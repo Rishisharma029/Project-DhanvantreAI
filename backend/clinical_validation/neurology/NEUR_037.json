@@ -1,0 +1,88 @@
+{
+  "case_id": "NEUR_037",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Neurology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 83,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with dizziness and altered mental status",
+  "presenting_symptoms": [
+    "dizziness",
+    "altered mental status",
+    "headache"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Levothyroxine"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.2,
+    "spo2_pct": 93,
+    "heart_rate": 79,
+    "respiratory_rate": 14,
+    "bp_systolic": 119,
+    "bp_diastolic": 78
+  },
+  "final_diagnosis": "TIA",
+  "icd11": "XX50",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "TIA",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of dizziness supports TIA",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "TIA",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

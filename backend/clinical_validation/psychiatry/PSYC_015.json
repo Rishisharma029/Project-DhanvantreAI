@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_015",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "easy",
+  "patient": {
+    "age": 83,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with suicidal ideation and delusions",
+  "presenting_symptoms": [
+    "suicidal ideation",
+    "delusions",
+    "insomnia"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "head trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Omeprazole"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.6,
+    "spo2_pct": 96,
+    "heart_rate": 62,
+    "respiratory_rate": 17,
+    "bp_systolic": 176,
+    "bp_diastolic": 87
+  },
+  "final_diagnosis": "Acute Psychosis",
+  "icd11": "XX34",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Acute Psychosis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of suicidal ideation supports Acute Psychosis",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Acute Psychosis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

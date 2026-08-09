@@ -1,0 +1,88 @@
+{
+  "case_id": "GERI_004",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Geriatrics",
+  "difficulty": "hard",
+  "patient": {
+    "age": 75,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with falls and confusion",
+  "presenting_symptoms": [
+    "falls",
+    "confusion",
+    "weakness"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Levothyroxine"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.1,
+    "spo2_pct": 93,
+    "heart_rate": 73,
+    "respiratory_rate": 20,
+    "bp_systolic": 106,
+    "bp_diastolic": 75
+  },
+  "final_diagnosis": "Cardiac failure elderly",
+  "icd11": "XX31",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Cardiac failure elderly",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of falls supports Cardiac failure elderly",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Cardiac failure elderly",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

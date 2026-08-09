@@ -1,0 +1,88 @@
+{
+  "case_id": "ACUT_023",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergency",
+  "difficulty": "hard",
+  "patient": {
+    "age": 48,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with trauma and burns",
+  "presenting_symptoms": [
+    "trauma",
+    "burns",
+    "bleeding"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "weight loss"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.1,
+    "spo2_pct": 95,
+    "heart_rate": 113,
+    "respiratory_rate": 29,
+    "bp_systolic": 144,
+    "bp_diastolic": 92
+  },
+  "final_diagnosis": "Organophosphate poisoning",
+  "icd11": "XX48",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Organophosphate poisoning",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of trauma supports Organophosphate poisoning",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Organophosphate poisoning",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

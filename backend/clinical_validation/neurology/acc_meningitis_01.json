@@ -1,0 +1,31 @@
+{
+  "case_id": "ACC_NEUR_MENINGITIS_001",
+  "source": "Archive of Clinical Cases",
+  "license": "CC BY-NC 4.0",
+  "title": "Meningeal Irritation Presentation with High Fever, Severe Headache, Photophobia, and Neck Stiffness",
+  "patient": {
+    "age": 24,
+    "sex": "Female"
+  },
+  "chief_complaint": "High fever (102°F), severe headache, photophobia, and neck stiffness",
+  "symptoms": [
+    "High fever (102°F)",
+    "Severe headache",
+    "Photophobia",
+    "Neck stiffness"
+  ],
+  "history": [
+    "No cough",
+    "No shortness of breath"
+  ],
+  "labs": [],
+  "imaging": [],
+  "final_diagnosis": "Bacterial Meningitis",
+  "expected_triage": "RED",
+  "expected_emergency": true,
+  "expected_followup": [
+    "Has the neck stiffness made it difficult to touch your chin to your chest?",
+    "Have you noticed any confusion or unusual drowsiness?"
+  ],
+  "expected_safety": "SAFE"
+}

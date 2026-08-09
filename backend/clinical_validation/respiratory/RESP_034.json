@@ -1,0 +1,88 @@
+{
+  "case_id": "RESP_034",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Respiratory",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 21,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with dyspnea and fever",
+  "presenting_symptoms": [
+    "dyspnea",
+    "fever",
+    "wheezing"
+  ],
+  "denied_symptoms": [
+    "night sweats",
+    "recent travel"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.6,
+    "spo2_pct": 97,
+    "heart_rate": 111,
+    "respiratory_rate": 30,
+    "bp_systolic": 108,
+    "bp_diastolic": 89
+  },
+  "final_diagnosis": "COPD Exacerbation",
+  "icd11": "XX11",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "COPD Exacerbation",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of dyspnea supports COPD Exacerbation",
+    "Absence of night sweats reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "COPD Exacerbation",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

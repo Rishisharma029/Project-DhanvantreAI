@@ -1,0 +1,88 @@
+{
+  "case_id": "CARD_011",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Cardiology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 57,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with dyspnea and syncope",
+  "presenting_symptoms": [
+    "dyspnea",
+    "syncope",
+    "orthopnea"
+  ],
+  "denied_symptoms": [
+    "cough",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Metformin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.2,
+    "spo2_pct": 96,
+    "heart_rate": 129,
+    "respiratory_rate": 26,
+    "bp_systolic": 146,
+    "bp_diastolic": 100
+  },
+  "final_diagnosis": "STEMI",
+  "icd11": "XX50",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "STEMI",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of dyspnea supports STEMI",
+    "Absence of cough reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "STEMI",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

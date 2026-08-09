@@ -1,0 +1,88 @@
+{
+  "case_id": "EMRG_002",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergencies",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 63,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with tachypnea and tachycardia",
+  "presenting_symptoms": [
+    "tachypnea",
+    "tachycardia",
+    "rash"
+  ],
+  "denied_symptoms": [
+    "focal weakness",
+    "recent trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Lisinopril"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.6,
+    "spo2_pct": 89,
+    "heart_rate": 70,
+    "respiratory_rate": 22,
+    "bp_systolic": 94,
+    "bp_diastolic": 71
+  },
+  "final_diagnosis": "DKA",
+  "icd11": "XX58",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "DKA",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of tachypnea supports DKA",
+    "Absence of focal weakness reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "DKA",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

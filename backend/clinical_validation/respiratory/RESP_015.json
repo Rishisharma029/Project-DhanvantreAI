@@ -1,0 +1,88 @@
+{
+  "case_id": "RESP_015",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Respiratory",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 65,
+    "sex": "Female",
+    "smoking": "never",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with chest pain and hemoptysis",
+  "presenting_symptoms": [
+    "chest pain",
+    "hemoptysis",
+    "fever"
+  ],
+  "denied_symptoms": [
+    "night sweats",
+    "recent travel"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Atorvastatin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.4,
+    "spo2_pct": 95,
+    "heart_rate": 97,
+    "respiratory_rate": 26,
+    "bp_systolic": 144,
+    "bp_diastolic": 103
+  },
+  "final_diagnosis": "Pneumothorax",
+  "icd11": "XX12",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Pneumothorax",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of chest pain supports Pneumothorax",
+    "Absence of night sweats reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Pneumothorax",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

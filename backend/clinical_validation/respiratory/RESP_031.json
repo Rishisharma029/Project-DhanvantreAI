@@ -1,0 +1,88 @@
+{
+  "case_id": "RESP_031",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Respiratory",
+  "difficulty": "easy",
+  "patient": {
+    "age": 44,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with hemoptysis and sputum production",
+  "presenting_symptoms": [
+    "hemoptysis",
+    "sputum production",
+    "chest pain"
+  ],
+  "denied_symptoms": [
+    "night sweats",
+    "weight loss"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Omeprazole"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.0,
+    "spo2_pct": 94,
+    "heart_rate": 75,
+    "respiratory_rate": 20,
+    "bp_systolic": 144,
+    "bp_diastolic": 69
+  },
+  "final_diagnosis": "Viral URTI",
+  "icd11": "XX61",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Viral URTI",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of hemoptysis supports Viral URTI",
+    "Absence of night sweats reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Viral URTI",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

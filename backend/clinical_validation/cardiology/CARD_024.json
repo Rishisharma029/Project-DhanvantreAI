@@ -1,0 +1,88 @@
+{
+  "case_id": "CARD_024",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Cardiology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 63,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with edema and syncope",
+  "presenting_symptoms": [
+    "edema",
+    "syncope",
+    "chest pain"
+  ],
+  "denied_symptoms": [
+    "calf pain",
+    "cough"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Atorvastatin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.5,
+    "spo2_pct": 99,
+    "heart_rate": 74,
+    "respiratory_rate": 19,
+    "bp_systolic": 109,
+    "bp_diastolic": 64
+  },
+  "final_diagnosis": "Unstable Angina",
+  "icd11": "XX44",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Unstable Angina",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of edema supports Unstable Angina",
+    "Absence of calf pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Unstable Angina",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

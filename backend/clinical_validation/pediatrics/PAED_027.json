@@ -1,0 +1,88 @@
+{
+  "case_id": "PAED_027",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pediatrics",
+  "difficulty": "easy",
+  "patient": {
+    "age": 8,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with cough and poor feeding",
+  "presenting_symptoms": [
+    "cough",
+    "poor feeding",
+    "rash"
+  ],
+  "denied_symptoms": [
+    "choking",
+    "cyanosis"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.4,
+    "spo2_pct": 100,
+    "heart_rate": 61,
+    "respiratory_rate": 12,
+    "bp_systolic": 158,
+    "bp_diastolic": 100
+  },
+  "final_diagnosis": "Acute Otitis Media",
+  "icd11": "XX58",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Acute Otitis Media",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of cough supports Acute Otitis Media",
+    "Absence of choking reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Acute Otitis Media",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

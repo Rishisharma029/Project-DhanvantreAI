@@ -1,0 +1,88 @@
+{
+  "case_id": "EMRG_033",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergencies",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 51,
+    "sex": "Female",
+    "smoking": "never",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with hypotension and fever",
+  "presenting_symptoms": [
+    "hypotension",
+    "fever",
+    "oliguria"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "focal weakness"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Aspirin"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.2,
+    "spo2_pct": 93,
+    "heart_rate": 119,
+    "respiratory_rate": 17,
+    "bp_systolic": 110,
+    "bp_diastolic": 91
+  },
+  "final_diagnosis": "Opioid OD",
+  "icd11": "XX65",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Opioid OD",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of hypotension supports Opioid OD",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Opioid OD",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

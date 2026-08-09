@@ -1,0 +1,88 @@
+{
+  "case_id": "ACUT_030",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergency",
+  "difficulty": "easy",
+  "patient": {
+    "age": 56,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with burns and unresponsiveness",
+  "presenting_symptoms": [
+    "burns",
+    "unresponsiveness",
+    "trauma"
+  ],
+  "denied_symptoms": [
+    "weight loss",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.0,
+    "spo2_pct": 88,
+    "heart_rate": 71,
+    "respiratory_rate": 28,
+    "bp_systolic": 160,
+    "bp_diastolic": 63
+  },
+  "final_diagnosis": "Electrocution",
+  "icd11": "XX61",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Electrocution",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of burns supports Electrocution",
+    "Absence of weight loss reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Electrocution",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

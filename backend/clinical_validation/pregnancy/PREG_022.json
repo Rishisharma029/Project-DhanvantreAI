@@ -1,0 +1,88 @@
+{
+  "case_id": "PREG_022",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pregnancy",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 25,
+    "sex": "Female",
+    "smoking": "never",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with reduced fetal movements and headache",
+  "presenting_symptoms": [
+    "reduced fetal movements",
+    "headache",
+    "visual changes"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "fluid leakage"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.0,
+    "spo2_pct": 94,
+    "heart_rate": 124,
+    "respiratory_rate": 17,
+    "bp_systolic": 157,
+    "bp_diastolic": 105
+  },
+  "final_diagnosis": "DVT in pregnancy",
+  "icd11": "XX29",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "DVT in pregnancy",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of reduced fetal movements supports DVT in pregnancy",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "DVT in pregnancy",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

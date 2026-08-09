@@ -1,0 +1,88 @@
+{
+  "case_id": "CARD_038",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Cardiology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 35,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with chest pain and syncope",
+  "presenting_symptoms": [
+    "chest pain",
+    "syncope",
+    "diaphoresis"
+  ],
+  "denied_symptoms": [
+    "cough",
+    "calf pain"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.9,
+    "spo2_pct": 88,
+    "heart_rate": 116,
+    "respiratory_rate": 15,
+    "bp_systolic": 159,
+    "bp_diastolic": 66
+  },
+  "final_diagnosis": "Pericarditis",
+  "icd11": "XX17",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Pericarditis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of chest pain supports Pericarditis",
+    "Absence of cough reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Pericarditis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

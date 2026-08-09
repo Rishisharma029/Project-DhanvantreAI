@@ -1,0 +1,88 @@
+{
+  "case_id": "RESP_032",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Respiratory",
+  "difficulty": "easy",
+  "patient": {
+    "age": 20,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with cough and dyspnea",
+  "presenting_symptoms": [
+    "cough",
+    "dyspnea",
+    "sputum production"
+  ],
+  "denied_symptoms": [
+    "recent travel",
+    "night sweats"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.2,
+    "spo2_pct": 99,
+    "heart_rate": 83,
+    "respiratory_rate": 12,
+    "bp_systolic": 127,
+    "bp_diastolic": 97
+  },
+  "final_diagnosis": "Lung Cancer presentation",
+  "icd11": "XX69",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Lung Cancer presentation",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of cough supports Lung Cancer presentation",
+    "Absence of recent travel reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Lung Cancer presentation",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

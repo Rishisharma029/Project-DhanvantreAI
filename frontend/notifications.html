@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Universal Toast Notification System - Trigger Success, Warning, and Error toast alerts with auto-dismiss timers.">
+    <title>Toast Notifications Portal | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .notif-container {
+            max-width: 1000px;
+            margin: 120px auto 60px;
+            padding: 0 24px;
+        }
+
+        .notif-hero-card {
+            padding: 36px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .notif-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 900px) {
+            .notif-grid { grid-template-columns: 1fr; }
+        }
+
+        .notif-trigger-card {
+            padding: 28px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Toast Stack Container -->
+    <div id="toastStackContainer"></div>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-header scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="notif-container">
+        <!-- Hero Card -->
+        <div class="glass-card notif-hero-card">
+            <div class="badge"><i class="fa-solid fa-bell"></i> Universal Alert System</div>
+            <h1 class="section-title">Toast <span class="gradient-text">Notifications</span></h1>
+            <p class="section-subtitle">
+                Non-intrusive floating feedback alerts for Success actions, Warning alerts, and Error exceptions.
+            </p>
+        </div>
+
+        <!-- 3 Toast Type Cards Grid -->
+        <div class="notif-grid">
+
+            <!-- 1. SUCCESS TOAST -->
+            <div class="glass-card notif-trigger-card">
+                <i class="fa-solid fa-circle-check" style="font-size: 2.8rem; color: var(--accent-emerald); margin-bottom: 14px;"></i>
+                <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">Success Toast</h3>
+                <p class="text-sm text-muted" style="margin-bottom: 20px;">
+                    Confirms completed operations such as saved health profiles or report exports.
+                </p>
+                <button class="btn btn-primary btn-sm" style="background: var(--accent-emerald); border-color: var(--accent-emerald);" id="triggerSuccessBtn">
+                    <i class="fa-solid fa-play"></i> Trigger Success
+                </button>
+            </div>
+
+            <!-- 2. WARNING TOAST -->
+            <div class="glass-card notif-trigger-card">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.8rem; color: var(--accent-amber); margin-bottom: 14px;"></i>
+                <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">Warning Toast</h3>
+                <p class="text-sm text-muted" style="margin-bottom: 20px;">
+                    Warns of potential clinical interplay cautions or SpO2 vital sign drops.
+                </p>
+                <button class="btn btn-primary btn-sm" style="background: var(--accent-amber); border-color: var(--accent-amber);" id="triggerWarningBtn">
+                    <i class="fa-solid fa-play"></i> Trigger Warning
+                </button>
+            </div>
+
+            <!-- 3. ERROR TOAST -->
+            <div class="glass-card notif-trigger-card">
+                <i class="fa-solid fa-circle-xmark" style="font-size: 2.8rem; color: var(--accent-rose); margin-bottom: 14px;"></i>
+                <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">Error Toast</h3>
+                <p class="text-sm text-muted" style="margin-bottom: 20px;">
+                    Alerts on network failures, validation errors, or cluster exceptions.
+                </p>
+                <button class="btn btn-primary btn-sm" style="background: var(--accent-rose); border-color: var(--accent-rose);" id="triggerErrorBtn">
+                    <i class="fa-solid fa-play"></i> Trigger Error
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script -->
+    <script src="notifications.js"></script>
+</body>
+</html>

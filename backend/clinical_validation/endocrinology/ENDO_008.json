@@ -1,0 +1,88 @@
+{
+  "case_id": "ENDO_008",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Endocrinology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 29,
+    "sex": "Female",
+    "smoking": "never",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with polyuria and weight loss",
+  "presenting_symptoms": [
+    "polyuria",
+    "weight loss",
+    "fatigue"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "chest pain"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.2,
+    "spo2_pct": 97,
+    "heart_rate": 121,
+    "respiratory_rate": 30,
+    "bp_systolic": 106,
+    "bp_diastolic": 81
+  },
+  "final_diagnosis": "Cushing's Syndrome",
+  "icd11": "XX44",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Cushing's Syndrome",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of polyuria supports Cushing's Syndrome",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Cushing's Syndrome",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

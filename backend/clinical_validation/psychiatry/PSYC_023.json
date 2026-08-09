@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_023",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "hard",
+  "patient": {
+    "age": 49,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with delusions and agitation",
+  "presenting_symptoms": [
+    "delusions",
+    "agitation",
+    "hallucinations"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "seizures"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.8,
+    "spo2_pct": 89,
+    "heart_rate": 89,
+    "respiratory_rate": 13,
+    "bp_systolic": 100,
+    "bp_diastolic": 64
+  },
+  "final_diagnosis": "Acute Psychosis",
+  "icd11": "XX36",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Acute Psychosis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of delusions supports Acute Psychosis",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Acute Psychosis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

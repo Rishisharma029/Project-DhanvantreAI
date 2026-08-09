@@ -1,0 +1,88 @@
+{
+  "case_id": "RESP_038",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Respiratory",
+  "difficulty": "hard",
+  "patient": {
+    "age": 29,
+    "sex": "Female",
+    "smoking": "never",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with fever and sputum production",
+  "presenting_symptoms": [
+    "fever",
+    "sputum production",
+    "chest pain"
+  ],
+  "denied_symptoms": [
+    "night sweats",
+    "weight loss"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.9,
+    "spo2_pct": 89,
+    "heart_rate": 112,
+    "respiratory_rate": 22,
+    "bp_systolic": 92,
+    "bp_diastolic": 61
+  },
+  "final_diagnosis": "Pleural Effusion",
+  "icd11": "XX17",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Pleural Effusion",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of fever supports Pleural Effusion",
+    "Absence of night sweats reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Pleural Effusion",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

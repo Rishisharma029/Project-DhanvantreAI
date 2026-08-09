@@ -1,0 +1,34 @@
+{
+  "case_id": "ACC_GASTRO_001",
+  "source": "Archive of Clinical Cases",
+  "license": "CC BY-NC 4.0",
+  "patient": {
+    "age": 42,
+    "sex": "Female"
+  },
+  "chief_complaint": "Epigastric burning discomfort after meals",
+  "symptoms": [
+    "Epigastric pain",
+    "Heartburn",
+    "Acid regurgitation",
+    "Nausea"
+  ],
+  "history": [
+    "No weight loss",
+    "No dysphagia"
+  ],
+  "labs": [],
+  "imaging": [],
+  "final_diagnosis": "Gastroesophageal Reflux Disease (GERD)",
+  "expected_triage": "GREEN",
+  "expected_emergency": false,
+  "expected_followup": [
+    "Difficulty swallowing?",
+    "Black dark stool?"
+  ],
+  "expected_safety": "SAFE",
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\acc_gastro_001.json",
+  "failure_analysis": [
+    "Triage mismatch (Expected: GREEN, AI: UNCERTAINTY)"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "case_id": "CARD_034",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Cardiology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 42,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with palpitations and diaphoresis",
+  "presenting_symptoms": [
+    "palpitations",
+    "diaphoresis",
+    "syncope"
+  ],
+  "denied_symptoms": [
+    "calf pain",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Amlodipine"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.2,
+    "spo2_pct": 98,
+    "heart_rate": 68,
+    "respiratory_rate": 22,
+    "bp_systolic": 112,
+    "bp_diastolic": 73
+  },
+  "final_diagnosis": "NSTEMI",
+  "icd11": "XX90",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "NSTEMI",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of palpitations supports NSTEMI",
+    "Absence of calf pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "NSTEMI",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

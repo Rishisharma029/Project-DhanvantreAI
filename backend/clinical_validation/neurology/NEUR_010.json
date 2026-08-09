@@ -1,0 +1,88 @@
+{
+  "case_id": "NEUR_010",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Neurology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 30,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with altered mental status and dizziness",
+  "presenting_symptoms": [
+    "altered mental status",
+    "dizziness",
+    "seizure"
+  ],
+  "denied_symptoms": [
+    "loss of consciousness",
+    "trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.2,
+    "spo2_pct": 91,
+    "heart_rate": 102,
+    "respiratory_rate": 24,
+    "bp_systolic": 173,
+    "bp_diastolic": 79
+  },
+  "final_diagnosis": "Bell's Palsy",
+  "icd11": "XX94",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Bell's Palsy",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of altered mental status supports Bell's Palsy",
+    "Absence of loss of consciousness reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Bell's Palsy",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

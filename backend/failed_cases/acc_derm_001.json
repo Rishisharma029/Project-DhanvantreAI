@@ -1,0 +1,32 @@
+{
+  "case_id": "ACC_DERM_001",
+  "source": "Archive of Clinical Cases",
+  "license": "CC BY-NC 4.0",
+  "patient": {
+    "age": 22,
+    "sex": "Female"
+  },
+  "chief_complaint": "Itchy red rash on inner elbows",
+  "symptoms": [
+    "Pruritus",
+    "Erythematous rash",
+    "Dry skin"
+  ],
+  "history": [
+    "Asthma"
+  ],
+  "labs": [],
+  "imaging": [],
+  "final_diagnosis": "Atopic Dermatitis",
+  "expected_triage": "GREEN",
+  "expected_emergency": false,
+  "expected_followup": [
+    "New soaps or cosmetics?",
+    "Pus or honey crusting?"
+  ],
+  "expected_safety": "SAFE",
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\acc_derm_001.json",
+  "failure_analysis": [
+    "Diagnosis mismatch (Expected 'Atopic Dermatitis', Top 3 AI: ['fungal infection', 'drug reaction', '(vertigo) paroymsal positional vertigo'])"
+  ]
+}

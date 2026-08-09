@@ -1,0 +1,88 @@
+{
+  "case_id": "PAED_022",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pediatrics",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 2,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with diarrhea and vomiting",
+  "presenting_symptoms": [
+    "diarrhea",
+    "vomiting",
+    "lethargy"
+  ],
+  "denied_symptoms": [
+    "choking",
+    "trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.9,
+    "spo2_pct": 98,
+    "heart_rate": 68,
+    "respiratory_rate": 19,
+    "bp_systolic": 99,
+    "bp_diastolic": 81
+  },
+  "final_diagnosis": "Croup",
+  "icd11": "XX30",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Croup",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of diarrhea supports Croup",
+    "Absence of choking reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Croup",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

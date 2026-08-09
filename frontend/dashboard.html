@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Clinical Dashboard - Health summary, recent diagnostic reports, saved medicines, search history, and notifications.">
+    <title>Clinical Dashboard | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            background: rgba(10, 15, 29, 0.95);
+            border-right: 1px solid var(--border-color);
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        [data-theme="light"] .sidebar {
+            background: #ffffff;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 36px;
+            padding: 0 8px;
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+        }
+
+        .sidebar-link:hover, .sidebar-link.active {
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--accent-cyan);
+        }
+
+        .sidebar-link i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-user {
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .user-info {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .user-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-role {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            text-transform: capitalize;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+        }
+
+        .logout-btn:hover {
+            color: var(--accent-rose);
+        }
+
+        /* Main Content Header & Layout */
+        .dash-content {
+            padding: 32px 40px;
+            overflow-y: auto;
+        }
+
+        .dash-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 36px;
+            gap: 20px;
+        }
+
+        .dash-title h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .dash-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .dash-search-box {
+            position: relative;
+            width: 320px;
+        }
+
+        .dash-search-box input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 10px 16px 10px 40px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .dash-search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+        }
+
+        .notif-btn {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .notif-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--accent-rose);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Health Summary Metric Grid */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+
+        .summary-card {
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .summary-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .summary-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.1;
+        }
+
+        .summary-lbl {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Content Sections Layout */
+        .dash-section {
+            margin-bottom: 40px;
+        }
+
+        .section-header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .section-header-flex h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Recent Reports Table */
+        .reports-table-card {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .custom-table th {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 16px 24px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .custom-table td {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .custom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-ready { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .status-pending { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+
+        /* Saved Medicines Cards Grid */
+        .meds-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .med-card {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .med-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .med-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .med-dosage {
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .med-purpose {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .med-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        /* Recent Searches List */
+        .searches-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .search-chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all var(--transition-fast);
+        }
+
+        .search-chip:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        /* Slide-out Notifications Drawer */
+        .notif-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-color);
+            z-index: 2000;
+            transition: right var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+        }
+
+        .notif-drawer.open {
+            right: 0;
+        }
+
+        .notif-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .notif-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .notif-item {
+            padding: 14px;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            display: flex;
+            gap: 12px;
+        }
+
+        .notif-icon {
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            margin-top: 2px;
+        }
+
+        .notif-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .notif-body {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .notif-time {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-top: 6px;
+        }
+
+        /* Modal Popup Backdrop & Dialog */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 32px;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Glows -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div>
+                <a href="index.html" class="sidebar-brand">
+                    <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <span>AuraMed<span class="logo-highlight">.AI</span></span>
+                </a>
+
+                <ul class="sidebar-menu">
+                    <li><a href="#overview" class="sidebar-link active"><i class="fa-solid fa-chart-pie"></i> Health Overview</a></li>
+                    <li><a href="chat.html" class="sidebar-link" style="color: var(--accent-cyan); font-weight: 700;"><i class="fa-solid fa-robot"></i> AI Medical Chat ⭐</a></li>
+                    <li><a href="#reports" class="sidebar-link"><i class="fa-solid fa-file-medical"></i> Recent Reports</a></li>
+                    <li><a href="#medicines" class="sidebar-link"><i class="fa-solid fa-pills"></i> Saved Medicines</a></li>
+                    <li><a href="#searches" class="sidebar-link"><i class="fa-solid fa-clock-rotate-left"></i> Search History</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-user">
+                <div class="user-avatar" id="sidebarAvatar">DR</div>
+                <div class="user-info">
+                    <div class="user-name" id="sidebarUserName">Dr. Sarah Jenkins</div>
+                    <div class="user-role" id="sidebarUserRole">Clinician</div>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Log Out">
+                    <i class="fa-solid fa-power-off"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dash-content">
+            <!-- Top Header Bar -->
+            <header class="dash-header">
+                <div class="dash-title">
+                    <h1 id="welcomeGreeting">Welcome Back, Clinician</h1>
+                    <p class="text-muted" id="dashSubtext">Here is your clinical intelligence & health activity summary.</p>
+                </div>
+
+                <div class="dash-actions">
+                    <div class="dash-search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="dashGlobalSearch" placeholder="Search symptoms, drugs, reports...">
+                    </div>
+
+                    <button class="notif-btn" id="openNotifBtn" title="Notifications">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notif-badge" id="notifCountBadge">3</span>
+                    </button>
+
+                    <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme">
+                        <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- 1. HEALTH SUMMARY METRICS -->
+            <section class="dash-section" id="overview">
+                <div class="summary-grid">
+                    <div class="glass-card summary-card">
+                        <div class="summary-icon icon-teal"><i class="fa-solid fa-file-waveform"></i></div>
+                        <div>
+                            <div class="summary-val" id="valTotalReports">4</div>
+                            <div class="summary-lbl">Diagnostic Reports</div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card summary-card">
+                        <div class="summary-icon icon-blue"><i class="fa-solid fa-prescription-bottle-medical"></i></div>
+                        <div>
+                            <div class="summary-val" id="valActiveMeds">3</div>
+                            <div class="summary-lbl">Active Medicines</div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card summary-card">
+                        <div class="summary-icon icon-purple"><i class="fa-solid fa-stethoscope"></i></div>
+                        <div>
+                            <div class="summary-val" id="valSymptomsLogged">7</div>
+                            <div class="summary-lbl">Symptoms Logged</div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card summary-card">
+                        <div class="summary-icon icon-emerald"><i class="fa-solid fa-calendar-check"></i></div>
+                        <div>
+                            <div class="summary-val" id="valFollowupDate">Aug 14</div>
+                            <div class="summary-lbl">Next Follow-up</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. RECENT REPORTS SECTION -->
+            <section class="dash-section" id="reports">
+                <div class="section-header-flex">
+                    <h2><i class="fa-solid fa-file-medical" style="color: var(--accent-cyan);"></i> Recent Diagnostic Reports</h2>
+                    <button class="btn btn-primary" id="openAddReportModalBtn">
+                        <i class="fa-solid fa-plus"></i> Log New Report
+                    </button>
+                </div>
+
+                <div class="glass-card reports-table-card">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Report Title</th>
+                                <th>Category</th>
+                                <th>Date Logged</th>
+                                <th>Status</th>
+                                <th>Key Findings</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportsTableBody">
+                            <tr>
+                                <td><strong>Lipid Panel & Metabolic Suite</strong></td>
+                                <td>Lab Diagnostic</td>
+                                <td>2026-07-28</td>
+                                <td><span class="status-pill status-ready"><i class="fa-solid fa-circle-check"></i> Ready</span></td>
+                                <td>Normal Fasting Glucose (92 mg/dL), LDL 110 mg/dL</td>
+                            </tr>
+                            <tr>
+                                <td><strong>12-Lead Electrocardiogram (ECG)</strong></td>
+                                <td>Cardiology</td>
+                                <td>2026-07-15</td>
+                                <td><span class="status-pill status-ready"><i class="fa-solid fa-circle-check"></i> Ready</span></td>
+                                <td>Normal Sinus Rhythm, HR 72 bpm, no ST elevation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Chest X-Ray (PA View)</strong></td>
+                                <td>Radiology</td>
+                                <td>2026-06-02</td>
+                                <td><span class="status-pill status-ready"><i class="fa-solid fa-circle-check"></i> Ready</span></td>
+                                <td>Clear lung fields, cardiac silhouette normal</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 3. SAVED MEDICINES SECTION -->
+            <section class="dash-section" id="medicines">
+                <div class="section-header-flex">
+                    <h2><i class="fa-solid fa-pills" style="color: var(--accent-purple);"></i> Saved Medications</h2>
+                    <button class="btn btn-secondary" id="openAddMedModalBtn">
+                        <i class="fa-solid fa-plus"></i> Add Medication
+                    </button>
+                </div>
+
+                <div class="meds-grid" id="medsGrid">
+                    <div class="glass-card med-card">
+                        <div class="med-header">
+                            <div class="med-name">Amoxicillin</div>
+                            <div class="med-dosage">500 mg</div>
+                        </div>
+                        <div class="med-purpose">Broad-spectrum antibiotic for bacterial infection.</div>
+                        <div class="med-footer">
+                            <span>Frequency: Twice Daily (BID)</span>
+                            <span style="color: var(--accent-emerald);"><i class="fa-solid fa-check"></i> Refill Active</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card med-card">
+                        <div class="med-header">
+                            <div class="med-name">Metformin HCl</div>
+                            <div class="med-dosage">850 mg</div>
+                        </div>
+                        <div class="med-purpose">Glycemic control for Type 2 Diabetes Mellitus.</div>
+                        <div class="med-footer">
+                            <span>Frequency: Once Daily (QD)</span>
+                            <span style="color: var(--accent-emerald);"><i class="fa-solid fa-check"></i> Refill Active</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card med-card">
+                        <div class="med-header">
+                            <div class="med-name">Atorvastatin</div>
+                            <div class="med-dosage">20 mg</div>
+                        </div>
+                        <div class="med-purpose">HMG-CoA reductase inhibitor for lipid management.</div>
+                        <div class="med-footer">
+                            <span>Frequency: At Bedtime (HS)</span>
+                            <span style="color: var(--accent-emerald);"><i class="fa-solid fa-check"></i> Refill Active</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. RECENT SEARCHES FEED -->
+            <section class="dash-section" id="searches">
+                <div class="section-header-flex">
+                    <h2><i class="fa-solid fa-clock-rotate-left" style="color: var(--accent-amber);"></i> Recent Clinical Searches</h2>
+                </div>
+
+                <div class="glass-card" style="padding: 24px;">
+                    <div class="searches-list" id="recentSearchesList">
+                        <button class="search-chip"><i class="fa-solid fa-magnifying-glass"></i> Paracetamol & Ibuprofen interaction</button>
+                        <button class="search-chip"><i class="fa-solid fa-magnifying-glass"></i> Acute Coronary Syndrome triage protocol</button>
+                        <button class="search-chip"><i class="fa-solid fa-magnifying-glass"></i> Amoxicillin pediatric dosage</button>
+                        <button class="search-chip"><i class="fa-solid fa-magnifying-glass"></i> Fasting glucose normal range</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- NOTIFICATIONS SLIDE-OUT DRAWER -->
+    <div class="notif-drawer" id="notifDrawer">
+        <div class="notif-header">
+            <h3><i class="fa-solid fa-bell" style="color: var(--accent-cyan);"></i> Notifications</h3>
+            <button class="logout-btn" id="closeNotifBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="notif-list" id="notifList">
+            <div class="notif-item">
+                <div class="notif-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+                <div>
+                    <div class="notif-title">Lipid Panel Report Ready</div>
+                    <div class="notif-body">Your lab report results have been processed and attached to your history.</div>
+                    <div class="notif-time">2 hours ago</div>
+                </div>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-icon"><i class="fa-solid fa-calendar-day"></i></div>
+                <div>
+                    <div class="notif-title">Follow-up Visit Scheduled</div>
+                    <div class="notif-body">Upcoming clinical follow-up appointment set for Aug 14, 2026.</div>
+                    <div class="notif-time">1 day ago</div>
+                </div>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div>
+                    <div class="notif-title">Security Alert</div>
+                    <div class="notif-body">New login detected from Palo Alto, CA.</div>
+                    <div class="notif-time">3 days ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 1: ADD REPORT MODAL -->
+    <div class="modal-overlay hidden" id="reportModal">
+        <div class="glass-card modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-file-circle-plus"></i> Log Medical Report</h3>
+                <button class="logout-btn" id="closeReportModalBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="addReportForm" class="contact-form">
+                <div class="form-group">
+                    <label for="reportTitleInput">Report Title <span class="required">*</span></label>
+                    <input type="text" id="reportTitleInput" placeholder="e.g. Complete Blood Count (CBC)" required>
+                </div>
+                <div class="form-group">
+                    <label for="reportCategorySelect">Category</label>
+                    <select id="reportCategorySelect" class="form-select">
+                        <option value="Lab Diagnostic">Lab Diagnostic</option>
+                        <option value="Radiology">Radiology / Imaging</option>
+                        <option value="Cardiology">Cardiology / ECG</option>
+                        <option value="Prescription">Prescription Note</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reportSummaryInput">Key Findings / Summary</label>
+                    <textarea id="reportSummaryInput" rows="3" placeholder="Enter findings or physician notes..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Save Report</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: ADD MEDICATION MODAL -->
+    <div class="modal-overlay hidden" id="medModal">
+        <div class="glass-card modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-prescription-bottle-medical"></i> Add Saved Medication</h3>
+                <button class="logout-btn" id="closeMedModalBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="addMedForm" class="contact-form">
+                <div class="form-group">
+                    <label for="medNameInput">Medication Name <span class="required">*</span></label>
+                    <input type="text" id="medNameInput" placeholder="e.g. Amoxicillin" required>
+                </div>
+                <div class="form-group">
+                    <label for="medDosageInput">Dosage <span class="required">*</span></label>
+                    <input type="text" id="medDosageInput" placeholder="e.g. 500 mg" required>
+                </div>
+                <div class="form-group">
+                    <label for="medPurposeInput">Purpose / Indication</label>
+                    <input type="text" id="medPurposeInput" placeholder="e.g. Bacterial infection">
+                </div>
+                <div class="form-group">
+                    <label for="medFrequencyInput">Frequency</label>
+                    <input type="text" id="medFrequencyInput" placeholder="e.g. Twice Daily (BID)">
+                </div>
+                <button type="submit" class="btn btn-accent btn-block">Save Medication</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+{
+  "case_id": "PREG_028",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pregnancy",
+  "difficulty": "easy",
+  "patient": {
+    "age": 19,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with visual changes and reduced fetal movements",
+  "presenting_symptoms": [
+    "visual changes",
+    "reduced fetal movements",
+    "abdominal pain"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "fluid leakage"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.6,
+    "spo2_pct": 91,
+    "heart_rate": 121,
+    "respiratory_rate": 23,
+    "bp_systolic": 123,
+    "bp_diastolic": 96
+  },
+  "final_diagnosis": "HELLP Syndrome",
+  "icd11": "XX57",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "HELLP Syndrome",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of visual changes supports HELLP Syndrome",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "HELLP Syndrome",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

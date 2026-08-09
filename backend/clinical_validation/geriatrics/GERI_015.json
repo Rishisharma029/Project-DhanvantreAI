@@ -1,0 +1,88 @@
+{
+  "case_id": "GERI_015",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Geriatrics",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 80,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with confusion and memory loss",
+  "presenting_symptoms": [
+    "confusion",
+    "memory loss",
+    "weakness"
+  ],
+  "denied_symptoms": [
+    "head trauma",
+    "chest pain"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Aspirin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.8,
+    "spo2_pct": 92,
+    "heart_rate": 108,
+    "respiratory_rate": 14,
+    "bp_systolic": 166,
+    "bp_diastolic": 67
+  },
+  "final_diagnosis": "Dementia exacerbation",
+  "icd11": "XX82",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Dementia exacerbation",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of confusion supports Dementia exacerbation",
+    "Absence of head trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Dementia exacerbation",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

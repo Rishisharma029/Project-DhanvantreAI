@@ -1,0 +1,88 @@
+{
+  "case_id": "DERM_001",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Dermatology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 76,
+    "sex": "Female",
+    "smoking": "never",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with erythema and pain",
+  "presenting_symptoms": [
+    "erythema",
+    "pain",
+    "blisters"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "shortness of breath"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.7,
+    "spo2_pct": 99,
+    "heart_rate": 67,
+    "respiratory_rate": 30,
+    "bp_systolic": 117,
+    "bp_diastolic": 86
+  },
+  "final_diagnosis": "Necrotising Fasciitis",
+  "icd11": "XX16",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Necrotising Fasciitis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of erythema supports Necrotising Fasciitis",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Necrotising Fasciitis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

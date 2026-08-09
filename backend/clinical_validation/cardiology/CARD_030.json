@@ -1,0 +1,88 @@
+{
+  "case_id": "CARD_030",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Cardiology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 52,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with orthopnea and dyspnea",
+  "presenting_symptoms": [
+    "orthopnea",
+    "dyspnea",
+    "palpitations"
+  ],
+  "denied_symptoms": [
+    "calf pain",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.0,
+    "spo2_pct": 95,
+    "heart_rate": 99,
+    "respiratory_rate": 25,
+    "bp_systolic": 131,
+    "bp_diastolic": 66
+  },
+  "final_diagnosis": "Hypertensive Emergency",
+  "icd11": "XX69",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Hypertensive Emergency",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of orthopnea supports Hypertensive Emergency",
+    "Absence of calf pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Hypertensive Emergency",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

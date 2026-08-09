@@ -1,0 +1,88 @@
+{
+  "case_id": "EMRG_036",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergencies",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 35,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with rash and oliguria",
+  "presenting_symptoms": [
+    "rash",
+    "oliguria",
+    "altered mental status"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "focal weakness"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.2,
+    "spo2_pct": 99,
+    "heart_rate": 78,
+    "respiratory_rate": 29,
+    "bp_systolic": 160,
+    "bp_diastolic": 65
+  },
+  "final_diagnosis": "Septic Shock",
+  "icd11": "XX95",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Septic Shock",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of rash supports Septic Shock",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Septic Shock",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

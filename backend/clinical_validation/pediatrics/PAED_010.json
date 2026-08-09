@@ -1,0 +1,88 @@
+{
+  "case_id": "PAED_010",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pediatrics",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 2,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with lethargy and cough",
+  "presenting_symptoms": [
+    "lethargy",
+    "cough",
+    "rash"
+  ],
+  "denied_symptoms": [
+    "choking",
+    "cyanosis"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.2,
+    "spo2_pct": 98,
+    "heart_rate": 63,
+    "respiratory_rate": 21,
+    "bp_systolic": 164,
+    "bp_diastolic": 73
+  },
+  "final_diagnosis": "Febrile Seizure",
+  "icd11": "XX22",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Febrile Seizure",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of lethargy supports Febrile Seizure",
+    "Absence of choking reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Febrile Seizure",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

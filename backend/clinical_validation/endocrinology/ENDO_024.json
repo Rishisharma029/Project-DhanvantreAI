@@ -1,0 +1,88 @@
+{
+  "case_id": "ENDO_024",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Endocrinology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 67,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with polyuria and heat intolerance",
+  "presenting_symptoms": [
+    "polyuria",
+    "heat intolerance",
+    "tremor"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.1,
+    "spo2_pct": 98,
+    "heart_rate": 128,
+    "respiratory_rate": 17,
+    "bp_systolic": 97,
+    "bp_diastolic": 65
+  },
+  "final_diagnosis": "Hyperthyroidism",
+  "icd11": "XX35",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Hyperthyroidism",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of polyuria supports Hyperthyroidism",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Hyperthyroidism",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_003",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 75,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with hematemesis and vomiting",
+  "presenting_symptoms": [
+    "hematemesis",
+    "vomiting",
+    "jaundice"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "shortness of breath"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Amlodipine"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.5,
+    "spo2_pct": 90,
+    "heart_rate": 91,
+    "respiratory_rate": 12,
+    "bp_systolic": 122,
+    "bp_diastolic": 61
+  },
+  "final_diagnosis": "Upper GI Bleed",
+  "icd11": "XX77",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Upper GI Bleed",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of hematemesis supports Upper GI Bleed",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Upper GI Bleed",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

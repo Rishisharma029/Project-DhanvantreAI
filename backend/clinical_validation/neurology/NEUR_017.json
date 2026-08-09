@@ -1,0 +1,88 @@
+{
+  "case_id": "NEUR_017",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Neurology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 30,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with headache and speech difficulty",
+  "presenting_symptoms": [
+    "headache",
+    "speech difficulty",
+    "altered mental status"
+  ],
+  "denied_symptoms": [
+    "loss of consciousness",
+    "trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.2,
+    "spo2_pct": 92,
+    "heart_rate": 121,
+    "respiratory_rate": 20,
+    "bp_systolic": 132,
+    "bp_diastolic": 89
+  },
+  "final_diagnosis": "Tension Headache",
+  "icd11": "XX99",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Tension Headache",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of headache supports Tension Headache",
+    "Absence of loss of consciousness reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Tension Headache",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

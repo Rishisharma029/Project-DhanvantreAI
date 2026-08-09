@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_040",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 75,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with diarrhea and hematemesis",
+  "presenting_symptoms": [
+    "diarrhea",
+    "hematemesis",
+    "abdominal pain"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "dysuria"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.6,
+    "spo2_pct": 91,
+    "heart_rate": 124,
+    "respiratory_rate": 29,
+    "bp_systolic": 134,
+    "bp_diastolic": 79
+  },
+  "final_diagnosis": "Ulcerative Colitis",
+  "icd11": "XX16",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Ulcerative Colitis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of diarrhea supports Ulcerative Colitis",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Ulcerative Colitis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

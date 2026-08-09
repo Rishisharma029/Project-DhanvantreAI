@@ -1,0 +1,88 @@
+{
+  "case_id": "ENDO_010",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Endocrinology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 44,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with fatigue and polyuria",
+  "presenting_symptoms": [
+    "fatigue",
+    "polyuria",
+    "tremor"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Metformin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.6,
+    "spo2_pct": 89,
+    "heart_rate": 129,
+    "respiratory_rate": 13,
+    "bp_systolic": 156,
+    "bp_diastolic": 109
+  },
+  "final_diagnosis": "DKA",
+  "icd11": "XX87",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "DKA",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of fatigue supports DKA",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "DKA",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

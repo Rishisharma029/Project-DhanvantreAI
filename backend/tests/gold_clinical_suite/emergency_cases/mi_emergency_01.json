@@ -1,0 +1,17 @@
+{
+  "case_id": "emergency_mi_01",
+  "category": "emergency_cases",
+  "title": "Crushing Chest Pain Radiating to Left Arm with Diaphoresis",
+  "patient": {
+    "age": 58,
+    "gender": "male",
+    "pregnancy_status": false,
+    "allergies": [],
+    "current_medications": ["Atorvastatin"]
+  },
+  "input_query": "Crushing chest pain for 30 minutes, radiating to left arm and jaw, severe shortness of breath, sweating profusely",
+  "expected_triage": "RED_URGENT",
+  "expected_emergency": true,
+  "expected_confidence": 1.0,
+  "should_stop_questioning": true
+}

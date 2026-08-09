@@ -1,0 +1,88 @@
+{
+  "case_id": "DERM_023",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Dermatology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 48,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with ulcer and pruritus",
+  "presenting_symptoms": [
+    "ulcer",
+    "pruritus",
+    "swelling"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "shortness of breath"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Amlodipine"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.8,
+    "spo2_pct": 99,
+    "heart_rate": 112,
+    "respiratory_rate": 26,
+    "bp_systolic": 104,
+    "bp_diastolic": 64
+  },
+  "final_diagnosis": "Stevens-Johnson Syndrome",
+  "icd11": "XX27",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Stevens-Johnson Syndrome",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of ulcer supports Stevens-Johnson Syndrome",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Stevens-Johnson Syndrome",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

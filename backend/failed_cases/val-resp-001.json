@@ -1,0 +1,111 @@
+{
+  "case_id": "VAL-RESP-001",
+  "domain": "respiratory",
+  "title": "Acute Viral Upper Respiratory Presentation in Healthy Adult",
+  "patient_demographics": {
+    "age": 29,
+    "gender": "male",
+    "pregnancy_status": false
+  },
+  "history": {
+    "chief_complaint": "Fever, dry cough, sore throat, and muscle aches for 2 days",
+    "onset": "Acute (48 hours)",
+    "past_medical_history": [
+      "None documented"
+    ],
+    "current_medications": [],
+    "allergies": []
+  },
+  "symptoms": [
+    "Fever (101\u00b0F)",
+    "Dry cough",
+    "Sore throat",
+    "Headache",
+    "Muscle aches",
+    "Fatigue"
+  ],
+  "examination_findings": {
+    "vitals": {
+      "temperature_f": 101.0,
+      "heart_rate_bpm": 84,
+      "blood_pressure": "118/76",
+      "respiratory_rate": 16,
+      "o2_saturation_pct": 98
+    },
+    "physical_exam": "Mild pharyngeal erythema without follicular exudate. Lungs clear to auscultation bilaterally."
+  },
+  "lab_results": {
+    "rapid_strep_test": "Negative",
+    "covid19_rapid_antigen": "Pending"
+  },
+  "expected_differential_diagnoses": [
+    {
+      "disease_name": "Viral Upper Respiratory Infection",
+      "icd11_code": "J06.9",
+      "expected_probability_range": [
+        0.4,
+        0.55
+      ],
+      "supporting_features": [
+        "Fever",
+        "Dry cough",
+        "Sore throat",
+        "Headache"
+      ],
+      "missing_features": [
+        "Loss of smell not reported"
+      ]
+    },
+    {
+      "disease_name": "Influenza (Flu)",
+      "icd11_code": "1E30",
+      "expected_probability_range": [
+        0.25,
+        0.38
+      ],
+      "supporting_features": [
+        "Fever",
+        "Muscle aches",
+        "Fatigue"
+      ],
+      "missing_features": [
+        "Sudden onset not confirmed"
+      ]
+    },
+    {
+      "disease_name": "COVID-19",
+      "icd11_code": "RA01.0",
+      "expected_probability_range": [
+        0.1,
+        0.22
+      ],
+      "supporting_features": [
+        "Fever",
+        "Dry cough",
+        "Fatigue"
+      ],
+      "missing_features": [
+        "Loss of taste or smell not reported"
+      ]
+    }
+  ],
+  "expected_triage": "GREEN_STABLE",
+  "expected_followup_questions": [
+    "Have you lost your sense of taste or smell?",
+    "Is your cough dry or producing thick yellow/green mucus?",
+    "Do you have a runny or blocked nose?",
+    "Has anyone around you in your household or workplace been ill recently?"
+  ],
+  "expected_safety_checks": [
+    "Verify patient age (29) before NSAID/Paracetamol recommendation",
+    "Confirm no active peptic ulcer disease or renal impairment"
+  ],
+  "expected_do_not_recommend": [
+    "Empiric systemic antibiotics (e.g. Amoxicillin, Azithromycin) without bacterial evidence",
+    "Codeine cough suppressants in non-severe presentations"
+  ],
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\respiratory_01.json",
+  "failure_analysis": [
+    "Diagnosis mismatch (Expected 'None', Top 3 AI: ['viral upper respiratory infection', 'influenza (flu)', 'covid-19'])"
+  ]
+}

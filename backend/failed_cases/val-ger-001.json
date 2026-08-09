@@ -1,0 +1,103 @@
+{
+  "case_id": "VAL-GER-001",
+  "domain": "geriatrics",
+  "title": "Atypical Pneumonia Presentation with Lethargy and Confusion in 76-Year-Old",
+  "patient_demographics": {
+    "age": 76,
+    "gender": "male",
+    "pregnancy_status": false
+  },
+  "history": {
+    "chief_complaint": "Acute lethargy, loss of appetite, and mild confusion over 3 days without overt high fever",
+    "onset": "Subacute (72 hours)",
+    "past_medical_history": [
+      "Chronic Obstructive Pulmonary Disease (COPD)",
+      "Chronic Kidney Disease Stage 3",
+      "Hypertension"
+    ],
+    "current_medications": [
+      "Tiotropium Inhaler",
+      "Lisinopril 10mg",
+      "Amlodipine 5mg"
+    ],
+    "allergies": [
+      "Codeine"
+    ]
+  },
+  "symptoms": [
+    "Lethargy",
+    "Confusion / Altered mental status",
+    "Productive cough with rust-colored sputum",
+    "Anorexia",
+    "Tachypnea"
+  ],
+  "examination_findings": {
+    "vitals": {
+      "temperature_f": 99.2,
+      "heart_rate_bpm": 96,
+      "blood_pressure": "108/64",
+      "respiratory_rate": 24,
+      "o2_saturation_pct": 92
+    },
+    "physical_exam": "Elderly male, lethargic but rousable. Coarse inspiratory crackles and bronchial breath sounds at right lung base. Decreased breath sounds."
+  },
+  "lab_results": {
+    "chest_xray": "Right lower lobe consolidation with air bronchograms",
+    "serum_creatinine": "1.8 mg/dL (eGFR 38 mL/min/1.73m\u00b2)",
+    "wbc_count": "14,500 /\u00b5L with 82% neutrophils"
+  },
+  "expected_differential_diagnoses": [
+    {
+      "disease_name": "Community-Acquired Bacterial Pneumonia",
+      "icd11_code": "CA40.0",
+      "expected_probability_range": [
+        0.7,
+        0.85
+      ],
+      "supporting_features": [
+        "Right lower lobe consolidation",
+        "Productive cough",
+        "Tachypnea",
+        "Hypoxia (O2 Sat 92%)",
+        "Altered mental status"
+      ],
+      "missing_features": [
+        "Classic high fever (blunted febrile response in elderly)"
+      ]
+    },
+    {
+      "disease_name": "Acute Exacerbation of COPD",
+      "icd11_code": "CA22.0",
+      "expected_probability_range": [
+        0.15,
+        0.25
+      ],
+      "supporting_features": [
+        "Cough",
+        "Tachypnea",
+        "COPD history"
+      ],
+      "missing_features": [
+        "Infiltrate on X-ray indicates focal pneumonia"
+      ]
+    }
+  ],
+  "expected_triage": "RED_URGENT",
+  "expected_followup_questions": [
+    "What is the patient's baseline mental status compared to current confusion?",
+    "Is the patient able to maintain fluid intake without choking?",
+    "Has oxygen saturation dropped below 92% on room air?"
+  ],
+  "expected_safety_checks": [
+    "BEERS CRITERIA GUARD: Block Sedating Antihistamines and Benzodiazepines in elderly confusion",
+    "RENAL DOSAGE ADJUSTMENT GUARD: Adjust nephrotoxic antibiotics for eGFR 38 mL/min"
+  ],
+  "expected_do_not_recommend": [
+    "High-dose nephrotoxic NSAIDs or Aminoglycosides without renal monitoring",
+    "Diphenhydramine or Diazepam for agitation/confusion (High delirium risk)"
+  ],
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\geriatrics_01.json",
+  "failure_analysis": [
+    "Diagnosis mismatch (Expected 'None', Top 3 AI: ['viral upper respiratory infection', 'influenza (flu)', 'covid-19'])"
+  ]
+}

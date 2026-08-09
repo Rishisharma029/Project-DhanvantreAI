@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_038",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 19,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with abdominal pain and jaundice",
+  "presenting_symptoms": [
+    "abdominal pain",
+    "jaundice",
+    "nausea"
+  ],
+  "denied_symptoms": [
+    "shortness of breath",
+    "dysuria"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.7,
+    "spo2_pct": 97,
+    "heart_rate": 88,
+    "respiratory_rate": 25,
+    "bp_systolic": 100,
+    "bp_diastolic": 88
+  },
+  "final_diagnosis": "Bowel Obstruction",
+  "icd11": "XX96",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Bowel Obstruction",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of abdominal pain supports Bowel Obstruction",
+    "Absence of shortness of breath reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Bowel Obstruction",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

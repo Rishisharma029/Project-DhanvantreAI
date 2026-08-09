@@ -1,0 +1,88 @@
+{
+  "case_id": "ENDO_002",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Endocrinology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 33,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with cold intolerance and polyuria",
+  "presenting_symptoms": [
+    "cold intolerance",
+    "polyuria",
+    "weight loss"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.5,
+    "spo2_pct": 90,
+    "heart_rate": 79,
+    "respiratory_rate": 23,
+    "bp_systolic": 178,
+    "bp_diastolic": 68
+  },
+  "final_diagnosis": "Type 2 Diabetes new diagnosis",
+  "icd11": "XX91",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Type 2 Diabetes new diagnosis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of cold intolerance supports Type 2 Diabetes new diagnosis",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Type 2 Diabetes new diagnosis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

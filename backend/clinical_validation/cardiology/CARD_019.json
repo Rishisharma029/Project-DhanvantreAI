@@ -1,0 +1,88 @@
+{
+  "case_id": "CARD_019",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Cardiology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 76,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with edema and diaphoresis",
+  "presenting_symptoms": [
+    "edema",
+    "diaphoresis",
+    "dyspnea"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "cough"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Omeprazole"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.1,
+    "spo2_pct": 96,
+    "heart_rate": 75,
+    "respiratory_rate": 27,
+    "bp_systolic": 129,
+    "bp_diastolic": 103
+  },
+  "final_diagnosis": "Hypertensive Emergency",
+  "icd11": "XX65",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Hypertensive Emergency",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of edema supports Hypertensive Emergency",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Hypertensive Emergency",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

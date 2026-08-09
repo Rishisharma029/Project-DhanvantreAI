@@ -1,0 +1,88 @@
+{
+  "case_id": "NEUR_004",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Neurology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 76,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with seizure and dizziness",
+  "presenting_symptoms": [
+    "seizure",
+    "dizziness",
+    "numbness"
+  ],
+  "denied_symptoms": [
+    "loss of consciousness",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Amlodipine"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.9,
+    "spo2_pct": 92,
+    "heart_rate": 114,
+    "respiratory_rate": 27,
+    "bp_systolic": 118,
+    "bp_diastolic": 109
+  },
+  "final_diagnosis": "Migraine",
+  "icd11": "XX92",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Migraine",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of seizure supports Migraine",
+    "Absence of loss of consciousness reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Migraine",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

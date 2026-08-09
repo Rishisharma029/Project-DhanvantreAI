@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_015",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 86,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with jaundice and melena",
+  "presenting_symptoms": [
+    "jaundice",
+    "melena",
+    "abdominal pain"
+  ],
+  "denied_symptoms": [
+    "shortness of breath",
+    "dysuria"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.3,
+    "spo2_pct": 88,
+    "heart_rate": 124,
+    "respiratory_rate": 16,
+    "bp_systolic": 180,
+    "bp_diastolic": 110
+  },
+  "final_diagnosis": "Lower GI Bleed",
+  "icd11": "XX44",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Lower GI Bleed",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of jaundice supports Lower GI Bleed",
+    "Absence of shortness of breath reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Lower GI Bleed",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

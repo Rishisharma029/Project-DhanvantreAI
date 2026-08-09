@@ -1,0 +1,88 @@
+{
+  "case_id": "GERI_007",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Geriatrics",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 80,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with poor appetite and weakness",
+  "presenting_symptoms": [
+    "poor appetite",
+    "weakness",
+    "confusion"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "head trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.4,
+    "spo2_pct": 93,
+    "heart_rate": 110,
+    "respiratory_rate": 19,
+    "bp_systolic": 102,
+    "bp_diastolic": 84
+  },
+  "final_diagnosis": "Dementia exacerbation",
+  "icd11": "XX72",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Dementia exacerbation",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of poor appetite supports Dementia exacerbation",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Dementia exacerbation",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

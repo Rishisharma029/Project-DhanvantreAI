@@ -1,0 +1,88 @@
+{
+  "case_id": "RESP_020",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Respiratory",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 24,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with cough and wheezing",
+  "presenting_symptoms": [
+    "cough",
+    "wheezing",
+    "fever"
+  ],
+  "denied_symptoms": [
+    "night sweats",
+    "recent travel"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.9,
+    "spo2_pct": 89,
+    "heart_rate": 84,
+    "respiratory_rate": 22,
+    "bp_systolic": 164,
+    "bp_diastolic": 60
+  },
+  "final_diagnosis": "Viral URTI",
+  "icd11": "XX65",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Viral URTI",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of cough supports Viral URTI",
+    "Absence of night sweats reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Viral URTI",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

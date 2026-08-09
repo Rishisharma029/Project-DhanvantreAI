@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_011",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 51,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with jaundice and hematemesis",
+  "presenting_symptoms": [
+    "jaundice",
+    "hematemesis",
+    "vomiting"
+  ],
+  "denied_symptoms": [
+    "shortness of breath",
+    "dysuria"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Omeprazole"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.6,
+    "spo2_pct": 91,
+    "heart_rate": 102,
+    "respiratory_rate": 15,
+    "bp_systolic": 95,
+    "bp_diastolic": 68
+  },
+  "final_diagnosis": "Appendicitis",
+  "icd11": "XX63",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Appendicitis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of jaundice supports Appendicitis",
+    "Absence of shortness of breath reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Appendicitis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

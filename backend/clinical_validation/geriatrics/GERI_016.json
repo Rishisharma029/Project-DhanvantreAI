@@ -1,0 +1,88 @@
+{
+  "case_id": "GERI_016",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Geriatrics",
+  "difficulty": "easy",
+  "patient": {
+    "age": 94,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with poor appetite and memory loss",
+  "presenting_symptoms": [
+    "poor appetite",
+    "memory loss",
+    "falls"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "chest pain"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.0,
+    "spo2_pct": 93,
+    "heart_rate": 95,
+    "respiratory_rate": 30,
+    "bp_systolic": 171,
+    "bp_diastolic": 78
+  },
+  "final_diagnosis": "Falls / Hip Fracture",
+  "icd11": "XX48",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Falls / Hip Fracture",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of poor appetite supports Falls / Hip Fracture",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Falls / Hip Fracture",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

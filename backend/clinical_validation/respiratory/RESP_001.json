@@ -1,0 +1,88 @@
+{
+  "case_id": "RESP_001",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Respiratory",
+  "difficulty": "hard",
+  "patient": {
+    "age": 39,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with cough and sputum production",
+  "presenting_symptoms": [
+    "cough",
+    "sputum production",
+    "dyspnea"
+  ],
+  "denied_symptoms": [
+    "night sweats",
+    "weight loss"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.6,
+    "spo2_pct": 92,
+    "heart_rate": 121,
+    "respiratory_rate": 14,
+    "bp_systolic": 137,
+    "bp_diastolic": 68
+  },
+  "final_diagnosis": "COPD Exacerbation",
+  "icd11": "XX15",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "COPD Exacerbation",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of cough supports COPD Exacerbation",
+    "Absence of night sweats reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "COPD Exacerbation",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

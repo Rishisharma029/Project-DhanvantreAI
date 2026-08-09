@@ -1,0 +1,88 @@
+{
+  "case_id": "CARD_039",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Cardiology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 50,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with chest pain and syncope",
+  "presenting_symptoms": [
+    "chest pain",
+    "syncope",
+    "orthopnea"
+  ],
+  "denied_symptoms": [
+    "cough",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Metformin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.6,
+    "spo2_pct": 99,
+    "heart_rate": 73,
+    "respiratory_rate": 18,
+    "bp_systolic": 112,
+    "bp_diastolic": 104
+  },
+  "final_diagnosis": "Aortic Dissection",
+  "icd11": "XX51",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Aortic Dissection",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of chest pain supports Aortic Dissection",
+    "Absence of cough reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Aortic Dissection",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

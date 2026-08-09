@@ -1,0 +1,88 @@
+{
+  "case_id": "GERI_002",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Geriatrics",
+  "difficulty": "hard",
+  "patient": {
+    "age": 90,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with weight loss and poor appetite",
+  "presenting_symptoms": [
+    "weight loss",
+    "poor appetite",
+    "confusion"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "head trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Levothyroxine"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.0,
+    "spo2_pct": 97,
+    "heart_rate": 101,
+    "respiratory_rate": 22,
+    "bp_systolic": 146,
+    "bp_diastolic": 104
+  },
+  "final_diagnosis": "Pneumonia in elderly",
+  "icd11": "XX97",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Pneumonia in elderly",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of weight loss supports Pneumonia in elderly",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Pneumonia in elderly",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

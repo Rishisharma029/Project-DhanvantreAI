@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_026",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 32,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with anxiety and agitation",
+  "presenting_symptoms": [
+    "anxiety",
+    "agitation",
+    "depressed mood"
+  ],
+  "denied_symptoms": [
+    "seizures",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.5,
+    "spo2_pct": 91,
+    "heart_rate": 106,
+    "respiratory_rate": 30,
+    "bp_systolic": 121,
+    "bp_diastolic": 95
+  },
+  "final_diagnosis": "Schizophrenia first episode",
+  "icd11": "XX91",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Schizophrenia first episode",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of anxiety supports Schizophrenia first episode",
+    "Absence of seizures reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Schizophrenia first episode",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

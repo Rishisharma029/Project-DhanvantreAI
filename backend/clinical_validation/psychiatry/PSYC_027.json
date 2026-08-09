@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_027",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 26,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with hallucinations and suicidal ideation",
+  "presenting_symptoms": [
+    "hallucinations",
+    "suicidal ideation",
+    "insomnia"
+  ],
+  "denied_symptoms": [
+    "head trauma",
+    "seizures"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.3,
+    "spo2_pct": 90,
+    "heart_rate": 104,
+    "respiratory_rate": 26,
+    "bp_systolic": 173,
+    "bp_diastolic": 82
+  },
+  "final_diagnosis": "Panic Disorder",
+  "icd11": "XX54",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Panic Disorder",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of hallucinations supports Panic Disorder",
+    "Absence of head trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Panic Disorder",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

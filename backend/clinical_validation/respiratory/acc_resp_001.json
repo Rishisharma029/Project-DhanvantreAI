@@ -1,0 +1,30 @@
+{
+  "case_id": "ACC_RESP_001",
+  "source": "Archive of Clinical Cases",
+  "license": "CC BY-NC 4.0",
+  "patient": {
+    "age": 29,
+    "sex": "Male"
+  },
+  "chief_complaint": "Fever and cough",
+  "symptoms": [
+    "Fever",
+    "Dry cough",
+    "Fatigue",
+    "Sore throat"
+  ],
+  "history": [
+    "No diabetes",
+    "No hypertension"
+  ],
+  "labs": [],
+  "imaging": [],
+  "final_diagnosis": "Viral Upper Respiratory Infection",
+  "expected_triage": "GREEN",
+  "expected_emergency": false,
+  "expected_followup": [
+    "Loss of smell?",
+    "Dry or productive cough?"
+  ],
+  "expected_safety": "SAFE"
+}

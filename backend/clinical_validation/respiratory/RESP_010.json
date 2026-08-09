@@ -1,0 +1,88 @@
+{
+  "case_id": "RESP_010",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Respiratory",
+  "difficulty": "hard",
+  "patient": {
+    "age": 41,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with chest pain and dyspnea",
+  "presenting_symptoms": [
+    "chest pain",
+    "dyspnea",
+    "hemoptysis"
+  ],
+  "denied_symptoms": [
+    "recent travel",
+    "night sweats"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Lisinopril"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.1,
+    "spo2_pct": 94,
+    "heart_rate": 94,
+    "respiratory_rate": 16,
+    "bp_systolic": 149,
+    "bp_diastolic": 95
+  },
+  "final_diagnosis": "Lung Cancer presentation",
+  "icd11": "XX65",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Lung Cancer presentation",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of chest pain supports Lung Cancer presentation",
+    "Absence of recent travel reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Lung Cancer presentation",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

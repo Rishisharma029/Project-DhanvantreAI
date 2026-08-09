@@ -1,0 +1,4096 @@
+{
+  "summary": {
+    "total_cases": 432,
+    "triage_correct": 0,
+    "top1_correct": 0,
+    "top3_correct": 1,
+    "emergency_correct": 6,
+    "false_emergency": 11,
+    "missed_emergency": 0,
+    "hallucinations": 0,
+    "medicine_gate_correct": 17,
+    "medicine_gate_violations": 0,
+    "all_pass": 0,
+    "failures_by_specialty": {
+      "Cardiology": 5,
+      "Psychiatry": 12
+    },
+    "failure_count": 432,
+    "triage_accuracy_pct": 0.0,
+    "top1_accuracy_pct": 0.0,
+    "top3_accuracy_pct": 0.2,
+    "emergency_detection_pct": 1.4,
+    "hallucination_rate_pct": 0.0,
+    "pass_rate_pct": 0.0,
+    "timestamp": "2026-08-06T18:21:56.063723+00:00"
+  },
+  "failures": [
+    {
+      "case_id": "ACC_CARD_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Angina Pectoris",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\acc_card_001.json"
+    },
+    {
+      "case_id": "VAL-CARD-001",
+      "specialty": "Unknown",
+      "final_diagnosis": "?",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\cardiology_01.json"
+    },
+    {
+      "case_id": "CARD_001",
+      "specialty": "Cardiology",
+      "final_diagnosis": "NSTEMI",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_001.json"
+    },
+    {
+      "case_id": "CARD_002",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Unstable Angina",
+      "failures": [
+        "TRIAGE_WRONG: expected=GREEN_STANDARD, got=RED_URGENT",
+        "FALSE_EMERGENCY: emergency triggered incorrectly",
+        "TOP1_WRONG: expected=Unstable Angina, got=Acute Myocardial Infarction"
+      ],
+      "warnings": [],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Acute Myocardial Infarction",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_002.json"
+    },
+    {
+      "case_id": "CARD_003",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Heart Failure",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_003.json"
+    },
+    {
+      "case_id": "CARD_004",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Atrial Fibrillation",
+      "failures": [
+        "TRIAGE_WRONG: expected=YELLOW_MODERATE, got=RED_URGENT",
+        "FALSE_EMERGENCY: emergency triggered incorrectly",
+        "TOP1_WRONG: expected=Atrial Fibrillation, got=Acute Myocardial Infarction"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Atrial Fibrillation', 'Alternative 1', 'Alternative 2'], got=['Acute Myocardial Infarction', 'Unstable Angina', 'Aortic Dissection']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Acute Myocardial Infarction",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_004.json"
+    },
+    {
+      "case_id": "CARD_005",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Pericarditis",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_005.json"
+    },
+    {
+      "case_id": "CARD_006",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Aortic Dissection",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_006.json"
+    },
+    {
+      "case_id": "CARD_007",
+      "specialty": "Cardiology",
+      "final_diagnosis": "DVT",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_007.json"
+    },
+    {
+      "case_id": "CARD_008",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Hypertensive Emergency",
+      "failures": [
+        "TRIAGE_WRONG: expected=YELLOW_MODERATE, got=RED_URGENT",
+        "FALSE_EMERGENCY: emergency triggered incorrectly",
+        "TOP1_WRONG: expected=Hypertensive Emergency, got=Acute Myocardial Infarction"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Hypertensive Emergency', 'Alternative 1', 'Alternative 2'], got=['Acute Myocardial Infarction', 'Unstable Angina', 'Aortic Dissection']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Acute Myocardial Infarction",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_008.json"
+    },
+    {
+      "case_id": "CARD_009",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Infective Endocarditis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_009.json"
+    },
+    {
+      "case_id": "CARD_010",
+      "specialty": "Cardiology",
+      "final_diagnosis": "SVT",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_010.json"
+    },
+    {
+      "case_id": "CARD_011",
+      "specialty": "Cardiology",
+      "final_diagnosis": "STEMI",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_011.json"
+    },
+    {
+      "case_id": "CARD_012",
+      "specialty": "Cardiology",
+      "final_diagnosis": "NSTEMI",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_012.json"
+    },
+    {
+      "case_id": "CARD_013",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Unstable Angina",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_013.json"
+    },
+    {
+      "case_id": "CARD_014",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Heart Failure",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_014.json"
+    },
+    {
+      "case_id": "CARD_015",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Atrial Fibrillation",
+      "failures": [
+        "TRIAGE_WRONG: expected=BLUE_NON_URGENT, got=RED_URGENT",
+        "FALSE_EMERGENCY: emergency triggered incorrectly",
+        "TOP1_WRONG: expected=Atrial Fibrillation, got=Acute Myocardial Infarction"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Atrial Fibrillation', 'Alternative 1', 'Alternative 2'], got=['Acute Myocardial Infarction', 'Unstable Angina', 'Aortic Dissection']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Acute Myocardial Infarction",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_015.json"
+    },
+    {
+      "case_id": "CARD_016",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Pericarditis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_016.json"
+    },
+    {
+      "case_id": "CARD_017",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Aortic Dissection",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_017.json"
+    },
+    {
+      "case_id": "CARD_018",
+      "specialty": "Cardiology",
+      "final_diagnosis": "DVT",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_018.json"
+    },
+    {
+      "case_id": "CARD_019",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Hypertensive Emergency",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_019.json"
+    },
+    {
+      "case_id": "CARD_020",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Infective Endocarditis",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_020.json"
+    },
+    {
+      "case_id": "CARD_021",
+      "specialty": "Cardiology",
+      "final_diagnosis": "SVT",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_021.json"
+    },
+    {
+      "case_id": "CARD_022",
+      "specialty": "Cardiology",
+      "final_diagnosis": "STEMI",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_022.json"
+    },
+    {
+      "case_id": "CARD_023",
+      "specialty": "Cardiology",
+      "final_diagnosis": "NSTEMI",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_023.json"
+    },
+    {
+      "case_id": "CARD_024",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Unstable Angina",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_024.json"
+    },
+    {
+      "case_id": "CARD_025",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Heart Failure",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_025.json"
+    },
+    {
+      "case_id": "CARD_026",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Atrial Fibrillation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_026.json"
+    },
+    {
+      "case_id": "CARD_027",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Pericarditis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_027.json"
+    },
+    {
+      "case_id": "CARD_028",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Aortic Dissection",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_028.json"
+    },
+    {
+      "case_id": "CARD_029",
+      "specialty": "Cardiology",
+      "final_diagnosis": "DVT",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_029.json"
+    },
+    {
+      "case_id": "CARD_030",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Hypertensive Emergency",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_030.json"
+    },
+    {
+      "case_id": "CARD_031",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Infective Endocarditis",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_031.json"
+    },
+    {
+      "case_id": "CARD_032",
+      "specialty": "Cardiology",
+      "final_diagnosis": "SVT",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_032.json"
+    },
+    {
+      "case_id": "CARD_033",
+      "specialty": "Cardiology",
+      "final_diagnosis": "STEMI",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_033.json"
+    },
+    {
+      "case_id": "CARD_034",
+      "specialty": "Cardiology",
+      "final_diagnosis": "NSTEMI",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_034.json"
+    },
+    {
+      "case_id": "CARD_035",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Unstable Angina",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_035.json"
+    },
+    {
+      "case_id": "CARD_036",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Heart Failure",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_036.json"
+    },
+    {
+      "case_id": "CARD_037",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Atrial Fibrillation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_037.json"
+    },
+    {
+      "case_id": "CARD_038",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Pericarditis",
+      "failures": [
+        "TRIAGE_WRONG: expected=RED_RESUSCITATION, got=RED_URGENT",
+        "TOP1_WRONG: expected=Pericarditis, got=Acute Myocardial Infarction"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Pericarditis', 'Alternative 1', 'Alternative 2'], got=['Acute Myocardial Infarction', 'Unstable Angina', 'Aortic Dissection']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Acute Myocardial Infarction",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_038.json"
+    },
+    {
+      "case_id": "CARD_039",
+      "specialty": "Cardiology",
+      "final_diagnosis": "Aortic Dissection",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_039.json"
+    },
+    {
+      "case_id": "CARD_040",
+      "specialty": "Cardiology",
+      "final_diagnosis": "DVT",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\CARD_040.json"
+    },
+    {
+      "case_id": "VAL_ACS_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Acute Myocardial Infarction",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\VAL_ACS_001.json"
+    },
+    {
+      "case_id": "ACC_DERM_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Atopic Dermatitis",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\acc_derm_001.json"
+    },
+    {
+      "case_id": "VAL-DERM-001",
+      "specialty": "Unknown",
+      "final_diagnosis": "?",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\dermatology_01.json"
+    },
+    {
+      "case_id": "DERM_001",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Necrotising Fasciitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_001.json"
+    },
+    {
+      "case_id": "DERM_002",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Meningococcal Rash",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_002.json"
+    },
+    {
+      "case_id": "DERM_003",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Stevens-Johnson Syndrome",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_003.json"
+    },
+    {
+      "case_id": "DERM_004",
+      "specialty": "Dermatology",
+      "final_diagnosis": "DRESS",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_004.json"
+    },
+    {
+      "case_id": "DERM_005",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Herpes Zoster",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_005.json"
+    },
+    {
+      "case_id": "DERM_006",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Tinea",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_006.json"
+    },
+    {
+      "case_id": "DERM_007",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Urticaria/Angioedema",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_007.json"
+    },
+    {
+      "case_id": "DERM_008",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Psoriasis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_008.json"
+    },
+    {
+      "case_id": "DERM_009",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Melanoma presentation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_009.json"
+    },
+    {
+      "case_id": "DERM_010",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Cellulitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_010.json"
+    },
+    {
+      "case_id": "DERM_011",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Necrotising Fasciitis",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_011.json"
+    },
+    {
+      "case_id": "DERM_012",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Meningococcal Rash",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_012.json"
+    },
+    {
+      "case_id": "DERM_013",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Stevens-Johnson Syndrome",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_013.json"
+    },
+    {
+      "case_id": "DERM_014",
+      "specialty": "Dermatology",
+      "final_diagnosis": "DRESS",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_014.json"
+    },
+    {
+      "case_id": "DERM_015",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Herpes Zoster",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_015.json"
+    },
+    {
+      "case_id": "DERM_016",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Tinea",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_016.json"
+    },
+    {
+      "case_id": "DERM_017",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Urticaria/Angioedema",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_017.json"
+    },
+    {
+      "case_id": "DERM_018",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Psoriasis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_018.json"
+    },
+    {
+      "case_id": "DERM_019",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Melanoma presentation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_019.json"
+    },
+    {
+      "case_id": "DERM_020",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Cellulitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_020.json"
+    },
+    {
+      "case_id": "DERM_021",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Necrotising Fasciitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_021.json"
+    },
+    {
+      "case_id": "DERM_022",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Meningococcal Rash",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_022.json"
+    },
+    {
+      "case_id": "DERM_023",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Stevens-Johnson Syndrome",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_023.json"
+    },
+    {
+      "case_id": "DERM_024",
+      "specialty": "Dermatology",
+      "final_diagnosis": "DRESS",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_024.json"
+    },
+    {
+      "case_id": "DERM_025",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Herpes Zoster",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_025.json"
+    },
+    {
+      "case_id": "DERM_026",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Tinea",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_026.json"
+    },
+    {
+      "case_id": "DERM_027",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Urticaria/Angioedema",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_027.json"
+    },
+    {
+      "case_id": "DERM_028",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Psoriasis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_028.json"
+    },
+    {
+      "case_id": "DERM_029",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Melanoma presentation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_029.json"
+    },
+    {
+      "case_id": "DERM_030",
+      "specialty": "Dermatology",
+      "final_diagnosis": "Cellulitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\DERM_030.json"
+    },
+    {
+      "case_id": "VAL-EMERG-001",
+      "specialty": "Unknown",
+      "final_diagnosis": "?",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\emergencies_01.json"
+    },
+    {
+      "case_id": "EMRG_001",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Anaphylaxis",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_001.json"
+    },
+    {
+      "case_id": "EMRG_002",
+      "specialty": "Emergencies",
+      "final_diagnosis": "DKA",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_002.json"
+    },
+    {
+      "case_id": "EMRG_003",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Malaria",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_003.json"
+    },
+    {
+      "case_id": "EMRG_004",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Typhoid",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_004.json"
+    },
+    {
+      "case_id": "EMRG_005",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Dengue",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_005.json"
+    },
+    {
+      "case_id": "EMRG_006",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Urosepsis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_006.json"
+    },
+    {
+      "case_id": "EMRG_007",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Cellulitis with sepsis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_007.json"
+    },
+    {
+      "case_id": "EMRG_008",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Paracetamol OD",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_008.json"
+    },
+    {
+      "case_id": "EMRG_009",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Opioid OD",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_009.json"
+    },
+    {
+      "case_id": "EMRG_010",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Carbon Monoxide",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_010.json"
+    },
+    {
+      "case_id": "EMRG_011",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Heat Stroke",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_011.json"
+    },
+    {
+      "case_id": "EMRG_012",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Septic Shock",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_012.json"
+    },
+    {
+      "case_id": "EMRG_013",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Anaphylaxis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_013.json"
+    },
+    {
+      "case_id": "EMRG_014",
+      "specialty": "Emergencies",
+      "final_diagnosis": "DKA",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_014.json"
+    },
+    {
+      "case_id": "EMRG_015",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Malaria",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_015.json"
+    },
+    {
+      "case_id": "EMRG_016",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Typhoid",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_016.json"
+    },
+    {
+      "case_id": "EMRG_017",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Dengue",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_017.json"
+    },
+    {
+      "case_id": "EMRG_018",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Urosepsis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_018.json"
+    },
+    {
+      "case_id": "EMRG_019",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Cellulitis with sepsis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_019.json"
+    },
+    {
+      "case_id": "EMRG_020",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Paracetamol OD",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_020.json"
+    },
+    {
+      "case_id": "EMRG_021",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Opioid OD",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_021.json"
+    },
+    {
+      "case_id": "EMRG_022",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Carbon Monoxide",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_022.json"
+    },
+    {
+      "case_id": "EMRG_023",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Heat Stroke",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_023.json"
+    },
+    {
+      "case_id": "EMRG_024",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Septic Shock",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_024.json"
+    },
+    {
+      "case_id": "EMRG_025",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Anaphylaxis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_025.json"
+    },
+    {
+      "case_id": "EMRG_026",
+      "specialty": "Emergencies",
+      "final_diagnosis": "DKA",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_026.json"
+    },
+    {
+      "case_id": "EMRG_027",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Malaria",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_027.json"
+    },
+    {
+      "case_id": "EMRG_028",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Typhoid",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_028.json"
+    },
+    {
+      "case_id": "EMRG_029",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Dengue",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_029.json"
+    },
+    {
+      "case_id": "EMRG_030",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Urosepsis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_030.json"
+    },
+    {
+      "case_id": "EMRG_031",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Cellulitis with sepsis",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_031.json"
+    },
+    {
+      "case_id": "EMRG_032",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Paracetamol OD",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_032.json"
+    },
+    {
+      "case_id": "EMRG_033",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Opioid OD",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_033.json"
+    },
+    {
+      "case_id": "EMRG_034",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Carbon Monoxide",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_034.json"
+    },
+    {
+      "case_id": "EMRG_035",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Heat Stroke",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_035.json"
+    },
+    {
+      "case_id": "EMRG_036",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Septic Shock",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_036.json"
+    },
+    {
+      "case_id": "EMRG_037",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Anaphylaxis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_037.json"
+    },
+    {
+      "case_id": "EMRG_038",
+      "specialty": "Emergencies",
+      "final_diagnosis": "DKA",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_038.json"
+    },
+    {
+      "case_id": "EMRG_039",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Malaria",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_039.json"
+    },
+    {
+      "case_id": "EMRG_040",
+      "specialty": "Emergencies",
+      "final_diagnosis": "Typhoid",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\EMRG_040.json"
+    },
+    {
+      "case_id": "ACC_EMERG_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Myocardial Infarction",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\acc_emerg_001.json"
+    },
+    {
+      "case_id": "ACUT_001",
+      "specialty": "Emergency",
+      "final_diagnosis": "Burns",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_001.json"
+    },
+    {
+      "case_id": "ACUT_002",
+      "specialty": "Emergency",
+      "final_diagnosis": "Spinal injury",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_002.json"
+    },
+    {
+      "case_id": "ACUT_003",
+      "specialty": "Emergency",
+      "final_diagnosis": "Tension Pneumothorax",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_003.json"
+    },
+    {
+      "case_id": "ACUT_004",
+      "specialty": "Emergency",
+      "final_diagnosis": "Hypovolaemic Shock",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_004.json"
+    },
+    {
+      "case_id": "ACUT_005",
+      "specialty": "Emergency",
+      "final_diagnosis": "Cardiogenic Shock",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_005.json"
+    },
+    {
+      "case_id": "ACUT_006",
+      "specialty": "Emergency",
+      "final_diagnosis": "Electrocution",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_006.json"
+    },
+    {
+      "case_id": "ACUT_007",
+      "specialty": "Emergency",
+      "final_diagnosis": "Drowning",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_007.json"
+    },
+    {
+      "case_id": "ACUT_008",
+      "specialty": "Emergency",
+      "final_diagnosis": "CO poisoning",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_008.json"
+    },
+    {
+      "case_id": "ACUT_009",
+      "specialty": "Emergency",
+      "final_diagnosis": "Hypothermia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_009.json"
+    },
+    {
+      "case_id": "ACUT_010",
+      "specialty": "Emergency",
+      "final_diagnosis": "Polytrauma",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_010.json"
+    },
+    {
+      "case_id": "ACUT_011",
+      "specialty": "Emergency",
+      "final_diagnosis": "Organophosphate poisoning",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_011.json"
+    },
+    {
+      "case_id": "ACUT_012",
+      "specialty": "Emergency",
+      "final_diagnosis": "Major Trauma",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_012.json"
+    },
+    {
+      "case_id": "ACUT_013",
+      "specialty": "Emergency",
+      "final_diagnosis": "Burns",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_013.json"
+    },
+    {
+      "case_id": "ACUT_014",
+      "specialty": "Emergency",
+      "final_diagnosis": "Spinal injury",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_014.json"
+    },
+    {
+      "case_id": "ACUT_015",
+      "specialty": "Emergency",
+      "final_diagnosis": "Tension Pneumothorax",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_015.json"
+    },
+    {
+      "case_id": "ACUT_016",
+      "specialty": "Emergency",
+      "final_diagnosis": "Hypovolaemic Shock",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_016.json"
+    },
+    {
+      "case_id": "ACUT_017",
+      "specialty": "Emergency",
+      "final_diagnosis": "Cardiogenic Shock",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_017.json"
+    },
+    {
+      "case_id": "ACUT_018",
+      "specialty": "Emergency",
+      "final_diagnosis": "Electrocution",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_018.json"
+    },
+    {
+      "case_id": "ACUT_019",
+      "specialty": "Emergency",
+      "final_diagnosis": "Drowning",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_019.json"
+    },
+    {
+      "case_id": "ACUT_020",
+      "specialty": "Emergency",
+      "final_diagnosis": "CO poisoning",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_020.json"
+    },
+    {
+      "case_id": "ACUT_021",
+      "specialty": "Emergency",
+      "final_diagnosis": "Hypothermia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_021.json"
+    },
+    {
+      "case_id": "ACUT_022",
+      "specialty": "Emergency",
+      "final_diagnosis": "Polytrauma",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_022.json"
+    },
+    {
+      "case_id": "ACUT_023",
+      "specialty": "Emergency",
+      "final_diagnosis": "Organophosphate poisoning",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_023.json"
+    },
+    {
+      "case_id": "ACUT_024",
+      "specialty": "Emergency",
+      "final_diagnosis": "Major Trauma",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_024.json"
+    },
+    {
+      "case_id": "ACUT_025",
+      "specialty": "Emergency",
+      "final_diagnosis": "Burns",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_025.json"
+    },
+    {
+      "case_id": "ACUT_026",
+      "specialty": "Emergency",
+      "final_diagnosis": "Spinal injury",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_026.json"
+    },
+    {
+      "case_id": "ACUT_027",
+      "specialty": "Emergency",
+      "final_diagnosis": "Tension Pneumothorax",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_027.json"
+    },
+    {
+      "case_id": "ACUT_028",
+      "specialty": "Emergency",
+      "final_diagnosis": "Hypovolaemic Shock",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_028.json"
+    },
+    {
+      "case_id": "ACUT_029",
+      "specialty": "Emergency",
+      "final_diagnosis": "Cardiogenic Shock",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_029.json"
+    },
+    {
+      "case_id": "ACUT_030",
+      "specialty": "Emergency",
+      "final_diagnosis": "Electrocution",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\ACUT_030.json"
+    },
+    {
+      "case_id": "VAL-ENDO-001",
+      "specialty": "Unknown",
+      "final_diagnosis": "?",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\endocrinology_01.json"
+    },
+    {
+      "case_id": "ENDO_001",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "HHS",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_001.json"
+    },
+    {
+      "case_id": "ENDO_002",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Type 2 Diabetes new diagnosis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_002.json"
+    },
+    {
+      "case_id": "ENDO_003",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Hypothyroidism",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_003.json"
+    },
+    {
+      "case_id": "ENDO_004",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Hyperthyroidism",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_004.json"
+    },
+    {
+      "case_id": "ENDO_005",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Thyroid Storm",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_005.json"
+    },
+    {
+      "case_id": "ENDO_006",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Hypoglycaemia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_006.json"
+    },
+    {
+      "case_id": "ENDO_007",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Addison's Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_007.json"
+    },
+    {
+      "case_id": "ENDO_008",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Cushing's Syndrome",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_008.json"
+    },
+    {
+      "case_id": "ENDO_009",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "PCOS",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_009.json"
+    },
+    {
+      "case_id": "ENDO_010",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "DKA",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_010.json"
+    },
+    {
+      "case_id": "ENDO_011",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "HHS",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_011.json"
+    },
+    {
+      "case_id": "ENDO_012",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Type 2 Diabetes new diagnosis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_012.json"
+    },
+    {
+      "case_id": "ENDO_013",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Hypothyroidism",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_013.json"
+    },
+    {
+      "case_id": "ENDO_014",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Hyperthyroidism",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_014.json"
+    },
+    {
+      "case_id": "ENDO_015",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Thyroid Storm",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_015.json"
+    },
+    {
+      "case_id": "ENDO_016",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Hypoglycaemia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_016.json"
+    },
+    {
+      "case_id": "ENDO_017",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Addison's Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_017.json"
+    },
+    {
+      "case_id": "ENDO_018",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Cushing's Syndrome",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_018.json"
+    },
+    {
+      "case_id": "ENDO_019",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "PCOS",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_019.json"
+    },
+    {
+      "case_id": "ENDO_020",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "DKA",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_020.json"
+    },
+    {
+      "case_id": "ENDO_021",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "HHS",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_021.json"
+    },
+    {
+      "case_id": "ENDO_022",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Type 2 Diabetes new diagnosis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_022.json"
+    },
+    {
+      "case_id": "ENDO_023",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Hypothyroidism",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_023.json"
+    },
+    {
+      "case_id": "ENDO_024",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Hyperthyroidism",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_024.json"
+    },
+    {
+      "case_id": "ENDO_025",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Thyroid Storm",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_025.json"
+    },
+    {
+      "case_id": "ENDO_026",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Hypoglycaemia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_026.json"
+    },
+    {
+      "case_id": "ENDO_027",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Addison's Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_027.json"
+    },
+    {
+      "case_id": "ENDO_028",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "Cushing's Syndrome",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_028.json"
+    },
+    {
+      "case_id": "ENDO_029",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "PCOS",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_029.json"
+    },
+    {
+      "case_id": "ENDO_030",
+      "specialty": "Endocrinology",
+      "final_diagnosis": "DKA",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\endocrinology\\ENDO_030.json"
+    },
+    {
+      "case_id": "ACC_GASTRO_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Gastroesophageal Reflux Disease (GERD)",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\acc_gastro_001.json"
+    },
+    {
+      "case_id": "GAST_001",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Cholecystitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_001.json"
+    },
+    {
+      "case_id": "GAST_002",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Acute Pancreatitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_002.json"
+    },
+    {
+      "case_id": "GAST_003",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Upper GI Bleed",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_003.json"
+    },
+    {
+      "case_id": "GAST_004",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Lower GI Bleed",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_004.json"
+    },
+    {
+      "case_id": "GAST_005",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Bowel Obstruction",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_005.json"
+    },
+    {
+      "case_id": "GAST_006",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Crohn's Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_006.json"
+    },
+    {
+      "case_id": "GAST_007",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Ulcerative Colitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_007.json"
+    },
+    {
+      "case_id": "GAST_008",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "GERD",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_008.json"
+    },
+    {
+      "case_id": "GAST_009",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Peptic Ulcer",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_009.json"
+    },
+    {
+      "case_id": "GAST_010",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Mesenteric Ischaemia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_010.json"
+    },
+    {
+      "case_id": "GAST_011",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Appendicitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_011.json"
+    },
+    {
+      "case_id": "GAST_012",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Cholecystitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_012.json"
+    },
+    {
+      "case_id": "GAST_013",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Acute Pancreatitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_013.json"
+    },
+    {
+      "case_id": "GAST_014",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Upper GI Bleed",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_014.json"
+    },
+    {
+      "case_id": "GAST_015",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Lower GI Bleed",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_015.json"
+    },
+    {
+      "case_id": "GAST_016",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Bowel Obstruction",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_016.json"
+    },
+    {
+      "case_id": "GAST_017",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Crohn's Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_017.json"
+    },
+    {
+      "case_id": "GAST_018",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Ulcerative Colitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_018.json"
+    },
+    {
+      "case_id": "GAST_019",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "GERD",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_019.json"
+    },
+    {
+      "case_id": "GAST_020",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Peptic Ulcer",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_020.json"
+    },
+    {
+      "case_id": "GAST_021",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Mesenteric Ischaemia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_021.json"
+    },
+    {
+      "case_id": "GAST_022",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Appendicitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_022.json"
+    },
+    {
+      "case_id": "GAST_023",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Cholecystitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_023.json"
+    },
+    {
+      "case_id": "GAST_024",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Acute Pancreatitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_024.json"
+    },
+    {
+      "case_id": "GAST_025",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Upper GI Bleed",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_025.json"
+    },
+    {
+      "case_id": "GAST_026",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Lower GI Bleed",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_026.json"
+    },
+    {
+      "case_id": "GAST_027",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Bowel Obstruction",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_027.json"
+    },
+    {
+      "case_id": "GAST_028",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Crohn's Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_028.json"
+    },
+    {
+      "case_id": "GAST_029",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Ulcerative Colitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_029.json"
+    },
+    {
+      "case_id": "GAST_030",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "GERD",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_030.json"
+    },
+    {
+      "case_id": "GAST_031",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Peptic Ulcer",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_031.json"
+    },
+    {
+      "case_id": "GAST_032",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Mesenteric Ischaemia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_032.json"
+    },
+    {
+      "case_id": "GAST_033",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Appendicitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_033.json"
+    },
+    {
+      "case_id": "GAST_034",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Cholecystitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_034.json"
+    },
+    {
+      "case_id": "GAST_035",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Acute Pancreatitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_035.json"
+    },
+    {
+      "case_id": "GAST_036",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Upper GI Bleed",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_036.json"
+    },
+    {
+      "case_id": "GAST_037",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Lower GI Bleed",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_037.json"
+    },
+    {
+      "case_id": "GAST_038",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Bowel Obstruction",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_038.json"
+    },
+    {
+      "case_id": "GAST_039",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Crohn's Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_039.json"
+    },
+    {
+      "case_id": "GAST_040",
+      "specialty": "Gastroenterology",
+      "final_diagnosis": "Ulcerative Colitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\gastroenterology\\GAST_040.json"
+    },
+    {
+      "case_id": "VAL-GER-001",
+      "specialty": "Unknown",
+      "final_diagnosis": "?",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\geriatrics_01.json"
+    },
+    {
+      "case_id": "GERI_001",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Delirium in elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_001.json"
+    },
+    {
+      "case_id": "GERI_002",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Pneumonia in elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_002.json"
+    },
+    {
+      "case_id": "GERI_003",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "UTI + Sepsis elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_003.json"
+    },
+    {
+      "case_id": "GERI_004",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Cardiac failure elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_004.json"
+    },
+    {
+      "case_id": "GERI_005",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Polypharmacy adverse effects",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_005.json"
+    },
+    {
+      "case_id": "GERI_006",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Parkinson's Disease elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_006.json"
+    },
+    {
+      "case_id": "GERI_007",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Dementia exacerbation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_007.json"
+    },
+    {
+      "case_id": "GERI_008",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Falls / Hip Fracture",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_008.json"
+    },
+    {
+      "case_id": "GERI_009",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Delirium in elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_009.json"
+    },
+    {
+      "case_id": "GERI_010",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Pneumonia in elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_010.json"
+    },
+    {
+      "case_id": "GERI_011",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "UTI + Sepsis elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_011.json"
+    },
+    {
+      "case_id": "GERI_012",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Cardiac failure elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_012.json"
+    },
+    {
+      "case_id": "GERI_013",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Polypharmacy adverse effects",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_013.json"
+    },
+    {
+      "case_id": "GERI_014",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Parkinson's Disease elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_014.json"
+    },
+    {
+      "case_id": "GERI_015",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Dementia exacerbation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_015.json"
+    },
+    {
+      "case_id": "GERI_016",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Falls / Hip Fracture",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_016.json"
+    },
+    {
+      "case_id": "GERI_017",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Delirium in elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_017.json"
+    },
+    {
+      "case_id": "GERI_018",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Pneumonia in elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_018.json"
+    },
+    {
+      "case_id": "GERI_019",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "UTI + Sepsis elderly",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_019.json"
+    },
+    {
+      "case_id": "GERI_020",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Cardiac failure elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_020.json"
+    },
+    {
+      "case_id": "GERI_021",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Polypharmacy adverse effects",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_021.json"
+    },
+    {
+      "case_id": "GERI_022",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Parkinson's Disease elderly",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_022.json"
+    },
+    {
+      "case_id": "GERI_023",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Dementia exacerbation",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_023.json"
+    },
+    {
+      "case_id": "GERI_024",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Falls / Hip Fracture",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_024.json"
+    },
+    {
+      "case_id": "GERI_025",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Delirium in elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_025.json"
+    },
+    {
+      "case_id": "GERI_026",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Pneumonia in elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_026.json"
+    },
+    {
+      "case_id": "GERI_027",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "UTI + Sepsis elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_027.json"
+    },
+    {
+      "case_id": "GERI_028",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Cardiac failure elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_028.json"
+    },
+    {
+      "case_id": "GERI_029",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Polypharmacy adverse effects",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_029.json"
+    },
+    {
+      "case_id": "GERI_030",
+      "specialty": "Geriatrics",
+      "final_diagnosis": "Parkinson's Disease elderly",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\geriatrics\\GERI_030.json"
+    },
+    {
+      "case_id": "ACC_NEUR_MENINGITIS_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Bacterial Meningitis",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\acc_meningitis_01.json"
+    },
+    {
+      "case_id": "ACC_NEUR_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Migraine",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\acc_neur_001.json"
+    },
+    {
+      "case_id": "VAL-NEUR-001",
+      "specialty": "Unknown",
+      "final_diagnosis": "?",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\neurology_01.json"
+    },
+    {
+      "case_id": "NEUR_001",
+      "specialty": "Neurology",
+      "final_diagnosis": "TIA",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_001.json"
+    },
+    {
+      "case_id": "NEUR_002",
+      "specialty": "Neurology",
+      "final_diagnosis": "Bacterial Meningitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_002.json"
+    },
+    {
+      "case_id": "NEUR_003",
+      "specialty": "Neurology",
+      "final_diagnosis": "Subarachnoid Haemorrhage",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_003.json"
+    },
+    {
+      "case_id": "NEUR_004",
+      "specialty": "Neurology",
+      "final_diagnosis": "Migraine",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_004.json"
+    },
+    {
+      "case_id": "NEUR_005",
+      "specialty": "Neurology",
+      "final_diagnosis": "Tension Headache",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_005.json"
+    },
+    {
+      "case_id": "NEUR_006",
+      "specialty": "Neurology",
+      "final_diagnosis": "Epilepsy/First Seizure",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_006.json"
+    },
+    {
+      "case_id": "NEUR_007",
+      "specialty": "Neurology",
+      "final_diagnosis": "Parkinson's Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_007.json"
+    },
+    {
+      "case_id": "NEUR_008",
+      "specialty": "Neurology",
+      "final_diagnosis": "Guillain-Barré",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_008.json"
+    },
+    {
+      "case_id": "NEUR_009",
+      "specialty": "Neurology",
+      "final_diagnosis": "Subdural Haematoma",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_009.json"
+    },
+    {
+      "case_id": "NEUR_010",
+      "specialty": "Neurology",
+      "final_diagnosis": "Bell's Palsy",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_010.json"
+    },
+    {
+      "case_id": "NEUR_011",
+      "specialty": "Neurology",
+      "final_diagnosis": "Vertigo",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_011.json"
+    },
+    {
+      "case_id": "NEUR_012",
+      "specialty": "Neurology",
+      "final_diagnosis": "Acute Stroke",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_012.json"
+    },
+    {
+      "case_id": "NEUR_013",
+      "specialty": "Neurology",
+      "final_diagnosis": "TIA",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_013.json"
+    },
+    {
+      "case_id": "NEUR_014",
+      "specialty": "Neurology",
+      "final_diagnosis": "Bacterial Meningitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_014.json"
+    },
+    {
+      "case_id": "NEUR_015",
+      "specialty": "Neurology",
+      "final_diagnosis": "Subarachnoid Haemorrhage",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_015.json"
+    },
+    {
+      "case_id": "NEUR_016",
+      "specialty": "Neurology",
+      "final_diagnosis": "Migraine",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_016.json"
+    },
+    {
+      "case_id": "NEUR_017",
+      "specialty": "Neurology",
+      "final_diagnosis": "Tension Headache",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_017.json"
+    },
+    {
+      "case_id": "NEUR_018",
+      "specialty": "Neurology",
+      "final_diagnosis": "Epilepsy/First Seizure",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_018.json"
+    },
+    {
+      "case_id": "NEUR_019",
+      "specialty": "Neurology",
+      "final_diagnosis": "Parkinson's Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_019.json"
+    },
+    {
+      "case_id": "NEUR_020",
+      "specialty": "Neurology",
+      "final_diagnosis": "Guillain-Barré",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_020.json"
+    },
+    {
+      "case_id": "NEUR_021",
+      "specialty": "Neurology",
+      "final_diagnosis": "Subdural Haematoma",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_021.json"
+    },
+    {
+      "case_id": "NEUR_022",
+      "specialty": "Neurology",
+      "final_diagnosis": "Bell's Palsy",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_022.json"
+    },
+    {
+      "case_id": "NEUR_023",
+      "specialty": "Neurology",
+      "final_diagnosis": "Vertigo",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_023.json"
+    },
+    {
+      "case_id": "NEUR_024",
+      "specialty": "Neurology",
+      "final_diagnosis": "Acute Stroke",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_024.json"
+    },
+    {
+      "case_id": "NEUR_025",
+      "specialty": "Neurology",
+      "final_diagnosis": "TIA",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_025.json"
+    },
+    {
+      "case_id": "NEUR_026",
+      "specialty": "Neurology",
+      "final_diagnosis": "Bacterial Meningitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_026.json"
+    },
+    {
+      "case_id": "NEUR_027",
+      "specialty": "Neurology",
+      "final_diagnosis": "Subarachnoid Haemorrhage",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_027.json"
+    },
+    {
+      "case_id": "NEUR_028",
+      "specialty": "Neurology",
+      "final_diagnosis": "Migraine",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_028.json"
+    },
+    {
+      "case_id": "NEUR_029",
+      "specialty": "Neurology",
+      "final_diagnosis": "Tension Headache",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_029.json"
+    },
+    {
+      "case_id": "NEUR_030",
+      "specialty": "Neurology",
+      "final_diagnosis": "Epilepsy/First Seizure",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_030.json"
+    },
+    {
+      "case_id": "NEUR_031",
+      "specialty": "Neurology",
+      "final_diagnosis": "Parkinson's Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_031.json"
+    },
+    {
+      "case_id": "NEUR_032",
+      "specialty": "Neurology",
+      "final_diagnosis": "Guillain-Barré",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_032.json"
+    },
+    {
+      "case_id": "NEUR_033",
+      "specialty": "Neurology",
+      "final_diagnosis": "Subdural Haematoma",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_033.json"
+    },
+    {
+      "case_id": "NEUR_034",
+      "specialty": "Neurology",
+      "final_diagnosis": "Bell's Palsy",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_034.json"
+    },
+    {
+      "case_id": "NEUR_035",
+      "specialty": "Neurology",
+      "final_diagnosis": "Vertigo",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_035.json"
+    },
+    {
+      "case_id": "NEUR_036",
+      "specialty": "Neurology",
+      "final_diagnosis": "Acute Stroke",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_036.json"
+    },
+    {
+      "case_id": "NEUR_037",
+      "specialty": "Neurology",
+      "final_diagnosis": "TIA",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_037.json"
+    },
+    {
+      "case_id": "NEUR_038",
+      "specialty": "Neurology",
+      "final_diagnosis": "Bacterial Meningitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_038.json"
+    },
+    {
+      "case_id": "NEUR_039",
+      "specialty": "Neurology",
+      "final_diagnosis": "Subarachnoid Haemorrhage",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_039.json"
+    },
+    {
+      "case_id": "NEUR_040",
+      "specialty": "Neurology",
+      "final_diagnosis": "Migraine",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\NEUR_040.json"
+    },
+    {
+      "case_id": "ACC_PED_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Croup",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\acc_ped_001.json"
+    },
+    {
+      "case_id": "PAED_001",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Kawasaki Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_001.json"
+    },
+    {
+      "case_id": "PAED_002",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Croup",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_002.json"
+    },
+    {
+      "case_id": "PAED_003",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "RSV Bronchiolitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_003.json"
+    },
+    {
+      "case_id": "PAED_004",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Meningococcal disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_004.json"
+    },
+    {
+      "case_id": "PAED_005",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Intussusception",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_005.json"
+    },
+    {
+      "case_id": "PAED_006",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Diabetic Ketoacidosis paeds",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_006.json"
+    },
+    {
+      "case_id": "PAED_007",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Acute Otitis Media",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_007.json"
+    },
+    {
+      "case_id": "PAED_008",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Whooping Cough",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_008.json"
+    },
+    {
+      "case_id": "PAED_009",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Epiglottitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_009.json"
+    },
+    {
+      "case_id": "PAED_010",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Febrile Seizure",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_010.json"
+    },
+    {
+      "case_id": "PAED_011",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Kawasaki Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_011.json"
+    },
+    {
+      "case_id": "PAED_012",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Croup",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_012.json"
+    },
+    {
+      "case_id": "PAED_013",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "RSV Bronchiolitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_013.json"
+    },
+    {
+      "case_id": "PAED_014",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Meningococcal disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_014.json"
+    },
+    {
+      "case_id": "PAED_015",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Intussusception",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_015.json"
+    },
+    {
+      "case_id": "PAED_016",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Diabetic Ketoacidosis paeds",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_016.json"
+    },
+    {
+      "case_id": "PAED_017",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Acute Otitis Media",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_017.json"
+    },
+    {
+      "case_id": "PAED_018",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Whooping Cough",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_018.json"
+    },
+    {
+      "case_id": "PAED_019",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Epiglottitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_019.json"
+    },
+    {
+      "case_id": "PAED_020",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Febrile Seizure",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_020.json"
+    },
+    {
+      "case_id": "PAED_021",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Kawasaki Disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_021.json"
+    },
+    {
+      "case_id": "PAED_022",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Croup",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_022.json"
+    },
+    {
+      "case_id": "PAED_023",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "RSV Bronchiolitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_023.json"
+    },
+    {
+      "case_id": "PAED_024",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Meningococcal disease",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_024.json"
+    },
+    {
+      "case_id": "PAED_025",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Intussusception",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_025.json"
+    },
+    {
+      "case_id": "PAED_026",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Diabetic Ketoacidosis paeds",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_026.json"
+    },
+    {
+      "case_id": "PAED_027",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Acute Otitis Media",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_027.json"
+    },
+    {
+      "case_id": "PAED_028",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Whooping Cough",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_028.json"
+    },
+    {
+      "case_id": "PAED_029",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Epiglottitis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_029.json"
+    },
+    {
+      "case_id": "PAED_030",
+      "specialty": "Pediatrics",
+      "final_diagnosis": "Febrile Seizure",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\PAED_030.json"
+    },
+    {
+      "case_id": "VAL-PED-001",
+      "specialty": "Unknown",
+      "final_diagnosis": "?",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\pediatrics_01.json"
+    },
+    {
+      "case_id": "ACC_PREG_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Urinary Tract Infection in Pregnancy",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\acc_preg_001.json"
+    },
+    {
+      "case_id": "VAL-PREG-001",
+      "specialty": "Unknown",
+      "final_diagnosis": "?",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\pregnancy_01.json"
+    },
+    {
+      "case_id": "PREG_001",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Pre-eclampsia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_001.json"
+    },
+    {
+      "case_id": "PREG_002",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Placental Abruption",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_002.json"
+    },
+    {
+      "case_id": "PREG_003",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Hyperemesis Gravidarum",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_003.json"
+    },
+    {
+      "case_id": "PREG_004",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "HELLP Syndrome",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_004.json"
+    },
+    {
+      "case_id": "PREG_005",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Miscarriage",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_005.json"
+    },
+    {
+      "case_id": "PREG_006",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "DVT in pregnancy",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_006.json"
+    },
+    {
+      "case_id": "PREG_007",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "GDM",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_007.json"
+    },
+    {
+      "case_id": "PREG_008",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Ectopic Pregnancy",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_008.json"
+    },
+    {
+      "case_id": "PREG_009",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Pre-eclampsia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_009.json"
+    },
+    {
+      "case_id": "PREG_010",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Placental Abruption",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_010.json"
+    },
+    {
+      "case_id": "PREG_011",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Hyperemesis Gravidarum",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_011.json"
+    },
+    {
+      "case_id": "PREG_012",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "HELLP Syndrome",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_012.json"
+    },
+    {
+      "case_id": "PREG_013",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Miscarriage",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_013.json"
+    },
+    {
+      "case_id": "PREG_014",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "DVT in pregnancy",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_014.json"
+    },
+    {
+      "case_id": "PREG_015",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "GDM",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_015.json"
+    },
+    {
+      "case_id": "PREG_016",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Ectopic Pregnancy",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_016.json"
+    },
+    {
+      "case_id": "PREG_017",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Pre-eclampsia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_017.json"
+    },
+    {
+      "case_id": "PREG_018",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Placental Abruption",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_018.json"
+    },
+    {
+      "case_id": "PREG_019",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Hyperemesis Gravidarum",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_019.json"
+    },
+    {
+      "case_id": "PREG_020",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "HELLP Syndrome",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_020.json"
+    },
+    {
+      "case_id": "PREG_021",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Miscarriage",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_021.json"
+    },
+    {
+      "case_id": "PREG_022",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "DVT in pregnancy",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_022.json"
+    },
+    {
+      "case_id": "PREG_023",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "GDM",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_023.json"
+    },
+    {
+      "case_id": "PREG_024",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Ectopic Pregnancy",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_024.json"
+    },
+    {
+      "case_id": "PREG_025",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Pre-eclampsia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_025.json"
+    },
+    {
+      "case_id": "PREG_026",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Placental Abruption",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_026.json"
+    },
+    {
+      "case_id": "PREG_027",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Hyperemesis Gravidarum",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_027.json"
+    },
+    {
+      "case_id": "PREG_028",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "HELLP Syndrome",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_028.json"
+    },
+    {
+      "case_id": "PREG_029",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "Miscarriage",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_029.json"
+    },
+    {
+      "case_id": "PREG_030",
+      "specialty": "Pregnancy",
+      "final_diagnosis": "DVT in pregnancy",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\PREG_030.json"
+    },
+    {
+      "case_id": "VAL-PSYCH-001",
+      "specialty": "Unknown",
+      "final_diagnosis": "?",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\psychiatry_01.json"
+    },
+    {
+      "case_id": "PSYC_001",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Bipolar Mania",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_001.json"
+    },
+    {
+      "case_id": "PSYC_002",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Schizophrenia first episode",
+      "failures": [
+        "TRIAGE_WRONG: expected=YELLOW_MODERATE, got=RED_URGENT",
+        "FALSE_EMERGENCY: emergency triggered incorrectly",
+        "TOP1_WRONG: expected=Schizophrenia first episode, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Schizophrenia first episode', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_002.json"
+    },
+    {
+      "case_id": "PSYC_003",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Panic Disorder",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_003.json"
+    },
+    {
+      "case_id": "PSYC_004",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Generalised Anxiety",
+      "failures": [
+        "TRIAGE_WRONG: expected=RED_RESUSCITATION, got=RED_URGENT",
+        "TOP1_WRONG: expected=Generalised Anxiety, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Generalised Anxiety', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_004.json"
+    },
+    {
+      "case_id": "PSYC_005",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Alcohol Withdrawal",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_005.json"
+    },
+    {
+      "case_id": "PSYC_006",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Delirium",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_006.json"
+    },
+    {
+      "case_id": "PSYC_007",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Acute Psychosis",
+      "failures": [
+        "TRIAGE_WRONG: expected=RED_RESUSCITATION, got=RED_URGENT",
+        "TOP1_WRONG: expected=Acute Psychosis, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Acute Psychosis', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_007.json"
+    },
+    {
+      "case_id": "PSYC_008",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Severe Depression with SI",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_008.json"
+    },
+    {
+      "case_id": "PSYC_009",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Bipolar Mania",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_009.json"
+    },
+    {
+      "case_id": "PSYC_010",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Schizophrenia first episode",
+      "failures": [
+        "TRIAGE_WRONG: expected=RED_RESUSCITATION, got=RED_URGENT",
+        "TOP1_WRONG: expected=Schizophrenia first episode, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Schizophrenia first episode', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_010.json"
+    },
+    {
+      "case_id": "PSYC_011",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Panic Disorder",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_011.json"
+    },
+    {
+      "case_id": "PSYC_012",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Generalised Anxiety",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_012.json"
+    },
+    {
+      "case_id": "PSYC_013",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Alcohol Withdrawal",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_013.json"
+    },
+    {
+      "case_id": "PSYC_014",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Delirium",
+      "failures": [
+        "TRIAGE_WRONG: expected=BLUE_NON_URGENT, got=RED_URGENT",
+        "FALSE_EMERGENCY: emergency triggered incorrectly",
+        "TOP1_WRONG: expected=Delirium, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Delirium', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_014.json"
+    },
+    {
+      "case_id": "PSYC_015",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Acute Psychosis",
+      "failures": [
+        "TRIAGE_WRONG: expected=YELLOW_MODERATE, got=RED_URGENT",
+        "FALSE_EMERGENCY: emergency triggered incorrectly",
+        "TOP1_WRONG: expected=Acute Psychosis, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Acute Psychosis', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_015.json"
+    },
+    {
+      "case_id": "PSYC_016",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Severe Depression with SI",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_016.json"
+    },
+    {
+      "case_id": "PSYC_017",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Bipolar Mania",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_017.json"
+    },
+    {
+      "case_id": "PSYC_018",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Schizophrenia first episode",
+      "failures": [
+        "TRIAGE_WRONG: expected=ORANGE_EMERGENT, got=RED_URGENT",
+        "TOP1_WRONG: expected=Schizophrenia first episode, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Schizophrenia first episode', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_018.json"
+    },
+    {
+      "case_id": "PSYC_019",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Panic Disorder",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_019.json"
+    },
+    {
+      "case_id": "PSYC_020",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Generalised Anxiety",
+      "failures": [
+        "TRIAGE_WRONG: expected=BLUE_NON_URGENT, got=RED_URGENT",
+        "FALSE_EMERGENCY: emergency triggered incorrectly",
+        "TOP1_WRONG: expected=Generalised Anxiety, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Generalised Anxiety', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_020.json"
+    },
+    {
+      "case_id": "PSYC_021",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Alcohol Withdrawal",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_021.json"
+    },
+    {
+      "case_id": "PSYC_022",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Delirium",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_022.json"
+    },
+    {
+      "case_id": "PSYC_023",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Acute Psychosis",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_023.json"
+    },
+    {
+      "case_id": "PSYC_024",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Severe Depression with SI",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_024.json"
+    },
+    {
+      "case_id": "PSYC_025",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Bipolar Mania",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_025.json"
+    },
+    {
+      "case_id": "PSYC_026",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Schizophrenia first episode",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_026.json"
+    },
+    {
+      "case_id": "PSYC_027",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Panic Disorder",
+      "failures": [
+        "TRIAGE_WRONG: expected=YELLOW_MODERATE, got=RED_URGENT",
+        "FALSE_EMERGENCY: emergency triggered incorrectly",
+        "TOP1_WRONG: expected=Panic Disorder, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Panic Disorder', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_027.json"
+    },
+    {
+      "case_id": "PSYC_028",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Generalised Anxiety",
+      "failures": [
+        "TRIAGE_WRONG: expected=BLUE_NON_URGENT, got=RED_URGENT",
+        "FALSE_EMERGENCY: emergency triggered incorrectly",
+        "TOP1_WRONG: expected=Generalised Anxiety, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Generalised Anxiety', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_028.json"
+    },
+    {
+      "case_id": "PSYC_029",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Alcohol Withdrawal",
+      "failures": [
+        "TRIAGE_WRONG: expected=RED_RESUSCITATION, got=RED_URGENT",
+        "TOP1_WRONG: expected=Alcohol Withdrawal, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Alcohol Withdrawal', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_029.json"
+    },
+    {
+      "case_id": "PSYC_030",
+      "specialty": "Psychiatry",
+      "final_diagnosis": "Delirium",
+      "failures": [
+        "TRIAGE_WRONG: expected=GREEN_STANDARD, got=RED_URGENT",
+        "FALSE_EMERGENCY: emergency triggered incorrectly",
+        "TOP1_WRONG: expected=Delirium, got=Major Depressive Disorder with Suicidal Ideation"
+      ],
+      "warnings": [
+        "TOP3_MISS: expected=['Delirium', 'Alternative 1', 'Alternative 2'], got=['Major Depressive Disorder with Suicidal Ideation', 'Acute Psychiatric Crisis']"
+      ],
+      "pipeline_output": {
+        "triage": "RED_URGENT",
+        "top1": "Major Depressive Disorder with Suicidal Ideation",
+        "confidence": 0.4,
+        "is_emergency": true
+      },
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\psychiatry\\PSYC_030.json"
+    },
+    {
+      "case_id": "ACC_RARE_DER21_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Down Syndrome (Trisomy 21) secondary to de novo Homologous Robertsonian Translocation der(21;21)(q10;q10)",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\rare_disease\\acc_der21_prenatal_01.json"
+    },
+    {
+      "case_id": "ACC_RARE_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Hereditary Angioedema",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\rare_disease\\acc_rare_001.json"
+    },
+    {
+      "case_id": "ACC_RESP_001",
+      "specialty": "Unknown",
+      "final_diagnosis": "Viral Upper Respiratory Infection",
+      "failures": [
+        "PIPELINE_CRASH: 'list' object has no attribute 'get'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\acc_resp_001.json"
+    },
+    {
+      "case_id": "VAL-RESP-001",
+      "specialty": "Unknown",
+      "final_diagnosis": "?",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\respiratory_01.json"
+    },
+    {
+      "case_id": "RESP_001",
+      "specialty": "Respiratory",
+      "final_diagnosis": "COPD Exacerbation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_001.json"
+    },
+    {
+      "case_id": "RESP_002",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Asthma",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_002.json"
+    },
+    {
+      "case_id": "RESP_003",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pulmonary Embolism",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_003.json"
+    },
+    {
+      "case_id": "RESP_004",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pneumothorax",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_004.json"
+    },
+    {
+      "case_id": "RESP_005",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pleural Effusion",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_005.json"
+    },
+    {
+      "case_id": "RESP_006",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Tuberculosis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_006.json"
+    },
+    {
+      "case_id": "RESP_007",
+      "specialty": "Respiratory",
+      "final_diagnosis": "COVID-19",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_007.json"
+    },
+    {
+      "case_id": "RESP_008",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Influenza",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_008.json"
+    },
+    {
+      "case_id": "RESP_009",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Viral URTI",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_009.json"
+    },
+    {
+      "case_id": "RESP_010",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Lung Cancer presentation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_010.json"
+    },
+    {
+      "case_id": "RESP_011",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Community-Acquired Pneumonia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_011.json"
+    },
+    {
+      "case_id": "RESP_012",
+      "specialty": "Respiratory",
+      "final_diagnosis": "COPD Exacerbation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_012.json"
+    },
+    {
+      "case_id": "RESP_013",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Asthma",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_013.json"
+    },
+    {
+      "case_id": "RESP_014",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pulmonary Embolism",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_014.json"
+    },
+    {
+      "case_id": "RESP_015",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pneumothorax",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_015.json"
+    },
+    {
+      "case_id": "RESP_016",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pleural Effusion",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_016.json"
+    },
+    {
+      "case_id": "RESP_017",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Tuberculosis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_017.json"
+    },
+    {
+      "case_id": "RESP_018",
+      "specialty": "Respiratory",
+      "final_diagnosis": "COVID-19",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_018.json"
+    },
+    {
+      "case_id": "RESP_019",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Influenza",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_019.json"
+    },
+    {
+      "case_id": "RESP_020",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Viral URTI",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_020.json"
+    },
+    {
+      "case_id": "RESP_021",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Lung Cancer presentation",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_021.json"
+    },
+    {
+      "case_id": "RESP_022",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Community-Acquired Pneumonia",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_022.json"
+    },
+    {
+      "case_id": "RESP_023",
+      "specialty": "Respiratory",
+      "final_diagnosis": "COPD Exacerbation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_023.json"
+    },
+    {
+      "case_id": "RESP_024",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Asthma",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_024.json"
+    },
+    {
+      "case_id": "RESP_025",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pulmonary Embolism",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_025.json"
+    },
+    {
+      "case_id": "RESP_026",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pneumothorax",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_026.json"
+    },
+    {
+      "case_id": "RESP_027",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pleural Effusion",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_027.json"
+    },
+    {
+      "case_id": "RESP_028",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Tuberculosis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_028.json"
+    },
+    {
+      "case_id": "RESP_029",
+      "specialty": "Respiratory",
+      "final_diagnosis": "COVID-19",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_029.json"
+    },
+    {
+      "case_id": "RESP_030",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Influenza",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_030.json"
+    },
+    {
+      "case_id": "RESP_031",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Viral URTI",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_031.json"
+    },
+    {
+      "case_id": "RESP_032",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Lung Cancer presentation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_032.json"
+    },
+    {
+      "case_id": "RESP_033",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Community-Acquired Pneumonia",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_033.json"
+    },
+    {
+      "case_id": "RESP_034",
+      "specialty": "Respiratory",
+      "final_diagnosis": "COPD Exacerbation",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_034.json"
+    },
+    {
+      "case_id": "RESP_035",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Asthma",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_035.json"
+    },
+    {
+      "case_id": "RESP_036",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pulmonary Embolism",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_036.json"
+    },
+    {
+      "case_id": "RESP_037",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pneumothorax",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_037.json"
+    },
+    {
+      "case_id": "RESP_038",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Pleural Effusion",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_038.json"
+    },
+    {
+      "case_id": "RESP_039",
+      "specialty": "Respiratory",
+      "final_diagnosis": "Tuberculosis",
+      "failures": [
+        "PIPELINE_CRASH: 'ScoringResult' object has no attribute 'interpretation'"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_039.json"
+    },
+    {
+      "case_id": "RESP_040",
+      "specialty": "Respiratory",
+      "final_diagnosis": "COVID-19",
+      "failures": [
+        "PIPELINE_CRASH: name 'unlikely_names' is not defined"
+      ],
+      "case_file": "c:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\respiratory\\RESP_040.json"
+    }
+  ]
+}

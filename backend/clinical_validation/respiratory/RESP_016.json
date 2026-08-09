@@ -1,0 +1,88 @@
+{
+  "case_id": "RESP_016",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Respiratory",
+  "difficulty": "hard",
+  "patient": {
+    "age": 62,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with cough and fever",
+  "presenting_symptoms": [
+    "cough",
+    "fever",
+    "hemoptysis"
+  ],
+  "denied_symptoms": [
+    "night sweats",
+    "recent travel"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Atorvastatin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.5,
+    "spo2_pct": 97,
+    "heart_rate": 89,
+    "respiratory_rate": 28,
+    "bp_systolic": 175,
+    "bp_diastolic": 63
+  },
+  "final_diagnosis": "Pleural Effusion",
+  "icd11": "XX84",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Pleural Effusion",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of cough supports Pleural Effusion",
+    "Absence of night sweats reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Pleural Effusion",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

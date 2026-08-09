@@ -1,0 +1,88 @@
+{
+  "case_id": "PAED_007",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pediatrics",
+  "difficulty": "easy",
+  "patient": {
+    "age": 5,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with lethargy and fever",
+  "presenting_symptoms": [
+    "lethargy",
+    "fever",
+    "rash"
+  ],
+  "denied_symptoms": [
+    "cyanosis",
+    "choking"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.1,
+    "spo2_pct": 97,
+    "heart_rate": 108,
+    "respiratory_rate": 18,
+    "bp_systolic": 168,
+    "bp_diastolic": 98
+  },
+  "final_diagnosis": "Acute Otitis Media",
+  "icd11": "XX26",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Acute Otitis Media",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of lethargy supports Acute Otitis Media",
+    "Absence of cyanosis reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Acute Otitis Media",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

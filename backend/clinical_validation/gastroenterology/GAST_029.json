@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_029",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 18,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with jaundice and diarrhea",
+  "presenting_symptoms": [
+    "jaundice",
+    "diarrhea",
+    "melena"
+  ],
+  "denied_symptoms": [
+    "shortness of breath",
+    "dysuria"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.9,
+    "spo2_pct": 95,
+    "heart_rate": 106,
+    "respiratory_rate": 20,
+    "bp_systolic": 130,
+    "bp_diastolic": 92
+  },
+  "final_diagnosis": "Ulcerative Colitis",
+  "icd11": "XX62",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Ulcerative Colitis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of jaundice supports Ulcerative Colitis",
+    "Absence of shortness of breath reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Ulcerative Colitis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

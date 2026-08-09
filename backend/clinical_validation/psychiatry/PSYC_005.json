@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_005",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 45,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with insomnia and hallucinations",
+  "presenting_symptoms": [
+    "insomnia",
+    "hallucinations",
+    "agitation"
+  ],
+  "denied_symptoms": [
+    "seizures",
+    "head trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.1,
+    "spo2_pct": 97,
+    "heart_rate": 76,
+    "respiratory_rate": 15,
+    "bp_systolic": 92,
+    "bp_diastolic": 105
+  },
+  "final_diagnosis": "Alcohol Withdrawal",
+  "icd11": "XX29",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Alcohol Withdrawal",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of insomnia supports Alcohol Withdrawal",
+    "Absence of seizures reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Alcohol Withdrawal",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "case_id": "VAL-ENDO-001",
+  "domain": "endocrinology",
+  "title": "Polydipsia, Polyuria, Unintentional Weight Loss, and Fatigue in Adult",
+  "patient_demographics": {
+    "age": 45,
+    "gender": "male",
+    "pregnancy_status": false
+  },
+  "history": {
+    "chief_complaint": "Excessive thirst, drinking 5-6 liters of water daily, frequent urination including 4 times per night",
+    "onset": "Progressive over 4 weeks with 6 kg weight loss",
+    "past_medical_history": ["Obesity (BMI 31.4)", "Hypertension"],
+    "current_medications": ["Lisnopril 10mg"],
+    "allergies": ["None"]
+  },
+  "symptoms": [
+    "Polydipsia (Excessive thirst)",
+    "Polyuria (Frequent urination)",
+    "Nocturia (Nighttime urination)",
+    "Unintentional weight loss",
+    "Fatigue",
+    "Blurred vision"
+  ],
+  "examination_findings": {
+    "vitals": {
+      "temperature_f": 98.6,
+      "heart_rate_bpm": 80,
+      "blood_pressure": "134/86",
+      "respiratory_rate": 16,
+      "o2_saturation_pct": 98
+    },
+    "physical_exam": "Dry mucous membranes, skin turgor mildly reduced. Acanthosis nigricans noted on posterior neck."
+  },
+  "lab_results": {
+    "fasting_plasma_glucose": "214 mg/dL (Diagnostic > 126 mg/dL)",
+    "hba1c": "10.2% (Diagnostic > 6.5%)",
+    "urine_ketones": "Negative"
+  },
+  "expected_differential_diagnoses": [
+    {
+      "disease_name": "Type 2 Diabetes Mellitus with Symptomatic Hyperglycemia",
+      "icd11_code": "5A11",
+      "expected_probability_range": [0.80, 0.95],
+      "supporting_features": ["Polydipsia", "Polyuria", "Weight loss", "Acanthosis nigricans", "Fasting Glucose 214 mg/dL", "HbA1c 10.2%"],
+      "missing_features": ["Ketoacidosis signs absent (Urine ketones negative)"]
+    },
+    {
+      "disease_name": "Diabetes Insipidus",
+      "icd11_code": "5A60",
+      "expected_probability_range": [0.03, 0.10],
+      "supporting_features": ["Polydipsia", "Polyuria"],
+      "missing_features": ["Hyperglycemia present rules out pure Diabetes Insipidus"]
+    }
+  ],
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_followup_questions": [
+    "Are you experiencing any nausea, vomiting, abdominal pain, or fruity breath odor?",
+    "Have you noticed any numbness, tingling, or burning sensations in your feet?",
+    "Has anyone in your immediate family been diagnosed with diabetes or thyroid conditions?"
+  ],
+  "expected_safety_checks": [
+    "Verify baseline kidney function (eGFR / Serum Creatinine) prior to Metformin initiation",
+    "Screen for diabetic ketoacidosis (DKA) warning signs"
+  ],
+  "expected_do_not_recommend": [
+    "High-glycemic simple carbohydrate sugary beverages or fruit juices to quench thirst",
+    "Metformin initiation without checking baseline renal function (eGFR < 30 mL/min contraindication)"
+  ]
+}

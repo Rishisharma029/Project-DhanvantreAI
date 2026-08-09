@@ -1,0 +1,88 @@
+{
+  "case_id": "ENDO_023",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Endocrinology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 40,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with fatigue and cold intolerance",
+  "presenting_symptoms": [
+    "fatigue",
+    "cold intolerance",
+    "polyuria"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.8,
+    "spo2_pct": 95,
+    "heart_rate": 120,
+    "respiratory_rate": 27,
+    "bp_systolic": 115,
+    "bp_diastolic": 109
+  },
+  "final_diagnosis": "Hypothyroidism",
+  "icd11": "XX52",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Hypothyroidism",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of fatigue supports Hypothyroidism",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Hypothyroidism",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

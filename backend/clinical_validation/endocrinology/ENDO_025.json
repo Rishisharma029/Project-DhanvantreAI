@@ -1,0 +1,88 @@
+{
+  "case_id": "ENDO_025",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Endocrinology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 67,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with polydipsia and cold intolerance",
+  "presenting_symptoms": [
+    "polydipsia",
+    "cold intolerance",
+    "fatigue"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Lisinopril"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.3,
+    "spo2_pct": 93,
+    "heart_rate": 114,
+    "respiratory_rate": 22,
+    "bp_systolic": 170,
+    "bp_diastolic": 73
+  },
+  "final_diagnosis": "Thyroid Storm",
+  "icd11": "XX48",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Thyroid Storm",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of polydipsia supports Thyroid Storm",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Thyroid Storm",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

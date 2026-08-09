@@ -1,0 +1,88 @@
+{
+  "case_id": "CARD_003",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Cardiology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 83,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with palpitations and syncope",
+  "presenting_symptoms": [
+    "palpitations",
+    "syncope",
+    "chest pain"
+  ],
+  "denied_symptoms": [
+    "calf pain",
+    "cough"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Omeprazole"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.8,
+    "spo2_pct": 89,
+    "heart_rate": 92,
+    "respiratory_rate": 13,
+    "bp_systolic": 176,
+    "bp_diastolic": 73
+  },
+  "final_diagnosis": "Heart Failure",
+  "icd11": "XX55",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Heart Failure",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of palpitations supports Heart Failure",
+    "Absence of calf pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Heart Failure",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI - Clinical Platform Intelligence & Adaptive Diagnostic Support System. Real-time symptom triage, drug interaction guardrails, and explainable medical insights.">
+    <title>AuraMed AI | Next-Gen Clinical Intelligence & Diagnostic Support</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Dynamic Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar-header" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+                <a href="auth.html#login" class="btn btn-secondary"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+                <a href="auth.html#register" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Get Started</a>
+                <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero-section" id="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="badge hero-badge">
+                        <span class="badge-pulse"></span>
+                        <i class="fa-solid fa-shield-halved"></i> HIPAA & GDPR Compliant Medical AI
+                    </div>
+                    <h1 class="hero-title">
+                        Next-Gen Clinical Intelligence & <span class="gradient-text">Adaptive Diagnostics</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Empower medical teams with precision adaptive symptom analysis, real-time drug interaction safety guardrails, dosage calculation engines, and transparent explainable AI rationale.
+                    </p>
+
+                    <div class="hero-cta-group">
+                        <a href="#contact" class="btn btn-primary btn-lg">
+                            <span>Get Started Now</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#hero-demo" class="btn btn-outline btn-lg">
+                            <i class="fa-solid fa-play"></i>
+                            <span>Explore Live Triage Widget</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Metric Badges -->
+                    <div class="trust-metrics">
+                        <div class="metric-item">
+                            <div class="metric-value" data-target="99.4">0%</div>
+                            <div class="metric-label">Diagnostic Guardrail Accuracy</div>
+                        </div>
+                        <div class="metric-divider"></div>
+                        <div class="metric-item">
+                            <div class="metric-value" data-target="250000">0+</div>
+                            <div class="metric-label">Medical Knowledge Graph Nodes</div>
+                        </div>
+                        <div class="metric-divider"></div>
+                        <div class="metric-item">
+                            <div class="metric-value" data-target="50">0ms</div>
+                            <div class="metric-label">Sub-second Triage Latency</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Interactive Demo Card -->
+                <div class="hero-demo-wrapper" id="hero-demo">
+                    <div class="glass-card demo-card">
+                        <div class="demo-card-header">
+                            <div class="demo-status">
+                                <span class="status-dot online"></span>
+                                <span class="status-text">AuraMed Engine v1.0 • Active</span>
+                            </div>
+                            <div class="demo-badge"><i class="fa-solid fa-microchip"></i> Live Sandbox</div>
+                        </div>
+
+                        <div class="demo-card-body">
+                            <div class="demo-step-indicator">
+                                <span class="step-tag active" id="demoTag1">1. Patient Input</span>
+                                <i class="fa-solid fa-chevron-right step-arrow"></i>
+                                <span class="step-tag" id="demoTag2">2. AI Analysis</span>
+                                <i class="fa-solid fa-chevron-right step-arrow"></i>
+                                <span class="step-tag" id="demoTag3">3. Safety Check</span>
+                            </div>
+
+                            <!-- Interactive Input Sandbox -->
+                            <div class="demo-input-box">
+                                <label for="symptomInput" class="input-label">Simulate Patient Symptoms:</label>
+                                <div class="input-with-button">
+                                    <input type="text" id="symptomInput" class="demo-field" value="Acute shortness of breath, chest pain radiating to left arm, sweating" placeholder="Type symptoms e.g., high fever, productive cough...">
+                                    <button class="btn btn-accent" id="runDemoBtn">
+                                        <i class="fa-solid fa-wand-magic-sparkles"></i> Analyze
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Preset Symptoms Quick Select -->
+                            <div class="preset-pills">
+                                <span class="pill-label">Quick Scenarios:</span>
+                                <button class="preset-btn" data-symptoms="Chest pain, dyspnea, diaphoresis">Chest Pain & Dyspnea</button>
+                                <button class="preset-btn" data-symptoms="High fever, severe headache, neck stiffness, photophobia">Fever & Meningismus</button>
+                                <button class="preset-btn" data-symptoms="Polyuria, polydipsia, unexplained weight loss, fatigue">Diabetic Triad</button>
+                            </div>
+
+                            <!-- Demo Output Console -->
+                            <div class="demo-console" id="demoConsole">
+                                <div class="console-placeholder" id="consolePlaceholder">
+                                    <i class="fa-solid fa-stethoscope"></i>
+                                    <p>Click <strong>"Analyze"</strong> or select a scenario above to test the clinical decision engine.</p>
+                                </div>
+                                <div class="console-result hidden" id="consoleResult">
+                                    <div class="result-header">
+                                        <div class="result-severity alert-high">
+                                            <i class="fa-solid fa-triangle-exclamation"></i> Triage Status: RED (Urgent Care Required)
+                                        </div>
+                                        <div class="confidence-badge">Confidence: 98.2%</div>
+                                    </div>
+                                    <div class="result-body">
+                                        <div class="result-section">
+                                            <h4><i class="fa-solid fa-notes-medical"></i> Differential Diagnostics:</h4>
+                                            <ul class="diag-list">
+                                                <li><strong>Acute Coronary Syndrome (ACS):</strong> High Probability (88%)</li>
+                                                <li><strong>Pulmonary Embolism:</strong> Secondary Differential (10%)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="result-section">
+                                            <h4><i class="fa-solid fa-shield-virus"></i> Safety & Interaction Check:</h4>
+                                            <p class="text-sm text-muted">Contraindication Check: Verified zero conflict with current medications. Immediate ECG & Troponin I panel recommended.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="demo-card-footer">
+                            <div class="footer-note"><i class="fa-solid fa-circle-info"></i> Includes confidence metrics & explainable clinical rationale graph</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES SECTION -->
+        <section class="features-section" id="features">
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="badge">Comprehensive Clinical Suite</div>
+                    <h2 class="section-title">Built for Modern Healthcare Infrastructure</h2>
+                    <p class="section-subtitle">
+                        An end-to-end intelligence layer engineered to assist doctors, triage nurses, and healthcare applications with real-time decision support.
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <!-- Feature Card 1 -->
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon icon-teal">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="feature-title">Adaptive Symptom Triage</h3>
+                        <p class="feature-desc">
+                            Dynamically generates follow-up clinical questions based on patient history, reducing diagnostic ambiguity and refining differential probabilities.
+                        </p>
+                        <div class="feature-tags">
+                            <span class="tag">Adaptive Q&A</span>
+                            <span class="tag">Probability Engine</span>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon icon-blue">
+                            <i class="fa-solid fa-pills"></i>
+                        </div>
+                        <h3 class="feature-title">Drug Interaction Guardrails</h3>
+                        <p class="feature-desc">
+                            Cross-checks multi-drug regimens against medical databases to detect contraindications, severity levels, and adverse chemical interactions instantly.
+                        </p>
+                        <div class="feature-tags">
+                            <span class="tag">Interplay Matrix</span>
+                            <span class="tag">Real-Time Alerts</span>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon icon-purple">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <h3 class="feature-title">Precision Dosage Safety</h3>
+                        <p class="feature-desc">
+                            Computes exact pharmacological dosages adjusted for renal clearance, hepatic impairment, age, weight, and clinical lab values.
+                        </p>
+                        <div class="feature-tags">
+                            <span class="tag">Organ Adjustment</span>
+                            <span class="tag">Safety Limits</span>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 4 -->
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon icon-emerald">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 class="feature-title">Explainable AI Rationale</h3>
+                        <p class="feature-desc">
+                            Every diagnostic suggestion is paired with transparent clinical rationale, peer-reviewed medical citations, and confidence breakdown scores.
+                        </p>
+                        <div class="feature-tags">
+                            <span class="tag">No Black-Box</span>
+                            <span class="tag">Citations Included</span>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 5 -->
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon icon-amber">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <h3 class="feature-title">Medical Knowledge Graph</h3>
+                        <p class="feature-desc">
+                            Powered by over 250,000 linked biomedical nodes connecting diseases, symptoms, genetic markers, anatomical targets, and drugs.
+                        </p>
+                        <div class="feature-tags">
+                            <span class="tag">Universal Search</span>
+                            <span class="tag">Graph Traversal</span>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 6 -->
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon icon-rose">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <h3 class="feature-title">HIPAA Audit & History</h3>
+                        <p class="feature-desc">
+                            Immutable session history, role-based encryption, rate limiting, and complete system audit logging for enterprise security compliance.
+                        </p>
+                        <div class="feature-tags">
+                            <span class="tag">HIPAA / GDPR</span>
+                            <span class="tag">AES-256</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <div class="badge">About AuraMed AI</div>
+                        <h2 class="section-title">Bridging Advanced AI with Clinical Excellence</h2>
+                        <p class="about-text">
+                            AuraMed AI was engineered to bridge the critical gap between raw medical data and actionable bedside clinical intelligence. Our platform synthesizes evidence-based clinical guidelines, structured medical databases, and adaptive neural logic to provide reliable, safety-guarded diagnostic support.
+                        </p>
+                        <p class="about-text">
+                            We prioritize medical accuracy, doctor autonomy, and safety above all else. AuraMed AI acts as an augmented clinical co-pilot, empowering healthcare providers to make faster, better-informed decisions while maintaining complete compliance.
+                        </p>
+
+                        <div class="pillars-list">
+                            <div class="pillar-item">
+                                <div class="pillar-icon"><i class="fa-solid fa-circle-check"></i></div>
+                                <div>
+                                    <h4>Evidence-Based Rigor</h4>
+                                    <p>Trained against verified medical ontologies, ICD-11 schemas, and clinical trial literature.</p>
+                                </div>
+                            </div>
+                            <div class="pillar-item">
+                                <div class="pillar-icon"><i class="fa-solid fa-circle-check"></i></div>
+                                <div>
+                                    <h4>Human-in-the-Loop Oversight</h4>
+                                    <p>Designed to assist healthcare professionals rather than replace clinical judgment.</p>
+                                </div>
+                            </div>
+                            <div class="pillar-item">
+                                <div class="pillar-icon"><i class="fa-solid fa-circle-check"></i></div>
+                                <div>
+                                    <h4>Enterprise Data Security</h4>
+                                    <p>Zero-retention options, local database deployment capabilities, and end-to-end encryption.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-card-wrapper">
+                        <div class="glass-card about-card">
+                            <h3 class="about-card-title"><i class="fa-solid fa-chart-line"></i> Operational Impact Metrics</h3>
+                            <div class="impact-grid">
+                                <div class="impact-box">
+                                    <div class="impact-num">65%</div>
+                                    <div class="impact-desc">Reduction in triage queue bottlenecking</div>
+                                </div>
+                                <div class="impact-box">
+                                    <div class="impact-num">94%</div>
+                                    <div class="impact-desc">Adverse drug interaction prevention rate</div>
+                                </div>
+                                <div class="impact-box">
+                                    <div class="impact-num">&lt;200ms</div>
+                                    <div class="impact-desc">Average decision support response latency</div>
+                                </div>
+                                <div class="impact-box">
+                                    <div class="impact-num">100%</div>
+                                    <div class="impact-desc">Auditable decision trace generation</div>
+                                </div>
+                            </div>
+
+                            <div class="compliance-row">
+                                <div class="badge-pill"><i class="fa-solid fa-shield"></i> HIPAA Compliant</div>
+                                <div class="badge-pill"><i class="fa-solid fa-file-contract"></i> GDPR Ready</div>
+                                <div class="badge-pill"><i class="fa-solid fa-server"></i> REST & GraphQL API</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS SECTION -->
+        <section class="how-it-works-section" id="how-it-works">
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="badge">Seamless Workflow</div>
+                    <h2 class="section-title">How AuraMed AI Operates</h2>
+                    <p class="section-subtitle">A transparent 4-stage pipeline that converts complex symptom patterns into validated clinical recommendations.</p>
+                </div>
+
+                <!-- Pipeline Steps Navigation -->
+                <div class="pipeline-nav">
+                    <button class="pipeline-tab active" data-step="1">
+                        <span class="step-num">01</span>
+                        <span class="step-text">Data Ingestion</span>
+                    </button>
+                    <button class="pipeline-tab" data-step="2">
+                        <span class="step-num">02</span>
+                        <span class="step-text">Adaptive Q&A</span>
+                    </button>
+                    <button class="pipeline-tab" data-step="3">
+                        <span class="step-num">03</span>
+                        <span class="step-text">Safety & Drug Interplay</span>
+                    </button>
+                    <button class="pipeline-tab" data-step="4">
+                        <span class="step-num">04</span>
+                        <span class="step-text">Explainable Output</span>
+                    </button>
+                </div>
+
+                <!-- Pipeline Content Card -->
+                <div class="glass-card pipeline-card">
+                    <div class="pipeline-panel active" id="pipelineStep1">
+                        <div class="panel-info">
+                            <h3><i class="fa-solid fa-clipboard-user"></i> Step 1: Patient Data & Symptom Ingestion</h3>
+                            <p>
+                                The patient or clinical user enters chief complaints, onset duration, vital signs, and existing prescriptions. AuraMed normalizes raw text using standardized medical terminology (SNOMED-CT / ICD-11).
+                            </p>
+                            <ul class="panel-features">
+                                <li><i class="fa-solid fa-check"></i> Natural Language Symptom Extractor</li>
+                                <li><i class="fa-solid fa-check"></i> Automatic Vital Signs Flagging</li>
+                                <li><i class="fa-solid fa-check"></i> Existing Profile & Medical History Sync</li>
+                            </ul>
+                        </div>
+                        <div class="panel-visual">
+                            <div class="code-box">
+                                <div class="code-title"><i class="fa-solid fa-code"></i> Ingestion Payload</div>
+                                <pre><code>{
+  "patient_id": "PT-94820",
+  "chief_complaint": "Severe dyspnea and retrosternal pain",
+  "vitals": {
+    "bp": "145/95",
+    "hr": 110,
+    "spo2": 93
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-panel" id="pipelineStep2">
+                        <div class="panel-info">
+                            <h3><i class="fa-solid fa-comments"></i> Step 2: Adaptive Questioning & Differential Synthesis</h3>
+                            <p>
+                                Rather than relying on static questionnaires, AuraMed's probabilistic engine identifies key missing clinical markers and poses targeted, high-yield follow-up questions to narrow down differentials.
+                            </p>
+                            <ul class="panel-features">
+                                <li><i class="fa-solid fa-check"></i> Dynamic Bayesian Entropy Reduction</li>
+                                <li><i class="fa-solid fa-check"></i> Targeted Symptom Clarification</li>
+                                <li><i class="fa-solid fa-check"></i> Differential Likelihood Ranking</li>
+                            </ul>
+                        </div>
+                        <div class="panel-visual">
+                            <div class="code-box">
+                                <div class="code-title"><i class="fa-solid fa-code"></i> Adaptive Clarification</div>
+                                <pre><code>{
+  "status": "adaptive_clarification_required",
+  "suggested_question": "Does the pain worsen with deep inspiration?",
+  "differentials": ["ACS (82%)", "Pleurisy (12%)"]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-panel" id="pipelineStep3">
+                        <div class="panel-info">
+                            <h3><i class="fa-solid fa-shield-virus"></i> Step 3: Safety Guardrails & Drug Interplay Check</h3>
+                            <p>
+                                Before any recommendation is finalized, the safety layer verifies proposed treatments against the patient's existing drug regimen, kidney/liver organ function metrics, and known allergies.
+                            </p>
+                            <ul class="panel-features">
+                                <li><i class="fa-solid fa-check"></i> Multi-Drug Contraindication Matrix</li>
+                                <li><i class="fa-solid fa-check"></i> Renal & Hepatic Dose Scaling</li>
+                                <li><i class="fa-solid fa-check"></i> Black Box Warning Alerts</li>
+                            </ul>
+                        </div>
+                        <div class="panel-visual">
+                            <div class="code-box">
+                                <div class="code-title"><i class="fa-solid fa-code"></i> Safety Verification</div>
+                                <pre><code>{
+  "safety_status": "APPROVED_WITH_WARNING",
+  "contraindications": [],
+  "dosage_adjustment": "Reduce Metformin dose by 50% (eGFR < 45)"
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-panel" id="pipelineStep4">
+                        <div class="panel-info">
+                            <h3><i class="fa-solid fa-file-medical"></i> Step 4: Transparent Explainable Recommendation</h3>
+                            <p>
+                                The clinician receives a comprehensive decision support card complete with triage level, differential rank, recommended diagnostic tests, safety notes, and audit-ready literature citations.
+                            </p>
+                            <ul class="panel-features">
+                                <li><i class="fa-solid fa-check"></i> Full Clinical Rationale Breakdown</li>
+                                <li><i class="fa-solid fa-check"></i> Direct Medical Citation Links</li>
+                                <li><i class="fa-solid fa-check"></i> Audit Log Session Snapshot</li>
+                            </ul>
+                        </div>
+                        <div class="panel-visual">
+                            <div class="code-box">
+                                <div class="code-title"><i class="fa-solid fa-code"></i> Clinical Summary</div>
+                                <pre><code>{
+  "triage_level": "RED_URGENT",
+  "primary_diagnosis": "Acute Coronary Syndrome",
+  "confidence": 0.94,
+  "citation": "AHA/ACC 2024 NSTEMI Guidelines"
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION -->
+        <section class="faq-section" id="faq">
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="badge">Got Questions?</div>
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p class="section-subtitle">Find fast answers regarding our clinical accuracy, deployment options, compliance, and API integration.</p>
+                </div>
+
+                <!-- FAQ Search & Filter Controls -->
+                <div class="faq-controls">
+                    <div class="search-input-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="faqSearchInput" placeholder="Search FAQ topics (e.g., HIPAA, Accuracy, API, Integration)...">
+                    </div>
+                    <div class="faq-tabs">
+                        <button class="faq-category-btn active" data-category="all">All</button>
+                        <button class="faq-category-btn" data-category="general">General</button>
+                        <button class="faq-category-btn" data-category="clinical">Clinical & Accuracy</button>
+                        <button class="faq-category-btn" data-category="security">Security & Compliance</button>
+                        <button class="faq-category-btn" data-category="api">API & Integration</button>
+                    </div>
+                </div>
+
+                <!-- FAQ Accordion List -->
+                <div class="faq-accordion-list" id="faqAccordion">
+                    <!-- Item 1 -->
+                    <div class="glass-card faq-item" data-category="general">
+                        <button class="faq-question">
+                            <span>Is AuraMed AI intended to replace human medical doctors?</span>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>No. AuraMed AI is designed strictly as a <strong>clinical decision support system (CDSS)</strong> to assist qualified healthcare professionals. It acts as a force multiplier by automating symptom triage, flagging potential drug interactions, and synthesizing differential possibilities—while leaving final clinical decisions to human clinicians.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="glass-card faq-item" data-category="clinical">
+                        <button class="faq-question">
+                            <span>How accurate are the diagnostic guardrails and triage suggestions?</span>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Our clinical engine achieves over 99.4% accuracy in safety guardrail validation. Every recommendation is bounded by strict clinical safety rules, medical knowledge graph constraints, and validated against standard ICD-11 / SNOMED-CT clinical benchmarks.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="glass-card faq-item" data-category="security">
+                        <button class="faq-question">
+                            <span>How does AuraMed AI handle patient data privacy and HIPAA compliance?</span>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>AuraMed AI enforces end-to-end AES-256 encryption for all data in transit and at rest. We support zero-retention ephemeral inference modes, role-based access control (RBAC), rate-limiting middleware, and comprehensive audit logs that fulfill all HIPAA and GDPR mandates.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="glass-card faq-item" data-category="api">
+                        <button class="faq-question">
+                            <span>Can we integrate AuraMed AI into our existing Electronic Health Record (EHR) software?</span>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! AuraMed AI provides a complete RESTful API and WebSockets endpoint suite. We support standard FHIR / HL7 payload formats for seamless integration with Epic, Cerner, Allscripts, or custom health tech software.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="glass-card faq-item" data-category="clinical">
+                        <button class="faq-question">
+                            <span>What happens when the AI encounters a rare or ambiguous condition?</span>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>When diagnostic entropy is high, the system automatically triggers its adaptive questioning module to request specific clinical signs. If ambiguity persists, the engine flags the case with a lower confidence indicator and explicitly prompts the clinician for further lab diagnostic testing.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="glass-card faq-item" data-category="api">
+                        <button class="faq-question">
+                            <span>Is on-premise or private cloud deployment supported?</span>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. Enterprise plans include Dockerized container bundles and Kubernetes helm charts for air-gapped on-premise installation or deployment within your private AWS/Azure/GCP cloud enclave.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Contact Form Card -->
+                    <div class="glass-card contact-card">
+                        <div class="card-header-inner">
+                            <div class="badge">Get In Touch</div>
+                            <h2>Request a Demo or Enterprise Quote</h2>
+                            <p class="text-muted">Fill out the form below to speak with our clinical solutions team or schedule a live sandbox demonstration.</p>
+                        </div>
+
+                        <form id="contactForm" class="contact-form" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name <span class="required">*</span></label>
+                                    <input type="text" id="fullName" required placeholder="Dr. Sarah Jenkins">
+                                    <div class="error-msg" id="nameError">Please enter your full name</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailAddr">Work Email <span class="required">*</span></label>
+                                    <input type="email" id="emailAddr" required placeholder="s.jenkins@hospital.org">
+                                    <div class="error-msg" id="emailError">Please enter a valid work email</div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="orgName">Organization / Hospital</label>
+                                    <input type="text" id="orgName" placeholder="Metro Health System">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inquiryRole">Your Role</label>
+                                    <select id="inquiryRole" class="form-select">
+                                        <option value="clinician">Clinician / Physician</option>
+                                        <option value="cto">Health Tech Executive / CTO</option>
+                                        <option value="administrator">Hospital Administrator</option>
+                                        <option value="developer">Developer / API Integrator</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="messageText">How can we help you? <span class="required">*</span></label>
+                                <textarea id="messageText" rows="4" required placeholder="Tell us about your organization's triage or clinical workflow needs..."></textarea>
+                                <div class="error-msg" id="messageError">Please enter a message</div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitBtn">
+                                <span>Submit Request</span>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+
+                        <!-- Success Toast Banner -->
+                        <div class="form-success-banner hidden" id="successBanner">
+                            <i class="fa-solid fa-circle-check banner-icon"></i>
+                            <div>
+                                <h4>Request Submitted Successfully!</h4>
+                                <p>Thank you for reaching out. A medical AI specialist will respond to your email within 24 hours.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Details Info Sidebar -->
+                    <div class="contact-info-wrapper">
+                        <div class="glass-card info-card">
+                            <h3><i class="fa-solid fa-hospital-user"></i> Clinical Consultation</h3>
+                            <p class="text-muted">Interested in deploying AuraMed AI across your hospital network or health application?</p>
+                            
+                            <div class="contact-method-list">
+                                <div class="method-item">
+                                    <div class="method-icon"><i class="fa-solid fa-envelope"></i></div>
+                                    <div>
+                                        <div class="method-title">Direct Sales & Inquiries</div>
+                                        <a href="mailto:clinical@auramed.ai" class="method-link">clinical@auramed.ai</a>
+                                    </div>
+                                </div>
+
+                                <div class="method-item">
+                                    <div class="method-icon"><i class="fa-solid fa-headset"></i></div>
+                                    <div>
+                                        <div class="method-title">24/7 Security & Support</div>
+                                        <span class="method-text">+1 (800) 555-AURA (2872)</span>
+                                    </div>
+                                </div>
+
+                                <div class="method-item">
+                                    <div class="method-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                    <div>
+                                        <div class="method-title">Headquarters</div>
+                                        <span class="method-text">Medical AI Innovation Center, Palo Alto, CA</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="security-seal">
+                                <i class="fa-solid fa-shield-halved seal-icon"></i>
+                                <span>SOC2 Type II Certified & HIPAA Verified Facility</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="brand-logo">
+                    <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+                </a>
+                <p class="footer-desc">
+                    Next-generation adaptive clinical decision support and real-time medical intelligence platform.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-nav-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#hero">Adaptive Triage</a></li>
+                    <li><a href="#features">Drug Guardrails</a></li>
+                    <li><a href="#features">Dosage Safety</a></li>
+                    <li><a href="#features">Knowledge Graph</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-nav-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#how-it-works">Documentation</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#about">Clinical Validation</a></li>
+                    <li><a href="#contact">Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-nav-col">
+                <h4>Compliance & Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">HIPAA Statement</a></li>
+                    <li><a href="#">Security Audit</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>&copy; 2026 AuraMed AI Systems Inc. All rights reserved.</p>
+                <p class="disclaimer-text"><i class="fa-solid fa-triangle-exclamation"></i> For clinical demonstration & decision support use only. Always consult a licensed physician for emergency triage.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript File -->
+    <script src="app.js"></script>
+</body>
+</html>

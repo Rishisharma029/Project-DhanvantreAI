@@ -1,0 +1,88 @@
+{
+  "case_id": "NEUR_021",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Neurology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 83,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with dizziness and altered mental status",
+  "presenting_symptoms": [
+    "dizziness",
+    "altered mental status",
+    "seizure"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Amlodipine"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.5,
+    "spo2_pct": 90,
+    "heart_rate": 78,
+    "respiratory_rate": 15,
+    "bp_systolic": 171,
+    "bp_diastolic": 76
+  },
+  "final_diagnosis": "Subdural Haematoma",
+  "icd11": "XX40",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Subdural Haematoma",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of dizziness supports Subdural Haematoma",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Subdural Haematoma",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

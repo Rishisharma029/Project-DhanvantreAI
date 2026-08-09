@@ -1,0 +1,88 @@
+{
+  "case_id": "CARD_007",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Cardiology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 21,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with diaphoresis and edema",
+  "presenting_symptoms": [
+    "diaphoresis",
+    "edema",
+    "dyspnea"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "calf pain"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.2,
+    "spo2_pct": 99,
+    "heart_rate": 78,
+    "respiratory_rate": 12,
+    "bp_systolic": 127,
+    "bp_diastolic": 100
+  },
+  "final_diagnosis": "DVT",
+  "icd11": "XX91",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "DVT",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of diaphoresis supports DVT",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "DVT",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

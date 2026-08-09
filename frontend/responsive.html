@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Responsive Mobile UI Showcase - Test and preview all 16 clinical modules across Desktop, Tablet, and Mobile viewports.">
+    <title>Responsive Mobile UI Simulator | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .responsive-container {
+            max-width: 1400px;
+            margin: 110px auto 40px;
+            padding: 0 24px;
+        }
+
+        .sim-toolbar-card {
+            padding: 20px 28px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .viewport-btn-group {
+            display: flex;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .viewport-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all var(--transition-fast);
+        }
+
+        .viewport-btn.active {
+            background: var(--accent-cyan);
+            color: #000;
+        }
+
+        /* Simulator Frame Container */
+        .simulator-frame-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 750px;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .device-frame {
+            background: var(--surface-card);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s ease;
+        }
+
+        /* 3 Viewport Dimensions */
+        .device-desktop {
+            width: 100%;
+            max-width: 1360px;
+            height: 750px;
+        }
+
+        .device-tablet {
+            width: 768px;
+            height: 800px;
+            border-radius: 28px;
+            border-width: 12px;
+        }
+
+        .device-mobile {
+            width: 375px;
+            height: 720px;
+            border-radius: 36px;
+            border-width: 12px;
+        }
+
+        .sim-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: var(--bg-main);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-header scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="responsive-container">
+        <!-- Control Toolbar Card -->
+        <div class="glass-card sim-toolbar-card">
+            <div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase;">
+                    <i class="fa-solid fa-mobile-screen-button"></i> Multi-Device Viewport Simulator
+                </div>
+                <div style="font-size: 1.1rem; font-weight: 800; color: var(--text-main);" id="activeViewportLabel">
+                    Desktop View (1360px × 750px)
+                </div>
+            </div>
+
+            <!-- Page Selector Dropdown -->
+            <div>
+                <select class="settings-select" id="modulePageSelect" style="min-width: 220px;">
+                    <option value="dashboard.html" selected>Dashboard (Module 3.3)</option>
+                    <option value="chat.html">AI Medical Chat (Module 3.4)</option>
+                    <option value="wizard.html">Symptom Assessment Wizard (Module 3.5)</option>
+                    <option value="medicines.html">Medicine Explorer (Module 3.6)</option>
+                    <option value="diseases.html">Disease Explorer (Module 3.7)</option>
+                    <option value="interactions.html">Drug Interaction Checker (Module 3.8)</option>
+                    <option value="results.html">Recommendation Results (Module 3.9)</option>
+                    <option value="explainability.html">Explainability View (Module 3.10)</option>
+                    <option value="report_viewer.html">Medical Report Viewer (Module 3.11)</option>
+                    <option value="history.html">Medical History (Module 3.12)</option>
+                    <option value="profile.html">User Profile (Module 3.13)</option>
+                    <option value="settings.html">Application Settings (Module 3.14)</option>
+                    <option value="emergency.html">Emergency Mode (Module 3.15)</option>
+                    <option value="index.html">Landing Website (Module 3.1)</option>
+                    <option value="auth.html">Authentication UI (Module 3.2)</option>
+                </select>
+            </div>
+
+            <!-- Viewport Device Switcher Buttons -->
+            <div class="viewport-btn-group">
+                <button class="viewport-btn active" id="btnDesktop"><i class="fa-solid fa-desktop"></i> Desktop</button>
+                <button class="viewport-btn" id="btnTablet"><i class="fa-solid fa-tablet-screen-button"></i> Tablet</button>
+                <button class="viewport-btn" id="btnMobile"><i class="fa-solid fa-mobile-button"></i> Mobile</button>
+            </div>
+        </div>
+
+        <!-- Simulator Frame Display -->
+        <div class="simulator-frame-wrapper">
+            <div class="device-frame device-desktop" id="deviceFrame">
+                <iframe src="dashboard.html" class="sim-iframe" id="simIframe"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <!-- Script -->
+    <script src="responsive.js"></script>
+</body>
+</html>

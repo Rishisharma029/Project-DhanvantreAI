@@ -1,0 +1,88 @@
+{
+  "case_id": "PAED_015",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pediatrics",
+  "difficulty": "easy",
+  "patient": {
+    "age": 7,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with lethargy and vomiting",
+  "presenting_symptoms": [
+    "lethargy",
+    "vomiting",
+    "cough"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "cyanosis"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.0,
+    "spo2_pct": 100,
+    "heart_rate": 87,
+    "respiratory_rate": 29,
+    "bp_systolic": 136,
+    "bp_diastolic": 110
+  },
+  "final_diagnosis": "Intussusception",
+  "icd11": "XX28",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Intussusception",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of lethargy supports Intussusception",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Intussusception",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

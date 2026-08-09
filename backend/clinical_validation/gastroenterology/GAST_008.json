@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_008",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 44,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with abdominal pain and diarrhea",
+  "presenting_symptoms": [
+    "abdominal pain",
+    "diarrhea",
+    "vomiting"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "shortness of breath"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.5,
+    "spo2_pct": 91,
+    "heart_rate": 81,
+    "respiratory_rate": 24,
+    "bp_systolic": 166,
+    "bp_diastolic": 97
+  },
+  "final_diagnosis": "GERD",
+  "icd11": "XX58",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "GERD",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of abdominal pain supports GERD",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "GERD",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "case_id": "CARD_009",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Cardiology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 85,
+    "sex": "Female",
+    "smoking": "never",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with syncope and dyspnea",
+  "presenting_symptoms": [
+    "syncope",
+    "dyspnea",
+    "chest pain"
+  ],
+  "denied_symptoms": [
+    "calf pain",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Metformin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.4,
+    "spo2_pct": 98,
+    "heart_rate": 95,
+    "respiratory_rate": 13,
+    "bp_systolic": 130,
+    "bp_diastolic": 90
+  },
+  "final_diagnosis": "Infective Endocarditis",
+  "icd11": "XX33",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Infective Endocarditis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of syncope supports Infective Endocarditis",
+    "Absence of calf pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Infective Endocarditis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "case_id": "RESP_024",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Respiratory",
+  "difficulty": "hard",
+  "patient": {
+    "age": 20,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with sputum production and wheezing",
+  "presenting_symptoms": [
+    "sputum production",
+    "wheezing",
+    "hemoptysis"
+  ],
+  "denied_symptoms": [
+    "night sweats",
+    "weight loss"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.5,
+    "spo2_pct": 99,
+    "heart_rate": 95,
+    "respiratory_rate": 24,
+    "bp_systolic": 153,
+    "bp_diastolic": 95
+  },
+  "final_diagnosis": "Asthma",
+  "icd11": "XX18",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Asthma",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of sputum production supports Asthma",
+    "Absence of night sweats reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Asthma",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

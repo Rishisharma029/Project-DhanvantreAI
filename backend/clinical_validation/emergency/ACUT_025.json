@@ -1,0 +1,88 @@
+{
+  "case_id": "ACUT_025",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergency",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 67,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with burns and unresponsiveness",
+  "presenting_symptoms": [
+    "burns",
+    "unresponsiveness",
+    "trauma"
+  ],
+  "denied_symptoms": [
+    "chronic cough",
+    "weight loss"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Omeprazole"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.7,
+    "spo2_pct": 97,
+    "heart_rate": 129,
+    "respiratory_rate": 23,
+    "bp_systolic": 145,
+    "bp_diastolic": 96
+  },
+  "final_diagnosis": "Burns",
+  "icd11": "XX60",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Burns",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of burns supports Burns",
+    "Absence of chronic cough reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Burns",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

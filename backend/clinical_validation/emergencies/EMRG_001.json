@@ -1,0 +1,88 @@
+{
+  "case_id": "EMRG_001",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergencies",
+  "difficulty": "easy",
+  "patient": {
+    "age": 40,
+    "sex": "Female",
+    "smoking": "never",
+    "occupation": "construction worker"
+  },
+  "chief_complaint": "Patient presents with altered mental status and hypotension",
+  "presenting_symptoms": [
+    "altered mental status",
+    "hypotension",
+    "tachypnea"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "recent trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.5,
+    "spo2_pct": 93,
+    "heart_rate": 101,
+    "respiratory_rate": 21,
+    "bp_systolic": 152,
+    "bp_diastolic": 100
+  },
+  "final_diagnosis": "Anaphylaxis",
+  "icd11": "XX33",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Anaphylaxis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of altered mental status supports Anaphylaxis",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Anaphylaxis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

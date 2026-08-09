@@ -1,0 +1,88 @@
+{
+  "case_id": "ACUT_014",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergency",
+  "difficulty": "hard",
+  "patient": {
+    "age": 23,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with pain and shortness of breath",
+  "presenting_symptoms": [
+    "pain",
+    "shortness of breath",
+    "unresponsiveness"
+  ],
+  "denied_symptoms": [
+    "weight loss",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.4,
+    "spo2_pct": 91,
+    "heart_rate": 78,
+    "respiratory_rate": 22,
+    "bp_systolic": 131,
+    "bp_diastolic": 94
+  },
+  "final_diagnosis": "Spinal injury",
+  "icd11": "XX18",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Spinal injury",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of pain supports Spinal injury",
+    "Absence of weight loss reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Spinal injury",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

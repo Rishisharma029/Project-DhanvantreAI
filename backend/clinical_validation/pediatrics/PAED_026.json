@@ -1,0 +1,88 @@
+{
+  "case_id": "PAED_026",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pediatrics",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 11,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with rash and cough",
+  "presenting_symptoms": [
+    "rash",
+    "cough",
+    "fever"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "choking"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.3,
+    "spo2_pct": 100,
+    "heart_rate": 121,
+    "respiratory_rate": 22,
+    "bp_systolic": 138,
+    "bp_diastolic": 95
+  },
+  "final_diagnosis": "Diabetic Ketoacidosis paeds",
+  "icd11": "XX34",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Diabetic Ketoacidosis paeds",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of rash supports Diabetic Ketoacidosis paeds",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Diabetic Ketoacidosis paeds",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

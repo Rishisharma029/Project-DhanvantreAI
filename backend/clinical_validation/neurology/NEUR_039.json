@@ -1,0 +1,88 @@
+{
+  "case_id": "NEUR_039",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Neurology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 74,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with seizure and dizziness",
+  "presenting_symptoms": [
+    "seizure",
+    "dizziness",
+    "speech difficulty"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "loss of consciousness"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Atorvastatin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.9,
+    "spo2_pct": 88,
+    "heart_rate": 107,
+    "respiratory_rate": 22,
+    "bp_systolic": 120,
+    "bp_diastolic": 90
+  },
+  "final_diagnosis": "Subarachnoid Haemorrhage",
+  "icd11": "XX49",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Subarachnoid Haemorrhage",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of seizure supports Subarachnoid Haemorrhage",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Subarachnoid Haemorrhage",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_009",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 77,
+    "sex": "Female",
+    "smoking": "never",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with melena and nausea",
+  "presenting_symptoms": [
+    "melena",
+    "nausea",
+    "diarrhea"
+  ],
+  "denied_symptoms": [
+    "dysuria",
+    "shortness of breath"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Aspirin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.8,
+    "spo2_pct": 88,
+    "heart_rate": 73,
+    "respiratory_rate": 15,
+    "bp_systolic": 113,
+    "bp_diastolic": 60
+  },
+  "final_diagnosis": "Peptic Ulcer",
+  "icd11": "XX13",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Peptic Ulcer",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of melena supports Peptic Ulcer",
+    "Absence of dysuria reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Peptic Ulcer",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

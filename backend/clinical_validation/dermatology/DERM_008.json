@@ -1,0 +1,88 @@
+{
+  "case_id": "DERM_008",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Dermatology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 26,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with swelling and rash",
+  "presenting_symptoms": [
+    "swelling",
+    "rash",
+    "pain"
+  ],
+  "denied_symptoms": [
+    "shortness of breath",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.9,
+    "spo2_pct": 94,
+    "heart_rate": 93,
+    "respiratory_rate": 30,
+    "bp_systolic": 114,
+    "bp_diastolic": 90
+  },
+  "final_diagnosis": "Psoriasis",
+  "icd11": "XX82",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Psoriasis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of swelling supports Psoriasis",
+    "Absence of shortness of breath reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Psoriasis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

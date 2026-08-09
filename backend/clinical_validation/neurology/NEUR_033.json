@@ -1,0 +1,88 @@
+{
+  "case_id": "NEUR_033",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Neurology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 64,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with headache and altered mental status",
+  "presenting_symptoms": [
+    "headache",
+    "altered mental status",
+    "speech difficulty"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "loss of consciousness"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Lisinopril"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.6,
+    "spo2_pct": 89,
+    "heart_rate": 121,
+    "respiratory_rate": 25,
+    "bp_systolic": 98,
+    "bp_diastolic": 81
+  },
+  "final_diagnosis": "Subdural Haematoma",
+  "icd11": "XX97",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Subdural Haematoma",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of headache supports Subdural Haematoma",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Subdural Haematoma",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

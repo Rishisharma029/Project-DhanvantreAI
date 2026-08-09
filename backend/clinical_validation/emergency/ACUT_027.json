@@ -1,0 +1,88 @@
+{
+  "case_id": "ACUT_027",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergency",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 87,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with bleeding and pain",
+  "presenting_symptoms": [
+    "bleeding",
+    "pain",
+    "shortness of breath"
+  ],
+  "denied_symptoms": [
+    "weight loss",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Lisinopril"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.0,
+    "spo2_pct": 89,
+    "heart_rate": 72,
+    "respiratory_rate": 18,
+    "bp_systolic": 124,
+    "bp_diastolic": 87
+  },
+  "final_diagnosis": "Tension Pneumothorax",
+  "icd11": "XX46",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Tension Pneumothorax",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of bleeding supports Tension Pneumothorax",
+    "Absence of weight loss reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Tension Pneumothorax",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

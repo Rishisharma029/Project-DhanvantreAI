@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_001",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 74,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with nausea and vomiting",
+  "presenting_symptoms": [
+    "nausea",
+    "vomiting",
+    "hematemesis"
+  ],
+  "denied_symptoms": [
+    "dysuria",
+    "chest pain"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Aspirin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.4,
+    "spo2_pct": 95,
+    "heart_rate": 65,
+    "respiratory_rate": 22,
+    "bp_systolic": 135,
+    "bp_diastolic": 86
+  },
+  "final_diagnosis": "Cholecystitis",
+  "icd11": "XX28",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Cholecystitis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of nausea supports Cholecystitis",
+    "Absence of dysuria reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Cholecystitis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

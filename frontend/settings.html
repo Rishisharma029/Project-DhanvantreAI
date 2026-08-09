@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Settings - Manage Dark Mode theme, Language, Notification preferences, and Privacy controls.">
+    <title>Application Settings | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .settings-container {
+            max-width: 900px;
+            margin: 120px auto 60px;
+            padding: 0 24px;
+        }
+
+        .settings-hero-card {
+            padding: 36px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .settings-section-card {
+            padding: 32px;
+            margin-bottom: 28px;
+        }
+
+        .settings-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .settings-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .settings-label-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .settings-label-sub {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* Toggle Switches */
+        .switch-toggle {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 26px;
+        }
+
+        .switch-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider-round {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 255, 255, 0.15);
+            transition: .3s;
+            border-radius: 34px;
+            border: 1px solid var(--border-color);
+        }
+
+        .slider-round:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--text-muted);
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider-round {
+            background-color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
+
+        input:checked + .slider-round:before {
+            transform: translateX(22px);
+            background-color: #000;
+        }
+
+        select.settings-select {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 10px 16px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-header scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="settings-container">
+        <!-- Hero Card -->
+        <div class="glass-card settings-hero-card">
+            <div class="badge"><i class="fa-solid fa-sliders"></i> Preferences & Governance</div>
+            <h1 class="section-title">Application <span class="gradient-text">Settings</span></h1>
+            <p class="section-subtitle">
+                Customize appearance themes, language localization, notification triggers, and data privacy policies.
+            </p>
+        </div>
+
+        <!-- SECTION 1: DARK MODE & APPEARANCE -->
+        <div class="glass-card settings-section-card">
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--accent-cyan); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-palette"></i> 1. Appearance & Dark Mode
+            </h3>
+
+            <div class="settings-row">
+                <div>
+                    <div class="settings-label-title">Dark Mode Theme</div>
+                    <div class="settings-label-sub">Toggle between sleek dark mode glassmorphism and high-contrast light theme</div>
+                </div>
+                <label class="switch-toggle">
+                    <input type="checkbox" id="darkModeToggle" checked>
+                    <span class="slider-round"></span>
+                </label>
+            </div>
+
+            <div class="settings-row">
+                <div>
+                    <div class="settings-label-title">Accent Color Palette</div>
+                    <div class="settings-label-sub">Select primary UI highlight color scheme</div>
+                </div>
+                <select class="settings-select" id="accentColorSelect">
+                    <option value="cyan" selected>Cyan / Teal (Default)</option>
+                    <option value="emerald">Emerald Green</option>
+                    <option value="purple">Royal Purple</option>
+                    <option value="blue">Ocean Blue</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- SECTION 2: LANGUAGE & LOCALIZATION -->
+        <div class="glass-card settings-section-card">
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--accent-purple); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-language"></i> 2. Language & Localization
+            </h3>
+
+            <div class="settings-row">
+                <div>
+                    <div class="settings-label-title">Platform Language</div>
+                    <div class="settings-label-sub">Choose primary interface language</div>
+                </div>
+                <select class="settings-select" id="languageSelect">
+                    <option value="en" selected>English (United States)</option>
+                    <option value="hi">Hindi (हिंदी)</option>
+                    <option value="es">Spanish (Español)</option>
+                    <option value="fr">French (Français)</option>
+                    <option value="de">German (Deutsch)</option>
+                </select>
+            </div>
+
+            <div class="settings-row">
+                <div>
+                    <div class="settings-label-title">Measurement Units</div>
+                    <div class="settings-label-sub">Standard clinical measurement system</div>
+                </div>
+                <select class="settings-select" id="unitsSelect">
+                    <option value="metric" selected>Metric (kg, cm, mmHg, °C)</option>
+                    <option value="imperial">Imperial (lbs, ft/in, °F)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- SECTION 3: NOTIFICATIONS -->
+        <div class="glass-card settings-section-card">
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--accent-teal); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-bell"></i> 3. Notification Triggers
+            </h3>
+
+            <div class="settings-row">
+                <div>
+                    <div class="settings-label-title">Email Diagnostic Reports</div>
+                    <div class="settings-label-sub">Receive monthly PDF summaries of diagnostic reports via email</div>
+                </div>
+                <label class="switch-toggle">
+                    <input type="checkbox" id="emailNotifToggle" checked>
+                    <span class="slider-round"></span>
+                </label>
+            </div>
+
+            <div class="settings-row">
+                <div>
+                    <div class="settings-label-title">Medication Intake Reminders</div>
+                    <div class="settings-label-sub">Push notifications for scheduled prescription dosages</div>
+                </div>
+                <label class="switch-toggle">
+                    <input type="checkbox" id="medRemindersToggle" checked>
+                    <span class="slider-round"></span>
+                </label>
+            </div>
+
+            <div class="settings-row">
+                <div>
+                    <div class="settings-label-title">Security & Login Alerts</div>
+                    <div class="settings-label-sub">Instant alerts for new device logins or password modifications</div>
+                </div>
+                <label class="switch-toggle">
+                    <input type="checkbox" id="secAlertsToggle" checked>
+                    <span class="slider-round"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- SECTION 4: PRIVACY & DATA SECURITY -->
+        <div class="glass-card settings-section-card">
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--accent-rose); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-shield-halved"></i> 4. Privacy & Data Governance
+            </h3>
+
+            <div class="settings-row">
+                <div>
+                    <div class="settings-label-title">Anonymous Research Analytics</div>
+                    <div class="settings-label-sub">Share de-identified symptom telemetry to improve biomedical AI precision</div>
+                </div>
+                <label class="switch-toggle">
+                    <input type="checkbox" id="analyticsConsentToggle" checked>
+                    <span class="slider-round"></span>
+                </label>
+            </div>
+
+            <div class="settings-row">
+                <div>
+                    <div class="settings-label-title">Export All Patient Data</div>
+                    <div class="settings-label-sub">Download complete medical records, reports, and profile in JSON format</div>
+                </div>
+                <button class="btn btn-secondary btn-sm" id="exportDataBtn">
+                    <i class="fa-solid fa-download"></i> Export Data
+                </button>
+            </div>
+
+            <div class="settings-row">
+                <div>
+                    <div class="settings-label-title" style="color: var(--accent-rose);">Delete Patient Account & Records</div>
+                    <div class="settings-label-sub">Permanently purge account credentials and clinical history</div>
+                </div>
+                <button class="btn btn-outline btn-sm" style="border-color: var(--accent-rose); color: var(--accent-rose);" id="deleteAccountBtn">
+                    <i class="fa-solid fa-trash-can"></i> Delete Account
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Delete Account Confirmation Modal -->
+    <div class="modal-overlay hidden" id="deleteModal">
+        <div class="modal-card" style="max-width: 440px;">
+            <div class="modal-header">
+                <h3 style="color: var(--accent-rose);"><i class="fa-solid fa-triangle-exclamation"></i> Delete Account Confirmation</h3>
+                <button class="modal-close-btn" id="closeDeleteModalBtn">&times;</button>
+            </div>
+            <div style="padding: 20px 0;">
+                <p class="text-sm text-muted">
+                    Are you sure you want to permanently delete your AuraMed AI account? All patient health history, saved medicines, and diagnostic reports will be purged. This action cannot be undone.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="document.getElementById('deleteModal').classList.add('hidden')">Cancel</button>
+                <button class="btn btn-primary" style="background: var(--accent-rose); border-color: var(--accent-rose);" id="confirmDeleteBtn">Delete Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+{
+  "case_id": "NEUR_003",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Neurology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 26,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with dizziness and speech difficulty",
+  "presenting_symptoms": [
+    "dizziness",
+    "speech difficulty",
+    "weakness"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "loss of consciousness"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.4,
+    "spo2_pct": 97,
+    "heart_rate": 63,
+    "respiratory_rate": 14,
+    "bp_systolic": 122,
+    "bp_diastolic": 64
+  },
+  "final_diagnosis": "Subarachnoid Haemorrhage",
+  "icd11": "XX20",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Subarachnoid Haemorrhage",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of dizziness supports Subarachnoid Haemorrhage",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Subarachnoid Haemorrhage",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

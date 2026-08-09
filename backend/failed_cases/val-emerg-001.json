@@ -1,0 +1,99 @@
+{
+  "case_id": "VAL-EMERG-001",
+  "domain": "emergencies",
+  "title": "Substernal Crushing Chest Pain, Diaphoresis, and Dyspnea (ST-Elevation MI)",
+  "patient_demographics": {
+    "age": 62,
+    "gender": "male",
+    "pregnancy_status": false
+  },
+  "history": {
+    "chief_complaint": "Severe crushing substernal chest pain radiating to left arm and jaw for 45 minutes",
+    "onset": "Sudden onset at rest",
+    "past_medical_history": [
+      "Hypertension",
+      "Hyperlipidemia",
+      "Type 2 Diabetes",
+      "30 pack-year smoking history"
+    ],
+    "current_medications": [
+      "Amlodipine 10mg",
+      "Metformin 1000mg"
+    ],
+    "allergies": [
+      "None"
+    ]
+  },
+  "symptoms": [
+    "Crushing chest pain (10/10 intensity)",
+    "Radiation to left arm and jaw",
+    "Severe shortness of breath",
+    "Diaphoresis (Profuse sweating)",
+    "Nausea",
+    "Lightheadedness"
+  ],
+  "examination_findings": {
+    "vitals": {
+      "temperature_f": 98.6,
+      "heart_rate_bpm": 108,
+      "blood_pressure": "94/60",
+      "respiratory_rate": 26,
+      "o2_saturation_pct": 91
+    },
+    "physical_exam": "Diaphoretic, pale male in acute distress. S4 gallop present. Bilateral basilar lung crackles."
+  },
+  "lab_results": {
+    "troponin_t": "3.8 ng/mL (Severely Elevated > 0.01 ng/mL)",
+    "ecg_12_lead": "ST-segment elevation > 2mm in leads V1-V4 (Acute Anterior STEMI)"
+  },
+  "expected_differential_diagnoses": [
+    {
+      "disease_name": "Acute Anterior ST-Elevation Myocardial Infarction (STEMI)",
+      "icd11_code": "BA41.0",
+      "expected_probability_range": [
+        0.85,
+        0.98
+      ],
+      "supporting_features": [
+        "Crushing substernal pain",
+        "Left arm & jaw radiation",
+        "Diaphoresis",
+        "ST-elevation V1-V4",
+        "Troponin T 3.8 ng/mL"
+      ],
+      "missing_features": [
+        "None"
+      ]
+    },
+    {
+      "disease_name": "Aortic Dissection",
+      "icd11_code": "BD50",
+      "expected_probability_range": [
+        0.03,
+        0.1
+      ],
+      "supporting_features": [
+        "Severe chest pain"
+      ],
+      "missing_features": [
+        "No tearing back pain or pulse asymmetry"
+      ]
+    }
+  ],
+  "expected_triage": "RED_URGENT",
+  "expected_emergency": true,
+  "expected_followup_questions": [],
+  "expected_safety_checks": [
+    "EMERGENCY RED FLAG HARD-STOP: Immediately trigger emergency dispatch warning (Call 911 / 108 / 112)",
+    "Halt all non-urgent conversational questioning"
+  ],
+  "expected_do_not_recommend": [
+    "Outpatient oral NSAIDs or Antacids",
+    "Delaying emergency room transport for routine clinical survey"
+  ],
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergencies\\emergencies_01.json",
+  "failure_analysis": [
+    "Diagnosis mismatch (Expected 'None', Top 3 AI: ['angina pectoris', 'musculoskeletal chest wall strain', 'gastroesophageal reflux disease (gerd)'])",
+    "Emergency flag mismatch (Expected: True, AI: False)"
+  ]
+}

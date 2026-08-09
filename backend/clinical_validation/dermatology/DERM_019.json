@@ -1,0 +1,88 @@
+{
+  "case_id": "DERM_019",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Dermatology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 70,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with ulcer and pruritus",
+  "presenting_symptoms": [
+    "ulcer",
+    "pruritus",
+    "swelling"
+  ],
+  "denied_symptoms": [
+    "joint pain",
+    "shortness of breath"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Lisinopril"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.1,
+    "spo2_pct": 98,
+    "heart_rate": 124,
+    "respiratory_rate": 12,
+    "bp_systolic": 148,
+    "bp_diastolic": 74
+  },
+  "final_diagnosis": "Melanoma presentation",
+  "icd11": "XX21",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Melanoma presentation",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 2,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of ulcer supports Melanoma presentation",
+    "Absence of joint pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Melanoma presentation",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

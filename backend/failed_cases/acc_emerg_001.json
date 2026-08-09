@@ -1,0 +1,32 @@
+{
+  "case_id": "ACC_EMERG_001",
+  "source": "Archive of Clinical Cases",
+  "license": "CC BY-NC 4.0",
+  "patient": {
+    "age": 62,
+    "sex": "Male"
+  },
+  "chief_complaint": "Crushing chest pain radiating to arm",
+  "symptoms": [
+    "Crushing chest pain",
+    "Radiation to left arm",
+    "Shortness of breath",
+    "Diaphoresis"
+  ],
+  "history": [
+    "Hypertension",
+    "Smoking history"
+  ],
+  "labs": [],
+  "imaging": [],
+  "final_diagnosis": "Myocardial Infarction",
+  "expected_triage": "RED",
+  "expected_emergency": true,
+  "expected_followup": [],
+  "expected_safety": "SAFE",
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\emergency\\acc_emerg_001.json",
+  "failure_analysis": [
+    "Diagnosis mismatch (Expected 'Myocardial Infarction', Top 3 AI: ['angina pectoris', 'musculoskeletal chest wall strain', 'gastroesophageal reflux disease (gerd)'])",
+    "Emergency flag mismatch (Expected: True, AI: False)"
+  ]
+}

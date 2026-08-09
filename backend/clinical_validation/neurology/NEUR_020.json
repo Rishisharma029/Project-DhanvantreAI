@@ -1,0 +1,88 @@
+{
+  "case_id": "NEUR_020",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Neurology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 30,
+    "sex": "Female",
+    "smoking": "never",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with seizure and speech difficulty",
+  "presenting_symptoms": [
+    "seizure",
+    "speech difficulty",
+    "weakness"
+  ],
+  "denied_symptoms": [
+    "loss of consciousness",
+    "trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.0,
+    "spo2_pct": 95,
+    "heart_rate": 130,
+    "respiratory_rate": 14,
+    "bp_systolic": 106,
+    "bp_diastolic": 75
+  },
+  "final_diagnosis": "Guillain-Barr\u00e9",
+  "icd11": "XX94",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Guillain-Barr\u00e9",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of seizure supports Guillain-Barr\u00e9",
+    "Absence of loss of consciousness reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Guillain-Barr\u00e9",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

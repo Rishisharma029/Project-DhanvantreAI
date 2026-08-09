@@ -1,0 +1,88 @@
+{
+  "case_id": "CARD_018",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Cardiology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 46,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with orthopnea and diaphoresis",
+  "presenting_symptoms": [
+    "orthopnea",
+    "diaphoresis",
+    "syncope"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "cough"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.2,
+    "spo2_pct": 95,
+    "heart_rate": 77,
+    "respiratory_rate": 24,
+    "bp_systolic": 100,
+    "bp_diastolic": 62
+  },
+  "final_diagnosis": "DVT",
+  "icd11": "XX82",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "DVT",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of orthopnea supports DVT",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "DVT",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

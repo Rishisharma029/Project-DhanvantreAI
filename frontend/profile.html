@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI User Health Profile - Edit age, weight, allergies, pre-existing diseases, and active medications.">
+    <title>User Health Profile | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .profile-container {
+            max-width: 900px;
+            margin: 120px auto 60px;
+            padding: 0 24px;
+        }
+
+        .profile-header-card {
+            padding: 36px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 640px) {
+            .profile-header-card { flex-direction: column; text-align: center; }
+        }
+
+        .profile-avatar-box {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            color: #000;
+            font-weight: 800;
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+            flex-shrink: 0;
+        }
+
+        .profile-form-card {
+            padding: 36px;
+        }
+
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 640px) {
+            .form-row-2 { grid-template-columns: 1fr; }
+        }
+
+        .tag-input-container {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .tag-input-container input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            outline: none;
+            flex: 1;
+            min-width: 140px;
+            font-size: 0.9rem;
+        }
+
+        .chip-tag {
+            background: rgba(6, 182, 212, 0.18);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: var(--radius-full);
+            padding: 4px 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chip-tag i {
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity var(--transition-fast);
+        }
+
+        .chip-tag i:hover { opacity: 1; color: var(--accent-rose); }
+
+        .toast-banner {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(16, 185, 129, 0.9);
+            color: #000;
+            padding: 14px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-header scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <!-- Patient Header Card -->
+        <div class="glass-card profile-header-card">
+            <div class="profile-avatar-box">RS</div>
+            <div style="flex: 1;">
+                <h1 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 4px;">Rishi Sharma</h1>
+                <div style="color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-bottom: 10px;">
+                    Patient ID: #PAT-2026-9941 • O+ Positive
+                </div>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <span class="badge" style="margin:0;"><i class="fa-solid fa-weight-scale"></i> BMI: <strong id="bmiValHeader">22.8 Normal</strong></span>
+                    <span class="badge" style="margin:0; background: rgba(168,85,247,0.15); color: var(--accent-purple);"><i class="fa-solid fa-shield-halved"></i> HIPAA Verified</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Editable Profile Form -->
+        <div class="glass-card profile-form-card">
+            <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 24px; color: var(--accent-cyan);">
+                <i class="fa-solid fa-user-pen"></i> Edit Patient Health Profile
+            </h2>
+
+            <form id="profileForm">
+                <!-- Row 1: Age & Weight -->
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="ageInput">Age (Years) <span class="required">*</span></label>
+                        <input type="number" id="ageInput" value="34" min="1" max="120" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weightInput">Weight (kg) <span class="required">*</span></label>
+                        <input type="number" id="weightInput" value="72.5" step="0.1" min="1" max="300" required>
+                    </div>
+                </div>
+
+                <!-- Height Field for BMI -->
+                <div class="form-group">
+                    <label for="heightInput">Height (cm)</label>
+                    <input type="number" id="heightInput" value="178" step="1" min="50" max="250">
+                </div>
+
+                <!-- Allergies -->
+                <div class="form-group">
+                    <label><i class="fa-solid fa-allergies" style="color: var(--accent-rose);"></i> Allergies (Drug & Food)</label>
+                    <div class="tag-input-container" id="allergiesContainer">
+                        <span class="chip-tag">Penicillin <i class="fa-solid fa-xmark" onclick="removeTag(this)"></i></span>
+                        <span class="chip-tag">Sulfonamides <i class="fa-solid fa-xmark" onclick="removeTag(this)"></i></span>
+                        <input type="text" id="allergyInput" placeholder="Add allergy and press Enter...">
+                    </div>
+                </div>
+
+                <!-- Pre-existing Diseases -->
+                <div class="form-group">
+                    <label><i class="fa-solid fa-heart-pulse" style="color: var(--accent-amber);"></i> Pre-existing Diseases / Conditions</label>
+                    <div class="tag-input-container" id="diseasesContainer">
+                        <span class="chip-tag" style="background: rgba(245,158,11,0.18); color: var(--accent-amber); border-color: rgba(245,158,11,0.3);">
+                            Hypertension <i class="fa-solid fa-xmark" onclick="removeTag(this)"></i>
+                        </span>
+                        <input type="text" id="diseaseInput" placeholder="Add condition and press Enter...">
+                    </div>
+                </div>
+
+                <!-- Medications -->
+                <div class="form-group">
+                    <label><i class="fa-solid fa-pills" style="color: var(--accent-teal);"></i> Active Daily Medications</label>
+                    <div class="tag-input-container" id="medicationsContainer">
+                        <span class="chip-tag" style="background: rgba(45,212,191,0.18); color: var(--accent-teal); border-color: rgba(45,212,191,0.3);">
+                            Metformin 500mg <i class="fa-solid fa-xmark" onclick="removeTag(this)"></i>
+                        </span>
+                        <span class="chip-tag" style="background: rgba(45,212,191,0.18); color: var(--accent-teal); border-color: rgba(45,212,191,0.3);">
+                            Amlodipine 5mg <i class="fa-solid fa-xmark" onclick="removeTag(this)"></i>
+                        </span>
+                        <input type="text" id="medicationInput" placeholder="Add prescription and press Enter...">
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div style="margin-top: 32px; text-align: right;">
+                    <button type="submit" class="btn btn-primary btn-lg" id="saveProfileBtn">
+                        <span>Save Profile Changes</span>
+                        <i class="fa-solid fa-floppy-disk"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Toast Banner Container -->
+    <div id="toastContainer"></div>
+
+    <!-- Script -->
+    <script src="profile.js"></script>
+</body>
+</html>

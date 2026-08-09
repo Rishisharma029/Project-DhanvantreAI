@@ -1,0 +1,88 @@
+{
+  "case_id": "ACUT_002",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergency",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 35,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with trauma and shortness of breath",
+  "presenting_symptoms": [
+    "trauma",
+    "shortness of breath",
+    "deformity"
+  ],
+  "denied_symptoms": [
+    "weight loss",
+    "chronic cough"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.9,
+    "spo2_pct": 94,
+    "heart_rate": 125,
+    "respiratory_rate": 21,
+    "bp_systolic": 131,
+    "bp_diastolic": 106
+  },
+  "final_diagnosis": "Spinal injury",
+  "icd11": "XX93",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Spinal injury",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of trauma supports Spinal injury",
+    "Absence of weight loss reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Spinal injury",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuraMed AI — Clinical Evaluation Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --card: #1a2235;
+    --border: #1e2d45;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --green: #10b981;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --purple: #8b5cf6;
+    --cyan: #06b6d4;
+    --accent: #6366f1;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1a2235 0%, #0f172a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo { width: 40px; height: 40px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+  .header h1 { font-size: 20px; font-weight: 700; }
+  .header p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .live-badge {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3);
+    border-radius: 20px; padding: 6px 14px; font-size: 12px; color: var(--green);
+  }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* Layout */
+  .container { max-width: 1400px; margin: 0 auto; padding: 32px 40px; }
+
+  /* Stat Grid */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 20px 24px; position: relative; overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .stat-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent-color, var(--accent));
+  }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .stat-value { font-size: 32px; font-weight: 700; font-family: 'JetBrains Mono'; }
+  .stat-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .good { color: var(--green); --accent-color: var(--green); }
+  .warn { color: var(--yellow); --accent-color: var(--yellow); }
+  .danger { color: var(--red); --accent-color: var(--red); }
+  .info { color: var(--blue); --accent-color: var(--blue); }
+  .purple-accent { color: var(--purple); --accent-color: var(--purple); }
+
+  /* Section header */
+  .section-header { font-size: 14px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+
+  /* Cards */
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
+    margin-bottom: 24px;
+  }
+  .card-title { font-size: 16px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .card-title .icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+
+  /* Progress bars */
+  .metric-row { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+  .metric-label { font-size: 13px; width: 200px; flex-shrink: 0; color: var(--text); }
+  .metric-bar-wrap { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .metric-bar { height: 100%; border-radius: 4px; transition: width 1s ease; }
+  .metric-pct { font-size: 13px; font-family: 'JetBrains Mono'; width: 52px; text-align: right; }
+
+  /* Two-column layout */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* Specialty table */
+  .table { width: 100%; border-collapse: collapse; }
+  .table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 13px; }
+  .table tr:hover td { background: rgba(255,255,255,0.02); }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-family: 'JetBrains Mono'; }
+  .badge-green { background: rgba(16,185,129,0.15); color: var(--green); }
+  .badge-yellow { background: rgba(245,158,11,0.15); color: var(--yellow); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-blue { background: rgba(59,130,246,0.15); color: var(--blue); }
+
+  /* Safety meter */
+  .safety-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .safety-item { text-align: center; padding: 16px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border); }
+  .safety-num { font-size: 28px; font-weight: 700; font-family: 'JetBrains Mono'; }
+  .safety-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* Recent failures */
+  .failure-item { padding: 12px 16px; background: var(--surface); border-radius: 10px; margin-bottom: 10px; border-left: 3px solid var(--red); }
+  .failure-id { font-size: 11px; font-family: 'JetBrains Mono'; color: var(--muted); }
+  .failure-dx { font-size: 13px; font-weight: 500; margin: 4px 0; }
+  .failure-msg { font-size: 12px; color: var(--red); }
+
+  /* KB stats */
+  .kb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .kb-item { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 16px; text-align: center; }
+  .kb-num { font-size: 32px; font-weight: 700; font-family: 'JetBrains Mono'; color: var(--cyan); }
+  .kb-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* Last run */
+  .last-run { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono'; }
+
+  /* Refresh button */
+  .refresh-btn {
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    border: none; color: white; padding: 10px 20px; border-radius: 10px;
+    font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;
+  }
+  .refresh-btn:hover { opacity: 0.85; }
+
+  /* Loading */
+  .loading { text-align: center; padding: 60px; color: var(--muted); font-size: 14px; }
+
+  /* Specialty list */
+  .spec-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .spec-chip { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; font-size: 12px; }
+  .spec-chip span { font-family: 'JetBrains Mono'; color: var(--cyan); margin-left: 6px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo">🩺</div>
+    <div>
+      <h1>AuraMed AI — Clinical Evaluation Dashboard</h1>
+      <p id="last-run-label">Loading metrics...</p>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <div class="live-badge"><div class="live-dot"></div> Live Metrics</div>
+    <button class="refresh-btn" onclick="loadMetrics()">↻ Refresh</button>
+  </div>
+</div>
+
+<div class="container" id="dashboard">
+  <div class="loading" id="loading">Loading evaluation metrics...</div>
+</div>
+
+<script>
+async function loadMetrics() {
+  const el = document.getElementById('dashboard');
+  document.getElementById('loading').style.display = 'block';
+  try {
+    const res = await fetch('/api/v1/eval/metrics');
+    const d = await res.json();
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('last-run-label').textContent =
+      d.last_run !== 'Never' ? `Last run: ${new Date(d.last_run).toLocaleString()}` : 'No validation runs yet';
+    renderDashboard(d);
+  } catch(e) {
+    el.innerHTML = `<div class="loading" style="color:#ef4444">Failed to load metrics: ${e.message}<br>Is the server running at port 8000?</div>`;
+  }
+}
+
+function bar(pct, color) {
+  return `<div class="metric-bar-wrap"><div class="metric-bar" style="width:${pct}%;background:${color}"></div></div>`;
+}
+
+function pctColor(v) {
+  if (v >= 85) return '#10b981';
+  if (v >= 60) return '#f59e0b';
+  return '#ef4444';
+}
+
+function renderDashboard(d) {
+  const acc = d.accuracy_metrics;
+  const safe = d.safety_metrics;
+  const cases = d.case_metrics;
+  const kb = d.knowledge_base;
+
+  document.getElementById('dashboard').innerHTML = `
+    <!-- Knowledge Base Cards -->
+    <p class="section-header">Knowledge Base</p>
+    <div class="kb-grid" style="margin-bottom:32px;">
+      <div class="kb-item"><div class="kb-num">${kb.diseases}</div><div class="kb-label">Diseases in KB</div></div>
+      <div class="kb-item"><div class="kb-num">${kb.questions}</div><div class="kb-label">Clinical Questions</div></div>
+      <div class="kb-item"><div class="kb-num">${kb.validation_cases}</div><div class="kb-label">Validation Cases</div></div>
+    </div>
+
+    <!-- Accuracy KPIs -->
+    <p class="section-header">Accuracy Metrics</p>
+    <div class="stat-grid" style="margin-bottom:32px;">
+      <div class="stat-card"><div class="stat-label">Triage Accuracy</div><div class="stat-value ${acc.triage_accuracy_pct>=85?'good':acc.triage_accuracy_pct>=65?'warn':'danger'}">${acc.triage_accuracy_pct}%</div><div class="stat-sub">RED/YELLOW/GREEN correct</div></div>
+      <div class="stat-card"><div class="stat-label">Top-1 Accuracy</div><div class="stat-value ${acc.top1_accuracy_pct>=75?'good':acc.top1_accuracy_pct>=55?'warn':'danger'}">${acc.top1_accuracy_pct}%</div><div class="stat-sub">Primary Dx = Rank #1</div></div>
+      <div class="stat-card"><div class="stat-label">Top-3 Accuracy</div><div class="stat-value ${acc.top3_accuracy_pct>=85?'good':acc.top3_accuracy_pct>=70?'warn':'danger'}">${acc.top3_accuracy_pct}%</div><div class="stat-sub">Expected Dx in Top 3</div></div>
+      <div class="stat-card"><div class="stat-label">Emergency Detection</div><div class="stat-value ${acc.emergency_detection_pct>=95?'good':acc.emergency_detection_pct>=85?'warn':'danger'}">${acc.emergency_detection_pct}%</div><div class="stat-sub">Red flags caught</div></div>
+      <div class="stat-card"><div class="stat-label">Overall Pass Rate</div><div class="stat-value ${acc.pass_rate_pct>=80?'good':acc.pass_rate_pct>=60?'warn':'danger'}">${acc.pass_rate_pct}%</div><div class="stat-sub">${cases.all_pass} / ${cases.total_cases_tested} cases</div></div>
+    </div>
+
+    <div class="two-col">
+      <!-- Accuracy detail bars -->
+      <div class="card">
+        <div class="card-title"><div class="icon" style="background:rgba(99,102,241,0.15)">📊</div>Detailed Accuracy</div>
+        ${[
+          ['Triage Accuracy', acc.triage_accuracy_pct],
+          ['Top-1 Accuracy', acc.top1_accuracy_pct],
+          ['Top-3 Accuracy', acc.top3_accuracy_pct],
+          ['Emergency Detection', acc.emergency_detection_pct],
+          ['Overall Pass Rate', acc.pass_rate_pct],
+        ].map(([label, pct]) => `
+          <div class="metric-row">
+            <span class="metric-label">${label}</span>
+            ${bar(pct, pctColor(pct))}
+            <span class="metric-pct" style="color:${pctColor(pct)}">${pct}%</span>
+          </div>
+        `).join('')}
+      </div>
+
+      <!-- Safety metrics -->
+      <div class="card">
+        <div class="card-title"><div class="icon" style="background:rgba(16,185,129,0.15)">🛡️</div>Safety Metrics</div>
+        <div class="safety-grid">
+          <div class="safety-item">
+            <div class="safety-num" style="color:${safe.hallucination_rate_pct===0?'#10b981':'#ef4444'}">${safe.hallucination_rate_pct}%</div>
+            <div class="safety-label">Hallucination Rate<br><small>Target: 0%</small></div>
+          </div>
+          <div class="safety-item">
+            <div class="safety-num" style="color:${safe.false_emergency_count===0?'#10b981':'#f59e0b'}">${safe.false_emergency_count}</div>
+            <div class="safety-label">False Emergencies<br><small>Target: 0</small></div>
+          </div>
+          <div class="safety-item">
+            <div class="safety-num" style="color:${safe.missed_emergency_count===0?'#10b981':'#ef4444'}">${safe.missed_emergency_count}</div>
+            <div class="safety-label">Missed Emergencies<br><small>Target: 0</small></div>
+          </div>
+          <div class="safety-item">
+            <div class="safety-num" style="color:${safe.medicine_gate_violations===0?'#10b981':'#ef4444'}">${safe.medicine_gate_violations}</div>
+            <div class="safety-label">Medicine Gate Violations<br><small>Target: 0</small></div>
+          </div>
+          <div class="safety-item">
+            <div class="safety-num" style="color:#10b981">${safe.hallucinations_total}</div>
+            <div class="safety-label">Total Hallucinations<br><small>Absolute count</small></div>
+          </div>
+          <div class="safety-item">
+            <div class="safety-num" style="color:${cases.failure_count===0?'#10b981':'#f59e0b'}">${cases.failure_count}</div>
+            <div class="safety-label">Total Failures<br><small>Need investigation</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <!-- Cases by specialty -->
+      <div class="card">
+        <div class="card-title"><div class="icon" style="background:rgba(6,182,212,0.15)">📁</div>Cases by Specialty</div>
+        <div class="spec-list">
+          ${Object.entries(kb.cases_by_specialty || {}).sort((a,b)=>b[1]-a[1]).map(([spec,n]) =>
+            `<div class="spec-chip">${spec}<span>${n}</span></div>`
+          ).join('')}
+        </div>
+      </div>
+
+      <!-- Top failure specialties -->
+      <div class="card">
+        <div class="card-title"><div class="icon" style="background:rgba(239,68,68,0.15)">⚠️</div>Top Failure Specialties</div>
+        ${d.top_failure_specialties.length === 0
+          ? '<p style="color:var(--green);font-size:14px;">✓ No failures recorded</p>'
+          : `<table class="table">
+              <thead><tr><th>Specialty</th><th>Failures</th></tr></thead>
+              <tbody>
+              ${d.top_failure_specialties.map(([spec, count]) =>
+                `<tr><td>${spec}</td><td><span class="badge badge-red">${count}</span></td></tr>`
+              ).join('')}
+              </tbody>
+            </table>`
+        }
+      </div>
+    </div>
+
+    <!-- Recent failures -->
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(239,68,68,0.15)">🔍</div>Recent Failures (Last 10)</div>
+      ${d.recent_failures.length === 0
+        ? '<p style="color:var(--green);font-size:14px;text-align:center;padding:20px">✓ No failures recorded in this run</p>'
+        : d.recent_failures.map(f => `
+            <div class="failure-item">
+              <div class="failure-id">${f.case_id} · ${f.specialty}</div>
+              <div class="failure-dx">${f.diagnosis}</div>
+              ${f.failures.map(msg => `<div class="failure-msg">→ ${msg}</div>`).join('')}
+            </div>
+          `).join('')
+      }
+    </div>
+
+    <!-- Progress roadmap -->
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(139,92,246,0.15)">🗺️</div>CDSS Roadmap</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;">
+        ${[
+          ['✅', 'Architecture', 'Complete', 'green'],
+          ['✅', 'Safety Engine', 'Complete', 'green'],
+          ['✅', 'Explainability', 'Complete', 'green'],
+          ['✅', 'Syndrome Library', '11 syndromes', 'green'],
+          ['✅', 'Clinical Scoring', '8 systems', 'green'],
+          ['✅', 'Disease KB', `${kb.diseases} diseases`, 'green'],
+          ['✅', 'Question Bank', `${kb.questions} questions`, 'green'],
+          ['✅', 'Validation Cases', `${kb.validation_cases} cases`, 'green'],
+          ['🔄', 'Real Case Testing', 'In Progress', 'yellow'],
+          ['🔄', 'Guideline Alignment', 'In Progress', 'yellow'],
+          ['🔄', 'Continuous Eval', 'This Dashboard', 'yellow'],
+          ['⏳', 'External Benchmarks', 'Planned', 'blue'],
+        ].map(([icon, label, detail, color]) => `
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;">
+            <div style="font-size:20px;margin-bottom:6px;">${icon}</div>
+            <div style="font-size:13px;font-weight:600;">${label}</div>
+            <div style="font-size:11px;color:var(--${color});margin-top:3px;">${detail}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+loadMetrics();
+setInterval(loadMetrics, 60000); // Auto-refresh every 60s
+</script>
+</body>
+</html>

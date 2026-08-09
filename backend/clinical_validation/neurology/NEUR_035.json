@@ -1,0 +1,88 @@
+{
+  "case_id": "NEUR_035",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Neurology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 53,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with altered mental status and dizziness",
+  "presenting_symptoms": [
+    "altered mental status",
+    "dizziness",
+    "seizure"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "loss of consciousness"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Levothyroxine"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.6,
+    "spo2_pct": 88,
+    "heart_rate": 119,
+    "respiratory_rate": 18,
+    "bp_systolic": 155,
+    "bp_diastolic": 102
+  },
+  "final_diagnosis": "Vertigo",
+  "icd11": "XX30",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Vertigo",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of altered mental status supports Vertigo",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Vertigo",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

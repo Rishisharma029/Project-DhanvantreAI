@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_018",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 77,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with suicidal ideation and anxiety",
+  "presenting_symptoms": [
+    "suicidal ideation",
+    "anxiety",
+    "hallucinations"
+  ],
+  "denied_symptoms": [
+    "head trauma",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Metformin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.9,
+    "spo2_pct": 91,
+    "heart_rate": 101,
+    "respiratory_rate": 18,
+    "bp_systolic": 111,
+    "bp_diastolic": 69
+  },
+  "final_diagnosis": "Schizophrenia first episode",
+  "icd11": "XX48",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Schizophrenia first episode",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of suicidal ideation supports Schizophrenia first episode",
+    "Absence of head trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Schizophrenia first episode",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_012",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "easy",
+  "patient": {
+    "age": 31,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with insomnia and depressed mood",
+  "presenting_symptoms": [
+    "insomnia",
+    "depressed mood",
+    "delusions"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "seizures"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.9,
+    "spo2_pct": 98,
+    "heart_rate": 118,
+    "respiratory_rate": 24,
+    "bp_systolic": 151,
+    "bp_diastolic": 103
+  },
+  "final_diagnosis": "Generalised Anxiety",
+  "icd11": "XX77",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Generalised Anxiety",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of insomnia supports Generalised Anxiety",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Generalised Anxiety",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

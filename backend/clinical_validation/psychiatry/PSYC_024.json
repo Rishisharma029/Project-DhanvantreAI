@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_024",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "hard",
+  "patient": {
+    "age": 68,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with delusions and agitation",
+  "presenting_symptoms": [
+    "delusions",
+    "agitation",
+    "hallucinations"
+  ],
+  "denied_symptoms": [
+    "head trauma",
+    "seizures"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Amlodipine"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.7,
+    "spo2_pct": 95,
+    "heart_rate": 122,
+    "respiratory_rate": 12,
+    "bp_systolic": 154,
+    "bp_diastolic": 94
+  },
+  "final_diagnosis": "Severe Depression with SI",
+  "icd11": "XX76",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Severe Depression with SI",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of delusions supports Severe Depression with SI",
+    "Absence of head trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Severe Depression with SI",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

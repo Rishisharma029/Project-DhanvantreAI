@@ -1,0 +1,30 @@
+{
+  "gap_id": "GAP_20260806T200852Z",
+  "session_uuid": "unknown",
+  "timestamp": "20260806T200852Z",
+  "status": "PENDING_REVIEW",
+  "query": "Patient presents with poor appetite and confusion. Symptoms: poor appetite; confusion; memory loss",
+  "extracted_symptoms": [
+    "Confusion"
+  ],
+  "extracted_entities": {
+    "age": 93,
+    "gender": "female",
+    "detected_symptoms": [
+      "confusion"
+    ]
+  },
+  "reasoning_steps": [
+    "Extracted 1 clinical symptoms: Confusion",
+    "No high-risk syndrome pattern detected — proceeding to disease matching.",
+    "Generated 0 differential diagnoses led by 'Unspecified Condition'",
+    "Confidence calibrated: 25% | Stage: Adaptive Questioning (Turn 1) | Triage: YELLOW_MODERATE",
+    "Selected 0 high info-gain follow-up questions.",
+    "Medicine suppressed: No evidence-based medicine recommendation available at current confidence level (25%). Further history and investigation required."
+  ],
+  "top_candidate_diseases": [],
+  "final_confidence": 0.25,
+  "resolution": null,
+  "reviewed_by": null,
+  "note": "This case could not be matched to an evidence-supported diagnosis. Human expert review is required before any learning update."
+}

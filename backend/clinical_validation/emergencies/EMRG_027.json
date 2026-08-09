@@ -1,0 +1,88 @@
+{
+  "case_id": "EMRG_027",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergencies",
+  "difficulty": "easy",
+  "patient": {
+    "age": 41,
+    "sex": "Female",
+    "smoking": "never",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with oliguria and rash",
+  "presenting_symptoms": [
+    "oliguria",
+    "rash",
+    "fever"
+  ],
+  "denied_symptoms": [
+    "recent trauma",
+    "focal weakness"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.6,
+    "spo2_pct": 95,
+    "heart_rate": 95,
+    "respiratory_rate": 26,
+    "bp_systolic": 158,
+    "bp_diastolic": 63
+  },
+  "final_diagnosis": "Malaria",
+  "icd11": "XX46",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Malaria",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of oliguria supports Malaria",
+    "Absence of recent trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Malaria",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "drug_interaction_01",
+  "category": "drug_interactions",
+  "title": "Severe Bleeding Risk Interaction between Warfarin and Ibuprofen",
+  "patient": {
+    "age": 64,
+    "gender": "female",
+    "pregnancy_status": false,
+    "allergies": [],
+    "current_medications": ["Warfarin"]
+  },
+  "medicine_query": "Ibuprofen",
+  "expected_safety_grade": "DANGEROUS",
+  "expected_warnings_contain": "Warfarin",
+  "expected_interaction_detected": true
+}

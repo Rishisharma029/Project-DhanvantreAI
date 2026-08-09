@@ -1,0 +1,88 @@
+{
+  "case_id": "NEUR_009",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Neurology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 51,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with speech difficulty and weakness",
+  "presenting_symptoms": [
+    "speech difficulty",
+    "weakness",
+    "dizziness"
+  ],
+  "denied_symptoms": [
+    "loss of consciousness",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Levothyroxine"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.6,
+    "spo2_pct": 96,
+    "heart_rate": 102,
+    "respiratory_rate": 25,
+    "bp_systolic": 127,
+    "bp_diastolic": 92
+  },
+  "final_diagnosis": "Subdural Haematoma",
+  "icd11": "XX18",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Subdural Haematoma",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of speech difficulty supports Subdural Haematoma",
+    "Absence of loss of consciousness reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Subdural Haematoma",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

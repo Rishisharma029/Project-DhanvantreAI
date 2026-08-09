@@ -1,0 +1,88 @@
+{
+  "case_id": "GERI_029",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Geriatrics",
+  "difficulty": "hard",
+  "patient": {
+    "age": 77,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with urinary incontinence and poor appetite",
+  "presenting_symptoms": [
+    "urinary incontinence",
+    "poor appetite",
+    "weakness"
+  ],
+  "denied_symptoms": [
+    "head trauma",
+    "chest pain"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Aspirin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.4,
+    "spo2_pct": 91,
+    "heart_rate": 90,
+    "respiratory_rate": 13,
+    "bp_systolic": 121,
+    "bp_diastolic": 98
+  },
+  "final_diagnosis": "Polypharmacy adverse effects",
+  "icd11": "XX47",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Polypharmacy adverse effects",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of urinary incontinence supports Polypharmacy adverse effects",
+    "Absence of head trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Polypharmacy adverse effects",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

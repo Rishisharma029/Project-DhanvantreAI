@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Explainability View - Transparent clinical AI rationale showing Why this condition?, Matched symptoms, Missing symptoms, and Alternative conditions.">
+    <title>Explainability View | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .explain-container {
+            max-width: 1100px;
+            margin: 120px auto 60px;
+            padding: 0 24px;
+        }
+
+        .explain-hero-box {
+            padding: 36px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .explain-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .explain-grid { grid-template-columns: 1fr; }
+        }
+
+        .explain-panel-card {
+            padding: 32px;
+        }
+
+        .panel-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .panel-head h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .symptom-tag-matched {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 8px 14px;
+            border-radius: var(--radius-md);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .symptom-tag-missing {
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--accent-amber);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 8px 14px;
+            border-radius: var(--radius-md);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .alt-condition-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-header scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="explain-container">
+        <!-- Hero Case Selector -->
+        <div class="glass-card explain-hero-box">
+            <div class="badge"><i class="fa-solid fa-eye"></i> Transparent AI Decision Support</div>
+            <h1 class="section-title">Explainability <span class="gradient-text">Rationale Report</span></h1>
+            <p class="section-subtitle" style="margin-bottom: 20px;">
+                Inspect why the diagnostic engine prioritized this condition, verified supporting evidence, and evaluated rule-out criteria.
+            </p>
+
+            <div class="quick-cat-row">
+                <span style="font-size: 0.75rem; color: var(--text-dim);">Select Condition Case:</span>
+                <button class="quick-cat-btn explain-case-btn active" data-disease="Acute Coronary Syndrome">Acute Coronary Syndrome</button>
+                <button class="quick-cat-btn explain-case-btn" data-disease="Pneumonia">Pneumonia</button>
+                <button class="quick-cat-btn explain-case-btn" data-disease="Type 2 Diabetes">Type 2 Diabetes</button>
+                <button class="quick-cat-btn explain-case-btn" data-disease="Fungal Infection">Fungal Infection</button>
+            </div>
+        </div>
+
+        <!-- 4 Core Explainability Panels Grid -->
+        <div class="explain-grid">
+
+            <!-- PANEL 1: WHY THIS CONDITION? -->
+            <div class="glass-card explain-panel-card" style="grid-column: 1 / -1;">
+                <div class="panel-head">
+                    <h3><i class="fa-solid fa-brain" style="color: var(--accent-cyan);"></i> 1. Why This Condition?</h3>
+                    <span class="badge" style="margin: 0;">Diagnostic Rationale</span>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                    <p style="font-size: 1rem; color: var(--text-main); line-height: 1.6;" id="textWhyCondition">
+                        The engine prioritized <strong>Acute Coronary Syndrome (ACS)</strong> with 86.4% confidence due to the pathognomonic triad of retrosternal pressure, dyspnea, and diaphoresis matching AHA/ACC clinical guidelines.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PANEL 2: MATCHED SYMPTOMS -->
+            <div class="glass-card explain-panel-card">
+                <div class="panel-head">
+                    <h3><i class="fa-solid fa-circle-check" style="color: var(--accent-emerald);"></i> 2. Matched Symptoms</h3>
+                    <span class="confidence-badge" style="background: rgba(16,185,129,0.15); color: var(--accent-emerald);">Supporting Evidence</span>
+                </div>
+                <div id="matchedSymptomsList">
+                    <div class="symptom-tag-matched">
+                        <span><i class="fa-solid fa-check"></i> Retrosternal Chest Pain</span>
+                        <span style="font-size: 0.75rem; color: var(--accent-emerald);">Weight: High (0.92)</span>
+                    </div>
+                    <div class="symptom-tag-matched">
+                        <span><i class="fa-solid fa-check"></i> Shortness of Breath (Dyspnea)</span>
+                        <span style="font-size: 0.75rem; color: var(--accent-emerald);">Weight: High (0.88)</span>
+                    </div>
+                    <div class="symptom-tag-matched">
+                        <span><i class="fa-solid fa-check"></i> Diaphoresis (Cold Sweat)</span>
+                        <span style="font-size: 0.75rem; color: var(--accent-emerald);">Weight: Moderate (0.75)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 3: MISSING SYMPTOMS -->
+            <div class="glass-card explain-panel-card">
+                <div class="panel-head">
+                    <h3><i class="fa-solid fa-circle-question" style="color: var(--accent-amber);"></i> 3. Missing Symptoms</h3>
+                    <span class="confidence-badge" style="background: rgba(245,158,11,0.15); color: var(--accent-amber);">Rule-Out Rationale</span>
+                </div>
+                <div id="missingSymptomsList">
+                    <div class="symptom-tag-missing">
+                        <span><i class="fa-solid fa-question"></i> Radiation to Jaw or Left Arm</span>
+                        <span style="font-size: 0.75rem;">Rule-out check</span>
+                    </div>
+                    <div class="symptom-tag-missing">
+                        <span><i class="fa-solid fa-question"></i> Nausea / Vomiting</span>
+                        <span style="font-size: 0.75rem;">Secondary sign</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 4: ALTERNATIVE CONDITIONS -->
+            <div class="glass-card explain-panel-card" style="grid-column: 1 / -1;">
+                <div class="panel-head">
+                    <h3><i class="fa-solid fa-diagram-project" style="color: var(--accent-purple);"></i> 4. Alternative Differential Conditions</h3>
+                    <span class="badge" style="margin: 0;">Overlapping Symptoms Matrix</span>
+                </div>
+                <div id="alternativeConditionsList">
+                    <div class="alt-condition-item">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                            <strong style="color: var(--text-main);">Pleurisy / Pericarditis</strong>
+                            <span style="color: var(--accent-amber); font-weight: 700;">11.2% Differential Match</span>
+                        </div>
+                        <p class="text-sm text-muted">Overlaps on chest pain and dyspnea. Differentiated by inspiration-dependent pain amplification.</p>
+                    </div>
+
+                    <div class="alt-condition-item">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                            <strong style="color: var(--text-main);">Gastroesophageal Reflux Disease (GERD)</strong>
+                            <span style="color: var(--text-dim); font-weight: 700;">2.4% Differential Match</span>
+                        </div>
+                        <p class="text-sm text-muted">Overlaps on substernal burning sensation. Lacks vital signs instability or diaphoresis.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script -->
+    <script src="explainability.js"></script>
+</body>
+</html>

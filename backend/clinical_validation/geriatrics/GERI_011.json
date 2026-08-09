@@ -1,0 +1,88 @@
+{
+  "case_id": "GERI_011",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Geriatrics",
+  "difficulty": "hard",
+  "patient": {
+    "age": 81,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with memory loss and weakness",
+  "presenting_symptoms": [
+    "memory loss",
+    "weakness",
+    "falls"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "head trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Lisinopril"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.8,
+    "spo2_pct": 94,
+    "heart_rate": 87,
+    "respiratory_rate": 13,
+    "bp_systolic": 139,
+    "bp_diastolic": 103
+  },
+  "final_diagnosis": "UTI + Sepsis elderly",
+  "icd11": "XX38",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "UTI + Sepsis elderly",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of memory loss supports UTI + Sepsis elderly",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "UTI + Sepsis elderly",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

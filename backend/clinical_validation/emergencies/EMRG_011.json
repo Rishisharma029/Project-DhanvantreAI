@@ -1,0 +1,88 @@
+{
+  "case_id": "EMRG_011",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergencies",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 55,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with rash and tachycardia",
+  "presenting_symptoms": [
+    "rash",
+    "tachycardia",
+    "tachypnea"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "recent trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Aspirin"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.0,
+    "spo2_pct": 89,
+    "heart_rate": 78,
+    "respiratory_rate": 28,
+    "bp_systolic": 110,
+    "bp_diastolic": 77
+  },
+  "final_diagnosis": "Heat Stroke",
+  "icd11": "XX33",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Heat Stroke",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of rash supports Heat Stroke",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Heat Stroke",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

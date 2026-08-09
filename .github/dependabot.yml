@@ -1,0 +1,21 @@
+# GitHub Dependabot Automated Dependency Security Scan Configuration
+version: 2
+updates:
+  # 1. Python Pip Packages Scan
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    labels:
+      - "security"
+      - "dependencies"
+
+  # 2. GitHub Actions Security Scan
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "security"
+      - "ci-cd"

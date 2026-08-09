@@ -1,0 +1,28 @@
+{
+  "case_id": "ACC_NEUR_001",
+  "source": "Archive of Clinical Cases",
+  "license": "CC BY-NC 4.0",
+  "patient": {
+    "age": 34,
+    "sex": "Female"
+  },
+  "chief_complaint": "Severe left-sided headache and light sensitivity",
+  "symptoms": [
+    "Headache",
+    "Photophobia",
+    "Nausea"
+  ],
+  "history": [
+    "Migraine history"
+  ],
+  "labs": [],
+  "imaging": [],
+  "final_diagnosis": "Migraine",
+  "expected_triage": "GREEN",
+  "expected_emergency": false,
+  "expected_followup": [
+    "Thunderclap onset?",
+    "Neck stiffness?"
+  ],
+  "expected_safety": "SAFE"
+}

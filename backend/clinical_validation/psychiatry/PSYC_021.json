@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_021",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "hard",
+  "patient": {
+    "age": 78,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with delusions and agitation",
+  "presenting_symptoms": [
+    "delusions",
+    "agitation",
+    "anxiety"
+  ],
+  "denied_symptoms": [
+    "seizures",
+    "head trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Amlodipine"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.9,
+    "spo2_pct": 88,
+    "heart_rate": 118,
+    "respiratory_rate": 16,
+    "bp_systolic": 93,
+    "bp_diastolic": 86
+  },
+  "final_diagnosis": "Alcohol Withdrawal",
+  "icd11": "XX73",
+  "expected_triage": "GREEN_STANDARD",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Alcohol Withdrawal",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of delusions supports Alcohol Withdrawal",
+    "Absence of seizures reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "GREEN_STANDARD",
+    "top1_match": "Alcohol Withdrawal",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

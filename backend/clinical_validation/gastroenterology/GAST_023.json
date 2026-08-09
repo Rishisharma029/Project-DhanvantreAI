@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_023",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "easy",
+  "patient": {
+    "age": 19,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with abdominal pain and jaundice",
+  "presenting_symptoms": [
+    "abdominal pain",
+    "jaundice",
+    "diarrhea"
+  ],
+  "denied_symptoms": [
+    "shortness of breath",
+    "chest pain"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 36.8,
+    "spo2_pct": 93,
+    "heart_rate": 76,
+    "respiratory_rate": 14,
+    "bp_systolic": 107,
+    "bp_diastolic": 107
+  },
+  "final_diagnosis": "Cholecystitis",
+  "icd11": "XX77",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Cholecystitis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of abdominal pain supports Cholecystitis",
+    "Absence of shortness of breath reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Cholecystitis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

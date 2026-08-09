@@ -1,0 +1,27 @@
+{
+  "case_id": "ACC_EMERG_001",
+  "source": "Archive of Clinical Cases",
+  "license": "CC BY-NC 4.0",
+  "patient": {
+    "age": 62,
+    "sex": "Male"
+  },
+  "chief_complaint": "Crushing chest pain radiating to arm",
+  "symptoms": [
+    "Crushing chest pain",
+    "Radiation to left arm",
+    "Shortness of breath",
+    "Diaphoresis"
+  ],
+  "history": [
+    "Hypertension",
+    "Smoking history"
+  ],
+  "labs": [],
+  "imaging": [],
+  "final_diagnosis": "Myocardial Infarction",
+  "expected_triage": "RED",
+  "expected_emergency": true,
+  "expected_followup": [],
+  "expected_safety": "SAFE"
+}

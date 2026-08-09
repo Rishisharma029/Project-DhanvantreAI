@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_006",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 82,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "student"
+  },
+  "chief_complaint": "Patient presents with hallucinations and insomnia",
+  "presenting_symptoms": [
+    "hallucinations",
+    "insomnia",
+    "delusions"
+  ],
+  "denied_symptoms": [
+    "head trauma",
+    "seizures"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Aspirin"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.0,
+    "spo2_pct": 90,
+    "heart_rate": 77,
+    "respiratory_rate": 28,
+    "bp_systolic": 179,
+    "bp_diastolic": 64
+  },
+  "final_diagnosis": "Delirium",
+  "icd11": "XX66",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Delirium",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of hallucinations supports Delirium",
+    "Absence of head trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Delirium",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_021",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 24,
+    "sex": "Male",
+    "smoking": "former",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with hematemesis and vomiting",
+  "presenting_symptoms": [
+    "hematemesis",
+    "vomiting",
+    "jaundice"
+  ],
+  "denied_symptoms": [
+    "shortness of breath",
+    "dysuria"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.4,
+    "spo2_pct": 91,
+    "heart_rate": 107,
+    "respiratory_rate": 15,
+    "bp_systolic": 114,
+    "bp_diastolic": 105
+  },
+  "final_diagnosis": "Mesenteric Ischaemia",
+  "icd11": "XX80",
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Mesenteric Ischaemia",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of hematemesis supports Mesenteric Ischaemia",
+    "Absence of shortness of breath reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "YELLOW_MODERATE",
+    "top1_match": "Mesenteric Ischaemia",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

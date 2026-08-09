@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_010",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "easy",
+  "patient": {
+    "age": 40,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with delusions and depressed mood",
+  "presenting_symptoms": [
+    "delusions",
+    "depressed mood",
+    "suicidal ideation"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "seizures"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.2,
+    "spo2_pct": 99,
+    "heart_rate": 117,
+    "respiratory_rate": 19,
+    "bp_systolic": 94,
+    "bp_diastolic": 71
+  },
+  "final_diagnosis": "Schizophrenia first episode",
+  "icd11": "XX10",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Schizophrenia first episode",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 0,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of delusions supports Schizophrenia first episode",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Schizophrenia first episode",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

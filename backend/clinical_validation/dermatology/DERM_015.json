@@ -1,0 +1,88 @@
+{
+  "case_id": "DERM_015",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Dermatology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 51,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with ulcer and pruritus",
+  "presenting_symptoms": [
+    "ulcer",
+    "pruritus",
+    "blisters"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "joint pain"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.3,
+    "spo2_pct": 100,
+    "heart_rate": 126,
+    "respiratory_rate": 24,
+    "bp_systolic": 142,
+    "bp_diastolic": 75
+  },
+  "final_diagnosis": "Herpes Zoster",
+  "icd11": "XX34",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Herpes Zoster",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of ulcer supports Herpes Zoster",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Herpes Zoster",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

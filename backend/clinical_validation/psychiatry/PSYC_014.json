@@ -1,0 +1,88 @@
+{
+  "case_id": "PSYC_014",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Psychiatry",
+  "difficulty": "easy",
+  "patient": {
+    "age": 40,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "retired"
+  },
+  "chief_complaint": "Patient presents with suicidal ideation and anxiety",
+  "presenting_symptoms": [
+    "suicidal ideation",
+    "anxiety",
+    "delusions"
+  ],
+  "denied_symptoms": [
+    "fever",
+    "seizures"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.2,
+    "spo2_pct": 91,
+    "heart_rate": 73,
+    "respiratory_rate": 24,
+    "bp_systolic": 94,
+    "bp_diastolic": 98
+  },
+  "final_diagnosis": "Delirium",
+  "icd11": "XX77",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Delirium",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of suicidal ideation supports Delirium",
+    "Absence of fever reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Delirium",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "case_id": "EMRG_031",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Emergencies",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 60,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "office worker"
+  },
+  "chief_complaint": "Patient presents with tachypnea and tachycardia",
+  "presenting_symptoms": [
+    "tachypnea",
+    "tachycardia",
+    "altered mental status"
+  ],
+  "denied_symptoms": [
+    "focal weakness",
+    "chest pain"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Lisinopril"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.5,
+    "spo2_pct": 95,
+    "heart_rate": 100,
+    "respiratory_rate": 29,
+    "bp_systolic": 172,
+    "bp_diastolic": 76
+  },
+  "final_diagnosis": "Cellulitis with sepsis",
+  "icd11": "XX77",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Cellulitis with sepsis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 1,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of tachypnea supports Cellulitis with sepsis",
+    "Absence of focal weakness reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Cellulitis with sepsis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

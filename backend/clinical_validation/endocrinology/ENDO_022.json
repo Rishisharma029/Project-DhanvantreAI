@@ -1,0 +1,88 @@
+{
+  "case_id": "ENDO_022",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Endocrinology",
+  "difficulty": "hard",
+  "patient": {
+    "age": 84,
+    "sex": "Male",
+    "smoking": "current",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with fatigue and polyuria",
+  "presenting_symptoms": [
+    "fatigue",
+    "polyuria",
+    "polydipsia"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "trauma"
+  ],
+  "history": {
+    "past_medical": [
+      "Hypertension"
+    ],
+    "medications": [
+      "Lisinopril"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.9,
+    "spo2_pct": 100,
+    "heart_rate": 116,
+    "respiratory_rate": 27,
+    "bp_systolic": 179,
+    "bp_diastolic": 108
+  },
+  "final_diagnosis": "Type 2 Diabetes new diagnosis",
+  "icd11": "XX26",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Type 2 Diabetes new diagnosis",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 3,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of fatigue supports Type 2 Diabetes new diagnosis",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Type 2 Diabetes new diagnosis",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

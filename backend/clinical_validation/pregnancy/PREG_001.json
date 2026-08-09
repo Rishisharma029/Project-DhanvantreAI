@@ -1,0 +1,88 @@
+{
+  "case_id": "PREG_001",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pregnancy",
+  "difficulty": "easy",
+  "patient": {
+    "age": 23,
+    "sex": "Female",
+    "smoking": "former",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with visual changes and nausea",
+  "presenting_symptoms": [
+    "visual changes",
+    "nausea",
+    "contractions"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.3,
+    "spo2_pct": 100,
+    "heart_rate": 121,
+    "respiratory_rate": 15,
+    "bp_systolic": 118,
+    "bp_diastolic": 104
+  },
+  "final_diagnosis": "Pre-eclampsia",
+  "icd11": "XX62",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Pre-eclampsia",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of visual changes supports Pre-eclampsia",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Pre-eclampsia",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

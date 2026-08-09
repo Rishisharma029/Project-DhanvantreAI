@@ -1,0 +1,88 @@
+{
+  "case_id": "PREG_005",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pregnancy",
+  "difficulty": "easy",
+  "patient": {
+    "age": 19,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with nausea and reduced fetal movements",
+  "presenting_symptoms": [
+    "nausea",
+    "reduced fetal movements",
+    "visual changes"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 37.1,
+    "spo2_pct": 91,
+    "heart_rate": 116,
+    "respiratory_rate": 12,
+    "bp_systolic": 107,
+    "bp_diastolic": 62
+  },
+  "final_diagnosis": "Miscarriage",
+  "icd11": "XX69",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Miscarriage",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of nausea supports Miscarriage",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Miscarriage",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

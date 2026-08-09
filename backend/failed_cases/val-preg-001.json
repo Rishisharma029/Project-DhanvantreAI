@@ -1,0 +1,101 @@
+{
+  "case_id": "VAL-PREG-001",
+  "domain": "pregnancy",
+  "title": "Acute Dysuria and Urinary Frequency at 28 Weeks Gestation with Penicillin Allergy",
+  "patient_demographics": {
+    "age": 28,
+    "gender": "female",
+    "pregnancy_status": true
+  },
+  "history": {
+    "chief_complaint": "Painful urination, increased frequency, and suprapubic discomfort for 2 days",
+    "onset": "Acute (48 hours)",
+    "past_medical_history": [
+      "28 weeks gestation (G1P0)",
+      "UTI in first trimester"
+    ],
+    "current_medications": [
+      "Prenatal Multivitamin",
+      "Ferrous Sulfate"
+    ],
+    "allergies": [
+      "Penicillin (Anaphylaxis)"
+    ]
+  },
+  "symptoms": [
+    "Dysuria",
+    "Urinary frequency",
+    "Urinary urgency",
+    "Suprapubic discomfort",
+    "Low-grade fever (99.8\u00b0F)"
+  ],
+  "examination_findings": {
+    "vitals": {
+      "temperature_f": 99.8,
+      "heart_rate_bpm": 82,
+      "blood_pressure": "114/72",
+      "respiratory_rate": 16,
+      "o2_saturation_pct": 98
+    },
+    "physical_exam": "Gravid uterus appropriate for 28 weeks. Mild suprapubic tenderness. Costovertebral angle (CVA) tenderness negative bilaterally."
+  },
+  "lab_results": {
+    "urinalysis": "Leukocyte esterase positive, Nitrites positive, WBC 25-30/hpf",
+    "urine_culture": "Escherichia coli > 100,000 CFU/mL (Sensitivities pending)"
+  },
+  "expected_differential_diagnoses": [
+    {
+      "disease_name": "Acute Uncomplicated Cystitis in Pregnancy",
+      "icd11_code": "GC00.0",
+      "expected_probability_range": [
+        0.75,
+        0.9
+      ],
+      "supporting_features": [
+        "Dysuria",
+        "Urinary frequency",
+        "Suprapubic tenderness",
+        "Positive urinalysis"
+      ],
+      "missing_features": [
+        "No flank pain or CVA tenderness"
+      ]
+    },
+    {
+      "disease_name": "Acute Pyelonephritis",
+      "icd11_code": "GB50",
+      "expected_probability_range": [
+        0.08,
+        0.18
+      ],
+      "supporting_features": [
+        "Dysuria",
+        "Fever"
+      ],
+      "missing_features": [
+        "No CVA tenderness, rigors, or high fever (>102\u00b0F)"
+      ]
+    }
+  ],
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_followup_questions": [
+    "Do you have any back or flank pain, chills, or high fever?",
+    "Have you noticed any vaginal bleeding or fluid leakage?",
+    "Are you experiencing regular uterine contractions or cramping?"
+  ],
+  "expected_safety_checks": [
+    "CRITICAL ALLERGY GUARD: Block Amoxicillin / Penicillins due to documented anaphylaxis history",
+    "PREGNANCY CATEGORY D/X GUARD: Block Fluoroquinolones (Ciprofloxacin) and Tetracyclines",
+    "Select pregnancy-safe non-penicillin antimicrobial (e.g. Nitrofurantoin / Fosfomycin prior to 36 weeks)"
+  ],
+  "expected_do_not_recommend": [
+    "Amoxicillin or Ampicillin (Strict Penicillin Allergy Contraindication)",
+    "Ciprofloxacin, Levofloxacin, or Doxycycline (Teratogenic / Cartilage Toxicity Risk in Pregnancy)",
+    "Trimethoprim-Sulfamethoxazole in third trimester (Kernicterus risk)"
+  ],
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\pregnancy_01.json",
+  "failure_analysis": [
+    "Triage mismatch (Expected: YELLOW, AI: UNCERTAINTY)",
+    "Diagnosis mismatch (Expected 'None', Top 3 AI: ['viral upper respiratory infection', 'influenza (flu)', 'covid-19'])"
+  ]
+}

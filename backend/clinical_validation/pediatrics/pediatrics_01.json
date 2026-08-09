@@ -1,0 +1,74 @@
+{
+  "case_id": "VAL-PED-001",
+  "domain": "pediatrics",
+  "title": "Barking Cough, Inspiratory Stridor, and Low-Grade Fever in 2-Year-Old",
+  "patient_demographics": {
+    "age": 2,
+    "gender": "male",
+    "pregnancy_status": false
+  },
+  "history": {
+    "chief_complaint": "Barking cough like a seal, hoarseness, and noisy breathing during agitation",
+    "onset": "Acute (24 hours), worsening at night",
+    "past_medical_history": ["Born full term", "Immunizations up to date"],
+    "current_medications": [],
+    "allergies": ["None"]
+  },
+  "symptoms": [
+    "Barking cough",
+    "Inspiratory stridor when crying",
+    "Hoarseness",
+    "Low-grade fever (100.4°F)",
+    "Nasal congestion"
+  ],
+  "examination_findings": {
+    "vitals": {
+      "temperature_f": 100.4,
+      "heart_rate_bpm": 115,
+      "blood_pressure": "92/58",
+      "respiratory_rate": 28,
+      "o2_saturation_pct": 97
+    },
+    "physical_exam": "Child alert and responsive. Mild inspiratory stridor audible when agitated, absent at rest. Mild subcostal retractions."
+  },
+  "lab_results": {
+    "soft_tissue_neck_xray": "Steeple sign visible on anteroposterior view (subglottic narrowing)"
+  },
+  "expected_differential_diagnoses": [
+    {
+      "disease_name": "Acute Laryngotracheobronchitis (Croup)",
+      "icd11_code": "CA05.0",
+      "expected_probability_range": [0.70, 0.85],
+      "supporting_features": ["Barking seal-like cough", "Inspiratory stridor", "Hoarseness", "Age 2 years"],
+      "missing_features": ["No severe drooling or toxic appearance"]
+    },
+    {
+      "disease_name": "Acute Epiglottitis",
+      "icd11_code": "CA05.1",
+      "expected_probability_range": [0.05, 0.12],
+      "supporting_features": ["Stridor"],
+      "missing_features": ["No high fever (104°F), drooling, or tripod position"]
+    },
+    {
+      "disease_name": "Pediatric Bronchiolitis",
+      "icd11_code": "CA42.0",
+      "expected_probability_range": [0.08, 0.18],
+      "supporting_features": ["Fever", "Cough"],
+      "missing_features": ["Wheezing and crackles on lung exam"]
+    }
+  ],
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_followup_questions": [
+    "Is the child drooling excessively or struggling to swallow liquid?",
+    "Is the stridor audible when the child is resting quietly, or only when crying?",
+    "Do you notice severe chest wall sucking (retractions) with every breath?"
+  ],
+  "expected_safety_checks": [
+    "Enforce pediatric age contraindication for Aspirin (Reye's syndrome risk)",
+    "Enforce pediatric restriction for Ciprofloxacin and Tetracyclines under 18 years"
+  ],
+  "expected_do_not_recommend": [
+    "Aspirin or Salicylate-containing preparations in pediatric viral syndromes",
+    "Over-the-counter cough and cold combination syrups in children under 6 years"
+  ]
+}

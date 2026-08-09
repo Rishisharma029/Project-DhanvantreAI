@@ -1,0 +1,88 @@
+{
+  "case_id": "PREG_024",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pregnancy",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 20,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with abdominal pain and reduced fetal movements",
+  "presenting_symptoms": [
+    "abdominal pain",
+    "reduced fetal movements",
+    "vaginal bleeding"
+  ],
+  "denied_symptoms": [
+    "fluid leakage",
+    "fever"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.6,
+    "spo2_pct": 96,
+    "heart_rate": 91,
+    "respiratory_rate": 14,
+    "bp_systolic": 171,
+    "bp_diastolic": 86
+  },
+  "final_diagnosis": "Ectopic Pregnancy",
+  "icd11": "XX43",
+  "expected_triage": "BLUE_NON_URGENT",
+  "expected_emergency": false,
+  "expected_top_3_diagnoses": [
+    "Ectopic Pregnancy",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 5,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of abdominal pain supports Ectopic Pregnancy",
+    "Absence of fluid leakage reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "BLUE_NON_URGENT",
+    "top1_match": "Ectopic Pregnancy",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

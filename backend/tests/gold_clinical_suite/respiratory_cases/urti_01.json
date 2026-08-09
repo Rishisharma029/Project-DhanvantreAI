@@ -1,0 +1,25 @@
+{
+  "case_id": "respiratory_urti_01",
+  "category": "respiratory_cases",
+  "title": "Acute Viral Upper Respiratory Presentation in Healthy Adult",
+  "patient": {
+    "age": 29,
+    "gender": "male",
+    "pregnancy_status": false,
+    "allergies": [],
+    "current_medications": []
+  },
+  "input_query": "Age 29, Fever (101°F), Dry cough, Fatigue, Headache, Muscle aches, No chest pain, No breathing difficulty",
+  "expected_triage": "GREEN_STABLE",
+  "expected_confidence_range": [0.30, 0.40],
+  "expected_top_3_differentials": [
+    "Viral Upper Respiratory Infection",
+    "Influenza (Flu)",
+    "COVID-19"
+  ],
+  "forbidden_questions": [
+    "What is your current body temperature reading?",
+    "Does the pain radiate to your arm, neck, or jaw?"
+  ],
+  "expected_first_question": "Have you lost your sense of taste or smell?"
+}

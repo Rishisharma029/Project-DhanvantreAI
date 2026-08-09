@@ -1,0 +1,88 @@
+{
+  "case_id": "GAST_006",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Gastroenterology",
+  "difficulty": "moderate",
+  "patient": {
+    "age": 42,
+    "sex": "Male",
+    "smoking": "never",
+    "occupation": "unemployed"
+  },
+  "chief_complaint": "Patient presents with vomiting and jaundice",
+  "presenting_symptoms": [
+    "vomiting",
+    "jaundice",
+    "abdominal pain"
+  ],
+  "denied_symptoms": [
+    "chest pain",
+    "shortness of breath"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "Sertraline"
+    ],
+    "allergies": [
+      "Penicillin"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 39.1,
+    "spo2_pct": 100,
+    "heart_rate": 63,
+    "respiratory_rate": 13,
+    "bp_systolic": 135,
+    "bp_diastolic": 77
+  },
+  "final_diagnosis": "Crohn's Disease",
+  "icd11": "XX91",
+  "expected_triage": "ORANGE_EMERGENT",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Crohn's Disease",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of vomiting supports Crohn's Disease",
+    "Absence of chest pain reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "ORANGE_EMERGENT",
+    "top1_match": "Crohn's Disease",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

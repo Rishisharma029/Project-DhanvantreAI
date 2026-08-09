@@ -1,0 +1,29 @@
+{
+  "case_id": "ACC_RARE_001",
+  "source": "Archive of Clinical Cases",
+  "license": "CC BY-NC 4.0",
+  "patient": {
+    "age": 36,
+    "sex": "Female"
+  },
+  "chief_complaint": "Recurrent episodic facial swelling and abdominal pain without hives",
+  "symptoms": [
+    "Facial swelling",
+    "Abdominal pain",
+    "Laryngeal edema risk"
+  ],
+  "history": [
+    "Family history of recurrent swelling",
+    "No response to antihistamines"
+  ],
+  "labs": [],
+  "imaging": [],
+  "final_diagnosis": "Hereditary Angioedema",
+  "expected_triage": "YELLOW",
+  "expected_emergency": false,
+  "expected_followup": [
+    "Airway difficulty?",
+    "Family history of swelling?"
+  ],
+  "expected_safety": "SAFE"
+}

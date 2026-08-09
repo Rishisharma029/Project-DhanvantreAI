@@ -1,0 +1,51 @@
+{
+  "case_id": "ACC_RARE_DER21_001",
+  "source": "Archive of Clinical Cases 2026;13(2):74-81",
+  "doi": "10.22551/2026.51.1302.10344",
+  "license": "CC BY-NC 4.0",
+  "title": "A rare de novo prenatal case of Down syndrome due to der(21;21)(q10;q10)",
+  "patient": {
+    "age": 32,
+    "sex": "Female",
+    "pregnancy_status": true,
+    "gestational_age_weeks": 13
+  },
+  "chief_complaint": "13-week gestational prenatal screening with elevated Down syndrome risk (1 in 40) and multiple fetal sonographic malformations",
+  "symptoms": [
+    "Increased nuchal translucency (2.79mm)",
+    "Hypoplastic nasal bone",
+    "Bilateral jugular lymphatic sacs",
+    "Marked tricuspid regurgitation",
+    "Single umbilical artery"
+  ],
+  "history": [
+    "32-year-old G2P1 pregnant woman at 13 weeks gestation",
+    "One healthy 5-year-old daughter",
+    "Non-consanguineous parents",
+    "No family history of chromosomal abnormalities"
+  ],
+  "labs": [
+    "QF-PCR Devyser Compact v3: False negative normal Chromosome 21 locus profile (21H, 21C peak ratio 1:1)",
+    "Parental High-Resolution Peripheral Blood Karyotyping: 46,XX and 46,XY (Both parents normal in 30 metaphases)"
+  ],
+  "imaging": [
+    "Fetal Ultrasound (13 weeks): Increased NT (2.79mm), bilateral jugular lymphatic sacs, marked tricuspid regurgitation, single umbilical artery"
+  ],
+  "cytogenetics": [
+    "G-banded Karyotype from CVS culture: 46,XX,der(21;21)(q10;q10),+21",
+    "Prenatal FISH Probe: ish (D21S270/D21S1440/D21S341)x3 (Three chromosome 21 signals with 2 red signals on derivative chromosome)"
+  ],
+  "final_diagnosis": "Down Syndrome (Trisomy 21) secondary to de novo Homologous Robertsonian Translocation der(21;21)(q10;q10)",
+  "expected_triage": "YELLOW",
+  "expected_emergency": false,
+  "expected_followup": [
+    "Parental karyotyping to differentiate de novo (1-10% recurrence risk) vs balanced parental carrier (100% recurrence risk)?",
+    "Karyotype and FISH confirmation following rapid QF-PCR false negative?"
+  ],
+  "expected_safety": "SAFE",
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\rare_disease\\acc_der21_prenatal_01.json",
+  "failure_analysis": [
+    "Triage mismatch (Expected: YELLOW, AI: UNCERTAINTY)",
+    "Diagnosis mismatch (Expected 'Down Syndrome (Trisomy 21) secondary to de novo Homologous Robertsonian Translocation der(21;21)(q10;q10)', Top 3 AI: ['viral upper respiratory infection', 'influenza'])"
+  ]
+}

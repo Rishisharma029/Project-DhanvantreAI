@@ -1,0 +1,97 @@
+{
+  "case_id": "VAL-DERM-001",
+  "domain": "dermatology",
+  "title": "Pruritic Erythematous Papules and Vesicles on Antecubital Fossa",
+  "patient_demographics": {
+    "age": 22,
+    "gender": "female",
+    "pregnancy_status": false
+  },
+  "history": {
+    "chief_complaint": "Intensely itchy red rash on inner elbows and behind knees for 5 days",
+    "onset": "Recurrent episodic flare-ups since childhood",
+    "past_medical_history": [
+      "Asthma",
+      "Allergic Rhinitis (Atopic Triad)"
+    ],
+    "current_medications": [
+      "Fluticasone Nasal Spray",
+      "Albuterol Inhaler PRN"
+    ],
+    "allergies": [
+      "Nickel"
+    ]
+  },
+  "symptoms": [
+    "Intense pruritus (itching)",
+    "Erythematous papules",
+    "Lichenification (thickened skin)",
+    "Xerosis (dry skin)"
+  ],
+  "examination_findings": {
+    "vitals": {
+      "temperature_f": 98.2,
+      "heart_rate_bpm": 70,
+      "blood_pressure": "116/74",
+      "respiratory_rate": 14,
+      "o2_saturation_pct": 99
+    },
+    "physical_exam": "Erythematous, ill-defined flexural papules and excoriations bilaterally on antecubital and popliteal fossae. Generalized dry skin."
+  },
+  "lab_results": {
+    "total_serum_ige": "Elevated (420 IU/mL)"
+  },
+  "expected_differential_diagnoses": [
+    {
+      "disease_name": "Atopic Dermatitis (Eczema)",
+      "icd11_code": "EA80.0",
+      "expected_probability_range": [
+        0.7,
+        0.85
+      ],
+      "supporting_features": [
+        "Flexural distribution",
+        "Intense pruritus",
+        "Atopic history (Asthma/Rhinitis)",
+        "Lichenification"
+      ],
+      "missing_features": [
+        "No honey-colored crusting (Impetiginization)"
+      ]
+    },
+    {
+      "disease_name": "Allergic Contact Dermatitis",
+      "icd11_code": "EK00.0",
+      "expected_probability_range": [
+        0.15,
+        0.25
+      ],
+      "supporting_features": [
+        "Pruritic rash",
+        "Nickel allergy"
+      ],
+      "missing_features": [
+        "Sharply demarcated geometric shape corresponding to contact item"
+      ]
+    }
+  ],
+  "expected_triage": "GREEN_STABLE",
+  "expected_followup_questions": [
+    "Have you started using any new soaps, lotions, detergents, or cosmetics recently?",
+    "Do you notice any pus, pain, or yellow honey-colored crusting on the rash?",
+    "Is the itching severe enough to disrupt your sleep at night?"
+  ],
+  "expected_safety_checks": [
+    "Emphasize short-course topical corticosteroid safety rules (avoid high-potency on face/intertriginous areas)",
+    "Recommend emollients and barrier repair cream"
+  ],
+  "expected_do_not_recommend": [
+    "Long-term uninterrupted continuous application of potent topical steroids",
+    "Oral systemic corticosteroids for mild localized flexural eczema flares"
+  ],
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\dermatology\\dermatology_01.json",
+  "failure_analysis": [
+    "Triage mismatch (Expected: GREEN, AI: UNCERTAINTY)",
+    "Diagnosis mismatch (Expected 'None', Top 3 AI: ['fungal infection', 'drug reaction', 'chronic cholestasis'])"
+  ]
+}

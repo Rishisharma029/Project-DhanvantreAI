@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" class="font-scale-md">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Accessibility Settings - WCAG 2.1 AA compliance tools including keyboard navigation, WAI-ARIA screen reader support, high contrast mode, and adjustable text scaling.">
+    <title>Accessibility Portal | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .access-container {
+            max-width: 960px;
+            margin: 110px auto 60px;
+            padding: 0 24px;
+        }
+
+        .access-hero-card {
+            padding: 36px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .access-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        @media (max-width: 900px) {
+            .access-grid { grid-template-columns: 1fr; }
+        }
+
+        .access-card {
+            padding: 32px;
+        }
+
+        .access-card-head {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .shortcut-key-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .font-scale-btn-group {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .font-scale-btn {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: all var(--transition-fast);
+        }
+
+        .font-scale-btn:hover, .font-scale-btn.active {
+            border-color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--accent-cyan);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Skip to Content Link -->
+    <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-header scrolled" role="navigation" aria-label="Main Navigation">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo" aria-label="AuraMed AI Home">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="access-container" id="mainContent" role="main" aria-label="Accessibility Portal Main Content">
+        <!-- Hero Card -->
+        <div class="glass-card access-hero-card">
+            <div class="badge"><i class="fa-solid fa-universal-access"></i> WCAG 2.1 AA Compliant</div>
+            <h1 class="section-title">Accessibility <span class="gradient-text">Portal</span></h1>
+            <p class="section-subtitle">
+                Customize keyboard shortcuts, screen reader live regions, high contrast modes, and text font scaling.
+            </p>
+        </div>
+
+        <!-- 4 Grid Cards -->
+        <div class="access-grid">
+
+            <!-- CARD 1: KEYBOARD NAVIGATION -->
+            <div class="glass-card access-card" role="region" aria-label="Keyboard Navigation Shortcuts">
+                <div class="access-card-head" style="color: var(--accent-cyan);">
+                    <i class="fa-solid fa-keyboard"></i> 1. Keyboard Navigation & Shortcuts
+                </div>
+                <p class="text-sm text-muted" style="margin-bottom: 16px;">
+                    Use standard <kbd>Tab</kbd> to navigate interactive elements or use hotkeys:
+                </p>
+
+                <div class="shortcut-key-item">
+                    <span>Focus Search Input</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-cyan);">Alt + S</span>
+                </div>
+
+                <div class="shortcut-key-item">
+                    <span>Activate Emergency Mode</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-rose);">Alt + E</span>
+                </div>
+
+                <div class="shortcut-key-item">
+                    <span>Toggle High Contrast</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-amber);">Alt + H</span>
+                </div>
+            </div>
+
+            <!-- CARD 2: SCREEN READER SUPPORT (WAI-ARIA) -->
+            <div class="glass-card access-card" role="region" aria-label="Screen Reader WAI-ARIA Support">
+                <div class="access-card-head" style="color: var(--accent-purple);">
+                    <i class="fa-solid fa-ear-listen"></i> 2. Screen Reader (WAI-ARIA)
+                </div>
+                <p class="text-sm text-muted" style="margin-bottom: 16px;">
+                    Screen reader live dynamic announcements for non-visual feedback.
+                </p>
+
+                <button class="btn btn-secondary btn-sm" id="testSrAnnounceBtn" style="margin-bottom: 14px;">
+                    <i class="fa-solid fa-bullhorn"></i> Test Live Announcement
+                </button>
+
+                <!-- ARIA Live Region -->
+                <div id="srLiveAnnouncer" aria-live="polite" style="background: rgba(0,0,0,0.3); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color); font-size: 0.85rem; color: var(--accent-emerald);">
+                    Screen reader live region ready.
+                </div>
+            </div>
+
+            <!-- CARD 3: HIGH CONTRAST MODE -->
+            <div class="glass-card access-card" role="region" aria-label="High Contrast Theme Settings">
+                <div class="access-card-head" style="color: var(--accent-amber);">
+                    <i class="fa-solid fa-circle-half-stroke"></i> 3. High Contrast Mode
+                </div>
+                <p class="text-sm text-muted" style="margin-bottom: 16px;">
+                    Meets WCAG 2.1 AA 7:1 contrast ratio for enhanced visual legibility.
+                </p>
+
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span style="font-weight: 700; font-size: 0.95rem;">High Contrast Theme:</span>
+                    <button class="btn btn-primary btn-sm" id="toggleHighContrastBtn">
+                        <i class="fa-solid fa-adjust"></i> Toggle High Contrast
+                    </button>
+                </div>
+            </div>
+
+            <!-- CARD 4: ADJUSTABLE TEXT SIZE -->
+            <div class="glass-card access-card" role="region" aria-label="Adjustable Text Size Scaler">
+                <div class="access-card-head" style="color: var(--accent-teal);">
+                    <i class="fa-solid fa-text-height"></i> 4. Adjustable Text Size
+                </div>
+                <p class="text-sm text-muted">
+                    Scale font size across all platform pages:
+                </p>
+
+                <div class="font-scale-btn-group">
+                    <button class="font-scale-btn" data-scale="sm">Small (14px)</button>
+                    <button class="font-scale-btn active" data-scale="md">Normal (16px)</button>
+                    <button class="font-scale-btn" data-scale="lg">Large (18px)</button>
+                    <button class="font-scale-btn" data-scale="xl">XL (20px)</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script -->
+    <script src="accessibility.js"></script>
+</body>
+</html>

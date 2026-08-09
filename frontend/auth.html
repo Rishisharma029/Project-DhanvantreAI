@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Authentication Portal - Secure login, registration, password recovery, and clinical role verification.">
+    <title>Authentication Portal | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .auth-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .auth-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 24px 60px;
+        }
+
+        .auth-box {
+            width: 100%;
+            max-width: 480px;
+            padding: 40px;
+            position: relative;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .auth-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Role Selector Segmented Switch */
+        .role-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 6px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .role-option {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--transition-fast);
+        }
+
+        .role-option:hover {
+            color: var(--text-main);
+        }
+
+        .role-option.active {
+            background: var(--accent-cyan);
+            color: #000;
+        }
+
+        /* Password Input Group with Toggle Eye */
+        .password-group {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .password-toggle:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Password Strength Meter */
+        .strength-meter {
+            margin-top: 8px;
+        }
+
+        .strength-bar-bg {
+            height: 4px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+
+        .strength-bar-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .strength-text {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Social OAuth Dividers */
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .auth-divider::before, .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .social-btn {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all var(--transition-fast);
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-cyan);
+        }
+
+        .auth-footer-link {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .auth-footer-link a {
+            color: var(--accent-cyan);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .auth-footer-link a:hover {
+            text-decoration: underline;
+        }
+
+        .form-feedback {
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .feedback-error {
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: var(--accent-rose);
+        }
+
+        .feedback-success {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: var(--accent-emerald);
+        }
+
+        .token-display-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px dashed var(--accent-cyan);
+            padding: 14px;
+            border-radius: var(--radius-md);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            word-break: break-all;
+            margin: 14px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <div class="auth-wrapper">
+        <!-- Header -->
+        <header class="navbar-header scrolled">
+            <div class="container nav-container">
+                <a href="index.html" class="brand-logo">
+                    <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+                </a>
+                <div class="nav-actions">
+                    <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to Website</a>
+                    <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                        <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Auth Content Container -->
+        <main class="auth-main">
+            <div class="glass-card auth-box">
+
+                <!-- Dynamic Form Feedback Alert -->
+                <div class="form-feedback feedback-error hidden" id="authErrorAlert">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span id="authErrorMsg">An error occurred</span>
+                </div>
+                <div class="form-feedback feedback-success hidden" id="authSuccessAlert">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span id="authSuccessMsg">Action completed successfully</span>
+                </div>
+
+                <!-- 1. LOGIN CARD -->
+                <div class="auth-view" id="loginView">
+                    <div class="auth-header">
+                        <h1 class="auth-title">Welcome Back</h1>
+                        <p class="auth-subtitle">Sign in to access your clinical dashboard & diagnostic tools</p>
+                    </div>
+
+                    <form id="loginForm" class="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address <span class="required">*</span></label>
+                            <input type="email" id="loginEmail" placeholder="doctor@hospital.org" required>
+                        </div>
+
+                        <div class="form-group">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <label for="loginPassword">Password <span class="required">*</span></label>
+                                <a href="#forgot" class="auth-link-sm" style="font-size: 0.8rem; color: var(--accent-cyan); text-decoration: none;">Forgot password?</a>
+                            </div>
+                            <div class="password-group">
+                                <input type="password" id="loginPassword" placeholder="••••••••••••" required>
+                                <button type="button" class="password-toggle" data-target="loginPassword">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="flex-direction: row; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="rememberMe" style="width: auto;">
+                            <label for="rememberMe" style="font-size: 0.85rem; color: var(--text-muted); cursor: pointer;">Remember this device for 30 days</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" id="loginSubmitBtn">
+                            <span>Sign In</span>
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                        </button>
+                    </form>
+
+                    <div style="margin: 16px 0 10px; text-align: center;">
+                        <button type="button" class="btn btn-secondary btn-block" id="quickDemoBtn" style="background: rgba(6, 182, 212, 0.15); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); font-weight: 700;">
+                            <i class="fa-solid fa-bolt" style="color: #f59e0b;"></i> 1-Click Quick Guest Access (No Auth Required)
+                        </button>
+                    </div>
+
+                    <div class="auth-divider">Or continue with</div>
+
+                    <button class="social-btn" id="googleOAuthBtn">
+                        <i class="fa-brands fa-google" style="color: #ea4335;"></i>
+                        <span>Sign in with Google</span>
+                    </button>
+
+                    <div style="margin-top: 18px; padding: 12px; background: rgba(0,0,0,0.25); border-radius: var(--radius-md); border: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-muted); text-align: center;">
+                        <div style="font-weight: 700; color: var(--text-main); margin-bottom: 4px;"><i class="fa-solid fa-key" style="color: var(--accent-purple);"></i> Temporary Entry Credentials</div>
+                        <div>Email: <strong style="color: var(--accent-cyan);">demo@auramed.ai</strong></div>
+                        <div>Password: <strong style="color: var(--accent-cyan);">Password123!</strong></div>
+                    </div>
+
+                    <div class="auth-footer-link" style="margin-top: 14px;">
+                        Don't have an account? <a href="#register">Register here</a>
+                    </div>
+                </div>
+
+                <!-- 2. REGISTER CARD -->
+                <div class="auth-view hidden" id="registerView">
+                    <div class="auth-header">
+                        <h1 class="auth-title">Create Account</h1>
+                        <p class="auth-subtitle">Join AuraMed AI for enhanced clinical decision support</p>
+                    </div>
+
+                    <form id="registerForm" class="contact-form" novalidate>
+                        <!-- Role Selector -->
+                        <div class="role-selector">
+                            <button type="button" class="role-option active" data-role="user">
+                                <i class="fa-solid fa-user"></i> Patient
+                            </button>
+                            <button type="button" class="role-option" data-role="doctor">
+                                <i class="fa-solid fa-user-doctor"></i> Clinician
+                            </button>
+                            <button type="button" class="role-option" data-role="admin">
+                                <i class="fa-solid fa-shield-halved"></i> Admin
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regFullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="regFullName" placeholder="Dr. Alexander Vance" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regEmail">Work Email Address <span class="required">*</span></label>
+                            <input type="email" id="regEmail" placeholder="a.vance@medical.org" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regPassword">Password <span class="required">*</span></label>
+                            <div class="password-group">
+                                <input type="password" id="regPassword" placeholder="Minimum 8 characters" required>
+                                <button type="button" class="password-toggle" data-target="regPassword">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                            <!-- Strength meter -->
+                            <div class="strength-meter">
+                                <div class="strength-bar-bg">
+                                    <div class="strength-bar-fill" id="strengthBar"></div>
+                                </div>
+                                <div class="strength-text">
+                                    <span>Password Security:</span>
+                                    <span id="strengthLabel" style="font-weight: 600;">None</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="flex-direction: row; align-items: flex-start; gap: 10px;">
+                            <input type="checkbox" id="agreeTerms" required style="width: auto; margin-top: 4px;">
+                            <label for="agreeTerms" style="font-size: 0.8rem; color: var(--text-muted);">
+                                I agree to the <a href="#" style="color: var(--accent-cyan);">Terms of Service</a> and <a href="#" style="color: var(--accent-cyan);">HIPAA Data Privacy Agreement</a>.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" id="registerSubmitBtn">
+                            <span>Create Account</span>
+                            <i class="fa-solid fa-user-plus"></i>
+                        </button>
+                    </form>
+
+                    <div class="auth-footer-link">
+                        Already registered? <a href="#login">Sign in</a>
+                    </div>
+                </div>
+
+                <!-- 3. FORGOT PASSWORD CARD -->
+                <div class="auth-view hidden" id="forgotView">
+                    <div class="auth-header">
+                        <h1 class="auth-title">Reset Password</h1>
+                        <p class="auth-subtitle">Enter your account email to receive a password reset token</p>
+                    </div>
+
+                    <!-- Step 1: Request Email -->
+                    <form id="forgotForm" class="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="forgotEmail">Email Address <span class="required">*</span></label>
+                            <input type="email" id="forgotEmail" placeholder="your.name@hospital.org" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" id="forgotSubmitBtn">
+                            <span>Send Reset Request</span>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+
+                    <!-- Step 2: Reset Form (Hidden until token generated or provided) -->
+                    <form id="resetForm" class="contact-form hidden" style="margin-top: 20px;" novalidate>
+                        <div class="token-display-box" id="resetTokenBox">
+                            Token: <span id="generatedResetToken">--</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="resetTokenInput">Reset Token <span class="required">*</span></label>
+                            <input type="text" id="resetTokenInput" placeholder="Paste reset token here" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="newPasswordInput">New Password <span class="required">*</span></label>
+                            <div class="password-group">
+                                <input type="password" id="newPasswordInput" placeholder="Enter new password" required>
+                                <button type="button" class="password-toggle" data-target="newPasswordInput">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-accent btn-block btn-lg" id="resetSubmitBtn">
+                            <span>Update Password</span>
+                            <i class="fa-solid fa-key"></i>
+                        </button>
+                    </form>
+
+                    <div class="auth-footer-link">
+                        Remembered your password? <a href="#login">Return to login</a>
+                    </div>
+                </div>
+
+                <!-- 4. EMAIL VERIFICATION CARD -->
+                <div class="auth-view hidden" id="verifyView">
+                    <div class="auth-header">
+                        <div style="font-size: 2.8rem; color: var(--accent-cyan); margin-bottom: 12px;">
+                            <i class="fa-solid fa-envelope-circle-check"></i>
+                        </div>
+                        <h1 class="auth-title">Verify Email</h1>
+                        <p class="auth-subtitle">Verify your email address to unlock full clinical platform features</p>
+                    </div>
+
+                    <form id="verifyForm" class="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="verifyTokenInput">Verification Token <span class="required">*</span></label>
+                            <input type="text" id="verifyTokenInput" placeholder="Paste email verification token" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" id="verifySubmitBtn">
+                            <span>Verify Email</span>
+                            <i class="fa-solid fa-check-double"></i>
+                        </button>
+                    </form>
+
+                    <div class="auth-footer-link">
+                        Need to sign in? <a href="#login">Go to Login</a>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Security Footer -->
+        <footer style="padding: 20px 0; text-align: center; font-size: 0.8rem; color: var(--text-dim); border-top: 1px solid var(--border-color);">
+            <div class="container">
+                <p><i class="fa-solid fa-shield-halved" style="color: var(--accent-emerald);"></i> 256-Bit SSL Encrypted • HIPAA & GDPR Compliant Security</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script -->
+    <script src="auth.js"></script>
+</body>
+</html>

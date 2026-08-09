@@ -1,0 +1,32 @@
+{
+  "case_id": "ACC_PED_001",
+  "source": "Archive of Clinical Cases",
+  "license": "CC BY-NC 4.0",
+  "patient": {
+    "age": 2,
+    "sex": "Male"
+  },
+  "chief_complaint": "Barking cough and noisy breathing",
+  "symptoms": [
+    "Barking cough",
+    "Stridor",
+    "Fever"
+  ],
+  "history": [
+    "Immunizations up to date"
+  ],
+  "labs": [],
+  "imaging": [],
+  "final_diagnosis": "Croup",
+  "expected_triage": "YELLOW",
+  "expected_emergency": false,
+  "expected_followup": [
+    "Drooling or swallowing difficulty?",
+    "Stridor at rest?"
+  ],
+  "expected_safety": "SAFE",
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pediatrics\\acc_ped_001.json",
+  "failure_analysis": [
+    "Diagnosis mismatch (Expected 'Croup', Top 3 AI: ['viral upper respiratory infection', 'influenza (flu)', 'covid-19'])"
+  ]
+}

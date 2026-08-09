@@ -1,0 +1,15 @@
+{
+  "case_id": "pregnancy_uti_01",
+  "category": "pregnancy",
+  "title": "UTI Presentation in Pregnant Patient with Penicillin Allergy",
+  "patient": {
+    "age": 28,
+    "gender": "female",
+    "pregnancy_status": true,
+    "allergies": ["Penicillin"],
+    "current_medications": ["Prenatal Vitamins"]
+  },
+  "medicine_query": "Amoxicillin",
+  "expected_safety_grade": "DANGEROUS",
+  "expected_warnings_contain": "Penicillin"
+}

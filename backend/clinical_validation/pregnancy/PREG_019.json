@@ -1,0 +1,88 @@
+{
+  "case_id": "PREG_019",
+  "source": "AuraMed Synthetic Clinical Case",
+  "specialty": "Pregnancy",
+  "difficulty": "hard",
+  "patient": {
+    "age": 29,
+    "sex": "Female",
+    "smoking": "current",
+    "occupation": "teacher"
+  },
+  "chief_complaint": "Patient presents with visual changes and vaginal bleeding",
+  "presenting_symptoms": [
+    "visual changes",
+    "vaginal bleeding",
+    "contractions"
+  ],
+  "denied_symptoms": [
+    "trauma",
+    "fluid leakage"
+  ],
+  "history": {
+    "past_medical": [
+      "None"
+    ],
+    "medications": [
+      "None"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "family_history": [
+      "Non-contributory"
+    ]
+  },
+  "vitals": {
+    "temperature_c": 38.8,
+    "spo2_pct": 98,
+    "heart_rate": 124,
+    "respiratory_rate": 28,
+    "bp_systolic": 173,
+    "bp_diastolic": 73
+  },
+  "final_diagnosis": "Hyperemesis Gravidarum",
+  "icd11": "XX89",
+  "expected_triage": "RED_RESUSCITATION",
+  "expected_emergency": true,
+  "expected_top_3_diagnoses": [
+    "Hyperemesis Gravidarum",
+    "Alternative 1",
+    "Alternative 2"
+  ],
+  "expected_investigations": [
+    "CBC",
+    "CMP",
+    "Imaging"
+  ],
+  "expected_clinical_score": "Standard clinical score",
+  "expected_score_result": {
+    "score": 4,
+    "risk": "Moderate"
+  },
+  "expected_treatment": [
+    "Standard protocol",
+    "Supportive care"
+  ],
+  "must_not_diagnose": [
+    "Unlikely diagnosis"
+  ],
+  "hallucination_check": {
+    "should_not_recommend": [
+      "Contraindicated med"
+    ],
+    "explanation": "Inappropriate for this condition."
+  },
+  "key_discriminating_factors": [
+    "Presence of visual changes supports Hyperemesis Gravidarum",
+    "Absence of trauma reduces likelihood of alternative"
+  ],
+  "evaluation_criteria": {
+    "triage_correct": "RED_RESUSCITATION",
+    "top1_match": "Hyperemesis Gravidarum",
+    "investigation_present": [
+      "CBC"
+    ],
+    "no_hallucination": true
+  }
+}

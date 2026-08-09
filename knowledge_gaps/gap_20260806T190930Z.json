@@ -1,0 +1,25 @@
+{
+  "gap_id": "GAP_20260806T190930Z",
+  "session_uuid": "unknown",
+  "timestamp": "20260806T190930Z",
+  "status": "PENDING_REVIEW",
+  "query": "Patient presents with falls and memory loss. Symptoms: falls; memory loss; urinary incontinence",
+  "extracted_symptoms": [],
+  "extracted_entities": {
+    "age": 78,
+    "gender": "female"
+  },
+  "reasoning_steps": [
+    "Extracted 0 clinical symptoms: none",
+    "No high-risk syndrome pattern detected — proceeding to disease matching.",
+    "Generated 0 differential diagnoses led by 'Unspecified Condition'",
+    "Confidence calibrated: 20% | Stage: Adaptive Questioning (Turn 1) | Triage: YELLOW_MODERATE",
+    "Selected 4 high info-gain follow-up questions.",
+    "Medicine suppressed: No evidence-based medicine recommendation available at current confidence level (20%). Further history and investigation required."
+  ],
+  "top_candidate_diseases": [],
+  "final_confidence": 0.2,
+  "resolution": null,
+  "reviewed_by": null,
+  "note": "This case could not be matched to an evidence-supported diagnosis. Human expert review is required before any learning update."
+}

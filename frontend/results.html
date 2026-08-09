@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Clinical Recommendation Results - Beautiful diagnostic cards displaying Possible Conditions, Confidence, Medicines Reviewed, Safety Score, Precautions, and Doctor Recommendation.">
+    <title>Recommendation Results | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .results-container {
+            max-width: 1200px;
+            margin: 120px auto 60px;
+            padding: 0 24px;
+        }
+
+        .results-header-hero {
+            padding: 36px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+
+        .result-card {
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-head h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Conditions Progress Bars */
+        .cond-bar-row {
+            margin-bottom: 16px;
+        }
+
+        .cond-bar-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        /* Confidence & Safety Radial Metrics */
+        .metric-big-val {
+            font-size: 3.2rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1;
+            margin: 12px 0;
+        }
+
+        .med-item-row {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-header scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="results-container">
+        <!-- Hero Header Card -->
+        <div class="glass-card results-header-hero">
+            <div class="badge"><i class="fa-solid fa-square-poll-vertical"></i> Clinical Decision Analysis</div>
+            <h1 class="section-title">Recommendation <span class="gradient-text">Results Report</span></h1>
+            <p class="section-subtitle" style="margin-bottom: 20px;">
+                Synthesized from patient symptoms, active prescriptions, and biomedical knowledge graph constraints.
+            </p>
+
+            <!-- Quick Scenario Switcher -->
+            <div class="quick-cat-row">
+                <span style="font-size: 0.75rem; color: var(--text-dim);">Load Case Scenario:</span>
+                <button class="quick-cat-btn scenario-btn active" data-scen="acs">Acute Coronary Syndrome</button>
+                <button class="quick-cat-btn scenario-btn" data-scen="fungal">Fungal Infection</button>
+                <button class="quick-cat-btn scenario-btn" data-scen="pneumonia">Pneumonia</button>
+                <button class="quick-cat-btn scenario-btn" data-scen="diabetes">Type 2 Diabetes</button>
+            </div>
+        </div>
+
+        <!-- 6 Beautiful Clinical Cards Grid -->
+        <div class="cards-grid">
+
+            <!-- CARD 1: POSSIBLE CONDITIONS -->
+            <div class="glass-card result-card">
+                <div>
+                    <div class="card-head">
+                        <h3><i class="fa-solid fa-brain" style="color: var(--accent-cyan);"></i> 1. Possible Conditions</h3>
+                        <span class="badge" style="margin: 0; padding: 3px 10px; font-size: 0.75rem;">Differential Ranking</span>
+                    </div>
+
+                    <div id="condsList">
+                        <div class="cond-bar-row">
+                            <div class="cond-bar-meta">
+                                <span>Acute Coronary Syndrome (ACS)</span>
+                                <span style="color: var(--accent-rose);">86.4% Match</span>
+                            </div>
+                            <div class="strength-bar-bg">
+                                <div class="strength-bar-fill" style="width: 86.4%; background: var(--accent-rose);"></div>
+                            </div>
+                        </div>
+
+                        <div class="cond-bar-row">
+                            <div class="cond-bar-meta">
+                                <span>Pleurisy / Pericarditis</span>
+                                <span style="color: var(--accent-amber);">11.2% Match</span>
+                            </div>
+                            <div class="strength-bar-bg">
+                                <div class="strength-bar-fill" style="width: 11.2%; background: var(--accent-amber);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 2: CONFIDENCE -->
+            <div class="glass-card result-card">
+                <div>
+                    <div class="card-head">
+                        <h3><i class="fa-solid fa-chart-line" style="color: var(--accent-purple);"></i> 2. Diagnostic Confidence</h3>
+                        <span class="confidence-badge">Entropy Reduced</span>
+                    </div>
+
+                    <div style="text-align: center; padding: 10px 0;">
+                        <div class="metric-big-val" id="confValText" style="color: var(--accent-cyan);">96.4%</div>
+                        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main);">High Clinical Certainty</div>
+                        <p class="text-sm text-muted" style="margin-top: 8px;" id="confDescText">
+                            Evaluated against 250,000 biomedical graph nodes. Sensitivity score 0.94, diagnostic precision 0.96.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 3: MEDICINES REVIEWED -->
+            <div class="glass-card result-card" style="grid-column: 1 / -1;">
+                <div>
+                    <div class="card-head">
+                        <h3><i class="fa-solid fa-prescription-bottle-medical" style="color: var(--accent-teal);"></i> 3. Medicines Reviewed & Recommended</h3>
+                        <span class="badge" style="margin: 0; padding: 3px 10px; font-size: 0.75rem;">Ranked Therapeutics</span>
+                    </div>
+
+                    <div id="medsList">
+                        <div class="med-item-row">
+                            <div>
+                                <strong>Aspirin 325 mg (Chewable)</strong>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">First-Line Antiplatelet Therapy • STAT Administration</div>
+                            </div>
+                            <div style="font-weight: 800; color: var(--accent-emerald); font-family: 'JetBrains Mono', monospace;">₹18.50</div>
+                        </div>
+
+                        <div class="med-item-row">
+                            <div>
+                                <strong>Clopidogrel 75 mg</strong>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Dual Antiplatelet Adjunct • Oral Tablet</div>
+                            </div>
+                            <div style="font-weight: 800; color: var(--accent-emerald); font-family: 'JetBrains Mono', monospace;">₹64.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 4: SAFETY SCORE -->
+            <div class="glass-card result-card">
+                <div>
+                    <div class="card-head">
+                        <h3><i class="fa-solid fa-shield-halved" style="color: var(--accent-emerald);"></i> 4. Patient Safety Score</h3>
+                        <span class="status-pill status-ready"><i class="fa-solid fa-check"></i> Passed</span>
+                    </div>
+
+                    <div style="text-align: center; padding: 10px 0;">
+                        <div class="metric-big-val" id="safetyScoreVal" style="color: var(--accent-emerald);">98 / 100</div>
+                        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main);">Zero Contraindication Hazard</div>
+                        <p class="text-sm text-muted" style="margin-top: 8px;" id="safetyDescText">
+                            Renal & hepatic clearance parameters normal. Allergy clearance verified against patient profile.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 5: PRECAUTIONS -->
+            <div class="glass-card result-card">
+                <div>
+                    <div class="card-head">
+                        <h3><i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-amber);"></i> 5. Clinical Precautions</h3>
+                        <span class="badge" style="margin: 0; padding: 3px 10px; font-size: 0.75rem;">Risk Warnings</span>
+                    </div>
+
+                    <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.9rem;" id="precautionsList">
+                        <li>Do not delay emergency transport if chest discomfort persists</li>
+                        <li>Avoid physical exertion or strenuous exercise</li>
+                        <li>Monitor oxygen saturation (keep SpO2 &gt; 94%)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CARD 6: DOCTOR RECOMMENDATION -->
+            <div class="glass-card result-card" style="grid-column: 1 / -1;">
+                <div>
+                    <div class="card-head">
+                        <h3><i class="fa-solid fa-user-doctor" style="color: var(--accent-cyan);"></i> 6. Actionable Doctor Recommendation</h3>
+                        <button class="btn btn-outline btn-sm" onclick="window.print()"><i class="fa-solid fa-print"></i> Export Summary PDF</button>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color);" id="docRecText">
+                        <strong style="color: var(--accent-cyan); font-size: 0.95rem; display: block; margin-bottom: 6px;">STAT Clinical Workup:</strong>
+                        Immediate 12-lead ECG, STAT Cardiac Troponin I assays, supplemental oxygen if SpO2 &lt; 94%, and transfer to Cardiac Care Unit (CCU) for non-ST elevation acute coronary syndrome (NSTEMI) protocol.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script -->
+    <script src="results.js"></script>
+</body>
+</html>

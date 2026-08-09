@@ -1,0 +1,33 @@
+{
+  "case_id": "ACC_PREG_001",
+  "source": "Archive of Clinical Cases",
+  "license": "CC BY-NC 4.0",
+  "patient": {
+    "age": 28,
+    "sex": "Female"
+  },
+  "chief_complaint": "Dysuria at 28 weeks pregnant",
+  "symptoms": [
+    "Dysuria",
+    "Urinary frequency",
+    "Suprapubic discomfort"
+  ],
+  "history": [
+    "28 weeks pregnant",
+    "Penicillin allergy"
+  ],
+  "labs": [],
+  "imaging": [],
+  "final_diagnosis": "Urinary Tract Infection in Pregnancy",
+  "expected_triage": "YELLOW",
+  "expected_emergency": false,
+  "expected_followup": [
+    "Flank pain or high fever?",
+    "Vaginal bleeding?"
+  ],
+  "expected_safety": "SAFE",
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\pregnancy\\acc_preg_001.json",
+  "failure_analysis": [
+    "Triage mismatch (Expected: YELLOW, AI: UNCERTAINTY)"
+  ]
+}

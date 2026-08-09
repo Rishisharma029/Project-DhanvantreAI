@@ -1,0 +1,111 @@
+{
+  "case_id": "VAL-CARD-001",
+  "domain": "cardiology",
+  "title": "Exertional Substernal Pressure in Patient with Cardiovascular Risk Factors",
+  "patient_demographics": {
+    "age": 58,
+    "gender": "male",
+    "pregnancy_status": false
+  },
+  "history": {
+    "chief_complaint": "Substernal chest tightness provoked by walking up stairs, lasting 10 minutes",
+    "onset": "Recurrent episodic over 2 weeks",
+    "past_medical_history": [
+      "Hypertension",
+      "Hyperlipidemia",
+      "Type 2 Diabetes"
+    ],
+    "current_medications": [
+      "Amlodipine 5mg",
+      "Atorvastatin 20mg",
+      "Metformin 1000mg"
+    ],
+    "allergies": [
+      "Latex"
+    ]
+  },
+  "symptoms": [
+    "Chest tightness",
+    "Mild exertional shortness of breath",
+    "Discomfort relieving with rest"
+  ],
+  "examination_findings": {
+    "vitals": {
+      "temperature_f": 98.6,
+      "heart_rate_bpm": 78,
+      "blood_pressure": "138/84",
+      "respiratory_rate": 18,
+      "o2_saturation_pct": 97
+    },
+    "physical_exam": "Regular rate and rhythm, S1/S2 present without murmur or gallop. Chest wall non-tender to palpation."
+  },
+  "lab_results": {
+    "troponin_i": "< 0.01 ng/mL (Normal)",
+    "ecg_12_lead": "Sinus rhythm with mild T-wave flattening in V4-V6"
+  },
+  "expected_differential_diagnoses": [
+    {
+      "disease_name": "Angina Pectoris",
+      "icd11_code": "BA40",
+      "expected_probability_range": [
+        0.45,
+        0.6
+      ],
+      "supporting_features": [
+        "Exertional chest tightness",
+        "Relief with rest",
+        "Hypertension & Diabetes history"
+      ],
+      "missing_features": [
+        "No acute ST-elevation on ECG"
+      ]
+    },
+    {
+      "disease_name": "Musculoskeletal Chest Wall Strain",
+      "icd11_code": "FB52",
+      "expected_probability_range": [
+        0.2,
+        0.32
+      ],
+      "supporting_features": [
+        "Chest pain"
+      ],
+      "missing_features": [
+        "Non-tender to palpation"
+      ]
+    },
+    {
+      "disease_name": "Gastroesophageal Reflux Disease (GERD)",
+      "icd11_code": "DA22",
+      "expected_probability_range": [
+        0.1,
+        0.2
+      ],
+      "supporting_features": [
+        "Substernal discomfort"
+      ],
+      "missing_features": [
+        "No acid regurgitation reported"
+      ]
+    }
+  ],
+  "expected_triage": "YELLOW_MODERATE",
+  "expected_followup_questions": [
+    "Does the chest tightness radiate to your left arm, neck, or jaw?",
+    "Do you experience sweating, nausea, or dizziness during episodes?",
+    "How long does the discomfort take to resolve after you sit down and rest?"
+  ],
+  "expected_safety_checks": [
+    "Evaluate cardiovascular medication interactions with Amlodipine and Atorvastatin",
+    "Monitor renal parameters before recommending contrast-based imaging"
+  ],
+  "expected_do_not_recommend": [
+    "High-dose non-selective NSAIDs (e.g. Ibuprofen, Naproxen) without gastroprotective cover",
+    "Immediate strenuous physical exertion test prior to outpatient cardiology review"
+  ],
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\cardiology\\cardiology_01.json",
+  "failure_analysis": [
+    "Triage mismatch (Expected: YELLOW, AI: UNCERTAINTY)",
+    "Diagnosis mismatch (Expected 'None', Top 3 AI: ['angina pectoris', 'musculoskeletal chest wall strain', 'gastroesophageal reflux disease (gerd)'])"
+  ]
+}

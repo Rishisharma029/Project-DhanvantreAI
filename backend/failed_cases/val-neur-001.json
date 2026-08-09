@@ -1,0 +1,109 @@
+{
+  "case_id": "VAL-NEUR-001",
+  "domain": "neurology",
+  "title": "Unilateral Throbbing Headache with Photophobia and Visual Aura",
+  "patient_demographics": {
+    "age": 34,
+    "gender": "female",
+    "pregnancy_status": false
+  },
+  "history": {
+    "chief_complaint": "Severe pulsating left-sided headache with sensitivity to light and sound",
+    "onset": "Gradual over 3 hours following shimmering visual spots",
+    "past_medical_history": [
+      "Migraine without aura (previous episodes)"
+    ],
+    "current_medications": [
+      "Combined Oral Contraceptive Pill"
+    ],
+    "allergies": [
+      "Sulfa drugs"
+    ]
+  },
+  "symptoms": [
+    "Unilateral headache",
+    "Pulsating pain",
+    "Photophobia",
+    "Phonophobia",
+    "Nausea",
+    "Visual scintillating scotoma"
+  ],
+  "examination_findings": {
+    "vitals": {
+      "temperature_f": 98.4,
+      "heart_rate_bpm": 72,
+      "blood_pressure": "122/78",
+      "respiratory_rate": 14,
+      "o2_saturation_pct": 99
+    },
+    "physical_exam": "Neurological examination entirely intact. Cranial nerves II-XII intact bilaterally. No meningismus or neck stiffness."
+  },
+  "lab_results": {
+    "non_contrast_ct_head": "Not indicated based on normal neurological examination and classic aura pattern"
+  },
+  "expected_differential_diagnoses": [
+    {
+      "disease_name": "Migraine with Aura",
+      "icd11_code": "8A80.0",
+      "expected_probability_range": [
+        0.65,
+        0.8
+      ],
+      "supporting_features": [
+        "Unilateral throbbing pain",
+        "Photophobia & Phonophobia",
+        "Nausea",
+        "Visual aura"
+      ],
+      "missing_features": [
+        "No fever or neck stiffness"
+      ]
+    },
+    {
+      "disease_name": "Tension-Type Headache",
+      "icd11_code": "8A81",
+      "expected_probability_range": [
+        0.12,
+        0.22
+      ],
+      "supporting_features": [
+        "Headache"
+      ],
+      "missing_features": [
+        "No band-like bilateral distribution"
+      ]
+    },
+    {
+      "disease_name": "Cluster Headache",
+      "icd11_code": "8A82.0",
+      "expected_probability_range": [
+        0.05,
+        0.12
+      ],
+      "supporting_features": [
+        "Severe unilateral pain"
+      ],
+      "missing_features": [
+        "No lacrimation or ipsilateral nasal congestion"
+      ]
+    }
+  ],
+  "expected_triage": "GREEN_STABLE",
+  "expected_followup_questions": [
+    "Did the headache start suddenly like a 'thunderclap' reaching peak intensity in seconds?",
+    "Do you have any neck stiffness, high fever, or confusion?",
+    "Have you noticed any weakness or numbness in your arms or legs?"
+  ],
+  "expected_safety_checks": [
+    "Cross-reference triptans contraindication with vascular risk factors",
+    "Check oral contraceptive pill interaction with migraine with aura (stroke risk evaluation)"
+  ],
+  "expected_do_not_recommend": [
+    "Ergotamine derivatives in patients with uncontrolled hypertension or arterial disease",
+    "Opioid analgesics as first-line abortive migraine therapy"
+  ],
+  "_file_path": "C:\\Users\\Rishi Sharma\\OneDrive\\Desktop\\PRODUCTION\\medical idea\\backend\\clinical_validation\\neurology\\neurology_01.json",
+  "failure_analysis": [
+    "Diagnosis mismatch (Expected 'None', Top 3 AI: ['viral upper respiratory infection', 'influenza (flu)', 'covid-19'])"
+  ]
+}
