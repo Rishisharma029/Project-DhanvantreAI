@@ -57,8 +57,8 @@ scratch/
 *.log
 
 # Large database and SQL files
-medical_database.db
 medical_db_dump.sql
 *.db
+!medical_database.db
 *.sql
 *.enc
