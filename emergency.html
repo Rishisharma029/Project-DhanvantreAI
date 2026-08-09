@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Emergency Mode - High-priority clinical response, nearest trauma center locator, ambulance hotline dialer, and primary doctor contact.">
+    <title>Emergency Mode | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .emergency-container {
+            max-width: 1000px;
+            margin: 110px auto 60px;
+            padding: 0 24px;
+        }
+
+        /* Top Red Emergency Banner */
+        .emergency-alert-banner {
+            background: linear-gradient(135deg, rgba(244,63,94,0.9), rgba(225,29,72,0.9));
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: var(--radius-md);
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 700;
+            box-shadow: 0 0 30px rgba(244,63,94,0.4);
+            animation: pulseBanner 2s infinite;
+        }
+
+        @keyframes pulseBanner {
+            0%, 100% { box-shadow: 0 0 20px rgba(244,63,94,0.4); }
+            50% { box-shadow: 0 0 40px rgba(244,63,94,0.8); }
+        }
+
+        /* Large Red SOS Button */
+        .sos-hero-card {
+            padding: 48px 32px;
+            text-align: center;
+            margin-bottom: 36px;
+            background: rgba(244,63,94,0.06);
+            border: 2px solid rgba(244,63,94,0.4);
+        }
+
+        .large-sos-btn {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f43f5e, #be123c);
+            color: #fff;
+            border: 6px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 50px rgba(244, 63, 94, 0.6), inset 0 0 20px rgba(255,255,255,0.3);
+            font-size: 1.5rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 24px auto 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            animation: sosPulse 1.8s infinite;
+        }
+
+        @keyframes sosPulse {
+            0% { transform: scale(1); box-shadow: 0 0 30px rgba(244, 63, 94, 0.6); }
+            50% { transform: scale(1.06); box-shadow: 0 0 70px rgba(244, 63, 94, 0.9); }
+            100% { transform: scale(1); box-shadow: 0 0 30px rgba(244, 63, 94, 0.6); }
+        }
+
+        .large-sos-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Grid Layout */
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        @media (max-width: 900px) {
+            .emergency-grid { grid-template-columns: 1fr; }
+        }
+
+        .em-card {
+            padding: 32px;
+        }
+
+        .em-card-head {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hospital-item-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin-bottom: 14px;
+        }
+
+        .num-btn {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: var(--text-main);
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            margin-bottom: 12px;
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+
+        .num-btn:hover {
+            background: var(--accent-rose);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-header scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="emergency-container">
+        <!-- Top Emergency Alert Banner -->
+        <div class="emergency-alert-banner">
+            <div>
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.3rem; margin-right: 8px;"></i>
+                CRITICAL EMERGENCY RESPONSE MODE ACTIVATED
+            </div>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">GPS TRACKING: ACTIVE</span>
+        </div>
+
+        <!-- Large Red SOS Button Card -->
+        <div class="glass-card sos-hero-card">
+            <h1 style="font-size: 2rem; font-weight: 800; color: var(--accent-rose);">EMERGENCY SOS RESPONSE</h1>
+            <p class="text-sm text-muted" style="margin-bottom: 16px;">
+                Press the SOS button to alert emergency dispatchers, notify primary physician, and transmit GPS location.
+            </p>
+
+            <button class="large-sos-btn" id="sosTriggerBtn">
+                <i class="fa-solid fa-bell" style="font-size: 2.2rem; margin-bottom: 6px;"></i>
+                <span>PRESS SOS</span>
+            </button>
+
+            <div id="sosStatusText" style="font-size: 0.9rem; color: var(--text-dim); margin-top: 10px;">
+                Status: Ready for Instant Emergency Trigger
+            </div>
+        </div>
+
+        <!-- 4 Grid Panels -->
+        <div class="emergency-grid">
+
+            <!-- PANEL 1: EMERGENCY SYMPTOMS DETECTED -->
+            <div class="glass-card em-card">
+                <div class="em-card-head" style="color: var(--accent-rose);">
+                    <i class="fa-solid fa-notes-medical"></i> 1. Emergency Symptoms Detected
+                </div>
+                <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.8;" id="emergSymptomsList">
+                    <li><strong style="color: var(--accent-rose);">Severe Retrosternal Chest Pain:</strong> Onset 2 hours ago during exertion</li>
+                    <li><strong style="color: var(--accent-amber);">Acute Dyspnea (Shortness of Breath):</strong> SpO2 96%</li>
+                    <li><strong style="color: var(--accent-amber);">Diaphoresis:</strong> Cold sweating and dizziness</li>
+                </ul>
+                <div style="background: rgba(244,63,94,0.12); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(244,63,94,0.3); font-size: 0.82rem; color: var(--accent-rose); margin-top: 16px;">
+                    <i class="fa-solid fa-circle-exclamation"></i> Triage Classifier: <strong>RED_EMERGENCY (NSTEMI Protocol)</strong>
+                </div>
+            </div>
+
+            <!-- PANEL 2: NEAREST HOSPITAL LOCATOR -->
+            <div class="glass-card em-card">
+                <div class="em-card-head" style="color: var(--accent-cyan);">
+                    <i class="fa-solid fa-hospital"></i> 2. Nearest Hospital Trauma Centers
+                </div>
+
+                <div class="hospital-item-box">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <strong style="color: var(--text-main); font-size: 0.95rem;">City Heart & Cardiac Trauma Institute</strong>
+                        <span style="color: var(--accent-emerald); font-size: 0.85rem; font-weight: 700;">1.8 km (4 mins)</span>
+                    </div>
+                    <p class="text-sm text-muted" style="margin-bottom: 8px;">24/7 Cardiac ER • ICU Beds Available</p>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="tel:+911145678900" class="btn btn-secondary btn-sm"><i class="fa-solid fa-phone"></i> Call ER</a>
+                        <a href="https://maps.google.com" target="_blank" class="btn btn-outline btn-sm"><i class="fa-solid fa-location-arrow"></i> Directions</a>
+                    </div>
+                </div>
+
+                <div class="hospital-item-box" style="margin-bottom: 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <strong style="color: var(--text-main); font-size: 0.95rem;">St. Jude Memorial Hospital</strong>
+                        <span style="color: var(--accent-cyan); font-size: 0.85rem; font-weight: 700;">3.4 km (8 mins)</span>
+                    </div>
+                    <p class="text-sm text-muted" style="margin-bottom: 8px;">General Emergency Room • 24/7 Trauma Unit</p>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="tel:+911145678901" class="btn btn-secondary btn-sm"><i class="fa-solid fa-phone"></i> Call ER</a>
+                        <a href="https://maps.google.com" target="_blank" class="btn btn-outline btn-sm"><i class="fa-solid fa-location-arrow"></i> Directions</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 3: EMERGENCY NUMBERS -->
+            <div class="glass-card em-card">
+                <div class="em-card-head" style="color: var(--accent-amber);">
+                    <i class="fa-solid fa-phone-volume"></i> 3. Direct Emergency Hotlines
+                </div>
+
+                <a href="tel:108" class="num-btn">
+                    <span><i class="fa-solid fa-truck-medical"></i> National Emergency Ambulance</span>
+                    <span>108 <i class="fa-solid fa-chevron-right"></i></span>
+                </a>
+
+                <a href="tel:102" class="num-btn">
+                    <span><i class="fa-solid fa-heart-pulse"></i> Cardiac Resuscitation Team</span>
+                    <span>102 <i class="fa-solid fa-chevron-right"></i></span>
+                </a>
+
+                <a href="tel:911" class="num-btn" style="margin-bottom: 0;">
+                    <span><i class="fa-solid fa-headset"></i> 24/7 Emergency Tele-Triage</span>
+                    <span>911 <i class="fa-solid fa-chevron-right"></i></span>
+                </a>
+            </div>
+
+            <!-- PANEL 4: CALL DOCTOR -->
+            <div class="glass-card em-card">
+                <div class="em-card-head" style="color: var(--accent-purple);">
+                    <i class="fa-solid fa-user-doctor"></i> 4. Primary Physician & Family Contact
+                </div>
+
+                <div class="hospital-item-box" style="margin-bottom: 14px;">
+                    <div style="font-weight: 800; font-size: 1rem; color: var(--accent-cyan);">Dr. A. Vance, MD</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Attending Cardiologist • Metro Cardiology Clinic</div>
+                    <a href="tel:+919876543210" class="btn btn-primary btn-sm"><i class="fa-solid fa-phone"></i> Call Primary Doctor</a>
+                </div>
+
+                <div class="hospital-item-box" style="margin-bottom: 0;">
+                    <div style="font-weight: 800; font-size: 1rem; color: var(--accent-amber);">Designated Family Contact</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Priya Sharma (Spouse) • +91 98765 12345</div>
+                    <a href="tel:+919876512345" class="btn btn-secondary btn-sm"><i class="fa-solid fa-phone"></i> Call Family Contact</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script -->
+    <script src="emergency.js"></script>
+</body>
+</html>

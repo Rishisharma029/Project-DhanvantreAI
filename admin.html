@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Admin Dashboard - Governance portal to manage Medicines, Diseases, Users, and Audit Reports.">
+    <title>Admin Governance Dashboard | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .admin-container {
+            max-width: 1300px;
+            margin: 110px auto 60px;
+            padding: 0 24px;
+        }
+
+        .admin-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 900px) {
+            .admin-metrics-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 540px) {
+            .admin-metrics-grid { grid-template-columns: 1fr; }
+        }
+
+        .admin-metric-card {
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .admin-metric-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .admin-nav-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .admin-tab-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all var(--transition-fast);
+        }
+
+        .admin-tab-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--text-main);
+        }
+
+        .admin-tab-btn.active {
+            background: var(--accent-cyan);
+            color: #000;
+            border-color: var(--accent-cyan);
+        }
+
+        .admin-panel {
+            display: none;
+        }
+
+        .admin-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .data-table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .admin-table th {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 14px 18px;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .admin-table td {
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+        }
+
+        .admin-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-main);
+        }
+
+        .table-action-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-header scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-container">
+        <div style="margin-bottom: 24px;">
+            <div class="badge" style="background: rgba(168,85,247,0.15); color: var(--accent-purple);"><i class="fa-solid fa-shield-halved"></i> Governance Console</div>
+            <h1 class="section-title">Admin <span class="gradient-text">Management Dashboard</span></h1>
+        </div>
+
+        <!-- 4 System Metric Cards -->
+        <div class="admin-metrics-grid">
+            <div class="glass-card admin-metric-card">
+                <div class="admin-metric-icon" style="background: rgba(6,182,212,0.15); color: var(--accent-cyan);">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div>
+                    <div style="font-size: 1.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace;" id="metricUsers">1,248</div>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">Total Registered Users</div>
+                </div>
+            </div>
+
+            <div class="glass-card admin-metric-card">
+                <div class="admin-metric-icon" style="background: rgba(16,185,129,0.15); color: var(--accent-emerald);">
+                    <i class="fa-solid fa-diagram-project"></i>
+                </div>
+                <div>
+                    <div style="font-size: 1.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace;" id="metricNodes">250,000+</div>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">Graph Knowledge Nodes</div>
+                </div>
+            </div>
+
+            <div class="glass-card admin-metric-card">
+                <div class="admin-metric-icon" style="background: rgba(245,158,11,0.15); color: var(--accent-amber);">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div>
+                    <div style="font-size: 1.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace;" id="metricLatency">42 ms</div>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">Query Latency</div>
+                </div>
+            </div>
+
+            <div class="glass-card admin-metric-card">
+                <div class="admin-metric-icon" style="background: rgba(168,85,247,0.15); color: var(--accent-purple);">
+                    <i class="fa-solid fa-file-shield"></i>
+                </div>
+                <div>
+                    <div style="font-size: 1.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace;" id="metricAudits">99.98%</div>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">HIPAA Compliance Score</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 Management Navigation Tabs -->
+        <div class="admin-nav-tabs">
+            <button class="admin-tab-btn active" data-tab="medicines"><i class="fa-solid fa-pills"></i> Manage Medicines</button>
+            <button class="admin-tab-btn" data-tab="diseases"><i class="fa-solid fa-virus"></i> Manage Diseases</button>
+            <button class="admin-tab-btn" data-tab="users"><i class="fa-solid fa-users-gear"></i> Manage Users</button>
+            <button class="admin-tab-btn" data-tab="reports"><i class="fa-solid fa-file-contract"></i> Reports & Audit Logs</button>
+        </div>
+
+        <!-- TAB 1: MANAGE MEDICINES -->
+        <div class="admin-panel active" id="panelMedicines">
+            <div class="glass-card" style="padding: 28px;">
+                <div class="table-action-bar">
+                    <input type="text" id="adminMedSearch" placeholder="Search medicines by brand or generic..." class="settings-select" style="min-width: 280px;">
+                    <button class="btn btn-primary btn-sm" id="addMedModalBtn"><i class="fa-solid fa-plus"></i> Add New Medicine</button>
+                </div>
+
+                <div class="data-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Brand Name</th>
+                                <th>Generic Name</th>
+                                <th>Active Ingredients</th>
+                                <th>Price (INR)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminMedsTbody">
+                            <tr>
+                                <td>#MED-101</td>
+                                <td><strong>Crocin 650</strong></td>
+                                <td>Paracetamol</td>
+                                <td>Paracetamol (650mg)</td>
+                                <td>₹32.50</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm" style="padding: 4px 10px; font-size: 0.75rem;">Edit</button>
+                                    <button class="btn btn-outline btn-sm" style="padding: 4px 10px; font-size: 0.75rem; color: var(--accent-rose);">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#MED-102</td>
+                                <td><strong>Augmentin 625</strong></td>
+                                <td>Amoxicillin + Clavulanate</td>
+                                <td>Amoxicillin (500mg) + Clavulanate (125mg)</td>
+                                <td>₹204.00</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm" style="padding: 4px 10px; font-size: 0.75rem;">Edit</button>
+                                    <button class="btn btn-outline btn-sm" style="padding: 4px 10px; font-size: 0.75rem; color: var(--accent-rose);">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: MANAGE DISEASES -->
+        <div class="admin-panel" id="panelDiseases">
+            <div class="glass-card" style="padding: 28px;">
+                <div class="table-action-bar">
+                    <input type="text" id="adminDisSearch" placeholder="Search diseases by name or ICD code..." class="settings-select" style="min-width: 280px;">
+                    <button class="btn btn-primary btn-sm" id="addDisModalBtn"><i class="fa-solid fa-plus"></i> Add New Disease Record</button>
+                </div>
+
+                <div class="data-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Condition Name</th>
+                                <th>ICD-11 Code</th>
+                                <th>Severity Classification</th>
+                                <th>Symptom Links</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminDisTbody">
+                            <tr>
+                                <td><strong>Acute Coronary Syndrome</strong></td>
+                                <td><code>BA80</code></td>
+                                <td><span class="badge" style="background: rgba(244,63,94,0.15); color: var(--accent-rose);">RED_EMERGENCY</span></td>
+                                <td>14 Symptoms</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm" style="padding: 4px 10px; font-size: 0.75rem;">Edit Profile</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fungal Infection</strong></td>
+                                <td><code>1F00</code></td>
+                                <td><span class="badge" style="background: rgba(245,158,11,0.15); color: var(--accent-amber);">MODERATE</span></td>
+                                <td>8 Symptoms</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm" style="padding: 4px 10px; font-size: 0.75rem;">Edit Profile</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: MANAGE USERS -->
+        <div class="admin-panel" id="panelUsers">
+            <div class="glass-card" style="padding: 28px;">
+                <div class="table-action-bar">
+                    <input type="text" id="adminUserSearch" placeholder="Search registered users by email..." class="settings-select" style="min-width: 280px;">
+                </div>
+
+                <div class="data-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User Email</th>
+                                <th>Full Name</th>
+                                <th>Assigned Role</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminUsersTbody">
+                            <tr>
+                                <td><strong>rishi@medical.org</strong></td>
+                                <td>Rishi Sharma</td>
+                                <td><span class="badge" style="background: rgba(168,85,247,0.15); color: var(--accent-purple);">Admin</span></td>
+                                <td><span style="color: var(--accent-emerald);">Active</span></td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm" onclick="openRoleModal('rishi@medical.org')">Change Role</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>dr.vance@cardio.org</strong></td>
+                                <td>Dr. A. Vance</td>
+                                <td><span class="badge" style="background: rgba(6,182,212,0.15); color: var(--accent-cyan);">Clinician</span></td>
+                                <td><span style="color: var(--accent-emerald);">Active</span></td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm" onclick="openRoleModal('dr.vance@cardio.org')">Change Role</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: REPORTS & AUDIT LOGS -->
+        <div class="admin-panel" id="panelReports">
+            <div class="glass-card" style="padding: 28px;">
+                <div class="table-action-bar">
+                    <div style="font-weight: 700; color: var(--accent-cyan);">System Audit Trail & Compliance Log</div>
+                </div>
+
+                <div class="data-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Action Event</th>
+                                <th>Actor</th>
+                                <th>IP Address</th>
+                                <th>Compliance Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminAuditTbody">
+                            <tr>
+                                <td>2026-08-01 23:30:15</td>
+                                <td>PROFILE_UPDATE</td>
+                                <td>rishi@medical.org</td>
+                                <td><code>192.168.1.45</code></td>
+                                <td><span style="color: var(--accent-emerald);"><i class="fa-solid fa-check"></i> PASSED</span></td>
+                            </tr>
+                            <tr>
+                                <td>2026-08-01 23:28:40</td>
+                                <td>REPORT_EXPORT</td>
+                                <td>rishi@medical.org</td>
+                                <td><code>192.168.1.45</code></td>
+                                <td><span style="color: var(--accent-emerald);"><i class="fa-solid fa-check"></i> PASSED</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Change Role Modal -->
+    <div class="modal-overlay hidden" id="roleModal">
+        <div class="modal-card" style="max-width: 420px;">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-shield" style="color: var(--accent-purple);"></i> Change User Role</h3>
+                <button class="modal-close-btn" id="closeRoleModalBtn">&times;</button>
+            </div>
+            <div style="padding: 20px 0;">
+                <div class="form-group">
+                    <label>Target User:</label>
+                    <input type="text" id="roleModalEmail" readonly style="font-weight: 700;">
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>Select New Role:</label>
+                    <select class="settings-select" id="newRoleSelect" style="width: 100%;">
+                        <option value="user">Patient (User)</option>
+                        <option value="clinician">Clinician</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="saveRoleBtn">Save Role</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="admin.js"></script>
+</body>
+</html>

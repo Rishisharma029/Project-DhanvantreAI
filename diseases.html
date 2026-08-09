@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Disease Explorer - 360-degree clinical profile covering Description, Symptoms, Causes, Treatments, Diet, Exercise, and Precautions.">
+    <title>Disease Explorer | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .diseases-container {
+            max-width: 1200px;
+            margin: 120px auto 60px;
+            padding: 0 24px;
+        }
+
+        /* Search Hero Section */
+        .disease-search-card {
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .disease-search-input-wrapper {
+            max-width: 680px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .disease-search-input-wrapper input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            padding: 16px 24px 16px 54px;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            outline: none;
+            transition: border-color var(--transition-fast);
+        }
+
+        .disease-search-input-wrapper input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+        }
+
+        .disease-search-input-wrapper i {
+            position: absolute;
+            left: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+        }
+
+        /* Disease 360 Profile Container */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .profile-container { grid-template-columns: 1fr; }
+        }
+
+        /* Disease Index Sidebar */
+        .disease-index-card {
+            padding: 20px;
+        }
+
+        .index-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 14px;
+        }
+
+        .index-item {
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all var(--transition-fast);
+        }
+
+        .index-item:hover, .index-item.active {
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--accent-cyan);
+        }
+
+        /* 7 Section Navigation Tabs */
+        .disease-nav-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .disease-tab-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all var(--transition-fast);
+        }
+
+        .disease-tab-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--text-main);
+        }
+
+        .disease-tab-btn.active {
+            background: var(--accent-cyan);
+            color: #000;
+            border-color: var(--accent-cyan);
+        }
+
+        .disease-panel {
+            display: none;
+        }
+
+        .disease-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .info-card-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .info-card-box h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-header scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="diseases-container">
+        <!-- Search Hero Section -->
+        <div class="glass-card disease-search-card">
+            <h1 class="section-title">Clinical <span class="gradient-text">Disease Explorer</span></h1>
+            <p class="section-subtitle" style="margin-bottom: 24px;">
+                Explore comprehensive 360° medical profiles covering symptoms, etiology, treatments, diets, exercises, and precautions.
+            </p>
+
+            <div class="disease-search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="diseaseSearchInput" placeholder="Search disease e.g. Fungal Infection, Pneumonia, Diabetes, Malaria...">
+            </div>
+
+            <!-- Quick Disease Pills -->
+            <div class="quick-cat-row">
+                <span style="font-size: 0.75rem; color: var(--text-dim);">Popular Conditions:</span>
+                <button class="quick-cat-btn disease-quick-btn" data-dis="Fungal infection">Fungal Infection</button>
+                <button class="quick-cat-btn disease-quick-btn" data-dis="Pneumonia">Pneumonia</button>
+                <button class="quick-cat-btn disease-quick-btn" data-dis="Diabetes">Diabetes</button>
+                <button class="quick-cat-btn disease-quick-btn" data-dis="Hypertension">Hypertension</button>
+                <button class="quick-cat-btn disease-quick-btn" data-dis="Malaria">Malaria</button>
+            </div>
+        </div>
+
+        <!-- 360° Profile Layout -->
+        <div class="profile-container">
+            <!-- Sidebar Disease Selector -->
+            <div class="glass-card disease-index-card">
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">
+                    <i class="fa-solid fa-book-bookmark"></i> Disease Index
+                </div>
+                <ul class="index-list" id="diseaseIndexList">
+                    <li class="index-item active" data-dis="Fungal infection">
+                        <span>Fungal Infection</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </li>
+                    <li class="index-item" data-dis="Pneumonia">
+                        <span>Pneumonia</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </li>
+                    <li class="index-item" data-dis="Diabetes">
+                        <span>Type 2 Diabetes</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </li>
+                    <li class="index-item" data-dis="Hypertension">
+                        <span>Hypertension</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </li>
+                    <li class="index-item" data-dis="Malaria">
+                        <span>Malaria</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Main 360 Profile Content Card -->
+            <div class="glass-card" style="padding: 32px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <div>
+                        <h2 id="disProfileTitle" style="font-size: 1.8rem; font-weight: 800;">Fungal Infection</h2>
+                        <div id="disProfileSub" style="font-size: 0.85rem; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace;">ICD-11: 1F00 • Mycosis</div>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="window.print()"><i class="fa-solid fa-print"></i> Export Summary</button>
+                </div>
+
+                <!-- 7 Section Tabs -->
+                <div class="disease-nav-tabs">
+                    <button class="disease-tab-btn active" data-tab="desc"><i class="fa-solid fa-circle-info"></i> Description</button>
+                    <button class="disease-tab-btn" data-tab="sym"><i class="fa-solid fa-notes-medical"></i> Symptoms</button>
+                    <button class="disease-tab-btn" data-tab="causes"><i class="fa-solid fa-microscope"></i> Causes</button>
+                    <button class="disease-tab-btn" data-tab="treat"><i class="fa-solid fa-pills"></i> Treatments</button>
+                    <button class="disease-tab-btn" data-tab="diet"><i class="fa-solid fa-utensils"></i> Diet</button>
+                    <button class="disease-tab-btn" data-tab="exercise"><i class="fa-solid fa-person-running"></i> Exercise</button>
+                    <button class="disease-tab-btn" data-tab="precautions"><i class="fa-solid fa-shield-halved"></i> Precautions</button>
+                </div>
+
+                <!-- TAB 1: DESCRIPTION -->
+                <div class="disease-panel active" id="disTabDesc">
+                    <div class="info-card-box">
+                        <h4><i class="fa-solid fa-file-lines"></i> Clinical Overview</h4>
+                        <p class="text-sm text-muted" id="textDescription">
+                            Fungal infection (mycosis) is an inflammatory skin and mucosal condition caused by opportunistic dermatophytes, Candida species, or systemic fungal pathogens. Characterized by scaling, erythema, and intense pruritus.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- TAB 2: SYMPTOMS -->
+                <div class="disease-panel" id="disTabSym">
+                    <div class="info-card-box">
+                        <h4><i class="fa-solid fa-stethoscope"></i> Primary Symptoms & Diagnostic Signs</h4>
+                        <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.9rem;" id="listSymptoms">
+                            <li>Itching and intense cutaneous pruritus</li>
+                            <li>Skin rash, scaling, and annular erythematous plaques</li>
+                            <li>Nail discoloration and hyperkeratosis</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- TAB 3: CAUSES -->
+                <div class="disease-panel" id="disTabCauses">
+                    <div class="info-card-box">
+                        <h4><i class="fa-solid fa-dna"></i> Etiology & Risk Factors</h4>
+                        <p class="text-sm text-muted" id="textCauses">
+                            Caused by dermatophyte overgrowth in warm, humid skin folds. Risk factors include compromised cellular immunity, prolonged antibiotic usage, hyperhidrosis, and direct contact with infected vectors.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- TAB 4: TREATMENTS -->
+                <div class="disease-panel" id="disTabTreat">
+                    <div class="info-card-box">
+                        <h4><i class="fa-solid fa-prescription-bottle-medical"></i> Recommended Therapies & Prescriptions</h4>
+                        <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.9rem;" id="listTreatments">
+                            <li>Topical Antifungals: Clotrimazole 1% cream or Miconazole</li>
+                            <li>Systemic Antifungals: Oral Fluconazole 150mg or Terbinafine</li>
+                            <li>Keep affected skin clean and completely dry</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- TAB 5: DIET -->
+                <div class="disease-panel" id="disTabDiet">
+                    <div class="info-card-box">
+                        <h4><i class="fa-solid fa-apple-whole"></i> Recommended Nutritional Guidelines</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <div>
+                                <strong style="color: var(--accent-emerald); font-size: 0.85rem;">Recommended Foods:</strong>
+                                <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.85rem;" id="listDietRecommended">
+                                    <li>Probiotic yogurt & fermented kefir</li>
+                                    <li>Garlic & coconut oil (antifungal lauric acid)</li>
+                                    <li>Leafy greens & low-glycemic vegetables</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="color: var(--accent-rose); font-size: 0.85rem;">Foods to Avoid:</strong>
+                                <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.85rem;" id="listDietAvoid">
+                                    <li>Refined sugars & high-carb sweets</li>
+                                    <li>Yeast-containing bakery products</li>
+                                    <li>Excessive alcohol & sweetened beverages</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 6: EXERCISE -->
+                <div class="disease-panel" id="disTabExercise">
+                    <div class="info-card-box">
+                        <h4><i class="fa-solid fa-dumbbell"></i> Exercise & Exertion Guidelines</h4>
+                        <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.9rem;" id="listExercise">
+                            <li>Light to moderate cardio (walking, indoor cycling)</li>
+                            <li>Avoid wearing damp sweaty gym clothing for extended periods</li>
+                            <li>Shower immediately following workout sessions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- TAB 7: PRECAUTIONS -->
+                <div class="disease-panel" id="disTabPrecautions">
+                    <div class="info-card-box">
+                        <h4><i class="fa-solid fa-shield-virus"></i> Clinical Precautions & Prevention</h4>
+                        <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.9rem;" id="listPrecautions">
+                            <li>Do not share personal towels, footwear, or grooming kits</li>
+                            <li>Wear loose-fitting breathable cotton clothing</li>
+                            <li>Consult physician if rash spreads or develops secondary bacterial infection</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Script -->
+    <script src="diseases.js"></script>
+</body>
+</html>

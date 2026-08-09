@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraMed AI - Live Performance & Telemetry Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --primary: #38bdf8;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge-live {
+            background-color: rgba(52, 211, 153, 0.15);
+            color: var(--success);
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover { transform: translateY(-2px); }
+
+        .card-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-val {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .card-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+        }
+
+        .latency-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .latency-section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .latency-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .latency-box {
+            background-color: rgba(15, 23, 42, 0.6);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .latency-box .lbl { font-size: 0.8rem; color: var(--text-muted); }
+        .latency-box .num { font-size: 1.4rem; font-weight: 700; margin-top: 0.3rem; color: var(--success); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>AuraMed AI — Live Performance Telemetry</h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.2rem;">Real-time API Throughput, System Load & Cache Metrics</p>
+        </div>
+        <div class="badge-live">
+            <span class="pulse-dot"></span> LIVE POLLING (2s)
+        </div>
+    </div>
+
+    <div class="grid-cards">
+        <div class="card">
+            <div class="card-label">⚡ Live Throughput</div>
+            <div class="card-val" id="val-rps">0.00</div>
+            <div class="card-sub">Requests per second (RPS)</div>
+        </div>
+        <div class="card">
+            <div class="card-label">🧠 Memory Usage</div>
+            <div class="card-val" id="val-mem">0.0 MB</div>
+            <div class="card-sub" id="val-mem-pct">System: 0%</div>
+        </div>
+        <div class="card">
+            <div class="card-label">🖥️ CPU Utilization</div>
+            <div class="card-val" id="val-cpu">0.0%</div>
+            <div class="card-sub">Core workload percentage</div>
+        </div>
+        <div class="card">
+            <div class="card-label">🎯 Cache Hit Rate</div>
+            <div class="card-val" style="color: var(--success);" id="val-cache-hit">0.0%</div>
+            <div class="card-sub" id="val-cache-sub">Hits: 0 | Misses: 0</div>
+        </div>
+    </div>
+
+    <div class="latency-section">
+        <h2>⏱️ API Request Latency Distribution</h2>
+        <div class="latency-grid">
+            <div class="latency-box">
+                <div class="lbl">Average Latency</div>
+                <div class="num" id="lat-avg">0.0 ms</div>
+            </div>
+            <div class="latency-box">
+                <div class="lbl">P50 Percentile</div>
+                <div class="num" id="lat-p50">0.0 ms</div>
+            </div>
+            <div class="latency-box">
+                <div class="lbl">P95 Percentile</div>
+                <div class="num" id="lat-p95" style="color: var(--warning);">0.0 ms</div>
+            </div>
+            <div class="latency-box">
+                <div class="lbl">P99 Percentile</div>
+                <div class="num" id="lat-p99" style="color: var(--danger);">0.0 ms</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchMetrics() {
+            try {
+                const res = await fetch('/api/v1/performance/stats');
+                if (!res.ok) return;
+                const data = await res.json();
+
+                document.getElementById('val-rps').innerText = data.throughput.requests_per_second;
+                document.getElementById('val-mem').innerText = data.system_resources.memory_usage_mb + ' MB';
+                document.getElementById('val-mem-pct').innerText = 'System: ' + data.system_resources.system_memory_percent + '%';
+                document.getElementById('val-cpu').innerText = data.system_resources.cpu_utilization_percent + '%';
+                document.getElementById('val-cache-hit').innerText = data.cache.hit_rate_percent + '%';
+                document.getElementById('val-cache-sub').innerText = `Hits: ${data.cache.total_hits} | Misses: ${data.cache.total_misses}`;
+
+                document.getElementById('lat-avg').innerText = data.latency.avg_ms + ' ms';
+                document.getElementById('lat-p50').innerText = data.latency.p50_ms + ' ms';
+                document.getElementById('lat-p95').innerText = data.latency.p95_ms + ' ms';
+                document.getElementById('lat-p99').innerText = data.latency.p99_ms + ' ms';
+            } catch (err) {
+                console.error("Telemetry fetch error:", err);
+            }
+        }
+
+        fetchMetrics();
+        setInterval(fetchMetrics, 2000);
+    </script>
+</body>
+</html>

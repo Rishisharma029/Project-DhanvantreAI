@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraMed AI Loading & Error States - Resiliency showcase featuring animated skeleton shimmer loaders, API failure retry actions, and offline network status detection.">
+    <title>Loading & Error States | AuraMed AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .states-container {
+            max-width: 1000px;
+            margin: 120px auto 60px;
+            padding: 0 24px;
+        }
+
+        .states-hero-card {
+            padding: 36px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .states-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        @media (max-width: 900px) {
+            .states-grid { grid-template-columns: 1fr; }
+        }
+
+        .states-card {
+            padding: 32px;
+        }
+
+        .states-card-head {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .error-state-box {
+            background: rgba(244, 63, 94, 0.08);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Offline Network Banner -->
+    <div class="offline-banner hidden" id="offlineBanner">
+        <i class="fa-solid fa-wifi-slash" style="font-size: 1.1rem;"></i>
+        <span>Network Disconnected: You are currently offline. Showing cached biomedical data.</span>
+    </div>
+
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Header Navigation -->
+    <header class="navbar-header scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            </a>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="states-container">
+        <!-- Hero Card -->
+        <div class="glass-card states-hero-card">
+            <div class="badge"><i class="fa-solid fa-shield-virus"></i> UI Resiliency & Fault Tolerance</div>
+            <h1 class="section-title">Loading & <span class="gradient-text">Error States</span></h1>
+            <p class="section-subtitle">
+                Demonstrates shimmer animated skeleton placeholders, API failure retry mechanisms, and offline network status detection.
+            </p>
+        </div>
+
+        <!-- 3 Sections Grid -->
+        <div class="states-grid">
+
+            <!-- SECTION 1: ANIMATED SKELETON SHIMMER LOADERS -->
+            <div class="glass-card states-card" style="grid-column: 1 / -1;">
+                <div class="states-card-head" style="color: var(--accent-cyan);">
+                    <i class="fa-solid fa-spinner"></i> 1. Animated Skeleton Shimmer Placeholders
+                </div>
+                <p class="text-sm text-muted" style="margin-bottom: 20px;">
+                    Used during asynchronous API data fetching to prevent layout shift:
+                </p>
+
+                <!-- Skeleton Card 1 -->
+                <div class="skeleton-card-box">
+                    <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 16px;">
+                        <div class="skeleton-avatar skeleton-shimmer"></div>
+                        <div style="flex: 1;">
+                            <div class="skeleton-title skeleton-shimmer"></div>
+                            <div class="skeleton-text skeleton-shimmer" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                    <div class="skeleton-text skeleton-shimmer"></div>
+                    <div class="skeleton-text skeleton-shimmer" style="width: 85%;"></div>
+                    <div class="skeleton-text skeleton-shimmer" style="width: 60%;"></div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: API FAILURE & INTERACTIVE RETRY -->
+            <div class="glass-card states-card">
+                <div class="states-card-head" style="color: var(--accent-rose);">
+                    <i class="fa-solid fa-rotate-right"></i> 2. API Failure & Retry Mechanism
+                </div>
+
+                <div class="error-state-box">
+                    <i class="fa-solid fa-circle-exclamation" style="font-size: 2.4rem; color: var(--accent-rose); margin-bottom: 12px;"></i>
+                    <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 6px;">500 Internal Server Error</h3>
+                    <p class="text-sm text-muted" style="margin-bottom: 18px;" id="retryStatusText">
+                        Failed to retrieve clinical recommendations from cluster node.
+                    </p>
+                    <button class="btn btn-primary btn-sm" id="retryActionBtn">
+                        <i class="fa-solid fa-rotate-right"></i> Retry Request
+                    </button>
+                </div>
+            </div>
+
+            <!-- SECTION 3: OFFLINE NETWORK STATUS SIMULATOR -->
+            <div class="glass-card states-card">
+                <div class="states-card-head" style="color: var(--accent-amber);">
+                    <i class="fa-solid fa-wifi"></i> 3. Network Status & Offline Alert
+                </div>
+
+                <p class="text-sm text-muted" style="margin-bottom: 16px;">
+                    Monitors `navigator.onLine` and `window.addEventListener('offline')` to inform users of network connectivity status.
+                </p>
+
+                <div style="background: rgba(0,0,0,0.3); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color); text-align: center;">
+                    <div style="font-weight: 800; font-size: 1rem; margin-bottom: 10px;" id="networkStatusLabel">
+                        Network Status: <span style="color: var(--accent-emerald);">ONLINE 📶</span>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" id="toggleOfflineSimBtn">
+                        <i class="fa-solid fa-toggle-on"></i> Toggle Offline Alert
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script -->
+    <script src="states.js"></script>
+</body>
+</html>
