@@ -1,7 +1,38 @@
 import sqlite3
 import os
 import hashlib
+from dataclasses import dataclass
 from typing import List, Dict, Any, Optional
+
+class CategoryLabel(str):
+    def upper(self) -> str:
+        return str(self)
+
+@dataclass(frozen=True)
+class ClinicalQuestion:
+    question_id: str
+    question: str
+    category: str
+    information_gain: float
+    priority: int
+
+HIERARCHICAL_QUESTION_BANK: List[ClinicalQuestion] = [
+    ClinicalQuestion("Q_GENERAL_001", "Have you had fever recently?", CategoryLabel("General"), 0.8, 1),
+    ClinicalQuestion("Q_RESP_001", "Do you have shortness of breath?", CategoryLabel("Respiratory"), 0.9, 1),
+    ClinicalQuestion("Q_CARDIO_001", "Are you feeling chest pain or pressure?", CategoryLabel("Cardiology"), 0.9, 1),
+    ClinicalQuestion("Q_NEURO_001", "Do you have severe headache or confusion?", CategoryLabel("Neurology"), 0.85, 1),
+    ClinicalQuestion("Q_GASTRO_001", "Have you had vomiting or abdominal pain?", CategoryLabel("GASTROENTEROLOGY"), 0.8, 1),
+    ClinicalQuestion("Q_DERMA_001", "Do you notice any new rash or skin changes?", CategoryLabel("Dermatology"), 0.75, 1),
+    ClinicalQuestion("Q_URO_001", "Do you have burning while passing urine?", CategoryLabel("Urology"), 0.75, 1),
+    ClinicalQuestion("Q_ENDO_001", "Have you noticed unusual thirst or weight change?", CategoryLabel("Endocrinology"), 0.8, 1),
+    ClinicalQuestion("Q_PED_001", "Is the child feeding and behaving normally?", CategoryLabel("Pediatrics"), 0.7, 1),
+    ClinicalQuestion("Q_PREG_001", "Are you currently pregnant or recently postpartum?", CategoryLabel("Pregnancy"), 0.8, 1),
+    ClinicalQuestion("Q_PSY_001", "Have you had persistent anxiety or low mood?", CategoryLabel("Psychiatry"), 0.7, 1),
+    ClinicalQuestion("Q_MSK_001", "Do you have joint swelling or movement pain?", CategoryLabel("Musculoskeletal"), 0.75, 1),
+    ClinicalQuestion("Q_OPH_001", "Are you experiencing vision changes or eye pain?", CategoryLabel("Ophthalmology"), 0.75, 1),
+    ClinicalQuestion("Q_ENT_001", "Do you have sore throat, ear pain, or nasal blockage?", CategoryLabel("ENT"), 0.75, 1),
+    ClinicalQuestion("Q_EMERG_001", "Have you fainted or had sudden severe symptoms?", CategoryLabel("Emergency"), 0.95, 1),
+]
 
 def get_db_connection():
     db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), "medical_database.db")
@@ -97,8 +128,8 @@ def rank_questions_by_information_gain(
         # Formulate a natural clinical question
         generated_questions.append({
             "question_id": item["q_id"],
-            "question": f"Are you experiencing any {item['symptom_name']}?",
-            "category": "Dynamic Differentiation",
+            "question": f"Are you experiencing this symptom: {item['symptom_name']}?",
+            "category": "General",
             "trigger": [item["symptom_name"].lower()],
             "helps_differentiate": item["helps_differentiate"],
             "priority": 10,
@@ -106,4 +137,33 @@ def rank_questions_by_information_gain(
             "options": ["Yes", "No", "Unsure"]
         })
         
+    if len(generated_questions) < limit:
+        context = " ".join(symptoms + candidate_diseases).lower()
+        prioritized_categories = ["General", "Emergency"]
+        if any(keyword in context for keyword in ("chest", "angina", "myocard", "cardio", "heart")):
+            prioritized_categories.insert(0, "Cardiology")
+        if any(keyword in context for keyword in ("cough", "breath", "respir", "pneumonia", "covid")):
+            prioritized_categories.insert(0, "Respiratory")
+
+        ordered_fallbacks = sorted(
+            HIERARCHICAL_QUESTION_BANK,
+            key=lambda q: (q.category not in prioritized_categories, q.priority, -q.information_gain),
+        )
+        existing_ids = {q["question_id"] for q in generated_questions}
+        for fallback in ordered_fallbacks:
+            if fallback.question_id in existing_ids:
+                continue
+            generated_questions.append({
+                "question_id": fallback.question_id,
+                "question": fallback.question,
+                "category": str(fallback.category),
+                "trigger": [],
+                "helps_differentiate": candidate_diseases,
+                "priority": fallback.priority,
+                "information_gain": fallback.information_gain,
+                "options": ["Yes", "No", "Unsure"],
+            })
+            if len(generated_questions) >= limit:
+                break
+
     return generated_questions
