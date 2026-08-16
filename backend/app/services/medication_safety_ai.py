@@ -1,6 +1,6 @@
 import time
 import sqlite3
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 from app.schemas.med_safety_schema import (
     MedicationSafetyRequest, SafetyCheckResult, MedicationSafetyResponse
 )
