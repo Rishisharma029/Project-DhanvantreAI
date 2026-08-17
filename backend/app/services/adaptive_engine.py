@@ -8,7 +8,7 @@ from app.schemas.adaptive_schema import (
 )
 
 EMERGENCY_KEYWORDS = [
-    'crushing chest pain', 'severe shortness of breath', 'severe difficulty breathing',
+    'crushing chest pain', 'chest pain', 'severe shortness of breath', 'severe difficulty breathing',
     'breathlessness at rest', 'unconscious', 'fainting', 'stroke',
     'paralysis', 'severe bleeding', 'seizure', 'convulsion',
     'heart attack', 'choking', 'stemi'

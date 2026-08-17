@@ -62,6 +62,7 @@ def extract_entities(query_text: str, patient_age: Optional[int] = None,
 
     # ── Key Red Flag Symptoms ─────────────────────────────────────────────────
     symptoms_detected = []
+    denied = []
     SYMPTOM_KEYWORDS = [
         "fever", "cough", "headache", "sore throat", "runny nose", "fatigue",
         "body ache", "muscle ache", "shortness of breath", "chest pain", "chest tightness",
@@ -74,19 +75,26 @@ def extract_entities(query_text: str, patient_age: Optional[int] = None,
     ]
     for sym in SYMPTOM_KEYWORDS:
         if sym in text:
-            symptoms_detected.append(sym)
-    if symptoms_detected:
-        entities["detected_symptoms"] = symptoms_detected
+            is_negated = any(
+                neg + sym in text or f"no {sym}" in text or f"without {sym}" in text or f"denies {sym}" in text or f"no {sym.split()[-1]}" in text
+                for neg in ["no ", "without ", "denies ", "free of ", "never "]
+            )
+            if not is_negated:
+                symptoms_detected.append(sym)
+            else:
+                denied.append(sym)
 
-    # ── Denied Symptoms (No X / Without X) ───────────────────────────────────
-    denied = []
+    # ── Additional Denied Symptoms (No X / Without X) ─────────────────────────
     deny_patterns = re.findall(r"no\s+(\w[\w\s]{1,30}?)(?:[,.]|$)", text)
     deny_patterns += re.findall(r"without\s+(\w[\w\s]{1,30}?)(?:[,.]|$)", text)
     deny_patterns += re.findall(r"denies?\s+(\w[\w\s]{1,30}?)(?:[,.]|$)", text)
     for d in deny_patterns:
         denied.append(d.strip())
+
+    if symptoms_detected:
+        entities["detected_symptoms"] = symptoms_detected
     if denied:
-        entities["denied_symptoms"] = denied
+        entities["denied_symptoms"] = list(set(denied))
 
     # ── Pregnancy ─────────────────────────────────────────────────────────────
     if any(w in text for w in ["pregnant", "pregnancy", "weeks gestation", "trimester"]):

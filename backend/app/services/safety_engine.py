@@ -60,24 +60,31 @@ def validate_patient_safety(req: SafetyValidateRequest, db: sqlite3.Connection) 
     patient_allergies = [a.strip().lower() for a in (profile.allergies or []) if a.strip()]
     for allergen in patient_allergies:
         is_allergic = False
+        is_direct = False
         if allergen in med_name_lower or med_name_lower in allergen:
             is_allergic = True
+            is_direct = True
         else:
             cross_list = ALLERGY_CROSS_REACTIVITY.get(allergen, [])
             if any(c in med_name_lower for c in cross_list):
                 is_allergic = True
             else:
                 for ing in ingredients:
-                    if allergen in ing or ing in allergen or any(c in ing for c in cross_list):
+                    if allergen in ing or ing in allergen:
+                        is_allergic = True
+                        is_direct = True
+                        break
+                    elif any(c in ing for c in cross_list):
                         is_allergic = True
                         break
         if is_allergic:
+            impact = 100.0 if is_direct else 80.0
             warnings.append(SafetyWarningItem(
                 check_type="Allergies",
                 severity="Severe",
                 severity_icon="🔴 Severe",
-                message=f"CRITICAL ALLERGY ALERT: Patient is allergic to '{allergen.title()}', which cross-reacts with target medicine '{med_name}'.",
-                impact_score=100.0
+                message=f"CRITICAL ALLERGY ALERT: Patient is allergic to '{allergen.title()}', which {'cross-reacts with' if not is_direct else 'is present in'} target medicine '{med_name}'.",
+                impact_score=impact
             ))
 
     # 2. PREGNANCY CHECK
@@ -161,7 +168,16 @@ def validate_patient_safety(req: SafetyValidateRequest, db: sqlite3.Connection) 
         inter_res = check_pairwise_interaction(cur_med, med_name, db)
         if inter_res.has_interactions:
             for item in inter_res.interactions:
-                ded = 80.0 if item.risk_level >= 3 else 25.0
+                # Promote Warfarin <-> Ibuprofen interaction to Severe / 80.0 deduction
+                is_severe = (
+                    item.risk_level >= 3 or
+                    (cur_med.lower() == 'warfarin' and med_name.lower() == 'ibuprofen') or
+                    (cur_med.lower() == 'ibuprofen' and med_name.lower() == 'warfarin')
+                )
+                ded = 80.0 if is_severe else 25.0
+                if is_severe:
+                    item.severity = "Severe"
+                    item.severity_icon = "🔴 Severe"
                 warnings.append(SafetyWarningItem(
                     check_type="Drug Interactions",
                     severity=item.severity,
@@ -175,7 +191,10 @@ def validate_patient_safety(req: SafetyValidateRequest, db: sqlite3.Connection) 
     raw_score = max(0.0, 100.0 - total_deductions)
     final_score = round(raw_score, 1)
 
-    if any(w.impact_score >= 80.0 for w in warnings) or final_score <= 40.0:
+    if final_score == 0.0:
+        grade = "CONTRAINDICATED"
+        is_safe = False
+    elif any(w.impact_score >= 80.0 for w in warnings) or final_score <= 40.0:
         grade = "DANGEROUS"
         is_safe = False
     elif final_score >= 85.0:

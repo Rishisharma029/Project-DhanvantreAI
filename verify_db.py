@@ -29,10 +29,10 @@ def verify():
     print("         SAMPLE DATA CHECK (MEDICINE)")
     print("=" * 55)
     c.execute("""
-        SELECT m.id, m.raw_name, m.normalized_name, m.price_inr, m.composition, mfg.name 
+        SELECT m.id, m.brand_name, m.canonical_name, m.price_inr, m.composition, mfg.name 
         FROM medicines m 
         LEFT JOIN manufacturers mfg ON m.manufacturer_id = mfg.id 
-        WHERE m.normalized_name LIKE '%augmentin%' LIMIT 3;
+        WHERE m.canonical_name LIKE '%augmentin%' LIMIT 3;
     """)
     for row in c.fetchall():
         print(" ", row)

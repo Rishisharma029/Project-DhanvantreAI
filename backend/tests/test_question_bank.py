@@ -13,7 +13,7 @@ def test_question_bank_categories_and_metadata():
         "Dermatology", "Urology", "Endocrinology", "Pediatrics", "Pregnancy",
         "Psychiatry", "Musculoskeletal", "Ophthalmology", "ENT", "Emergency"
     }
-    assert expected_categories.issubset(set(c.upper() for c in categories))
+    assert {c.upper() for c in expected_categories}.issubset(set(c.upper() for c in categories))
 
     for item in HIERARCHICAL_QUESTION_BANK:
         assert item.question_id.strip() != ""

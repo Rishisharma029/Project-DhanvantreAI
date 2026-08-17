@@ -21,7 +21,7 @@ def test_sql_injection_resilience():
 
     for payload in sql_payloads:
         # Search API test
-        res = client.get(f"/api/v1/search/medicines?q={payload}")
+        res = client.get(f"/api/v1/medicines/search?q={payload}")
         assert res.status_code == 200
 
         # Auth Login test
@@ -31,7 +31,7 @@ def test_sql_injection_resilience():
 def test_xss_payload_sanitization():
     """Verify Cross-Site Scripting (XSS) script tags do not break server response contracts."""
     xss_payload = "<script>alert('XSS_ATTACK')</script>"
-    res = client.get(f"/api/v1/search/medicines?q={xss_payload}")
+    res = client.get(f"/api/v1/medicines/search?q={xss_payload}")
     assert res.status_code == 200
     assert "<script>" not in res.text or "&lt;script&gt;" in res.text or isinstance(res.json(), list)
 

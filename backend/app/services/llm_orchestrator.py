@@ -331,7 +331,9 @@ def orchestrate_llm_pipeline(
         triage_status = "RED_URGENT"
     elif syndrome and syndrome["triage"] == "YELLOW_MODERATE":
         triage_status = "YELLOW_MODERATE"
-    elif any(w in user_text.lower() for w in ["neck stiffness", "stiff neck", "photophobia"]):
+    elif any(w in user_text.lower() for w in ["neck stiffness", "stiff neck"]):
+        triage_status = "RED_URGENT"
+    elif "photophobia" in user_text.lower() and ("fever" in user_text.lower() or "neck" in user_text.lower() or "stiff" in user_text.lower()):
         triage_status = "RED_URGENT"
     elif (req.patient_age and (req.patient_age <= 5 or req.patient_age >= 70)) or is_pregnant:
         triage_status = "YELLOW_MODERATE"
@@ -578,7 +580,7 @@ def build_orchestrator_prompt(req: OrchestratorRequest) -> PromptPreviewResponse
         f"\nUSER INPUT: \"{req.query}\""
     )
     return PromptPreviewResponse(
-        system_prompt="AuraMed AI v2.0 — Evidence-Based Clinical Decision Support System.",
+        system_prompt="AuraMed AI v2.0 — Evidence-Based Clinical Decision Support System and Clinical Assistant.",
         user_prompt=user_prompt,
         injected_context_summary=context_summary,
     )

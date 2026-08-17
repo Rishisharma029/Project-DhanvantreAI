@@ -51,17 +51,33 @@ class ClinicalSyndrome:
         self.question_category = question_category
 
     def evaluate(self, query_text: str, symptoms: List[str]) -> Optional[Dict[str, Any]]:
-        combined = (query_text + " " + " ".join(symptoms)).lower()
-        
-        # Hard stop if any excluded finding is present
-        if any(ex in combined for ex in self.excluded_findings):
-            return None
+        # Check if any excluded finding is present (and not negated)
+        for ex in self.excluded_findings:
+            ex_sym = any(ex in s.lower() for s in symptoms)
+            ex_text = ex in query_text.lower() and not any(neg + ex in query_text.lower() for neg in ["no ", "not ", "without ", "free of ", "denies ", "never "])
+            if ex_sym or ex_text:
+                return None
             
-        matched = [k for k in self.required_keywords if k in combined]
+        matched = []
+        for k in self.required_keywords:
+            # Check if keyword matches a normalized symptom name
+            matched_sym = any(k in s.lower() for s in symptoms)
+            # Or if it is in the query text and not negated
+            matched_text = k in query_text.lower() and not any(neg + k in query_text.lower() for neg in ["no ", "not ", "without ", "free of ", "denies ", "never "])
+            if matched_sym or matched_text:
+                matched.append(k)
+                
         if len(matched) >= self.min_match_count:
             # Check supporting and red flags for analytics (optional usage by caller)
-            matched_supporting = [k for k in self.supporting_findings if k in combined]
-            matched_red = [k for k in self.red_flags if k in combined]
+            matched_supporting = []
+            for k in self.supporting_findings:
+                if any(k in s.lower() for s in symptoms) or (k in query_text.lower() and not any(neg + k in query_text.lower() for neg in ["no ", "not ", "without ", "free of ", "denies ", "never "])):
+                    matched_supporting.append(k)
+                    
+            matched_red = []
+            for k in self.red_flags:
+                if any(k in s.lower() for s in symptoms) or (k in query_text.lower() and not any(neg + k in query_text.lower() for neg in ["no ", "not ", "without ", "free of ", "denies ", "never "])):
+                    matched_red.append(k)
             
             return {
                 "syndrome_id": self.syndrome_id,

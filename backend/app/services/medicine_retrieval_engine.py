@@ -15,6 +15,7 @@ def search_medicines(
     """
     Search medicines across canonical name, brand name, generic name, composition, ingredients, or uses.
     """
+    query = query.replace("<", "&lt;").replace(">", "&gt;")
     q_clean = query.strip()
     if not q_clean:
         return MedicineSearchResponse(query=query, search_by=search_by, page=page, limit=limit, total_results=0, medicines=[])
