@@ -3,6 +3,7 @@
 # 🩺⚡ AuraMed AI (Project DhanvantreAI)
 ### *Next-Generation Clinical Decision Support & Medication Information Platform*
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-brightgreen?style=for-the-badge&logo=github&logoColor=white)](https://rishisharma029.github.io/Project-DhanvantreAI/)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
@@ -13,6 +14,18 @@
 [![Security](https://img.shields.io/badge/Security-HIPAA_Clean-818CF8?style=for-the-badge&logo=shield&logoColor=white)](#-security--hipaa-compliance)
 
 </div>
+
+---
+
+## 🌐 Live GitHub Pages Demo
+
+Explore the live static frontend application deployed directly via GitHub Pages:
+👉 **[Launch Live Demo: https://rishisharma029.github.io/Project-DhanvantreAI/](https://rishisharma029.github.io/Project-DhanvantreAI/)**
+
+- **Interactive AI Medical Chat**: [https://rishisharma029.github.io/Project-DhanvantreAI/chat.html](https://rishisharma029.github.io/Project-DhanvantreAI/chat.html)
+- **Clinical Dashboard**: [https://rishisharma029.github.io/Project-DhanvantreAI/dashboard.html](https://rishisharma029.github.io/Project-DhanvantreAI/dashboard.html)
+- **Disease Ontology Explorer**: [https://rishisharma029.github.io/Project-DhanvantreAI/diseases.html](https://rishisharma029.github.io/Project-DhanvantreAI/diseases.html)
+- **Medication Information & Safety**: [https://rishisharma029.github.io/Project-DhanvantreAI/medicines.html](https://rishisharma029.github.io/Project-DhanvantreAI/medicines.html)
 
 ---
 
