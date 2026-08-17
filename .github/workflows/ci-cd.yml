@@ -29,7 +29,7 @@ jobs:
       - name: Install Linting & Formatting Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 black isort mypy pydantic email-validator cryptography PyJWT pytest
+          pip install flake8 black isort mypy pydantic email-validator cryptography PyJWT psutil bcrypt pytest
 
       - name: Run Flake8 Linter
         run: |
@@ -90,7 +90,7 @@ jobs:
       - name: Install Application & Test Dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f backend/requirements.txt ]; then pip install -r backend/requirements.txt; else pip install fastapi uvicorn pydantic email-validator cryptography PyJWT pytest pytest-asyncio httpx gunicorn psycopg2-binary redis; fi
+          if [ -f backend/requirements.txt ]; then pip install -r backend/requirements.txt; else pip install fastapi uvicorn pydantic email-validator cryptography PyJWT psutil bcrypt pytest pytest-asyncio httpx gunicorn psycopg2-binary redis; fi
 
       - name: Execute Full Pytest Test Suite
         run: |
