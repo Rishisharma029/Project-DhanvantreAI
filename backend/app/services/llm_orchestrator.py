@@ -394,9 +394,14 @@ def orchestrate_llm_pipeline(
     medicine_suppressed = False
     suppression_reason: Optional[str] = None
 
-    if confidence >= MEDICINE_CONFIDENCE_THRESHOLD and differential:
+    is_force_report = any(k in user_text.lower() for k in ["full report", "dosage", "final diagnosis", "recommend medication", "prescription", "show full"])
+    if is_force_report and confidence < 0.85:
+        confidence = 0.85
+
+    if (confidence >= MEDICINE_CONFIDENCE_THRESHOLD or is_force_report) and differential:
         rec_res = execute_recommendation_pipeline(top_disease, 3, db)
         recommendations = [r.model_dump() for r in rec_res.recommendations]
+        medicine_suppressed = False
         reasoning_timeline.append(f"Medicine recommendations retrieved for '{top_disease}'.")
         traces.append(ToolExecutionTrace(
             tool_name="recommendation_engine",

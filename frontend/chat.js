@@ -361,171 +361,203 @@ function renderAiResponseStream(data) {
     // 2. Clinical Rationale Summary
     const rationaleHtml = data.clinical_rationale || `<p>Clinical diagnostic evaluation generated based on reported symptoms and evidence guidelines.</p>`;
 
-    // 3. Actual Differential Diagnosis Candidates Table
-    const diffs = data.differential_diagnosis || data.differential_diagnoses || [];
-    let diagTableHtml = '';
-    if (diffs.length > 0) {
-        diagTableHtml = `
-            <div style="margin: 16px 0; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px;">
-                <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                    <i class="fa-solid fa-stethoscope" style="color: var(--accent-cyan);"></i> Possible Differential Conditions
-                </div>
-                <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem;">
-                    <thead>
-                        <tr style="border-bottom: 1px solid var(--border-color); text-align: left; color: var(--text-dim);">
-                            <th style="padding: 6px 8px;">Possible Condition</th>
-                            <th style="padding: 6px 8px;">ICD-11</th>
-                            <th style="padding: 6px 8px; text-align: right;">Confidence</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${diffs.map(d => {
-                            const pPct = Math.round((d.probability || d.confidence || 0.40) * 100);
-                            const name = d.disease_name || d.name || 'Condition';
-                            const code = d.icd11_code || 'N/A';
-                            const supportingHtml = (d.supporting || []).map(s => `<span style="color:#10b981; margin-right:6px;">✔ ${escapeHtml(s)}</span>`).join(' ');
-                            const missingHtml = (d.missing || []).map(m => `<span style="color:#f43f5e; margin-right:6px;">✘ ${escapeHtml(m)}</span>`).join(' ');
-                            return `
-                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-                                    <td style="padding: 10px 8px;">
-                                        <div style="font-weight: 700; color: var(--text-main); font-size: 0.88rem;">${escapeHtml(name)}</div>
-                                        <div style="font-size: 0.75rem; margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px;">
-                                            ${supportingHtml} ${missingHtml}
-                                        </div>
-                                    </td>
-                                    <td style="padding: 10px 8px; color: var(--text-dim); font-family: monospace; vertical-align: top;">${escapeHtml(code)}</td>
-                                    <td style="padding: 10px 8px; text-align: right; font-weight: 700; color: ${pPct > 40 ? 'var(--accent-cyan)' : 'var(--text-muted)'}; vertical-align: top;">${pPct}%</td>
-                                </tr>
-                            `;
-                        }).join('')}
-                    </tbody>
-                </table>
-            </div>
-        `;
-    }
+    // 3. Check Assessment Phase: Interactive Questioning vs Full Final Report
+    const questions = data.followup_questions || data.followup_questions_list || [];
+    const isForceReport = Boolean(data.recommended_medicines && data.recommended_medicines.length > 0) || confidencePct >= 80 || data.is_emergency || questions.length === 0;
 
-    // 4. Transparent Explainability Grid (Matched vs Missing vs Conditions Less Likely)
-    const matchedList = data.matched_symptoms || data.extracted_symptoms || [];
-    const missingList = data.missing_symptoms || [];
-    const lessLikelyList = data.conditions_less_likely || [];
+    let fullHtml = '';
 
-    let explainabilityHtml = '';
-    if (matchedList.length > 0 || missingList.length > 0 || lessLikelyList.length > 0) {
-        explainabilityHtml = `
-            <div style="margin: 16px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
-                ${matchedList.length > 0 ? `
-                <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; padding: 12px;">
-                    <div style="font-size: 0.8rem; font-weight: 700; color: #10b981; margin-bottom: 6px;">
-                        <i class="fa-solid fa-circle-check"></i> Matched Symptoms
+    if (!isForceReport) {
+        // ── PHASE 1: INTERACTIVE STEP-BY-STEP QUESTIONING FLOW ──
+        let questionsBlockHtml = '';
+        if (questions.length > 0) {
+            questionsBlockHtml = `
+                <div style="margin: 16px 0; background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.25); border-radius: 12px; padding: 14px;">
+                    <div style="font-weight: 700; color: var(--text-main); font-size: 0.88rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-circle-question" style="color: var(--accent-purple);"></i> Please Answer to Narrow Down Diagnosis & Get Precise Medication Dosage:
                     </div>
-                    <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-main);">
-                        ${matchedList.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
-                    </ul>
-                </div>` : ''}
-                ${missingList.length > 0 ? `
-                <div style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: 10px; padding: 12px;">
-                    <div style="font-size: 0.8rem; font-weight: 700; color: #f43f5e; margin-bottom: 6px;">
-                        <i class="fa-solid fa-circle-xmark"></i> Missing Symptoms
-                    </div>
-                    <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-muted);">
-                        ${missingList.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
-                    </ul>
-                </div>` : ''}
-                ${lessLikelyList.length > 0 ? `
-                <div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 10px; padding: 12px;">
-                    <div style="font-size: 0.8rem; font-weight: 700; color: #a855f7; margin-bottom: 6px;">
-                        <i class="fa-solid fa-filter"></i> Conditions Less Likely
-                    </div>
-                    <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-muted);">
-                        ${lessLikelyList.map(c => `<li>${escapeHtml(c)}</li>`).join('')}
-                    </ul>
-                </div>` : ''}
-            </div>
-        `;
-    }
-
-    // 5. Recommended Evidence-Based Medication & Dosage Guidelines
-    const medList = data.recommended_medicines || [];
-    let medTableHtml = '';
-    if (medList.length > 0 && !data.medicine_recommendation_suppressed) {
-        medTableHtml = `
-            <div style="margin: 16px 0; background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; padding: 14px;">
-                <div style="font-weight: 700; font-size: 0.88rem; color: #10b981; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                    <i class="fa-solid fa-pills"></i> Recommended Evidence-Based Medication & Dosage Guidelines
-                </div>
-                <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem;">
-                    <thead>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; color: var(--text-dim);">
-                            <th style="padding: 6px 8px;">Medication / Active Ingredient</th>
-                            <th style="padding: 6px 8px;">Dosage & Frequency</th>
-                            <th style="padding: 6px 8px;">Duration & Instructions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${medList.map(m => {
-                            const name = typeof m === 'string' ? m : (m.medicine || m.name || 'Medication');
-                            const dosage = typeof m === 'object' ? (m.dosage || 'Standard Adult Dose') : 'As directed by physician';
-                            const freq = typeof m === 'object' ? (m.frequency || 'Per clinical indication') : '';
-                            const duration = typeof m === 'object' ? (m.duration || '3-5 Days') : '';
-                            const notes = typeof m === 'object' ? (m.notes || m.warnings || '') : '';
-                            return `
-                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-                                    <td style="padding: 10px 8px; vertical-align: top;">
-                                        <div style="font-weight: 700; color: var(--text-main); font-size: 0.88rem;">${escapeHtml(name)}</div>
-                                        ${notes ? `<div style="font-size: 0.75rem; color: #f59e0b; margin-top: 4px;">⚠️ ${escapeHtml(notes)}</div>` : ''}
-                                    </td>
-                                    <td style="padding: 10px 8px; color: var(--text-muted); vertical-align: top;">
-                                        <div style="font-weight: 600; color: var(--text-main);">${escapeHtml(dosage)}</div>
-                                        ${freq ? `<div style="font-size: 0.76rem; color: var(--text-dim);">${escapeHtml(freq)}</div>` : ''}
-                                    </td>
-                                    <td style="padding: 10px 8px; color: var(--text-muted); vertical-align: top;">
-                                        ${duration ? `<div style="font-weight: 600;">${escapeHtml(duration)}</div>` : ''}
-                                        <div style="font-size: 0.75rem; color: var(--accent-cyan);">Consult a licensed healthcare professional before starting any medication.</div>
-                                    </td>
-                                </tr>
-                            `;
-                        }).join('')}
-                    </tbody>
-                </table>
-            </div>
-        `;
-    }
-
-    // 6. Clickable Interactive Citations
-    const citations = data.citations || [];
-    let citationsHtml = '';
-    if (citations.length > 0) {
-        citationsHtml = `
-            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-color);">
-                <div style="font-size: 0.75rem; color: var(--text-dim); margin-bottom: 6px;">Evidence-Based Guideline Citations (Click to Inspect):</div>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    ${citations.map(c => `
-                        <span class="citation-tag" onclick="openCitation('${escapeHtml(c.title)}', '${escapeHtml(c.snippet)}', '${escapeHtml(c.evidence_grade || 'Grade A')}', '${escapeHtml(c.source_db || 'WHO / CDC Database')}')" style="cursor: pointer;">
-                            <i class="fa-solid fa-bookmark" style="color: var(--accent-cyan);"></i> [${escapeHtml(c.title.slice(0, 35))}...]
-                        </span>
+                    ${questions.slice(0, 3).map((q, idx) => `
+                        <div style="margin-bottom: 12px; padding: 10px 12px; background: rgba(0,0,0,0.25); border-radius: 8px;">
+                            <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px;">
+                                ${idx + 1}. ${escapeHtml(q)}
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <button onclick="clickYesNoAnswer('${escapeHtml(q)}', 'yes')" style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-check"></i> Yes
+                                </button>
+                                <button onclick="clickYesNoAnswer('${escapeHtml(q)}', 'no')" style="padding: 6px 16px; background: #f43f5e; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-xmark"></i> No
+                                </button>
+                            </div>
+                        </div>
                     `).join('')}
                 </div>
+            `;
+        }
+
+        const skipToReportHtml = `
+            <div style="margin-top: 14px; text-align: center;">
+                <button onclick="clickRequestFullReport()" style="padding: 10px 20px; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.84rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: transform 0.2s ease;">
+                    <i class="fa-solid fa-file-medical"></i> Show Full Diagnosis & Medication Dosage Report Now
+                </button>
             </div>
         `;
-    }
 
-    // 7. Category-Matched Follow-up Clarification Chips
-    const questions = data.followup_questions || data.followup_questions_list || [];
-    let followupChipsHtml = '';
-    if (questions.length > 0) {
-        followupChipsHtml = `
-            <div class="followup-chips-container" style="margin-top: 16px; background: rgba(139, 92, 246, 0.06); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; padding: 12px;">
-                <div class="chips-label" style="font-weight: 700; color: var(--text-main); font-size: 0.84rem; margin-bottom: 8px;">
-                    <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-purple);"></i> Suggested Follow-up Clarifications (Click to Answer):
-                </div>
-                <div class="chips-flex" style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    ${questions.map(q => `<button class="followup-chip" onclick="clickFollowupChip('${escapeHtml(q)}')"><i class="fa-solid fa-plus"></i> ${escapeHtml(q)}</button>`).join('')}
-                </div>
-            </div>
-        `;
-    }
+        fullHtml = statusHeader + rationaleHtml + questionsBlockHtml + skipToReportHtml;
 
-    const fullHtml = statusHeader + rationaleHtml + diagTableHtml + explainabilityHtml + medTableHtml + citationsHtml + followupChipsHtml;
+    } else {
+        // ── PHASE 2: FULL FINAL CONSULTATION REPORT (WITH DIFFERENTIALS & DOSAGE) ──
+
+        // 3. Actual Differential Diagnosis Candidates Table
+        const diffs = data.differential_diagnosis || data.differential_diagnoses || [];
+        let diagTableHtml = '';
+        if (diffs.length > 0) {
+            diagTableHtml = `
+                <div style="margin: 16px 0; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px;">
+                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-stethoscope" style="color: var(--accent-cyan);"></i> Final Differential Diagnosis
+                    </div>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border-color); text-align: left; color: var(--text-dim);">
+                                <th style="padding: 6px 8px;">Possible Condition</th>
+                                <th style="padding: 6px 8px;">ICD-11</th>
+                                <th style="padding: 6px 8px; text-align: right;">Confidence</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${diffs.map(d => {
+                                const pPct = Math.round((d.probability || d.confidence || 0.40) * 100);
+                                const name = d.disease_name || d.name || 'Condition';
+                                const code = d.icd11_code || 'N/A';
+                                const supportingHtml = (d.supporting || []).map(s => `<span style="color:#10b981; margin-right:6px;">✔ ${escapeHtml(s)}</span>`).join(' ');
+                                const missingHtml = (d.missing || []).map(m => `<span style="color:#f43f5e; margin-right:6px;">✘ ${escapeHtml(m)}</span>`).join(' ');
+                                return `
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                                        <td style="padding: 10px 8px;">
+                                            <div style="font-weight: 700; color: var(--text-main); font-size: 0.88rem;">${escapeHtml(name)}</div>
+                                            <div style="font-size: 0.75rem; margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px;">
+                                                ${supportingHtml} ${missingHtml}
+                                            </div>
+                                        </td>
+                                        <td style="padding: 10px 8px; color: var(--text-dim); font-family: monospace; vertical-align: top;">${escapeHtml(code)}</td>
+                                        <td style="padding: 10px 8px; text-align: right; font-weight: 700; color: ${pPct > 40 ? 'var(--accent-cyan)' : 'var(--text-muted)'}; vertical-align: top;">${pPct}%</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // 4. Transparent Explainability Grid
+        const matchedList = data.matched_symptoms || data.extracted_symptoms || [];
+        const missingList = data.missing_symptoms || [];
+        const lessLikelyList = data.conditions_less_likely || [];
+
+        let explainabilityHtml = '';
+        if (matchedList.length > 0 || missingList.length > 0 || lessLikelyList.length > 0) {
+            explainabilityHtml = `
+                <div style="margin: 16px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+                    ${matchedList.length > 0 ? `
+                    <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; padding: 12px;">
+                        <div style="font-size: 0.8rem; font-weight: 700; color: #10b981; margin-bottom: 6px;">
+                            <i class="fa-solid fa-circle-check"></i> Matched Symptoms
+                        </div>
+                        <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-main);">
+                            ${matchedList.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
+                        </ul>
+                    </div>` : ''}
+                    ${missingList.length > 0 ? `
+                    <div style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: 10px; padding: 12px;">
+                        <div style="font-size: 0.8rem; font-weight: 700; color: #f43f5e; margin-bottom: 6px;">
+                            <i class="fa-solid fa-circle-xmark"></i> Missing Symptoms
+                        </div>
+                        <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-muted);">
+                            ${missingList.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
+                        </ul>
+                    </div>` : ''}
+                    ${lessLikelyList.length > 0 ? `
+                    <div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 10px; padding: 12px;">
+                        <div style="font-size: 0.8rem; font-weight: 700; color: #a855f7; margin-bottom: 6px;">
+                            <i class="fa-solid fa-filter"></i> Conditions Less Likely
+                        </div>
+                        <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-muted);">
+                            ${lessLikelyList.map(c => `<li>${escapeHtml(c)}</li>`).join('')}
+                        </ul>
+                    </div>` : ''}
+                </div>
+            `;
+        }
+
+        // 5. Recommended Evidence-Based Medication & Dosage Guidelines
+        const medList = data.recommended_medicines || [];
+        let medTableHtml = '';
+        if (medList.length > 0 && !data.medicine_recommendation_suppressed) {
+            medTableHtml = `
+                <div style="margin: 16px 0; background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; padding: 14px;">
+                    <div style="font-weight: 700; font-size: 0.88rem; color: #10b981; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-pills"></i> Recommended Evidence-Based Medication & Dosage Guidelines
+                    </div>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; color: var(--text-dim);">
+                                <th style="padding: 6px 8px;">Medication / Active Ingredient</th>
+                                <th style="padding: 6px 8px;">Dosage & Frequency</th>
+                                <th style="padding: 6px 8px;">Duration & Instructions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${medList.map(m => {
+                                const name = typeof m === 'string' ? m : (m.medicine || m.name || 'Medication');
+                                const dosage = typeof m === 'object' ? (m.dosage || 'Standard Adult Dose') : 'As directed by physician';
+                                const freq = typeof m === 'object' ? (m.frequency || 'Per clinical indication') : '';
+                                const duration = typeof m === 'object' ? (m.duration || '3-5 Days') : '';
+                                const notes = typeof m === 'object' ? (m.notes || m.warnings || '') : '';
+                                return `
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                                        <td style="padding: 10px 8px; vertical-align: top;">
+                                            <div style="font-weight: 700; color: var(--text-main); font-size: 0.88rem;">${escapeHtml(name)}</div>
+                                            ${notes ? `<div style="font-size: 0.75rem; color: #f59e0b; margin-top: 4px;">⚠️ ${escapeHtml(notes)}</div>` : ''}
+                                        </td>
+                                        <td style="padding: 10px 8px; color: var(--text-muted); vertical-align: top;">
+                                            <div style="font-weight: 600; color: var(--text-main);">${escapeHtml(dosage)}</div>
+                                            ${freq ? `<div style="font-size: 0.76rem; color: var(--text-dim);">${escapeHtml(freq)}</div>` : ''}
+                                        </td>
+                                        <td style="padding: 10px 8px; color: var(--text-muted); vertical-align: top;">
+                                            ${duration ? `<div style="font-weight: 600;">${escapeHtml(duration)}</div>` : ''}
+                                            <div style="font-size: 0.75rem; color: var(--accent-cyan);">Consult a licensed healthcare professional before starting any medication.</div>
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // 6. Clickable Interactive Citations
+        const citations = data.citations || [];
+        let citationsHtml = '';
+        if (citations.length > 0) {
+            citationsHtml = `
+                <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-color);">
+                    <div style="font-size: 0.75rem; color: var(--text-dim); margin-bottom: 6px;">Evidence-Based Guideline Citations (Click to Inspect):</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        ${citations.map(c => `
+                            <span class="citation-tag" onclick="openCitation('${escapeHtml(c.title)}', '${escapeHtml(c.snippet)}', '${escapeHtml(c.evidence_grade || 'Grade A')}', '${escapeHtml(c.source_db || 'WHO / CDC Database')}')" style="cursor: pointer;">
+                                <i class="fa-solid fa-bookmark" style="color: var(--accent-cyan);"></i> [${escapeHtml(c.title.slice(0, 35))}...]
+                            </span>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        fullHtml = statusHeader + rationaleHtml + diagTableHtml + explainabilityHtml + medTableHtml + citationsHtml;
+    }
 
     // Simulated Typing Stream Effect
     cardContainer.innerHTML = `<span class="stream-text"></span><span class="typing-cursor"></span>`;
@@ -624,6 +656,23 @@ window.openCitation = function(title, snippet, evidenceGrade, sourceDb) {
         </div>
     `;
     modal.classList.remove('hidden');
+};
+
+/* 10. Interactive Yes/No & Full Report Click Handlers */
+window.clickYesNoAnswer = function(questionText, answer) {
+    const chatInput = document.getElementById('chatInput');
+    if (answer === 'yes') {
+        chatInput.value = `Yes, ${questionText}`;
+    } else {
+        chatInput.value = `No, ${questionText}`;
+    }
+    sendMessage();
+};
+
+window.clickRequestFullReport = function() {
+    const chatInput = document.getElementById('chatInput');
+    chatInput.value = "Show full final diagnosis and medication dosage report now";
+    sendMessage();
 };
 
 /* Helper Functions */
