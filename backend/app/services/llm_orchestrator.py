@@ -229,6 +229,11 @@ def orchestrate_llm_pipeline(
         if sym not in [s.lower() for s in symptom_names]:
             symptom_names.append(sym.title())
 
+    # Merge accumulated symptoms from previous conversation turns
+    for acc in (req.accumulated_symptoms or []):
+        if acc and acc.title() not in symptom_names:
+            symptom_names.append(acc.title())
+
     reasoning_timeline.append(f"Extracted {len(symptom_names)} clinical symptoms: {', '.join(symptom_names) or 'none'}")
     traces.append(ToolExecutionTrace(
         tool_name="entity_extraction_engine",
@@ -515,7 +520,7 @@ def orchestrate_llm_pipeline(
             f"Immediate emergency assessment is recommended. The primary diagnostic consideration is "
             f"<strong>{top_disease}</strong>.</p>"
         )
-    elif is_final_report:
+    elif is_force_report:
         clinical_rationale = (
             f"<p>Based on the reported symptoms and gathered clinical history, the primary clinical differential is "
             f"<strong>{top_disease}</strong>. "
