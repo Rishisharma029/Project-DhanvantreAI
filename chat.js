@@ -305,13 +305,34 @@ function renderAiResponseStream(data) {
         progressColor = '#3b82f6'; // blue
     }
 
+    // 1. Dynamic Red Flag Check Calculation
+    const matchedLower = (data.matched_symptoms || data.extracted_symptoms || []).map(s => String(s).toLowerCase());
+    const deniedLower = (data.denied_symptoms || []).map(s => String(s).toLowerCase());
+
+    function getRedFlagStatusHtml(symptomKeywords, deniedKeywords) {
+        const isMatched = matchedLower.some(m => symptomKeywords.some(k => m.includes(k)));
+        const isDenied = deniedLower.some(d => symptomKeywords.some(k => d.includes(k)));
+        if (isMatched) {
+            return '<strong style="color: #f43f5e;">🚨 YES</strong>';
+        } else if (isDenied) {
+            return '<strong style="color: #10b981;">❌ No</strong>';
+        } else {
+            return '<em style="color: var(--text-dim);">❓ Unknown</em>';
+        }
+    }
+
+    const chestPainStatus = getRedFlagStatusHtml(['chest pain', 'chest tightness', 'angina'], ['no chest pain']);
+    const breathingStatus = getRedFlagStatusHtml(['shortness of breath', 'breathing difficulty', 'dyspnea', 'breathlessness'], ['no shortness of breath']);
+    const confusionStatus = getRedFlagStatusHtml(['confusion', 'disorientation', 'altered mental'], ['no confusion']);
+    const seizureStatus = getRedFlagStatusHtml(['seizure', 'convulsion', 'fits'], ['no seizure']);
+
     let redFlagChecklist = `
         <div style="margin-top: 8px; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 8px; font-size: 0.76rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
             <strong style="color: var(--text-main);">Red Flag Check:</strong>
-            <span>Chest pain? <strong style="color: #10b981;">❌ No</strong></span> •
-            <span>Severe breathing difficulty? <strong style="color: #10b981;">❌ No</strong></span> •
-            <span>Confusion? <strong style="color: #10b981;">❌ No</strong></span> •
-            <span>Seizure? <strong style="color: #10b981;">❌ No</strong></span> •
+            <span>Chest pain? ${chestPainStatus}</span> •
+            <span>Severe breathing difficulty? ${breathingStatus}</span> •
+            <span>Confusion? ${confusionStatus}</span> •
+            <span>Seizure? ${seizureStatus}</span> •
             <span>O2 Sat <94%? <em style="color: var(--text-dim);">Unknown</em></span>
         </div>
     `;
@@ -384,40 +405,93 @@ function renderAiResponseStream(data) {
     }
 
     // 4. Transparent Explainability Grid (Matched vs Missing vs Conditions Less Likely)
-    const matchedList = data.matched_symptoms || ["Fever", "Dry Cough", "Sore Throat", "Headache"];
-    const missingList = data.missing_symptoms || ["Shortness of breath", "Neck stiffness", "Skin rash"];
-    const lessLikelyList = data.conditions_less_likely || ["Bacterial pneumonia", "Meningitis"];
+    const matchedList = data.matched_symptoms || data.extracted_symptoms || [];
+    const missingList = data.missing_symptoms || [];
+    const lessLikelyList = data.conditions_less_likely || [];
 
-    const explainabilityHtml = `
-        <div style="margin: 16px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
-            <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; padding: 12px;">
-                <div style="font-size: 0.8rem; font-weight: 700; color: #10b981; margin-bottom: 6px;">
-                    <i class="fa-solid fa-circle-check"></i> Matched Symptoms
-                </div>
-                <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-main);">
-                    ${matchedList.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
-                </ul>
+    let explainabilityHtml = '';
+    if (matchedList.length > 0 || missingList.length > 0 || lessLikelyList.length > 0) {
+        explainabilityHtml = `
+            <div style="margin: 16px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+                ${matchedList.length > 0 ? `
+                <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; padding: 12px;">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: #10b981; margin-bottom: 6px;">
+                        <i class="fa-solid fa-circle-check"></i> Matched Symptoms
+                    </div>
+                    <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-main);">
+                        ${matchedList.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
+                    </ul>
+                </div>` : ''}
+                ${missingList.length > 0 ? `
+                <div style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: 10px; padding: 12px;">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: #f43f5e; margin-bottom: 6px;">
+                        <i class="fa-solid fa-circle-xmark"></i> Missing Symptoms
+                    </div>
+                    <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-muted);">
+                        ${missingList.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
+                    </ul>
+                </div>` : ''}
+                ${lessLikelyList.length > 0 ? `
+                <div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 10px; padding: 12px;">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: #a855f7; margin-bottom: 6px;">
+                        <i class="fa-solid fa-filter"></i> Conditions Less Likely
+                    </div>
+                    <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-muted);">
+                        ${lessLikelyList.map(c => `<li>${escapeHtml(c)}</li>`).join('')}
+                    </ul>
+                </div>` : ''}
             </div>
-            <div style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.2); border-radius: 10px; padding: 12px;">
-                <div style="font-size: 0.8rem; font-weight: 700; color: #f43f5e; margin-bottom: 6px;">
-                    <i class="fa-solid fa-circle-xmark"></i> Missing Symptoms
-                </div>
-                <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-muted);">
-                    ${missingList.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
-                </ul>
-            </div>
-            <div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 10px; padding: 12px;">
-                <div style="font-size: 0.8rem; font-weight: 700; color: #a855f7; margin-bottom: 6px;">
-                    <i class="fa-solid fa-filter"></i> Conditions Less Likely
-                </div>
-                <ul style="padding-left: 16px; margin: 0; font-size: 0.78rem; color: var(--text-muted);">
-                    ${lessLikelyList.map(c => `<li>${escapeHtml(c)}</li>`).join('')}
-                </ul>
-            </div>
-        </div>
-    `;
+        `;
+    }
 
-    // 5. Clickable Interactive Citations
+    // 5. Recommended Evidence-Based Medication & Dosage Guidelines
+    const medList = data.recommended_medicines || [];
+    let medTableHtml = '';
+    if (medList.length > 0 && !data.medicine_recommendation_suppressed) {
+        medTableHtml = `
+            <div style="margin: 16px 0; background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; padding: 14px;">
+                <div style="font-weight: 700; font-size: 0.88rem; color: #10b981; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-pills"></i> Recommended Evidence-Based Medication & Dosage Guidelines
+                </div>
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; color: var(--text-dim);">
+                            <th style="padding: 6px 8px;">Medication / Active Ingredient</th>
+                            <th style="padding: 6px 8px;">Dosage & Frequency</th>
+                            <th style="padding: 6px 8px;">Duration & Instructions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${medList.map(m => {
+                            const name = typeof m === 'string' ? m : (m.medicine || m.name || 'Medication');
+                            const dosage = typeof m === 'object' ? (m.dosage || 'Standard Adult Dose') : 'As directed by physician';
+                            const freq = typeof m === 'object' ? (m.frequency || 'Per clinical indication') : '';
+                            const duration = typeof m === 'object' ? (m.duration || '3-5 Days') : '';
+                            const notes = typeof m === 'object' ? (m.notes || m.warnings || '') : '';
+                            return `
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                                    <td style="padding: 10px 8px; vertical-align: top;">
+                                        <div style="font-weight: 700; color: var(--text-main); font-size: 0.88rem;">${escapeHtml(name)}</div>
+                                        ${notes ? `<div style="font-size: 0.75rem; color: #f59e0b; margin-top: 4px;">⚠️ ${escapeHtml(notes)}</div>` : ''}
+                                    </td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted); vertical-align: top;">
+                                        <div style="font-weight: 600; color: var(--text-main);">${escapeHtml(dosage)}</div>
+                                        ${freq ? `<div style="font-size: 0.76rem; color: var(--text-dim);">${escapeHtml(freq)}</div>` : ''}
+                                    </td>
+                                    <td style="padding: 10px 8px; color: var(--text-muted); vertical-align: top;">
+                                        ${duration ? `<div style="font-weight: 600;">${escapeHtml(duration)}</div>` : ''}
+                                        <div style="font-size: 0.75rem; color: var(--accent-cyan);">Consult a licensed healthcare professional before starting any medication.</div>
+                                    </td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    }
+
+    // 6. Clickable Interactive Citations
     const citations = data.citations || [];
     let citationsHtml = '';
     if (citations.length > 0) {
@@ -435,7 +509,7 @@ function renderAiResponseStream(data) {
         `;
     }
 
-    // 6. Category-Matched Follow-up Clarification Chips
+    // 7. Category-Matched Follow-up Clarification Chips
     const questions = data.followup_questions || data.followup_questions_list || [];
     let followupChipsHtml = '';
     if (questions.length > 0) {
@@ -451,7 +525,7 @@ function renderAiResponseStream(data) {
         `;
     }
 
-    const fullHtml = statusHeader + rationaleHtml + diagTableHtml + explainabilityHtml + citationsHtml + followupChipsHtml;
+    const fullHtml = statusHeader + rationaleHtml + diagTableHtml + explainabilityHtml + medTableHtml + citationsHtml + followupChipsHtml;
 
     // Simulated Typing Stream Effect
     cardContainer.innerHTML = `<span class="stream-text"></span><span class="typing-cursor"></span>`;
@@ -494,9 +568,15 @@ function renderAiFallbackResponse(userText) {
             { disease_name: 'Angina Pectoris', probability: 0.52, icd11_code: 'BA40' },
             { disease_name: 'Musculoskeletal Chest Wall Strain', probability: 0.28, icd11_code: 'FB52' }
         ],
-        matched_symptoms: isResp ? ["Fever", "Dry Cough", "Sore Throat", "Headache"] : ["Chest Pain", "Shortness of Breath"],
+        matched_symptoms: isResp ? ["Fever", "Cough", "Sore Throat"] : ["Chest Pain"],
         missing_symptoms: isResp ? ["Shortness of breath", "Neck stiffness", "Skin rash"] : ["Radiating jaw pain", "Dizziness"],
         conditions_less_likely: isResp ? ["Bacterial pneumonia", "Meningitis"] : ["Acute coronary syndrome", "Aortic dissection"],
+        recommended_medicines: isResp ? [
+            { medicine: "Paracetamol (Acetaminophen)", dosage: "500 mg - 650 mg", frequency: "Every 4-6 hours as needed (Max 4g/day)", duration: "3-5 Days", notes: "Symptomatic relief for fever and body aches." },
+            { medicine: "Warm Saline Gargle & Hydration", dosage: "3-4 times daily", frequency: "Daily", duration: "3-5 Days", notes: "Symptomatic relief for sore throat." }
+        ] : [
+            { medicine: "Sublingual Nitroglycerin", dosage: "0.4 mg", frequency: "1 tablet under tongue every 5 min (max 3 doses)", duration: "Emergency Triage", notes: "Seek immediate emergency medical care." }
+        ],
         citations: [
             { title: 'WHO 2024 Clinical Guidelines: Upper Respiratory Infections', snippet: 'Evidence-based protocols for triaging viral URTI vs streptococcal pharyngitis in outpatient care.', evidence_grade: 'Grade A (Level 1a Evidence)', source_db: 'WHO Guidelines Registry' },
             { title: 'SNOMED-CT 195662009 & ICD-11 J06.9', snippet: 'Standardized clinical symptom ontology lookup for upper respiratory illness.', evidence_grade: 'Standard Medical Reference', source_db: 'SNOMED International' }
