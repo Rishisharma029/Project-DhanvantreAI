@@ -61,6 +61,7 @@ from app.api.ai_eval_dashboard_router import router as ai_eval_dashboard_router
 from app.api.clinical_eval_router import router as clinical_eval_router
 from app.api.v1.eval_dashboard import router as eval_dashboard_router
 from app.middleware.monitoring_middleware import MonitoringMiddleware
+from app.middleware.csrf_middleware import CSRFMiddleware
 from app.services.api_gateway_service import gateway_rate_limiter
 
 
@@ -96,6 +97,7 @@ app = FastAPI(
 # 1. Response Compression Middleware (GZip >= 500 bytes)
 app.add_middleware(GZipMiddleware, minimum_size=500)
 app.add_middleware(MonitoringMiddleware)
+app.add_middleware(CSRFMiddleware)
 
 # 2. Configure CORS (Domain-Restricted Production Policy)
 allowed_origins = settings.CORS_ORIGINS if (settings.ENVIRONMENT == "production" or os.getenv("CORS_ORIGINS")) else ["*"]

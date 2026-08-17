@@ -14,8 +14,31 @@ from app.services.auth_service import (
 )
 from app.services.audit_service import log_security_audit_event
 from app.api.deps import get_current_user, RoleChecker, oauth2_scheme
+from app.middleware.csrf_middleware import CSRFMiddleware
 
 router = APIRouter(prefix="/auth", tags=["Authentication & Authorization"])
+
+
+@router.get("/csrf-token")
+def get_csrf_token():
+    """
+    Get a CSRF token. The frontend should read this cookie and
+    send it back as X-XSRF-TOKEN header on unsafe requests.
+    """
+    from fastapi.responses import JSONResponse
+    token = CSRFMiddleware.generate_csrf_token()
+    response = JSONResponse(content={"csrf_token": token})
+    response.set_cookie(
+        key="XSRF-TOKEN",
+        value=token,
+        httponly=False,  # Must be readable by JS
+        secure=True,
+        samesite="Strict",
+        max_age=7200  # 2 hours
+    )
+    return response
+
+
 
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
