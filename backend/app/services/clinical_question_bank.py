@@ -55,8 +55,10 @@ def get_symptom_category(symptom_name: str) -> str:
             return cat
     return "General"
 
+from app.config import settings
+
 def get_db_connection():
-    db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), "medical_database.db")
+    db_path = settings.DATABASE_PATH
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
