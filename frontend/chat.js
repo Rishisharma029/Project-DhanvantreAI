@@ -363,7 +363,7 @@ function renderAiResponseStream(data) {
 
     // 3. Check Assessment Phase: Interactive Questioning vs Full Final Report
     const questions = data.followup_questions || data.followup_questions_list || [];
-    const isForceReport = Boolean(data.recommended_medicines && data.recommended_medicines.length > 0) || confidencePct >= 80 || data.is_emergency || questions.length === 0;
+    const isForceReport = (data.recommended_medicines && data.recommended_medicines.length > 0 && !data.medicine_recommendation_suppressed) || confidencePct >= 80 || data.is_emergency || questions.length === 0;
 
     let fullHtml = '';
 
@@ -586,11 +586,17 @@ function renderAiResponseStream(data) {
 
 function renderAiFallbackResponse(userText) {
     const isResp = /fever|cough|throat|sore|headache/i.test(userText);
+    const isForce = /full report|dosage|final diagnosis|recommend medication|prescription|show full|give report/i.test(userText);
+    const isEmerg = userText.toLowerCase().includes('chest');
+    
     renderAiResponseStream({
-        confidence_score: isResp ? 0.48 : 0.42,
-        triage_status: userText.toLowerCase().includes('chest') ? 'RED_URGENT' : 'GREEN_STABLE',
-        is_emergency: userText.toLowerCase().includes('chest'),
-        clinical_rationale: `<p>Based on your reported symptoms: <em>"${escapeHtml(userText)}"</em>, our engine synthesized evidence-based differential candidates against clinical practice guidelines.</p>`,
+        confidence_score: isForce ? 0.85 : (isResp ? 0.48 : 0.42),
+        triage_status: isEmerg ? 'RED_URGENT' : 'GREEN_STABLE',
+        is_emergency: isEmerg,
+        medicine_recommendation_suppressed: !isForce && !isEmerg,
+        clinical_rationale: isForce ? 
+            `<p>Based on your reported symptoms: <em>"${escapeHtml(userText)}"</em>, our engine synthesized evidence-based differential candidates against clinical practice guidelines.</p>` :
+            `<p>I have noted your reported symptom(s): <em>"${escapeHtml(userText)}"</em>. To narrow down the differential diagnosis and provide evidence-based medication & dosage guidelines, please answer the following question(s):</p>`,
         differential_diagnosis: isResp ? [
             { disease_name: 'Viral Upper Respiratory Infection', probability: 0.48, icd11_code: 'J06.9' },
             { disease_name: 'Influenza (Flu)', probability: 0.31, icd11_code: '1E30' },
@@ -614,18 +620,12 @@ function renderAiFallbackResponse(userText) {
             { title: 'SNOMED-CT 195662009 & ICD-11 J06.9', snippet: 'Standardized clinical symptom ontology lookup for upper respiratory illness.', evidence_grade: 'Standard Medical Reference', source_db: 'SNOMED International' }
         ],
         followup_questions: isResp ? [
-            'What is your current body temperature reading?',
-            'Is your cough dry or producing mucus/phlegm?',
-            'Are you experiencing difficulty breathing or shortness of breath?',
-            'Do you have nasal congestion or a runny nose?',
-            'Are you experiencing generalized body aches or fatigue?',
-            'Have you lost your sense of taste or smell?',
-            'Have you recently been around anyone who is sick?'
+            'What is your current body temperature reading (e.g. 101°F)?',
+            'Do you have shortness of breath, breathing difficulty, or chest pain?',
+            'Is your cough dry or producing phlegm/mucus?'
         ] : [
-            'Does the pain radiate to your arm, neck, or jaw?',
-            'What is your current blood pressure reading?',
-            'Is the chest pain accompanied by sweating, nausea, or dizziness?',
-            'Do you have a history of hypertension, high cholesterol, or diabetes?'
+            'Does the chest pain radiate to your arm, neck, or jaw?',
+            'Are you experiencing sweating, shortness of breath, or dizziness?'
         ]
     });
 }

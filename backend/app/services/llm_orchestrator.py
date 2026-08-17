@@ -515,12 +515,17 @@ def orchestrate_llm_pipeline(
             f"Immediate emergency assessment is recommended. The primary diagnostic consideration is "
             f"<strong>{top_disease}</strong>.</p>"
         )
-    else:
+    elif is_final_report:
         clinical_rationale = (
-            f"<p>Based on the reported symptoms, the primary clinical differential is "
+            f"<p>Based on the reported symptoms and gathered clinical history, the primary clinical differential is "
             f"<strong>{top_disease}</strong>. "
-            f"Current confidence is {int(confidence * 100)}% — additional history and investigation "
-            f"will improve diagnostic certainty.</p>"
+            f"Current diagnostic confidence is <strong>{int(confidence * 100)}%</strong>.</p>"
+        )
+    else:
+        sym_str = ", ".join(symptom_names) if symptom_names else user_text
+        clinical_rationale = (
+            f"<p>I have noted your reported symptom(s): <strong>{sym_str}</strong>. "
+            f"To narrow down the differential diagnosis and provide evidence-based medication & dosage guidelines, please answer the following question(s):</p>"
         )
 
     citations = _build_citations(syndrome_name, top_disease)
