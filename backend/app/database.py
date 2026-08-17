@@ -2,12 +2,25 @@ import sqlite3
 import os
 from app.config import settings
 
+def _ensure_valid_sqlite_db(db_path: str):
+    """If db_path is an un-fetched Git LFS pointer text file or invalid header, remove it so sqlite3 initializes a fresh valid database."""
+    if os.path.exists(db_path):
+        try:
+            with open(db_path, "rb") as f:
+                header = f.read(16)
+                if header.startswith(b"version https://") or (len(header) > 0 and not header.startswith(b"SQLite format 3")):
+                    f.close()
+                    os.remove(db_path)
+        except Exception:
+            pass
+
 def get_db():
     """
     Dependency that provides a database connection.
     Closes the connection after request is completed.
     """
     db_path = settings.DATABASE_PATH
+    _ensure_valid_sqlite_db(db_path)
     conn = sqlite3.connect(db_path, check_same_thread=False, timeout=30.0)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA busy_timeout = 30000;")
@@ -19,6 +32,7 @@ def get_db():
 
 def init_user_db():
     """Ensure user-related tables exist in the medical database."""
+    _ensure_valid_sqlite_db(settings.DATABASE_PATH)
     conn = sqlite3.connect(settings.DATABASE_PATH, timeout=30.0)
     conn.execute("PRAGMA busy_timeout = 30000;")
     cursor = conn.cursor()
