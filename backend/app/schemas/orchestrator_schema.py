@@ -51,6 +51,7 @@ class OrchestratorRequest(BaseModel):
     # Conversation tracking
     turns_answered: Optional[int] = 0
     previously_asked_question_ids: Optional[List[str]] = []
+    accumulated_symptoms: Optional[List[str]] = []
 
     @model_validator(mode="before")
     @classmethod
