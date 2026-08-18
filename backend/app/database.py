@@ -45,6 +45,7 @@ def init_user_db():
             role TEXT DEFAULT 'user', -- user, doctor, admin
             is_active INTEGER DEFAULT 1,
             is_verified INTEGER DEFAULT 0,
+            password_changed_at TIMESTAMP DEFAULT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
@@ -249,6 +250,20 @@ def init_user_db():
         );
 
         CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+
+        -- Migration: Add password_changed_at column if not present
+        PRAGMA table_info(users);
+    """)
+
+    # Ensure password_changed_at column exists
+    cursor = conn.cursor()
+    cursor.execute("PRAGMA table_info(users);")
+    columns = [row[1] for row in cursor.fetchall()]
+    if "password_changed_at" not in columns:
+        cursor.execute("ALTER TABLE users ADD COLUMN password_changed_at TIMESTAMP DEFAULT NULL;")
+
+    # Ensure password_changed_at column exists in auth_tokens refresh check
+    cursor.executescript("""
         CREATE INDEX IF NOT EXISTS idx_refresh_token ON refresh_tokens(token);
         CREATE INDEX IF NOT EXISTS idx_auth_token ON auth_tokens(token);
         CREATE INDEX IF NOT EXISTS idx_profile_user_id ON user_medical_profiles(user_id);

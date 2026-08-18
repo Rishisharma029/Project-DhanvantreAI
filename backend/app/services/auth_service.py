@@ -18,8 +18,12 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     hash_bytes = hashed_password.encode('utf-8')
     return bcrypt.checkpw(pwd_bytes, hash_bytes)
 
-def create_access_token(user_id: int, email: str, role: str) -> str:
-    """Create short-lived JWT access token with unique JTI and IAT."""
+def create_access_token(user_id: int, email: str, role: str, password_changed_at: str = None) -> str:
+    """Create short-lived JWT access token with unique JTI and IAT.
+    
+    Includes password_changed_at in the payload so the auth dependency
+    can reject tokens issued before a password change.
+    """
     now = datetime.now(timezone.utc)
     expire = now + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     payload = {
@@ -31,6 +35,8 @@ def create_access_token(user_id: int, email: str, role: str) -> str:
         "jti": str(uuid.uuid4()),
         "type": "access"
     }
+    if password_changed_at:
+        payload["password_changed_at"] = password_changed_at
     return jwt.encode(payload, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
 def decode_access_token(token: str) -> dict:

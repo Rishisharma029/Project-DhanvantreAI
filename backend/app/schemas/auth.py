@@ -36,6 +36,11 @@ class ResetPasswordRequest(BaseModel):
     token: str
     new_password: str = Field(..., min_length=6)
 
+class ChangePasswordRequest(BaseModel):
+    """Request for authenticated users to change their own password."""
+    current_password: str
+    new_password: str = Field(..., min_length=6)
+
 class EmailVerifyRequest(BaseModel):
     token: str
 

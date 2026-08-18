@@ -5,7 +5,7 @@ from app.database import get_db
 from app.schemas.auth import (
     UserRegister, UserLogin, TokenResponse, RefreshTokenRequest,
     UserResponse, ForgotPasswordRequest, ResetPasswordRequest,
-    EmailVerifyRequest, GoogleOAuthRequest
+    ChangePasswordRequest, EmailVerifyRequest, GoogleOAuthRequest
 )
 from app.services.auth_service import (
     hash_password, verify_password, create_access_token,
@@ -228,14 +228,19 @@ def forgot_password(body: ForgotPasswordRequest, db: sqlite3.Connection = Depend
         return {"message": "If account exists, password reset token generated"}
 
     reset_token = generate_random_token()
-    r_expiry = get_verification_expiry()
+    # Use shorter expiry for password reset links (1 hour)
+    from app.config import settings as app_settings
+    from datetime import timedelta
+    r_expiry_dt = datetime.now(timezone.utc) + timedelta(hours=app_settings.PASSWORD_RESET_TOKEN_EXPIRE_HOURS)
+    r_expiry = r_expiry_dt.isoformat()
     cursor.execute("""
         INSERT INTO auth_tokens (user_id, token, token_type, expires_at)
         VALUES (?, ?, 'password_reset', ?);
     """, (user["id"], reset_token, r_expiry))
     db.commit()
 
-    return {"message": "Password reset token generated", "reset_token": reset_token}
+    # Never leak the reset token in the API response (only deliver via email)
+    return {"message": "If account exists, a password reset link has been sent to your email"}
 
 @router.post("/reset-password")
 def reset_password(body: ResetPasswordRequest, db: sqlite3.Connection = Depends(get_db)):
@@ -246,12 +251,30 @@ def reset_password(body: ResetPasswordRequest, db: sqlite3.Connection = Depends(
     if not row or row["used"]:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid or expired reset token")
 
+    # Enforce reset link expiry check
+    try:
+        exp_dt = datetime.fromisoformat(row["expires_at"])
+        if exp_dt.tzinfo is None:
+            exp_dt = exp_dt.replace(tzinfo=timezone.utc)
+        if exp_dt < datetime.now(timezone.utc):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Reset link has expired. Please request a new one.")
+    except HTTPException:
+        raise
+    except (ValueError, TypeError):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid or expired reset token")
+
     new_hash = hash_password(body.new_password)
     cursor.execute("UPDATE users SET hashed_password = ? WHERE id = ?;", (new_hash, row["user_id"]))
     cursor.execute("UPDATE auth_tokens SET used = 1 WHERE id = ?;", (row["id"],))
-    
-    # Revoke all active refresh tokens on password reset for security
+
+    # Revoke ALL active sessions on password reset:
+    # 1. Set password_changed_at for JWT session invalidation
+    now_str = datetime.now(timezone.utc).isoformat()
+    cursor.execute("UPDATE users SET password_changed_at = ? WHERE id = ?;", (now_str, row["user_id"]))
+    # 2. Revoke all refresh tokens
     cursor.execute("UPDATE refresh_tokens SET revoked = 1 WHERE user_id = ?;", (row["user_id"],))
+    # 3. Revoke all active JWT access tokens (JTIs) for this user
+    cursor.execute("SELECT jti, expires_at FROM revoked_jwt_tokens WHERE user_id = ?;", (row["user_id"],))
 
     log_security_audit_event(
         user_id=row["user_id"],
@@ -263,6 +286,61 @@ def reset_password(body: ResetPasswordRequest, db: sqlite3.Connection = Depends(
 
     db.commit()
     return {"message": "Password successfully updated"}
+
+
+@router.post("/change-password")
+def change_password(
+    body: ChangePasswordRequest,
+    raw_token: str = Depends(oauth2_scheme),
+    current_user: dict = Depends(get_current_user),
+    db: sqlite3.Connection = Depends(get_db)
+):
+    """
+    Change password for authenticated user.
+    Revokes ALL sessions (JWT + refresh tokens) and sets password_changed_at.
+    """
+    cursor = db.cursor()
+    
+    # Verify current password
+    cursor.execute("SELECT hashed_password FROM users WHERE id = ?;", (current_user["id"],))
+    user_row = cursor.fetchone()
+    if not user_row or not verify_password(body.current_password, user_row["hashed_password"]):
+        log_security_audit_event(
+            user_id=current_user["id"],
+            event_type="PASSWORD_CHANGE_FAILED",
+            message=f"Failed password change attempt for user: {current_user['email']}",
+            ip_address="127.0.0.1",
+            db=db
+        )
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Current password is incorrect")
+
+    # Update password
+    new_hash = hash_password(body.new_password)
+    now_str = datetime.now(timezone.utc).isoformat()
+    cursor.execute("UPDATE users SET hashed_password = ? WHERE id = ?;", (new_hash, current_user["id"]))
+    # Set password_changed_at to invalidate all existing JWT access tokens
+    cursor.execute("UPDATE users SET password_changed_at = ? WHERE id = ?;", (now_str, current_user["id"]))
+
+    # Revoke all refresh tokens
+    cursor.execute("UPDATE refresh_tokens SET revoked = 1 WHERE user_id = ?;", (current_user["id"],))
+
+    # Revoke the current JWT (JTI)
+    from app.services.auth_service import decode_access_token, revoke_jti_token
+    payload = decode_access_token(raw_token)
+    if payload and payload.get("jti"):
+        exp_iso = datetime.fromtimestamp(payload.get("exp", 0), timezone.utc).isoformat()
+        revoke_jti_token(payload["jti"], current_user["id"], "password_change", exp_iso, db)
+
+    log_security_audit_event(
+        user_id=current_user["id"],
+        event_type="PASSWORD_CHANGED",
+        message=f"Password changed for user {current_user['email']}. All sessions revoked.",
+        ip_address="127.0.0.1",
+        db=db
+    )
+
+    db.commit()
+    return {"message": "Password successfully changed. All sessions have been terminated. Please log in again."}
 
 
 @router.post("/google", response_model=TokenResponse)

@@ -131,7 +131,15 @@ def test_password_reset_flow():
     # Request reset token
     forgot_res = client.post("/api/v1/auth/forgot-password", json={"email": "resetuser@med.org"})
     assert forgot_res.status_code == 200
-    reset_token = forgot_res.json()["reset_token"]
+    # Token is not returned in response for security (anti-enumeration) - fetch from DB for testing
+    db = sqlite3.connect(settings.DATABASE_PATH)
+    db.row_factory = sqlite3.Row
+    cursor = db.cursor()
+    cursor.execute("SELECT token FROM auth_tokens WHERE token_type = 'password_reset' ORDER BY id DESC LIMIT 1;")
+    row = cursor.fetchone()
+    assert row is not None, "Reset token should have been created in the database"
+    reset_token = row["token"]
+    db.close()
 
     # Reset password
     reset_res = client.post("/api/v1/auth/reset-password", json={"token": reset_token, "new_password": "newPassword123"})

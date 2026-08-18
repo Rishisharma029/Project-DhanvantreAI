@@ -3,6 +3,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from app.database import get_db
 from app.services.auth_service import decode_access_token, is_jti_revoked
+from datetime import datetime, timezone
 from app.schemas.auth import UserResponse
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
@@ -32,8 +33,24 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: sqlite3.Connection
         raise credentials_exception
 
 
+    # Enforce session invalidation on password change:
+    # If the JWT was issued (iat) before the password was last changed, reject it
+    pwd_changed_at = payload.get("password_changed_at")
+    token_iat = payload.get("iat")
+    if pwd_changed_at and token_iat:
+        pwd_changed_dt = datetime.fromisoformat(pwd_changed_at)
+        if pwd_changed_dt.tzinfo is None:
+            pwd_changed_dt = pwd_changed_dt.replace(tzinfo=timezone.utc)
+        iat_dt = datetime.fromtimestamp(token_iat, tz=timezone.utc)
+        if iat_dt < pwd_changed_dt:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Session invalidated due to password change. Please log in again.",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+
     cursor = db.cursor()
-    cursor.execute("SELECT id, email, full_name, role, is_active, is_verified, created_at FROM users WHERE id = ?;", (user_id,))
+    cursor.execute("SELECT id, email, full_name, role, is_active, is_verified, created_at, password_changed_at FROM users WHERE id = ?;", (user_id,))
     row = cursor.fetchone()
     if not row:
         raise credentials_exception
@@ -41,6 +58,20 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: sqlite3.Connection
     user_dict = dict(row)
     if not user_dict.get("is_active"):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Inactive user account")
+
+    # Cross-check DB: if password_changed_at is newer than the token's iat, reject
+    db_pwd_changed = user_dict.get("password_changed_at")
+    if db_pwd_changed and token_iat:
+        pwd_changed_dt = datetime.fromisoformat(db_pwd_changed)
+        if pwd_changed_dt.tzinfo is None:
+            pwd_changed_dt = pwd_changed_dt.replace(tzinfo=timezone.utc)
+        iat_dt = datetime.fromtimestamp(token_iat, tz=timezone.utc)
+        if iat_dt < pwd_changed_dt:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Session invalidated due to password change. Please log in again.",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
 
     return user_dict
 
