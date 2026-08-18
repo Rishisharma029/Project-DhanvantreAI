@@ -247,6 +247,8 @@
             margin-bottom: 8px;
         }
     </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -451,5 +453,67 @@
 
     <!-- Script -->
     <script src="medicines.js"></script>
+    <!-- Theme Enhancement: Harsh Gradients, Rainbow, Lucide -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            
+            // Add rainbow class to navbar
+            const navbar = document.querySelector('.navbar-header, nav');
+            if (navbar && !navbar.classList.contains('navbar-harsh')) {
+                navbar.classList.add('navbar-harsh');
+            }
+            
+            // Add rainbow heading to main headings
+            document.querySelectorAll('h1, h2').forEach(function(h) {
+                if (!h.classList.contains('rainbow-heading')) {
+                    h.classList.add('rainbow-heading');
+                }
+            });
+            
+            // Add theme toggle rainbow button
+            const themeBtn = document.getElementById('themeToggleBtn');
+            if (themeBtn && !themeBtn.classList.contains('theme-toggle-rainbow')) {
+                themeBtn.classList.add('theme-toggle-rainbow');
+            }
+            
+            // Add rainbow border to primary buttons
+            document.querySelectorAll('.btn-primary, .btn-hero, .btn-submit, button[type="submit"]').forEach(function(btn) {
+                if (!btn.classList.contains('btn-harsh')) {
+                    btn.classList.add('btn-harsh');
+                }
+            });
+            
+            // Add card rainbow hover to glass cards
+            document.querySelectorAll('.glass-card, .card, .metric-card, .stat-card').forEach(function(card) {
+                if (!card.classList.contains('card-rainbow-hover')) {
+                    card.classList.add('card-rainbow-hover');
+                }
+            });
+            
+            // Observe theme changes to update body background
+            function updateBodyBg() {
+                const theme = document.documentElement.getAttribute('data-theme');
+                if (theme === 'light') {
+                    document.body.style.backgroundColor = '#ffffff';
+                } else {
+                    document.body.style.backgroundColor = '#000000';
+                }
+            }
+            
+            // Initial
+            updateBodyBg();
+            
+            // Watch for theme changes
+            const observer = new MutationObserver(updateBodyBg);
+            observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['data-theme']
+            });
+        });
+    </script>
 </body>
 </html>
