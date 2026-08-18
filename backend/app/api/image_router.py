@@ -1,8 +1,9 @@
 import base64
 import re
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, status
 from app.schemas.image_ai_schema import ImageAIRequest, ImageAIResponse
 from app.services.image_ai_engine import process_image_ai_analysis
+from app.utils.prompt_injection_guard import validate_and_sanitize_input
 
 router = APIRouter(prefix="/image", tags=["Image AI"])
 
@@ -68,6 +69,16 @@ def analyze_medical_image_endpoint(req: ImageAIRequest):
     Appends mandatory non-definitive clinical disclaimers.
     """
     validate_image_upload(req.image_base64_or_path)
+
+    # Prompt injection check on clinical context
+    if req.clinical_context:
+        sanitized_context, error_msg = validate_and_sanitize_input(req.clinical_context)
+        if error_msg:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=error_msg,
+            )
+        req.clinical_context = sanitized_context
 
     try:
         return process_image_ai_analysis(req)

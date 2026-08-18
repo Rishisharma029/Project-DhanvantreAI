@@ -42,6 +42,58 @@ class Settings:
         ).split(",") if origin.strip()
     ]
 
+    # Stripe / Payment Settings
+    STRIPE_SECRET_KEY: str = os.getenv("STRIPE_SECRET_KEY", "")
+    STRIPE_WEBHOOK_SECRET: str = os.getenv("STRIPE_WEBHOOK_SECRET", "")
+    STRIPE_PUBLISHABLE_KEY: str = os.getenv("STRIPE_PUBLISHABLE_KEY", "")
+
+    # Server-Side Plan Catalog
+    # Prices are in smallest currency unit (cents/paise). NEVER trust client-provided prices.
+    # The subscription endpoint always looks up prices from this catalog.
+    PLAN_CATALOG: dict[str, dict] = {
+        "free": {
+            "id": "free",
+            "name": "Free Tier",
+            "description": "Basic clinical decision support",
+            "price_cents": 0,
+            "currency": "usd",
+            "stripe_price_id": "",  # Set via env or admin
+            "features": ["basic_symptom_check", "5_queries_per_day"],
+        },
+        "pro": {
+            "id": "pro",
+            "name": "Pro Tier",
+            "description": "Advanced clinical AI with full reasoning",
+            "price_cents": 2999,  # $29.99/month
+            "currency": "usd",
+            "stripe_price_id": "",  # Set via env or admin
+            "features": [
+                "full_10_step_pipeline",
+                "unlimited_queries",
+                "document_ai",
+                "voice_ai",
+                "image_ai",
+                "export_reports",
+            ],
+        },
+        "enterprise": {
+            "id": "enterprise",
+            "name": "Enterprise Tier",
+            "description": "Full platform access with API and support",
+            "price_cents": 9999,  # $99.99/month
+            "currency": "usd",
+            "stripe_price_id": "",  # Set via env or admin
+            "features": [
+                "all_pro_features",
+                "api_access",
+                "priority_support",
+                "custom_integrations",
+                "audit_logs",
+                "sla",
+            ],
+        },
+    }
+
 settings = Settings()
 
 

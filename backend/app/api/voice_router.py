@@ -1,8 +1,9 @@
 import base64
 import re
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, status
 from app.schemas.voice_ai_schema import VoiceInteractionRequest, VoiceInteractionResponse
 from app.services.voice_ai_engine import process_voice_interaction
+from app.utils.prompt_injection_guard import validate_and_sanitize_input
 
 router = APIRouter(prefix="/voice", tags=["Voice AI"])
 
@@ -51,6 +52,16 @@ def voice_interact_endpoint(req: VoiceInteractionRequest):
     """
     if req.audio_base64:
         validate_audio_upload(req.audio_base64)
+
+    # Prompt injection check on transcribed text
+    if req.transcribed_text:
+        sanitized_text, error_msg = validate_and_sanitize_input(req.transcribed_text)
+        if error_msg:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=error_msg,
+            )
+        req.transcribed_text = sanitized_text
 
     try:
         return process_voice_interaction(req)

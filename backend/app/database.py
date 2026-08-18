@@ -249,6 +249,44 @@ def init_user_db():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
 
+        -- Payment / Subscription Tables
+        CREATE TABLE IF NOT EXISTS subscriptions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            plan_id TEXT NOT NULL, -- free, pro, enterprise
+            stripe_subscription_id TEXT UNIQUE,
+            stripe_customer_id TEXT UNIQUE,
+            status TEXT DEFAULT 'active', -- active, canceled, past_due, unpaid, incomplete
+            current_period_start TIMESTAMP,
+            current_period_end TIMESTAMP,
+            cancel_at_period_end INTEGER DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        );
+
+        CREATE TABLE IF NOT EXISTS webhook_events (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            event_id TEXT UNIQUE NOT NULL, -- Stripe event ID (evt_...)
+            event_type TEXT NOT NULL,
+            payload TEXT DEFAULT '{}', -- Raw JSON payload
+            processed INTEGER DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS payment_events (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            stripe_event_id TEXT,
+            event_type TEXT NOT NULL, -- checkout.session.completed, invoice.payment_succeeded, customer.subscription.deleted
+            amount_cents INTEGER DEFAULT 0,
+            currency TEXT DEFAULT 'usd',
+            plan_id TEXT,
+            status TEXT DEFAULT 'processed',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        );
+
         CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 
         -- Migration: Add password_changed_at column if not present
@@ -279,6 +317,9 @@ def init_user_db():
         CREATE INDEX IF NOT EXISTS idx_ai_logs_user ON ai_usage_logs(user_id);
         CREATE INDEX IF NOT EXISTS idx_audit_log_type ON system_audit_logs(log_type);
         CREATE INDEX IF NOT EXISTS idx_rec_hist_user ON recommendation_history_logs(user_id);
+        CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id);
+        CREATE INDEX IF NOT EXISTS idx_webhook_events_event_id ON webhook_events(event_id);
+        CREATE INDEX IF NOT EXISTS idx_payment_events_user_id ON payment_events(user_id);
     """)
 
     # Seed Default Temporary / Demo Users

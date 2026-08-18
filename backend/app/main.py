@@ -61,7 +61,6 @@ from app.api.ai_eval_dashboard_router import router as ai_eval_dashboard_router
 from app.api.clinical_eval_router import router as clinical_eval_router
 from app.api.v1.eval_dashboard import router as eval_dashboard_router
 from app.middleware.monitoring_middleware import MonitoringMiddleware
-from app.middleware.csrf_middleware import CSRFMiddleware
 from app.services.api_gateway_service import gateway_rate_limiter
 
 
@@ -97,7 +96,6 @@ app = FastAPI(
 # 1. Response Compression Middleware (GZip >= 500 bytes)
 app.add_middleware(GZipMiddleware, minimum_size=500)
 app.add_middleware(MonitoringMiddleware)
-app.add_middleware(CSRFMiddleware)
 
 # 2. Configure CORS (Domain-Restricted Production Policy)
 allowed_origins = settings.CORS_ORIGINS if (settings.ENVIRONMENT == "production" or os.getenv("CORS_ORIGINS")) else ["*"]
@@ -384,13 +382,7 @@ def notifications_page():
         return FileResponse(notif_index)
     return {"error": "Notifications page not found"}
 
-@app.get("/admin")
-@app.get("/admin.html")
-def admin_page():
-    adm_index = _get_frontend_file("admin.html")
-    if adm_index:
-        return FileResponse(adm_index)
-    return {"error": "Admin page not found"}
+# Unauthenticated admin page routes removed for security hardening
 
 @app.get("/performance")
 @app.get("/performance.html")
@@ -432,8 +424,18 @@ for p in [
         frontend_dir = p
         break
 
+class NoDirectoryListingStaticFiles(StaticFiles):
+    async def get_response(self, path: str, scope):
+        try:
+            full_path = self.get_path(path)
+            if os.path.isdir(full_path):
+                return Response(content='{"detail": "Directory listing is forbidden."}', status_code=403, media_type="application/json")
+        except Exception:
+            pass
+        return await super().get_response(path, scope)
+
 if frontend_dir:
-    app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
+    app.mount("/static", NoDirectoryListingStaticFiles(directory=frontend_dir), name="static")
 
 # Include Routers
 app.include_router(auth_router, prefix=settings.API_V1_STR)
@@ -500,3 +502,5 @@ app.include_router(monitoring_router)
 
 
 
+from app.api.payment_router import router as payment_router
+app.include_router(payment_router, prefix=settings.API_V1_STR)

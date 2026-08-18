@@ -1,8 +1,9 @@
 import re
 import os
-from fastapi import APIRouter, HTTPException, Header
+from fastapi import APIRouter, HTTPException, Header, status
 from app.schemas.document_ai_schema import DocumentAIRequest, DocumentAIResponse
 from app.services.document_ai_engine import process_document_ai
+from app.utils.prompt_injection_guard import validate_and_sanitize_input
 
 router = APIRouter(prefix="/document", tags=["Document AI"])
 
@@ -57,6 +58,16 @@ def analyze_document_endpoint(req: DocumentAIRequest, content_type: str = Header
     """
     validate_document_upload(req.file_filename)
     validate_document_mime(content_type)
+
+    # Prompt injection check on raw OCR text (if provided)
+    if hasattr(req, 'raw_ocr_text') and req.raw_ocr_text:
+        sanitized_text, error_msg = validate_and_sanitize_input(req.raw_ocr_text)
+        if error_msg:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=error_msg,
+            )
+        req.raw_ocr_text = sanitized_text
 
     try:
         return process_document_ai(req)
