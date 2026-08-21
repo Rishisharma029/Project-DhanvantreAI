@@ -78,7 +78,9 @@ def analyze_document_endpoint(req: DocumentAIRequest, content_type: str = Header
         req.raw_ocr_text = sanitized_text
 
     try:
-        return process_document_ai(req)
+        # Note: In a real app, 'db' would be a dependency. 
+        # For the current engine signature, we pass None as the engine handles fallback logic.
+        return process_document_ai(req, db=None)
     except HTTPException:
         raise
     except Exception as e:
