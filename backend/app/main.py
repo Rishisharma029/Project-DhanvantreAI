@@ -503,4 +503,37 @@ app.include_router(monitoring_router)
 
 
 from app.api.payment_router import router as payment_router
+from fastapi import UploadFile, File, BackgroundTasks
+from unihack_processor import UniHackProductProcessor
+import shutil
+from fastapi.responses import FileResponse
 app.include_router(payment_router, prefix=settings.API_V1_STR)
+
+@app.post("/api/v1/unihack/process", tags=["UniHack"])
+async def process_unihack_data(background_tasks: BackgroundTasks, file: UploadFile = File(...)):
+    """Hackathon-specific endpoint for processing industrial product data."""
+    temp_input = f"temp_{file.filename}"
+    output_file = f"processed_{file.filename.replace('.csv', '.xlsx')}"
+    
+    with open(temp_input, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+        
+    processor = UniHackProductProcessor()
+    # Ensure it outputs XLSX as requested by hackathon
+    count = processor.process_csv(temp_input, output_file)
+    
+    # Cleanup input in background
+    background_tasks.add_task(os.remove, temp_input)
+    
+    return {
+        "status": "success",
+        "message": f"Processed {count} rows successfully",
+        "download_url": f"/api/v1/unihack/download/{output_file}"
+    }
+
+@app.get("/api/v1/unihack/download/{filename}", tags=["UniHack"])
+async def download_unihack_file(filename: str):
+    """Download the processed UniHack file."""
+    if os.path.exists(filename):
+        return FileResponse(filename, filename=filename)
+    return {"error": "File not found"}
