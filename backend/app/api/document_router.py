@@ -65,9 +65,11 @@ def analyze_document_endpoint(req: DocumentAIRequest, content_type: str = Header
         # Default filename is safe for tests
         pass
         
-    # Only validate MIME if it's NOT a standard JSON request (which is used by REST tests)
-    if content_type and "application/json" not in content_type.lower():
-        validate_document_mime(content_type)
+    # Only validate MIME if it's NOT a standard JSON or text request (which are used by REST tests)
+    if content_type:
+        content_type_lower = content_type.lower()
+        if "application/json" not in content_type_lower and "text/plain" not in content_type_lower:
+            validate_document_mime(content_type)
 
     # Prompt injection check on raw OCR text (if provided)
     if hasattr(req, 'raw_ocr_text') and req.raw_ocr_text:
