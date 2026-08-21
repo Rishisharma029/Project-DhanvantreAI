@@ -64,7 +64,9 @@ def voice_interact_endpoint(req: VoiceInteractionRequest):
         req.transcribed_text = sanitized_text
 
     try:
-        return process_voice_interaction(req)
+        # Note: In a real app, 'db' would be a dependency. 
+        # For the current engine signature, we pass None as the engine handles fallback logic.
+        return process_voice_interaction(req, db=None)
     except HTTPException:
         raise
     except Exception as e:
