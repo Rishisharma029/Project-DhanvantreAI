@@ -1,8 +1,10 @@
 import base64
 import re
-from fastapi import APIRouter, HTTPException, status
+import sqlite3
+from fastapi import APIRouter, HTTPException, status, Depends
 from app.schemas.voice_ai_schema import VoiceInteractionRequest, VoiceInteractionResponse
 from app.services.voice_ai_engine import process_voice_interaction
+from app.database import get_db
 from app.utils.prompt_injection_guard import validate_and_sanitize_input
 
 router = APIRouter(prefix="/voice", tags=["Voice AI"])
@@ -45,7 +47,7 @@ def validate_audio_upload(data: str) -> None:
 
 
 @router.post("/interact", response_model=VoiceInteractionResponse)
-def voice_interact_endpoint(req: VoiceInteractionRequest):
+def voice_interact_endpoint(req: VoiceInteractionRequest, db: sqlite3.Connection = Depends(get_db)):
     """
     Execute Voice AI Pipeline:
     Processes transcribed text or audio for symptom analysis.
@@ -64,9 +66,7 @@ def voice_interact_endpoint(req: VoiceInteractionRequest):
         req.transcribed_text = sanitized_text
 
     try:
-        # Note: In a real app, 'db' would be a dependency. 
-        # For the current engine signature, we pass None as the engine handles fallback logic.
-        return process_voice_interaction(req, db=None)
+        return process_voice_interaction(req, db=db)
     except HTTPException:
         raise
     except Exception as e:

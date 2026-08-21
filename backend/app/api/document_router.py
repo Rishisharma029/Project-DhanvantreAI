@@ -1,8 +1,10 @@
 import re
 import os
-from fastapi import APIRouter, HTTPException, Header, status
+import sqlite3
+from fastapi import APIRouter, HTTPException, Header, status, Depends
 from app.schemas.document_ai_schema import DocumentAIRequest, DocumentAIResponse
 from app.services.document_ai_engine import process_document_ai
+from app.database import get_db
 from app.utils.prompt_injection_guard import validate_and_sanitize_input
 
 router = APIRouter(prefix="/document", tags=["Document AI"])
@@ -51,7 +53,7 @@ def validate_document_mime(content_type: str = None) -> None:
 
 
 @router.post("/analyze", response_model=DocumentAIResponse)
-def analyze_document_endpoint(req: DocumentAIRequest, content_type: str = Header(None)):
+def analyze_document_endpoint(req: DocumentAIRequest, content_type: str = Header(None), db: sqlite3.Connection = Depends(get_db)):
     """
     Execute Document AI Pipeline:
     Extracts lab entities from prescriptions, blood reports, and other medical documents.
@@ -78,9 +80,7 @@ def analyze_document_endpoint(req: DocumentAIRequest, content_type: str = Header
         req.raw_ocr_text = sanitized_text
 
     try:
-        # Note: In a real app, 'db' would be a dependency. 
-        # For the current engine signature, we pass None as the engine handles fallback logic.
-        return process_document_ai(req, db=None)
+        return process_document_ai(req, db=db)
     except HTTPException:
         raise
     except Exception as e:
