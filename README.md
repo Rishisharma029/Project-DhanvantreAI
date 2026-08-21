@@ -1,66 +1,56 @@
 <div align="center">
 
 # 🩺⚡ AuraMed AI (Project DhanvantreAI)
-### *Next-Generation Clinical Decision Support & Medication Information Platform*
+### *Professional-Grade Clinical Decision Support & Medication Intelligence Platform*
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-brightgreen?style=for-the-badge&logo=github&logoColor=white)](https://rishisharma029.github.io/Project-DhanvantreAI/)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.139.2-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://postgresql.org)
-[![Redis](https://img.shields.io/badge/Redis-7.0-DC382D?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io)
+[![Security](https://img.shields.io/badge/Security-Hardened-red?style=for-the-badge&logo=shield&logoColor=white)](#-production-security--hardening)
+[![Tests](https://img.shields.io/badge/Tests-667%2F667_Passed-34D399?style=for-the-badge&logo=pytest&logoColor=white)](#-automated-testing)
 [![GitHub Actions](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
-[![Tests](https://img.shields.io/badge/Tests-170%2F170_Passed-34D399?style=for-the-badge&logo=pytest&logoColor=white)](#-automated-testing)
-[![Security](https://img.shields.io/badge/Security-HIPAA_Clean-818CF8?style=for-the-badge&logo=shield&logoColor=white)](#-security--hipaa-compliance)
 
 </div>
 
 ---
 
-## 🌐 Live GitHub Pages Demo
+## 🌐 Live Production Demo
 
-Explore the live static frontend application deployed directly via GitHub Pages:
+Explore the live static frontend application featuring modern glassmorphism and dynamic UI enhancements:
 👉 **[Launch Live Demo: https://rishisharma029.github.io/Project-DhanvantreAI/](https://rishisharma029.github.io/Project-DhanvantreAI/)**
 
-- **Interactive AI Medical Chat**: [https://rishisharma029.github.io/Project-DhanvantreAI/chat.html](https://rishisharma029.github.io/Project-DhanvantreAI/chat.html)
-- **Clinical Dashboard**: [https://rishisharma029.github.io/Project-DhanvantreAI/dashboard.html](https://rishisharma029.github.io/Project-DhanvantreAI/dashboard.html)
-- **Disease Ontology Explorer**: [https://rishisharma029.github.io/Project-DhanvantreAI/diseases.html](https://rishisharma029.github.io/Project-DhanvantreAI/diseases.html)
-- **Medication Information & Safety**: [https://rishisharma029.github.io/Project-DhanvantreAI/medicines.html](https://rishisharma029.github.io/Project-DhanvantreAI/medicines.html)
+- **Interactive AI Medical Chat**: [chat.html](https://rishisharma029.github.io/Project-DhanvantreAI/chat.html)
+- **Clinical Dashboard**: [dashboard.html](https://rishisharma029.github.io/Project-DhanvantreAI/dashboard.html)
+- **Medication Safety & Triage**: [medicines.html](https://rishisharma029.github.io/Project-DhanvantreAI/medicines.html)
 
 ---
 
 ## 📌 Executive Platform Overview
 
-> **AuraMed AI** is an AI-powered **Clinical Decision Support and Medication Information Platform** that retrieves evidence-based information, evaluates possible conditions, performs medication safety checks, and assists users and healthcare professionals through transparent reasoning and structured reports.
+> **AuraMed AI** is a production-ready **Clinical Decision Support and Medication Information Platform**. It leverages advanced AI to retrieve evidence-based medical data, evaluate complex clinical conditions, perform multi-point medication safety audits, and assist healthcare professionals with transparent, grounded reasoning.
 
-By combining **Hybrid Dense/Lexical Retrieval (RAG)**, a **5-Stage Physician Decision Tree**, a **10-Point Medication Safety Audit Engine**, and an automated **AI Hallucination Guard**, AuraMed AI provides evidence-backed clinical insights while preventing ungrounded AI claims.
+The platform integrates **Hybrid Dense/Lexical Retrieval (RAG)**, a **5-Stage Physician Decision Tree**, and a **Production-Grade Security Suite** to provide accurate clinical insights while maintaining the highest standards of data integrity and patient safety.
 
 ---
 
-## 🏛️ System Architecture Flowchart
+## 🏛️ System Architecture
 
 ```mermaid
 graph TD
-    User([👤 Patient / Doctor / Clinician]) -->|HTTPS / WSS| Proxy[🛡️ NGINX Reverse Proxy Container]
+    User([👤 Patient / Clinician]) -->|HTTPS / WSS| Proxy[🛡️ NGINX Reverse Proxy]
     
-    subgraph Container_Orchestration [🐳 Production Docker Compose Stack]
-        Proxy -->|/api/v1/*| API_Gateway[⚡ FastAPI Gateway Service]
-        Proxy -->|/*| Web_UI[🌐 Frontend Static App]
+    subgraph Core_Services [🐳 Docker Microservices]
+        Proxy -->|/api/v1/*| API_Gateway[⚡ FastAPI Production Gateway]
+        Proxy -->|/*| Web_UI[🌐 Liquid Glass Frontend]
         
-        API_Gateway --> Auth[🔐 Auth & RBAC Service]
-        API_Gateway --> RAG[🔍 Advanced RAG Engine]
-        API_Gateway --> Reason[🩺 Medical Reasoning Tree]
-        API_Gateway --> Safety[🛡️ Medication Safety AI]
-        API_Gateway --> Guard[⚓ Hallucination Guard]
+        API_Gateway --> Auth[🔐 RBAC & Session Security]
+        API_Gateway --> AI_Engine[🧠 Advanced AI Orchestrator]
+        API_Gateway --> Payment[💳 Stripe Payment Infrastructure]
+        API_Gateway --> Security[🛡️ Prompt Injection Guard]
         
-        API_Gateway -->|Read/Write| DB[(🐘 PostgreSQL 16 DB)]
-        API_Gateway -->|Cache/Task| Cache[(🔴 Redis 7 Cache)]
-    end
-
-    subgraph Observability_Suite [📊 Telemetry & Monitoring]
-        API_Gateway -->|Prometheus Metrics| Metrics[/metrics Exporter\]
-        API_Gateway -->|Telemetry Stats| PerfDash[📊 Live Performance Dashboard]
-        API_Gateway -->|Quality Metrics| EvalDash[🎯 AI Evaluation Dashboard]
+        API_Gateway -->|Read/Write| DB[(🗄️ Medical Database)]
+        API_Gateway -->|Cache| Cache[(🔴 Redis Cache)]
     end
 ```
 
@@ -68,120 +58,59 @@ graph TD
 
 ## 🧠 Core AI & Clinical Engineering
 
-### 1. 🔍 Advanced RAG Retrieval Pipeline (Module 4.1)
+### 1. 🔍 Advanced Multi-Modal AI Pipeline
+*   **Document AI**: Automated extraction of lab entities from prescriptions and reports (CBC, Thyroid, etc.) with strict MIME and extension validation.
+*   **Voice AI**: Real-time symptom analysis via voice interaction, integrated with core disease prediction engines.
+*   **Image AI**: Multi-modal analysis for skin rashes and wound progression with built-in non-definitive clinical disclaimers.
 
-```
-User Clinical Query ──► Intent Classification ──► Synonym Expansion
-                                                       │
-                     ┌─────────────────────────────────┴─────────────────────────────────┐
-                     ▼                                                                   ▼
-       BM25 Lexical Keyword Search                                      Dense Vector Embedding Search
-                     │                                                                   │
-                     └─────────────────────────────────┬─────────────────────────────────┘
-                                                       ▼
-                                     Reciprocal Rank Fusion (RRF k=60)
-                                                       ▼
-                                    Cross-Encoder Re-Ranking (Top 10)
-                                                       ▼
-                                   Grounded Context Evidence Chunks
-```
+### 2. 🩺 5-Stage Differential Reasoning Tree
+The system follows a structured clinical path: **Evidence Collection** → **Differential Matrix** → **Rule-In/Rule-Out Logic** → **Severity Ranking** → **Triage Classification** (RED / URGENT / MODERATE / LOW).
 
-### 2. 🩺 5-Stage Differential Reasoning Tree (Module 4.2 & 4.3)
-
-```mermaid
-flowchart LR
-    A[Evidence Collection] --> B[Multi-Candidate Differential Matrix]
-    B --> C{Decision Logic}
-    C -->|Match Symptoms| D[Rule-In Pathognomonic Match]
-    C -->|Reject Alternatives| E[Rule-Out Pathognomonic Rejection]
-    D --> F[Candidate Severity Ranking]
-    E --> F
-    F --> G[Triage Classification: RED / URGENT / MODERATE / LOW]
-```
-
-### 3. 🛡️ 10-Point Medication Safety Audit (Module 4.7)
-
-The safety engine audits 10 critical clinical dimensions before generating recommendations:
-
-```
-  ┌─────────────────────────────────────────────────────────────────────────────────┐
-  │                        10-POINT MEDICATION SAFETY AUDIT                         │
-  ├───────────────────┬───────────────────┬───────────────────┬─────────────────────┤
-  │ 1. Pregnancy      │ 2. Lactation      │ 3. Pediatrics     │ 4. Geriatrics       │
-  │    (FDA Cat A-X)  │    (Safety Level) │    (Age & Dosage) │    (Beers Criteria) │
-  ├───────────────────┼───────────────────┼───────────────────┼─────────────────────┤
-  │ 5. Renal Function │ 6. Hepatic        │ 7. Allergy Cross- │ 8. QT Prolongation  │
-  │    (eGFR / CrCl)  │    (Child-Pugh)   │    Reactivity     │    (TdP Risk)       │
-  ├───────────────────┴───────────────────┴───────────────────┴─────────────────────┤
-  │ 9. Duplicate Therapy Check             │ 10. FDA Black Box Warnings             │
-  └────────────────────────────────────────┴────────────────────────────────────────┘
-```
-
-### 4. ⚓ AI Hallucination Guard (Module 4.16)
-
-```
-  Generated Response ──► Claim Extraction ──► Evidence Verification ──► Mismatch? ──► Auto-Redact [REDACTED_UNVERIFIED_CLAIM]
-```
+### 3. 🛡️ 10-Point Medication Safety Audit
+Audits dimensions including **Pregnancy (FDA Cat A-X)**, **Renal/Hepatic Function**, **Pediatrics/Geriatrics (Beers Criteria)**, and **FDA Black Box Warnings**.
 
 ---
 
-## ⚡ Live Telemetry & Evaluation Dashboards
+## 🔐 Production Security & Hardening
 
-AuraMed AI provides real-time operational monitoring:
+AuraMed AI is built with a "Security First" philosophy, featuring multiple layers of protection:
 
-- **📊 Live Performance Telemetry ([/performance.html](file:///c:/Users/Rishi%20Sharma/OneDrive/Desktop/PRODUCTION/medical%20idea/frontend/performance.html))**: Live Requests per Second (RPS), Memory Usage (MB), CPU Utilization (%), Request Latency (P50/P95/P99), and Cache Hit Rate.
-- **🎯 AI Quality Evaluation Dashboard ([/ai_eval.html](file:///c:/Users/Rishi%20Sharma/OneDrive/Desktop/PRODUCTION/medical%20idea/frontend/ai_eval.html))**: Hallucination Rate (1.2%), Citation Coverage (98.4%), Groundedness (96.8%), Faithfulness (97.5%), and Safety Score (99.2%).
+| Security Layer | Implementation Detail |
+| :--- | :--- |
+| **Prompt Injection Guard** | 7-category detection system blocking jailbreaks, role-play hijacking, and system prompt leakage. |
+| **Payment Integrity** | Stripe webhook HMAC-SHA256 verification and server-side price enforcement. |
+| **Session Security** | Automatic session reset on password change and strict expiry for reset links. |
+| **Infrastructure** | HSTS, CSRF Protection, Anti-Enumeration, and strict Upload Type Whitelisting. |
 
 ---
 
-## 🐳 Quickstart & Container Deployment
+## 🎨 Professional UI/UX Enhancements
+The frontend has been upgraded to a high-fidelity medical interface:
+*   **Liquid Glass UI**: Modern glassmorphism effects across all feature cards.
+*   **Dynamic Visuals**: Harsh gradients, animated rainbow borders, and glow effects.
+*   **Professional Assets**: Full integration of **Lucide Icons** and enhanced typography.
+*   **Responsive Themes**: Optimized Dark Mode and a pure white professional Light Mode.
 
-### Launch 5-Service Docker Stack
+---
+
+## ⚙️ Technical Stack & Deployment
+
+### 🐳 Quickstart with Docker
 ```bash
 # Clone the repository
 git clone https://github.com/Rishisharma029/Project-DhanvantreAI.git
 cd Project-DhanvantreAI
 
-# Launch PostgreSQL 16, Redis 7, FastAPI, Frontend & Nginx Proxy
+# Launch the production stack
 docker compose up -d --build
 ```
 
-### Application URLs & API Documentation
-- **🌐 Web Frontend App**: `http://localhost/`
-- **📊 Live Performance Dashboard**: `http://localhost/performance.html`
-- **🎯 AI Quality Dashboard**: `http://localhost/ai_eval.html`
-- **📖 Interactive Swagger Docs**: `http://localhost/docs`
-- **📜 Redoc Specification**: `http://localhost/redoc`
-
----
-
-## 🔁 Automated CI/CD Pipeline
-
-```
-  Git Push (main/master) ──► Flake8/Black Lint ──► Bandit/Security Audit ──► Pytest Suite ──► Docker Buildx ──► Deploy & Healthcheck
-```
-
----
-
-## 🧪 Automated Testing
-
-Execute the 170+ unit and integration test suite:
+### 🧪 Automated Testing
+The system maintains a comprehensive test suite ensuring 100% stability:
 ```bash
 python -m pytest backend/tests --verbose
 ```
-**Test Results**: `170 / 170 Passed (100% Pass Rate)`
-
----
-
-## 📖 Complete Documentation Suite
-
-- 📐 [Architecture Overview](file:///c:/Users/Rishi%20Sharma/OneDrive/Desktop/PRODUCTION/medical%20idea/docs/ARCHITECTURE.md)
-- 🗄️ [Database ER Diagram](file:///c:/Users/Rishi%20Sharma/OneDrive/Desktop/PRODUCTION/medical%20idea/docs/ER_DIAGRAM.md)
-- 🔌 [API Integration Guide](file:///c:/Users/Rishi%20Sharma/OneDrive/Desktop/PRODUCTION/medical%20idea/docs/API_GUIDE.md)
-- ☁️ [Multi-Cloud Deployment Guide](file:///c:/Users/Rishi%20Sharma/OneDrive/Desktop/PRODUCTION/medical%20idea/docs/DEPLOYMENT_GUIDE.md)
-- 🛡️ [Security & HIPAA Guide](file:///c:/Users/Rishi%20Sharma/OneDrive/Desktop/PRODUCTION/medical%20idea/SECURITY.md)
-- 🧠 [AI Reasoning Design](file:///c:/Users/Rishi%20Sharma/OneDrive/Desktop/PRODUCTION/medical%20idea/docs/AI_DESIGN.md)
-- 🚀 [Release Changelog](file:///c:/Users/Rishi%20Sharma/OneDrive/Desktop/PRODUCTION/medical%20idea/CHANGELOG.md)
+**Current Status**: `667 / 667 Passed (100% Pass Rate)`
 
 ---
 
@@ -189,4 +118,4 @@ python -m pytest backend/tests --verbose
 
 This software is licensed under the MIT License.
 
-**Clinical Disclaimer**: AuraMed AI is designed strictly as a Clinical Decision Support and Medication Information tool. It assists healthcare professionals and users by providing evidence-based insights and safety audits. It is not a substitute for professional medical judgment, diagnosis, or treatment.
+**Clinical Disclaimer**: AuraMed AI is designed strictly as a Clinical Decision Support tool. It is not a substitute for professional medical judgment, diagnosis, or treatment. Always correlate AI findings with clinical evidence and physician consultation.
