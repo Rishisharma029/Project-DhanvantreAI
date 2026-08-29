@@ -55,8 +55,10 @@ class SlidingWindowRateLimiter:
                 status="ALLOWED" if used < self.max_requests else "EXCEEDED"
             )
 
-# Global Gateway Rate Limiter Instance
+# Global Gateway Rate Limiter Instances
 gateway_rate_limiter = SlidingWindowRateLimiter(max_requests=100, window_seconds=60)
+ai_rate_limiter = SlidingWindowRateLimiter(max_requests=20, window_seconds=60)
+password_reset_rate_limiter = SlidingWindowRateLimiter(max_requests=3, window_seconds=900)
 
 def get_gateway_health(app) -> GatewayHealthResponse:
     total_routes = len(app.routes)

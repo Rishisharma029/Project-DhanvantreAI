@@ -1,0 +1,25 @@
+{
+  "gap_id": "GAP_20260818T174033Z",
+  "session_uuid": "unknown",
+  "timestamp": "20260818T174033Z",
+  "status": "PENDING_REVIEW",
+  "query": "Does AuraMed have guidelines for Xylopharyngitis Syndrome?",
+  "extracted_symptoms": [],
+  "extracted_entities": {
+    "age": 30,
+    "gender": "male"
+  },
+  "reasoning_steps": [
+    "Extracted 0 clinical symptoms: none",
+    "No high-risk syndrome pattern detected — proceeding to disease matching.",
+    "Generated 0 differential diagnoses led by 'Unspecified Condition'",
+    "Confidence calibrated: 20% | Stage: Adaptive Questioning (Turn 1) | Triage: GREEN_STABLE",
+    "Selected 0 high info-gain follow-up questions.",
+    "Medicine suppressed: No evidence-based medicine recommendation available at current confidence level (20%). Further history and investigation required."
+  ],
+  "top_candidate_diseases": [],
+  "final_confidence": 0.2,
+  "resolution": null,
+  "reviewed_by": null,
+  "note": "This case could not be matched to an evidence-supported diagnosis. Human expert review is required before any learning update."
+}

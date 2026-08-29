@@ -59,6 +59,10 @@ class OrchestratorRequest(BaseModel):
         if isinstance(data, dict):
             if not data.get("query") and data.get("user_message"):
                 data["query"] = data["user_message"]
+            if data.get("query") and isinstance(data["query"], str):
+                from app.utils.sanitizer import sanitize_text
+                data["query"] = sanitize_text(data["query"])
+                data["user_message"] = data["query"]
         return data
 
 class ClinicalLLMResponse(BaseModel):

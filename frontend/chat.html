@@ -428,68 +428,91 @@
     <div class="bg-grid-pattern"></div>
 
     <div class="chat-layout">
-        <!-- Sidebar Navigation & Threads -->
+        <!-- Sidebar Navigation & Cases Drawer -->
         <aside class="chat-sidebar">
             <div class="chat-sidebar-header">
-                <a href="dashboard.html" class="brand-logo" style="margin-bottom: 20px; text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                    <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-                    <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+                <a href="index.html" class="brand-logo" style="margin-bottom: 20px; text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                    <div class="logo-icon"><i class="fa-solid fa-square-plus"></i></div>
+                    <span class="logo-text">Dhanvantre<span class="logo-highlight">AI</span></span>
                 </a>
 
-                <button class="new-chat-btn" id="newChatBtn">
-                    <i class="fa-solid fa-plus"></i> New Consultation
+                <button class="new-chat-btn" id="newChatBtn" style="background: var(--accent-teal); color: #ffffff; border: none;">
+                    <i class="fa-solid fa-plus"></i> New Case Workspace
                 </button>
             </div>
 
-            <div style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700; padding: 0 8px;">
-                Past Conversations
+            <div style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700; padding: 0 8px; margin-bottom: 8px;">
+                Active Patient Cases
             </div>
 
             <div class="session-list-wrapper" id="sessionList">
                 <div class="session-item active">
-                    <i class="fa-regular fa-message"></i>
-                    <span>Acute Dyspnea & Chest Pain</span>
+                    <i class="fa-solid fa-notes-medical" style="color: var(--accent-teal);"></i>
+                    <span>Case #DH-2048 • Chest Pain</span>
                 </div>
                 <div class="session-item">
-                    <i class="fa-regular fa-message"></i>
-                    <span>Fever & Neck Stiffness</span>
+                    <i class="fa-solid fa-notes-medical"></i>
+                    <span>Case #DH-2047 • Pyrexia</span>
                 </div>
                 <div class="session-item">
-                    <i class="fa-regular fa-message"></i>
-                    <span>Diabetes & Polyuria</span>
+                    <i class="fa-solid fa-notes-medical"></i>
+                    <span>Case #DH-2046 • Dyspnea</span>
                 </div>
             </div>
 
-            <div style="border-top: 1px solid var(--border-color); padding-top: 14px; display: flex; flex-direction: column; gap: 8px;">
-                <a href="dashboard.html" class="sidebar-link"><i class="fa-solid fa-arrow-left"></i> Return to Dashboard</a>
+            <div style="border-top: 1px solid var(--border-color); padding-top: 14px; display: flex; flex-direction: column; gap: 6px;">
+                <a href="index.html" class="nav-link" style="font-size: 0.85rem;"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="medicines.html" class="nav-link" style="font-size: 0.85rem;"><i class="fa-solid fa-pills"></i> Medication Safety</a>
+                <a href="diseases.html" class="nav-link" style="font-size: 0.85rem;"><i class="fa-solid fa-book-medical"></i> Knowledge Base</a>
+                <a href="dashboard.html" class="nav-link" style="font-size: 0.85rem;"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
             </div>
         </aside>
 
-        <!-- Main Chat Area -->
+        <!-- Main Workspace Area -->
         <main class="chat-main-window">
             <!-- Top Header -->
-            <header class="chat-top-bar">
+            <header class="chat-top-bar" style="background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); padding: 12px 24px;">
                 <div class="model-status-badge">
-                    <span class="status-dot online"></span>
-                    <span>AuraMed Clinical AI v1.0 • Engine Active</span>
+                    <span class="badge badge-emerald" style="padding: 2px 8px;"><i class="fa-solid fa-circle-check"></i> System Operational</span>
+                    <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-left: 12px;">Case Workspace • DhanvantreAI Engine</span>
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme">
-                        <i class="fa-solid fa-moon" id="themeIcon"></i>
+                        <i class="fa-solid fa-sun" id="themeIcon"></i>
                     </button>
                 </div>
             </header>
 
-            <!-- Message Stream -->
-            <div class="stream-messages-container" id="messageStream">
-                <!-- AI Welcome Message -->
+            <!-- Message Stream / Case Workbench -->
+            <div class="stream-messages-container" id="messageStream" style="padding: 24px 15%;">
+                <!-- Clinical Welcome Workspace Card -->
                 <div class="message-row ai">
-                    <div class="avatar-box avatar-ai"><i class="fa-solid fa-robot"></i></div>
-                    <div class="msg-content-wrapper">
-                        <div class="glass-card ai-card">
-                            <p>Hello! I am <strong>AuraMed Clinical AI</strong>, your diagnostic decision support assistant.</p>
-                            <p style="margin-top: 8px;">Describe the patient's symptoms, vital signs, or medication questions to begin an adaptive clinical analysis.</p>
+                    <div class="msg-content-wrapper" style="max-width: 100%; width: 100%;">
+                        <div class="clinical-card" style="padding: 20px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                                <div style="font-size: 0.95rem; font-weight: 800; color: var(--text-main);">
+                                    <i class="fa-solid fa-stethoscope" style="color: var(--accent-teal);"></i> DHANVANTREAI CLINICAL WORKSPACE
+                                </div>
+                                <div class="badge badge-neutral">Ready for Case Input</div>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">
+                                Enter patient presenting symptoms, vital signs, lab findings (CBC, LFT, KFT), or drug safety inquiries below to generate a structured clinical decision analysis.
+                            </p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.8rem; color: var(--text-dim);">
+                                <div style="background: var(--bg-surface); padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                                    <strong>1. Patient Evidence:</strong> Symptoms & Labs
+                                </div>
+                                <div style="background: var(--bg-surface); padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                                    <strong>2. Clinical Signals:</strong> Measured Flags
+                                </div>
+                                <div style="background: var(--bg-surface); padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                                    <strong>3. Differential:</strong> Rule-In / Rule-Out
+                                </div>
+                                <div style="background: var(--bg-surface); padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                                    <strong>4. Medication Safety:</strong> Pharmacist Check
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -193,6 +193,7 @@ function renderSessions(sessions) {
 
 /* 6. Send & Orchestrate Message Flow */
 let currentTurnCount = 0;
+let sessionSymptoms = new Set();
 
 /* 6. Send & Orchestrate Message Flow */
 async function sendMessage() {
@@ -221,7 +222,8 @@ async function sendMessage() {
             body: JSON.stringify({
                 query: userText,
                 user_message: userText,
-                turns_answered: currentTurnCount
+                turns_answered: currentTurnCount,
+                accumulated_symptoms: Array.from(sessionSymptoms)
             })
         });
 
@@ -230,6 +232,8 @@ async function sendMessage() {
 
         if (res.ok) {
             currentTurnCount++;
+            (data.extracted_symptoms || []).forEach(s => sessionSymptoms.add(s));
+            (data.matched_symptoms || []).forEach(s => sessionSymptoms.add(s));
             renderAiResponseStream(data);
         } else {
             renderAiFallbackResponse(userText);
@@ -339,20 +343,27 @@ function renderAiResponseStream(data) {
 
     let statusHeader = `
         <div style="margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                <span style="font-weight: 700; color: ${data.is_emergency ? 'var(--accent-rose)' : 'var(--accent-cyan)'}; font-size: 0.9rem;">
+            <!-- Patient Header Bar -->
+            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="font-weight: 800; color: var(--text-main); font-size: 0.9rem;">
+                        <i class="fa-solid fa-user-doctor" style="color: var(--accent-teal);"></i> CASE #DH-2048
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Patient: Anonymized • Age 45 (Male)</span>
+                </div>
+                <div class="badge ${data.is_emergency ? 'badge-rose' : 'badge-emerald'}">
                     <i class="fa-solid ${data.is_emergency ? 'fa-triangle-exclamation' : 'fa-shield-halved'}"></i>
-                    ${data.is_emergency ? 'Triage Status: RED (Urgent Clinical Evaluation)' : 'Triage Status: GREEN / STABLE'}
-                </span>
+                    ${data.is_emergency ? 'URGENT EVALUATION' : 'STABLE / GREEN TRIAGE'}
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-main);">Clinical Confidence Calibration:</span>
                 <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">${confidenceLabel}</span>
             </div>
             
-            <div style="background: rgba(255,255,255,0.06); border-radius: 99px; height: 10px; overflow: hidden; width: 100%; position: relative;">
+            <div style="background: var(--bg-surface); border-radius: 99px; height: 8px; overflow: hidden; width: 100%; position: relative;">
                 <div style="background: ${progressColor}; width: ${confidencePct}%; height: 100%; border-radius: 99px; transition: width 0.6s ease;"></div>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-dim); margin-top: 4px;">
-                <span>Assessment Stage: ${confidenceLabel}</span>
-                <span>Target: 95%</span>
             </div>
             ${data.is_emergency ? '' : redFlagChecklist}
         </div>
@@ -372,33 +383,52 @@ function renderAiResponseStream(data) {
         let questionsBlockHtml = '';
         if (questions.length > 0) {
             questionsBlockHtml = `
-                <div style="margin: 16px 0; background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.25); border-radius: 12px; padding: 14px;">
+                <div style="margin: 16px 0; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px;">
                     <div style="font-weight: 700; color: var(--text-main); font-size: 0.88rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-circle-question" style="color: var(--accent-purple);"></i> Please Answer to Narrow Down Diagnosis & Get Precise Medication Dosage:
+                        <i class="fa-solid fa-circle-question" style="color: var(--accent-teal);"></i> Clinical Clarifications Needed to Narrow Down Diagnosis:
                     </div>
-                    ${questions.slice(0, 3).map((q, idx) => `
-                        <div style="margin-bottom: 12px; padding: 10px 12px; background: rgba(0,0,0,0.25); border-radius: 8px;">
-                            <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px;">
-                                ${idx + 1}. ${escapeHtml(q)}
-                            </div>
-                            <div style="display: flex; gap: 10px;">
-                                <button onclick="clickYesNoAnswer('${escapeHtml(q)}', 'yes')" style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
-                                    <i class="fa-solid fa-check"></i> Yes
-                                </button>
-                                <button onclick="clickYesNoAnswer('${escapeHtml(q)}', 'no')" style="padding: 6px 16px; background: #f43f5e; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
-                                    <i class="fa-solid fa-xmark"></i> No
-                                </button>
-                            </div>
-                        </div>
-                    `).join('')}
+                    ${questions.slice(0, 3).map((q, idx) => {
+                        const isTempQ = /temperature|how high|body temp/i.test(q);
+                        if (isTempQ) {
+                            return `
+                                <div style="margin-bottom: 12px; padding: 10px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                                    <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px;">
+                                        ${idx + 1}. ${escapeHtml(q)}
+                                    </div>
+                                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                        <button onclick="clickValueAnswer('Body temperature is 98.6°F (Normal)')" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.78rem;">🌡️ 98.6°F (Normal)</button>
+                                        <button onclick="clickValueAnswer('Body temperature is 100°F (Mild Fever)')" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem; border-color: var(--accent-amber); color: var(--status-amber-text);">🌡️ 100°F</button>
+                                        <button onclick="clickValueAnswer('Body temperature is 101°F (High Fever)')" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem; border-color: var(--accent-orange); color: var(--status-orange-text);">🌡️ 101°F</button>
+                                        <button onclick="clickValueAnswer('Body temperature is 102.5°F+ (High Fever)')" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem; border-color: var(--accent-crimson); color: var(--status-rose-text);">🌡️ 102.5°F+</button>
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            return `
+                                <div style="margin-bottom: 12px; padding: 10px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                                    <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px;">
+                                        ${idx + 1}. ${escapeHtml(q)}
+                                    </div>
+                                    <div style="display: flex; gap: 10px;">
+                                        <button onclick="clickYesNoAnswer('${escapeHtml(q)}', 'yes')" class="btn btn-primary" style="padding: 4px 14px; font-size: 0.8rem;">
+                                            <i class="fa-solid fa-check"></i> Yes
+                                        </button>
+                                        <button onclick="clickYesNoAnswer('${escapeHtml(q)}', 'no')" class="btn btn-secondary" style="padding: 4px 14px; font-size: 0.8rem;">
+                                            <i class="fa-solid fa-xmark"></i> No
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }).join('')}
                 </div>
             `;
         }
 
         const skipToReportHtml = `
             <div style="margin-top: 14px; text-align: center;">
-                <button onclick="clickRequestFullReport()" style="padding: 10px 20px; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 0.84rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: transform 0.2s ease;">
-                    <i class="fa-solid fa-file-medical"></i> Show Full Diagnosis & Medication Dosage Report Now
+                <button onclick="clickRequestFullReport()" class="btn btn-primary btn-lg">
+                    <i class="fa-solid fa-file-medical"></i> Generate Complete Case Analysis & Medication Safety Report
                 </button>
             </div>
         `;
@@ -658,14 +688,25 @@ window.openCitation = function(title, snippet, evidenceGrade, sourceDb) {
     modal.classList.remove('hidden');
 };
 
-/* 10. Interactive Yes/No & Full Report Click Handlers */
+/* 10. Interactive Yes/No, Option Value & Full Report Click Handlers */
 window.clickYesNoAnswer = function(questionText, answer) {
     const chatInput = document.getElementById('chatInput');
+    
+    let topic = questionText.replace(/^(?:do you have|are you experiencing|do you experience|is there|do you feel)\s+/i, '')
+                             .replace(/\?$/, '')
+                             .trim();
+
     if (answer === 'yes') {
-        chatInput.value = `Yes, ${questionText}`;
+        chatInput.value = `Yes, I have ${topic}`;
     } else {
-        chatInput.value = `No, ${questionText}`;
+        chatInput.value = `No, I do not have ${topic}`;
     }
+    sendMessage();
+};
+
+window.clickValueAnswer = function(valueText) {
+    const chatInput = document.getElementById('chatInput');
+    chatInput.value = valueText;
     sendMessage();
 };
 
