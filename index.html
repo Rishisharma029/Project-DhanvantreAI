@@ -29,26 +29,24 @@
     <!-- Navigation Header -->
     <header class="navbar-header" id="navbar">
         <div class="container nav-container">
-            <a href="#" class="brand-logo">
-                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+            <a href="index.html" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-square-plus"></i></div>
+                <span class="logo-text">Dhanvantre<span class="logo-highlight">AI</span></span>
             </a>
 
             <nav class="nav-menu" id="navMenu">
-                <a href="#hero" class="nav-link active">Home</a>
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#how-it-works" class="nav-link">How It Works</a>
-                <a href="#faq" class="nav-link">FAQ</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="chat.html" class="nav-link active">Cases</a>
+                <a href="medicines.html" class="nav-link">Medications</a>
+                <a href="diseases.html" class="nav-link">Knowledge</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
             </nav>
 
             <div class="nav-actions">
                 <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
-                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    <i class="fa-solid fa-sun" id="themeIcon"></i>
                 </button>
                 <a href="auth.html#login" class="btn btn-secondary"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
-                <a href="auth.html#register" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Get Started</a>
+                <a href="chat.html" class="btn btn-primary"><i class="fa-solid fa-folder-plus"></i> Launch Case Workspace</a>
                 <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>
@@ -58,48 +56,72 @@
 
     <main>
         <!-- HERO SECTION -->
-        <section class="hero-section" id="hero">
+        <section class="hero-section" id="hero" style="padding-top: 120px; padding-bottom: 60px;">
             <div class="container hero-container">
-                <div class="hero-content">
-                    <div class="badge hero-badge">
-                        <span class="badge-pulse"></span>
-                        <i class="fa-solid fa-shield-halved"></i> HIPAA & GDPR Compliant Medical AI
+                <div class="hero-content" style="max-width: 900px; margin: 0 auto; text-align: center;">
+                    <div class="badge badge-neutral" style="margin-bottom: 20px;">
+                        <i class="fa-solid fa-notes-medical"></i> Clinical Decision Support System
                     </div>
-                    <h1 class="hero-title">
-                        Next-Gen Clinical Intelligence & <span class="gradient-text">Adaptive Diagnostics</span>
+                    <h1 class="hero-title" style="font-size: 2.5rem; font-weight: 800; line-height: 1.25; margin-bottom: 20px; color: var(--text-main);">
+                        TURN MEDICAL INFORMATION INTO A <span style="color: var(--accent-teal);">CLEARER CLINICAL PICTURE</span>
                     </h1>
-                    <p class="hero-subtitle">
-                        Empower medical teams with precision adaptive symptom analysis, real-time drug interaction safety guardrails, dosage calculation engines, and transparent explainable AI rationale.
+                    <p class="hero-subtitle" style="font-size: 1.1rem; color: var(--text-muted); max-width: 760px; margin: 0 auto 32px;">
+                        DhanvantreAI organizes patient evidence, clinical signals, differential possibilities, medication safety, and uncertainty into one structured workspace.
                     </p>
 
-                    <div class="hero-cta-group">
-                        <a href="#contact" class="btn btn-primary btn-lg">
-                            <span>Get Started Now</span>
-                            <i class="fa-solid fa-arrow-right"></i>
+                    <div class="hero-cta-group" style="display: flex; gap: 14px; justify-content: center; margin-bottom: 48px;">
+                        <a href="chat.html" class="btn btn-primary btn-lg">
+                            <i class="fa-solid fa-stethoscope"></i>
+                            <span>Launch Case Workspace</span>
                         </a>
-                        <a href="#hero-demo" class="btn btn-outline btn-lg">
-                            <i class="fa-solid fa-play"></i>
-                            <span>Explore Live Triage Widget</span>
+                        <a href="medicines.html" class="btn btn-outline btn-lg">
+                            <i class="fa-solid fa-pills"></i>
+                            <span>Explore Medication Safety</span>
                         </a>
                     </div>
 
-                    <!-- Trust Metric Badges -->
-                    <div class="trust-metrics">
-                        <div class="metric-item">
-                            <div class="metric-value" data-target="99.4">0%</div>
-                            <div class="metric-label">Diagnostic Guardrail Accuracy</div>
+                    <!-- Clinical Workspace Transformation Flow Diagram -->
+                    <div class="clinical-card" style="padding: 24px; text-align: left; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+                        <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
+                            <span><span><i class="fa-solid fa-network-wired" style="color: var(--accent-teal);"></i> INFORMATION TRANSFORMATION PIPELINE</span></span>
+                            <span>EVIDENCE-TO-ACTION</span>
                         </div>
-                        <div class="metric-divider"></div>
-                        <div class="metric-item">
-                            <div class="metric-value" data-target="250000">0+</div>
-                            <div class="metric-label">Medical Knowledge Graph Nodes</div>
-                        </div>
-                        <div class="metric-divider"></div>
-                        <div class="metric-item">
-                            <div class="metric-value" data-target="50">0ms</div>
-                            <div class="metric-label">Sub-second Triage Latency</div>
+                        <div style="display: grid; grid-template-columns: 1fr 40px 1.2fr 40px 1fr; align-items: center; gap: 12px;">
+                            <!-- Column 1: Messy Input -->
+                            <div style="background: var(--bg-surface); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">MESSY UNSTRUCTURED INPUT</div>
+                                <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); display: flex; flex-direction: column; gap: 4px;">
+                                    <span>📄 Lab Reports (CBC, LFT)</span>
+                                    <span>💊 Active Prescriptions</span>
+                                    <span>🗣️ Patient Reported Symptoms</span>
+                                    <span>🎙️ Clinical Voice Dictations</span>
+                                </div>
+                            </div>
+                            <div style="text-align: center; color: var(--text-muted); font-size: 1.2rem;"><i class="fa-solid fa-arrow-right"></i></div>
+                            <!-- Column 2: DhanvantreAI Core -->
+                            <div style="background: var(--status-emerald-bg); border: 1px solid var(--status-emerald-border); padding: 14px; border-radius: var(--radius-sm);">
+                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--status-emerald-text); margin-bottom: 8px; text-transform: uppercase;">DHANVANTREAI CLINICAL WORKSPACE</div>
+                                <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); display: flex; flex-direction: column; gap: 4px;">
+                                    <span>🔍 Extracted Evidence Mapping</span>
+                                    <span>📊 Clinical Signals & Lab Flags</span>
+                                    <span>🩺 Differential Rule-In / Rule-Out</span>
+                                    <span>🛡️ 10-Point Medication Safety</span>
+                                </div>
+                            </div>
+                            <div style="text-align: center; color: var(--text-muted); font-size: 1.2rem;"><i class="fa-solid fa-arrow-right"></i></div>
+                            <!-- Column 3: Clear Clinical Picture -->
+                            <div style="background: var(--bg-surface); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">STRUCTURED CLINICAL ACTION</div>
+                                <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); display: flex; flex-direction: column; gap: 4px;">
+                                    <span>📋 Reasoned Case Report</span>
+                                    <span>⚠️ Calibrated Triage Level</span>
+                                    <span>💊 Verified Dosage Schedule</span>
+                                    <span>🔒 Certainty & Audit Trail</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div></div>
                 </div>
 
                 <!-- Hero Interactive Demo Card -->
