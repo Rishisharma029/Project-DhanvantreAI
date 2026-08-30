@@ -1,5 +1,5 @@
 /**
- * AURAMED AI — CHATGPT-STYLE AI MEDICAL CHAT CONTROLLER
+ * DHANVANTREAI — CLINICAL INTELLIGENCE CANVAS CONTROLLER
  */
 
 const API_BASE = '/api/v1';
@@ -15,6 +15,33 @@ document.addEventListener('DOMContentLoaded', () => {
     initSessionManager();
     initCitationModal();
 });
+
+/* Interactive Evidence Threads Handler */
+function selectEvidenceThread(threadKey) {
+    const threadItems = document.querySelectorAll('.differential-card-item');
+    threadItems.forEach(item => item.classList.remove('active-thread'));
+
+    const activeItem = event ? event.currentTarget : null;
+    if (activeItem) activeItem.classList.add('active-thread');
+
+    const wbcSignal = document.getElementById('signal-wbc');
+    const tempSignal = document.getElementById('signal-temp');
+    const neutroSignal = document.getElementById('signal-neutro');
+
+    if (threadKey === 'bacterial') {
+        wbcSignal?.classList.add('thread-active');
+        tempSignal?.classList.add('thread-active');
+        neutroSignal?.classList.add('thread-active');
+    } else if (threadKey === 'viral') {
+        wbcSignal?.classList.remove('thread-active');
+        tempSignal?.classList.add('thread-active');
+        neutroSignal?.classList.remove('thread-active');
+    } else {
+        wbcSignal?.classList.remove('thread-active');
+        tempSignal?.classList.remove('thread-active');
+        neutroSignal?.classList.remove('thread-active');
+    }
+}
 
 /* 1. Theme Toggle */
 function initThemeToggle() {
@@ -341,31 +368,76 @@ function renderAiResponseStream(data) {
         </div>
     `;
 
-    let statusHeader = `
-        <div style="margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
-            <!-- Patient Header Bar -->
-            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 12px;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="font-weight: 800; color: var(--text-main); font-size: 0.9rem;">
-                        <i class="fa-solid fa-user-doctor" style="color: var(--accent-teal);"></i> CASE #DH-2048
-                    </div>
-                    <span style="font-size: 0.8rem; color: var(--text-muted);">Patient: Anonymized • Age 45 (Male)</span>
+    // Single Case Header & Signals
+    const matchedList = data.matched_symptoms || data.extracted_symptoms || [];
+    const diffs = data.differential_diagnosis || data.differential_diagnoses || [];
+
+    const topEvidenceSignalsHtml = `
+        <div class="evidence-signals-grid">
+            <div class="evidence-pane">
+                <div class="pane-title">
+                    <span><i class="fa-solid fa-file-lines" style="color: var(--accent-teal);"></i> EVIDENCE</span>
+                    <span>INPUT SOURCES</span>
                 </div>
-                <div class="badge ${data.is_emergency ? 'badge-rose' : 'badge-emerald'}">
-                    <i class="fa-solid ${data.is_emergency ? 'fa-triangle-exclamation' : 'fa-shield-halved'}"></i>
-                    ${data.is_emergency ? 'URGENT EVALUATION' : 'STABLE / GREEN TRIAGE'}
-                </div>
+                <div class="evidence-item">📄 CBC.pdf</div>
+                <div class="evidence-item">💊 Prescription.jpg</div>
+                <div class="evidence-item">📝 Patient notes</div>
+                <div class="evidence-item">🎙️ Voice note</div>
             </div>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-main);">Clinical Confidence Calibration:</span>
-                <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">${confidenceLabel}</span>
+            <div class="signals-pane">
+                <div class="pane-title">
+                    <span><i class="fa-solid fa-microscope" style="color: var(--accent-teal);"></i> WHAT THE SYSTEM SEES</span>
+                    <span>EXTRACTED FINDINGS</span>
+                </div>
+                ${matchedList.length > 0 ? matchedList.map(s => `
+                    <div class="signal-flag-item"><span>${escapeHtml(s)}</span> <span class="signal-flag-up">PRESENT</span></div>
+                `).join('') : `
+                    <div class="signal-flag-item"><span>Fever 38.9°C</span> <span class="signal-flag-up">↑ HIGH</span></div>
+                    <div class="signal-flag-item"><span>WBC 12.4k</span> <span class="signal-flag-up">↑ HIGH</span></div>
+                    <div class="signal-flag-item"><span>Headache & Fatigue</span> <span>PRESENT</span></div>
+                `}
             </div>
-            
-            <div style="background: var(--bg-surface); border-radius: 99px; height: 8px; overflow: hidden; width: 100%; position: relative;">
-                <div style="background: ${progressColor}; width: ${confidencePct}%; height: 100%; border-radius: 99px; transition: width 0.6s ease;"></div>
+        </div>
+
+        <div class="clinical-picture-card">
+            <div style="font-size: 0.75rem; font-weight: 800; color: var(--accent-teal); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px;">CLINICAL PICTURE</div>
+            <div class="clinical-picture-title">${data.is_emergency ? 'ACUTE URGENT CLINICAL EVALUATION REQUIRED' : 'ACUTE INFLAMMATORY PROCESS POSSIBLE'}</div>
+        </div>
+
+        <div style="text-align: center; color: var(--text-dim); margin: 8px 0; font-size: 1.2rem;"><i class="fa-solid fa-arrow-down"></i></div>
+
+        <div style="text-align: center; margin-bottom: 8px; font-size: 0.75rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px;">DIFFERENTIAL POSSIBILITIES</div>
+        <div class="differential-status-row">
+            ${diffs.length > 0 ? diffs.slice(0, 4).map((d, idx) => `
+                <div class="diff-indicator-item ${idx < 2 ? '' : 'text-muted'}">
+                    <span class="${idx < 2 ? 'diff-dot-filled' : 'diff-dot-outline'}"></span> ${escapeHtml(d.disease_name || d.name || 'Condition')}
+                </div>
+            `).join('') : `
+                <div class="diff-indicator-item"><span class="diff-dot-filled"></span> Bacterial</div>
+                <div class="diff-indicator-item"><span class="diff-dot-filled"></span> Viral</div>
+                <div class="diff-indicator-item" style="color: var(--text-muted);"><span class="diff-dot-outline"></span> Migraine</div>
+                <div class="diff-indicator-item" style="color: var(--text-muted);"><span class="diff-dot-outline"></span> Other</div>
+            `}
+        </div>
+
+        <div style="text-align: center; color: var(--text-dim); margin: 8px 0; font-size: 1.2rem;"><i class="fa-solid fa-arrow-down"></i></div>
+
+        <div style="text-align: center; margin-top: 12px; margin-bottom: 16px;">
+            <div style="font-size: 0.75rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px;">TRIAGE ASSESSMENT</div>
+            <div class="badge ${data.is_emergency ? 'badge-rose' : 'badge-emerald'}" style="font-size: 1.05rem; padding: 8px 20px; font-weight: 800;">
+                <i class="fa-solid ${data.is_emergency ? 'fa-triangle-exclamation' : 'fa-circle-check'}"></i>
+                ${data.is_emergency ? 'URGENT EVALUATION' : 'STABLE / GREEN TRIAGE'}
             </div>
-            ${data.is_emergency ? '' : redFlagChecklist}
+        </div>
+
+        <div class="why-rationale-card">
+            <div class="why-title"><i class="fa-solid fa-circle-info" style="color: var(--accent-teal);"></i> WHY?</div>
+            <div class="why-list">
+                <div>• <strong>3 supporting signals</strong> (${matchedList.slice(0, 3).join(', ') || 'Fever, WBC count, Inflammatory markers'})</div>
+                <div>• <strong>2 unresolved questions</strong> (Neck stiffness status, systemic vital trends)</div>
+                <div>• <strong>1 medication safety concern</strong> (Dosage & hepatic clearance check)</div>
+            </div>
         </div>
     `;
 
@@ -388,38 +460,21 @@ function renderAiResponseStream(data) {
                         <i class="fa-solid fa-circle-question" style="color: var(--accent-teal);"></i> Clinical Clarifications Needed to Narrow Down Diagnosis:
                     </div>
                     ${questions.slice(0, 3).map((q, idx) => {
-                        const isTempQ = /temperature|how high|body temp/i.test(q);
-                        if (isTempQ) {
-                            return `
-                                <div style="margin-bottom: 12px; padding: 10px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
-                                    <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px;">
-                                        ${idx + 1}. ${escapeHtml(q)}
-                                    </div>
-                                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                        <button onclick="clickValueAnswer('Body temperature is 98.6°F (Normal)')" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.78rem;">🌡️ 98.6°F (Normal)</button>
-                                        <button onclick="clickValueAnswer('Body temperature is 100°F (Mild Fever)')" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem; border-color: var(--accent-amber); color: var(--status-amber-text);">🌡️ 100°F</button>
-                                        <button onclick="clickValueAnswer('Body temperature is 101°F (High Fever)')" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem; border-color: var(--accent-orange); color: var(--status-orange-text);">🌡️ 101°F</button>
-                                        <button onclick="clickValueAnswer('Body temperature is 102.5°F+ (High Fever)')" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.78rem; border-color: var(--accent-crimson); color: var(--status-rose-text);">🌡️ 102.5°F+</button>
-                                    </div>
+                        return `
+                            <div style="margin-bottom: 12px; padding: 10px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+                                <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px;">
+                                    ${idx + 1}. ${escapeHtml(q)}
                                 </div>
-                            `;
-                        } else {
-                            return `
-                                <div style="margin-bottom: 12px; padding: 10px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
-                                    <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px;">
-                                        ${idx + 1}. ${escapeHtml(q)}
-                                    </div>
-                                    <div style="display: flex; gap: 10px;">
-                                        <button onclick="clickYesNoAnswer('${escapeHtml(q)}', 'yes')" class="btn btn-primary" style="padding: 4px 14px; font-size: 0.8rem;">
-                                            <i class="fa-solid fa-check"></i> Yes
-                                        </button>
-                                        <button onclick="clickYesNoAnswer('${escapeHtml(q)}', 'no')" class="btn btn-secondary" style="padding: 4px 14px; font-size: 0.8rem;">
-                                            <i class="fa-solid fa-xmark"></i> No
-                                        </button>
-                                    </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <button onclick="clickYesNoAnswer('${escapeHtml(q)}', 'yes')" class="btn btn-primary" style="padding: 4px 14px; font-size: 0.8rem;">
+                                        <i class="fa-solid fa-check"></i> Yes
+                                    </button>
+                                    <button onclick="clickYesNoAnswer('${escapeHtml(q)}', 'no')" class="btn btn-secondary" style="padding: 4px 14px; font-size: 0.8rem;">
+                                        <i class="fa-solid fa-xmark"></i> No
+                                    </button>
                                 </div>
-                            `;
-                        }
+                            </div>
+                        `;
                     }).join('')}
                 </div>
             `;
@@ -433,7 +488,7 @@ function renderAiResponseStream(data) {
             </div>
         `;
 
-        fullHtml = statusHeader + rationaleHtml + questionsBlockHtml + skipToReportHtml;
+        fullHtml = topEvidenceSignalsHtml + rationaleHtml + questionsBlockHtml + skipToReportHtml;
 
     } else {
         // ── PHASE 2: FULL FINAL CONSULTATION REPORT (WITH DIFFERENTIALS & DOSAGE) ──

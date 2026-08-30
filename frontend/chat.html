@@ -427,96 +427,228 @@
     <div class="bg-glow bg-glow-2"></div>
     <div class="bg-grid-pattern"></div>
 
-    <div class="chat-layout">
-        <!-- Sidebar Navigation & Cases Drawer -->
-        <aside class="chat-sidebar">
-            <div class="chat-sidebar-header">
-                <a href="index.html" class="brand-logo" style="margin-bottom: 20px; text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                    <div class="logo-icon"><i class="fa-solid fa-square-plus"></i></div>
-                    <span class="logo-text">Dhanvantre<span class="logo-highlight">AI</span></span>
-                </a>
+    <!-- Thin Floating Navigation Rail -->
+    <nav class="nav-rail" id="navRail">
+        <div class="rail-top-group">
+            <a href="index.html" class="rail-item active" title="DhanvantreAI Workspace">
+                <span class="rail-icon"><i class="fa-solid fa-square-plus" style="color: var(--accent-teal);"></i></span>
+                <span class="rail-label">DhanvantreAI</span>
+            </a>
+            <a href="chat.html" class="rail-item active" title="Current Case">
+                <span class="rail-icon"><i class="fa-solid fa-house"></i></span>
+                <span class="rail-label">Case Workbench</span>
+            </a>
+            <button class="rail-item" id="newChatBtn" title="New Case" style="background: transparent; border: none;">
+                <span class="rail-icon"><i class="fa-solid fa-plus"></i></span>
+                <span class="rail-label">New Case</span>
+            </button>
+            <a href="medicines.html" class="rail-item" title="Medication Safety">
+                <span class="rail-icon"><i class="fa-solid fa-pills"></i></span>
+                <span class="rail-label">Medications</span>
+            </a>
+            <a href="diseases.html" class="rail-item" title="Knowledge Base">
+                <span class="rail-icon"><i class="fa-solid fa-book-medical"></i></span>
+                <span class="rail-label">Knowledge Base</span>
+            </a>
+        </div>
+        <div class="rail-bottom-group">
+            <button class="rail-item theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme" style="background: transparent; border: none;">
+                <span class="rail-icon"><i class="fa-solid fa-sun" id="themeIcon"></i></span>
+                <span class="rail-label">Toggle Theme</span>
+            </button>
+            <a href="dashboard.html" class="rail-item" title="Telemetry Dashboard">
+                <span class="rail-icon"><i class="fa-solid fa-chart-line"></i></span>
+                <span class="rail-label">Dashboard</span>
+            </a>
+        </div>
+    </nav>
 
-                <button class="new-chat-btn" id="newChatBtn" style="background: var(--accent-teal); color: #ffffff; border: none;">
-                    <i class="fa-solid fa-plus"></i> New Case Workspace
-                </button>
-            </div>
+    <!-- Clinical Intelligence Canvas Viewport -->
+    <main class="canvas-main-viewport">
+        <!-- 3-Column Spatial Workspace Layout -->
+        <div class="canvas-layout-3col" id="caseCanvas">
 
-            <div style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700; padding: 0 8px; margin-bottom: 8px;">
-                Active Patient Cases
-            </div>
-
-            <div class="session-list-wrapper" id="sessionList">
-                <div class="session-item active">
-                    <i class="fa-solid fa-notes-medical" style="color: var(--accent-teal);"></i>
-                    <span>Case #DH-2048 • Chest Pain</span>
+            <!-- COLUMN 1: EVIDENCE & SIGNALS (LEFT) -->
+            <div class="canvas-col-left">
+                <!-- Inputs & Files Card -->
+                <div class="paper-card" style="margin-bottom: 16px;">
+                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+                        <span><i class="fa-solid fa-file-medical" style="color: var(--accent-teal);"></i> INPUT EVIDENCE</span>
+                        <span>4 SOURCES</span>
+                    </div>
+                    <div class="evidence-signal-tag"><span>📄 CBC_Report.pdf</span> <span style="font-size: 0.75rem; color: var(--text-dim);">Lab PDF</span></div>
+                    <div class="evidence-signal-tag"><span>💊 Active_Rx.jpg</span> <span style="font-size: 0.75rem; color: var(--text-dim);">Prescription</span></div>
+                    <div class="evidence-signal-tag"><span>📝 Patient_History.txt</span> <span style="font-size: 0.75rem; color: var(--text-dim);">Clinical Notes</span></div>
+                    <div class="evidence-signal-tag"><span>🎙️ Voice_Dictation_1.wav</span> <span style="font-size: 0.75rem; color: var(--text-dim);">Audio Memo</span></div>
                 </div>
-                <div class="session-item">
-                    <i class="fa-solid fa-notes-medical"></i>
-                    <span>Case #DH-2047 • Pyrexia</span>
-                </div>
-                <div class="session-item">
-                    <i class="fa-solid fa-notes-medical"></i>
-                    <span>Case #DH-2046 • Dyspnea</span>
-                </div>
-            </div>
 
-            <div style="border-top: 1px solid var(--border-color); padding-top: 14px; display: flex; flex-direction: column; gap: 6px;">
-                <a href="index.html" class="nav-link" style="font-size: 0.85rem;"><i class="fa-solid fa-house"></i> Home</a>
-                <a href="medicines.html" class="nav-link" style="font-size: 0.85rem;"><i class="fa-solid fa-pills"></i> Medication Safety</a>
-                <a href="diseases.html" class="nav-link" style="font-size: 0.85rem;"><i class="fa-solid fa-book-medical"></i> Knowledge Base</a>
-                <a href="dashboard.html" class="nav-link" style="font-size: 0.85rem;"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-            </div>
-        </aside>
-
-        <!-- Main Workspace Area -->
-        <main class="chat-main-window">
-            <!-- Top Header -->
-            <header class="chat-top-bar" style="background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); padding: 12px 24px;">
-                <div class="model-status-badge">
-                    <span class="badge badge-emerald" style="padding: 2px 8px;"><i class="fa-solid fa-circle-check"></i> System Operational</span>
-                    <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-left: 12px;">Case Workspace • DhanvantreAI Engine</span>
-                </div>
-
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme">
-                        <i class="fa-solid fa-sun" id="themeIcon"></i>
-                    </button>
-                </div>
-            </header>
-
-            <!-- Message Stream / Case Workbench -->
-            <div class="stream-messages-container" id="messageStream" style="padding: 24px 15%;">
-                <!-- Clinical Welcome Workspace Card -->
-                <div class="message-row ai">
-                    <div class="msg-content-wrapper" style="max-width: 100%; width: 100%;">
-                        <div class="clinical-card" style="padding: 20px;">
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-                                <div style="font-size: 0.95rem; font-weight: 800; color: var(--text-main);">
-                                    <i class="fa-solid fa-stethoscope" style="color: var(--accent-teal);"></i> DHANVANTREAI CLINICAL WORKSPACE
-                                </div>
-                                <div class="badge badge-neutral">Ready for Case Input</div>
-                            </div>
-                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">
-                                Enter patient presenting symptoms, vital signs, lab findings (CBC, LFT, KFT), or drug safety inquiries below to generate a structured clinical decision analysis.
-                            </p>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.8rem; color: var(--text-dim);">
-                                <div style="background: var(--bg-surface); padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-                                    <strong>1. Patient Evidence:</strong> Symptoms & Labs
-                                </div>
-                                <div style="background: var(--bg-surface); padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-                                    <strong>2. Clinical Signals:</strong> Measured Flags
-                                </div>
-                                <div style="background: var(--bg-surface); padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-                                    <strong>3. Differential:</strong> Rule-In / Rule-Out
-                                </div>
-                                <div style="background: var(--bg-surface); padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-                                    <strong>4. Medication Safety:</strong> Pharmacist Check
-                                </div>
-                            </div>
-                        </div>
+                <!-- Extracted Findings / Lab Signals -->
+                <div class="paper-card">
+                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+                        <span><i class="fa-solid fa-microscope" style="color: var(--accent-teal);"></i> EXTRACTED SIGNALS</span>
+                        <span>5 DETECTED</span>
+                    </div>
+                    <div class="evidence-signal-tag thread-active" id="signal-wbc">
+                        <span>WBC 12.4k/µL</span> <span class="badge badge-rose">↑ HIGH</span>
+                    </div>
+                    <div class="evidence-signal-tag thread-active" id="signal-temp">
+                        <span>Fever 38.9°C</span> <span class="badge badge-orange">↑ HIGH</span>
+                    </div>
+                    <div class="evidence-signal-tag thread-active" id="signal-neutro">
+                        <span>Neutrophils 82%</span> <span class="badge badge-rose">↑ HIGH</span>
+                    </div>
+                    <div class="evidence-signal-tag" id="signal-headache">
+                        <span>Headache (frontal)</span> <span class="badge badge-neutral">PRESENT</span>
+                    </div>
+                    <div class="evidence-signal-tag" id="signal-fatigue">
+                        <span>Fatigue (3 days)</span> <span class="badge badge-neutral">PRESENT</span>
                     </div>
                 </div>
             </div>
+
+            <!-- COLUMN 2: DIFFERENTIAL REASONING & CANVAS (CENTER) -->
+            <div class="canvas-col-center">
+                <!-- Case Header Card -->
+                <div class="paper-card" style="margin-bottom: 16px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 0.75rem; font-weight: 800; color: var(--accent-teal); letter-spacing: 0.5px;">CLINICAL CASE WORKBENCH</span>
+                            <h1 style="font-size: 1.4rem; font-weight: 800; color: var(--text-main);">CASE #DH-0428</h1>
+                        </div>
+                        <div class="badge badge-emerald" style="padding: 4px 10px;">
+                            <i class="fa-solid fa-circle-check"></i> System Operational
+                        </div>
+                    </div>
+                    <div style="font-size: 1rem; font-weight: 700; color: var(--text-main);">
+                        Sarah • 34 • Female
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 4px;">
+                        <em>"Fever, severe frontal headache, and progressive fatigue for 3 days"</em>
+                    </div>
+                </div>
+
+                <!-- Clinical Picture Summary Box -->
+                <div class="paper-card" style="border-left: 4px solid var(--accent-teal); margin-bottom: 16px; background: var(--bg-card);">
+                    <div style="font-size: 0.75rem; font-weight: 800; color: var(--accent-teal); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">SYNTHESIZED CLINICAL PICTURE</div>
+                    <div style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">
+                        ACUTE INFLAMMATORY PROCESS POSSIBLE
+                    </div>
+                    <p style="font-size: 0.86rem; color: var(--text-muted); margin-top: 6px;">
+                        Significant leukocytosis with neutrophilic predominance (82%) combined with pyrexia (38.9°C) strongly points toward an acute infectious/inflammatory etiology.
+                    </p>
+                </div>
+
+                <!-- Interactive Evidence Threads Section -->
+                <div class="paper-card" style="margin-bottom: 16px;">
+                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+                        <span><i class="fa-solid fa-network-wired" style="color: var(--accent-teal);"></i> INTERACTIVE EVIDENCE THREADS</span>
+                        <span>CLICK TO EXPLORE RATIONALE</span>
+                    </div>
+
+                    <!-- Candidate 1: Bacterial Infection -->
+                    <div class="differential-card-item active-thread" onclick="selectEvidenceThread('bacterial')">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                            <span style="font-weight: 800; color: var(--text-main); font-size: 0.95rem;">● Bacterial Infection</span>
+                            <span class="badge badge-rose">84% Probability</span>
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="color: var(--status-emerald-text);">✔ Supporting: WBC 12.4k ↑, Neutrophils 82% ↑</span>
+                            <span style="color: var(--status-rose-text);">✘ Missing: Blood cultures pending</span>
+                        </div>
+                    </div>
+
+                    <!-- Candidate 2: Viral Syndrome -->
+                    <div class="differential-card-item" onclick="selectEvidenceThread('viral')">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                            <span style="font-weight: 800; color: var(--text-main); font-size: 0.95rem;">● Viral Syndrome</span>
+                            <span class="badge badge-amber">42% Probability</span>
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="color: var(--status-emerald-text);">✔ Supporting: Fever, Fatigue, Headache</span>
+                            <span style="color: var(--status-rose-text);">✘ Contradicting: Neutrophilia >80%</span>
+                        </div>
+                    </div>
+
+                    <!-- Candidate 3: Migraine -->
+                    <div class="differential-card-item" onclick="selectEvidenceThread('migraine')">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                            <span style="font-weight: 800; color: var(--text-dim); font-size: 0.95rem;">○ Migraine</span>
+                            <span class="badge badge-neutral">12% Probability</span>
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            <span style="color: var(--status-rose-text);">✘ Contradicting: High fever 38.9°C & leukocytosis contradict simple migraine</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step-by-Step Clinical Rationale Trail -->
+                <div class="paper-card">
+                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 10px;">CLINICAL REASONING TIMELINE</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem; color: var(--text-muted);">
+                        <div><strong style="color: var(--text-main);">Step 1:</strong> Lab extraction identified leukocytosis (12.4k) and fever (38.9°C).</div>
+                        <div><strong style="color: var(--text-main);">Step 2:</strong> Differential matching ruled out migraine due to inflammatory flags.</div>
+                        <div><strong style="color: var(--text-main);">Step 3:</strong> Recommended empiric evaluation and medication safety verification.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMN 3: SAFETY, CERTAINTY & ACTIONS (RIGHT) -->
+            <div class="canvas-col-right">
+                <!-- Triage Level Card -->
+                <div class="paper-card" style="margin-bottom: 16px; text-align: center;">
+                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 8px;">TRIAGE ASSESSMENT</div>
+                    <div class="badge badge-rose" style="font-size: 1rem; padding: 8px 18px; font-weight: 800;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> URGENT EVALUATION
+                    </div>
+                </div>
+
+                <!-- Certainty & Uncertainty Breakdown -->
+                <div class="paper-card" style="margin-bottom: 16px;">
+                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 10px;">CERTAINTY & UNCERTAINTY</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem;">
+                        <div style="display: flex; justify-content: space-between; font-weight: 700; color: var(--text-main);">
+                            <span>Diagnostic Certainty:</span>
+                            <span style="color: var(--status-emerald-text);">78% Calibrated</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);">
+                            <span>• Unresolved Questions:</span>
+                            <span style="font-weight: 700; color: var(--status-amber-text);">2 Open Flags</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);">
+                            <span>• Safety Guardrail Alerts:</span>
+                            <span style="font-weight: 700; color: var(--status-rose-text);">1 Check</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10-Point Medication Safety Audit -->
+                <div class="paper-card" style="margin-bottom: 16px;">
+                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 10px;">MEDICATION SAFETY AUDIT</div>
+                    <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.82rem;">
+                        <div style="display: flex; justify-content: space-between; color: var(--status-emerald-text);">
+                            <span>Renal Function (eGFR):</span> <span>✔ Normal (>90 mL/min)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; color: var(--status-amber-text);">
+                            <span>Hepatic Clearance:</span> <span>⚠️ Caution (Paracetamol max 2g/day)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; color: var(--status-emerald-text);">
+                            <span>Drug Interactions:</span> <span>✔ No Severe Interplay</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; color: var(--status-emerald-text);">
+                            <span>Allergy Guardrail:</span> <span>✔ Penicillin Clear</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiet Contextual AI Marginalia Annotation -->
+                <div class="ai-annotation-note">
+                    <strong style="color: var(--text-main);">Clinical Marginalia:</strong><br>
+                    Neutrophil predominance >80% strongly favors bacterial etiology over viral prodrome. Recommend blood culture and clinical follow-up within 12 hours.
+                </div>
+            </div>
+
+        </div>
+    </main>
 
             <!-- Chat Input Area -->
             <div class="chat-input-area">
