@@ -48,11 +48,11 @@ function loadScenario(scen) {
     if (scen === 'fungal') {
         renderCardData({
             conditions: [
-                { name: 'Fungal Infection (Tinea Corporis)', match: 92.4, color: 'var(--accent-cyan)' },
-                { name: 'Contact Dermatitis', match: 7.2, color: 'var(--accent-amber)' }
+                { name: 'Fungal Infection (Tinea Corporis)', match: 92.4, color: 'var(--primary)' },
+                { name: 'Contact Dermatitis', match: 7.2, color: 'var(--status-warning)' }
             ],
-            confidence: '94.8%',
-            confDesc: 'High precision match against dermatological fungal ontology.',
+            confidence: 'Strong',
+            confDesc: 'High concordance match against dermatological fungal ontology and localized physical presentation.',
             medicines: [
                 { name: 'Clotrimazole 1% Cream', desc: 'Topical Antifungal • Apply BID for 14 days', price: '₹42.00' },
                 { name: 'Fluconazole 150 mg', desc: 'Oral Systemic Antifungal • Single Dose', price: '₹28.50' }
@@ -69,11 +69,11 @@ function loadScenario(scen) {
     } else if (scen === 'pneumonia') {
         renderCardData({
             conditions: [
-                { name: 'Community-Acquired Pneumonia', match: 89.1, color: 'var(--accent-rose)' },
-                { name: 'Acute Bronchitis', match: 9.8, color: 'var(--accent-amber)' }
+                { name: 'Community-Acquired Pneumonia', match: 89.1, color: 'var(--status-danger)' },
+                { name: 'Acute Bronchitis', match: 9.8, color: 'var(--status-warning)' }
             ],
-            confidence: '95.2%',
-            confDesc: 'High certainty match from fever, productive cough, and infiltrate signs.',
+            confidence: 'Strong',
+            confDesc: 'High evidence concordance from pyrexia, productive cough, and auscultatory crepitation signs.',
             medicines: [
                 { name: 'Amoxicillin + Clavulanate 625mg', desc: 'Broad-Spectrum Antibiotic • BID for 7 days', price: '₹204.00' },
                 { name: 'Azithromycin 500 mg', desc: 'Macrolide Antibiotic Adjunct • QD for 3 days', price: '₹115.00' }
@@ -90,11 +90,11 @@ function loadScenario(scen) {
     } else if (scen === 'diabetes') {
         renderCardData({
             conditions: [
-                { name: 'Type 2 Diabetes Mellitus', match: 94.5, color: 'var(--accent-cyan)' },
-                { name: 'Impaired Fasting Glucose', match: 5.1, color: 'var(--accent-amber)' }
+                { name: 'Type 2 Diabetes Mellitus', match: 94.5, color: 'var(--primary)' },
+                { name: 'Impaired Fasting Glucose', match: 5.1, color: 'var(--status-warning)' }
             ],
-            confidence: '97.6%',
-            confDesc: 'Exceptional diagnostic precision based on glycemic triad.',
+            confidence: 'Strong',
+            confDesc: 'High evidence concordance based on classical glycemic polydipsia and polyuria triad.',
             medicines: [
                 { name: 'Metformin HCl 500 mg SR', desc: 'Biguanide Anti-hyperglycemic • QD with meals', price: '₹48.00' },
                 { name: 'Teneligliptin 20 mg', desc: 'DPP-4 Inhibitor • QD in morning', price: '₹130.00' }
@@ -112,11 +112,11 @@ function loadScenario(scen) {
         // ACS Default
         renderCardData({
             conditions: [
-                { name: 'Acute Coronary Syndrome (ACS)', match: 86.4, color: 'var(--accent-rose)' },
-                { name: 'Pleurisy / Pericarditis', match: 11.2, color: 'var(--accent-amber)' }
+                { name: 'Acute Coronary Syndrome (ACS)', match: 86.4, color: 'var(--status-danger)' },
+                { name: 'Pleurisy / Pericarditis', match: 11.2, color: 'var(--status-warning)' }
             ],
-            confidence: '96.4%',
-            confDesc: 'Evaluated against 250,000 biomedical graph nodes. Sensitivity score 0.94, diagnostic precision 0.96.',
+            confidence: 'Strong',
+            confDesc: 'Evaluated against ACC/AHA guidelines with 4 matching pathognomonic clinical signals.',
             medicines: [
                 { name: 'Aspirin 325 mg (Chewable)', desc: 'First-Line Antiplatelet Therapy • STAT Administration', price: '₹18.50' },
                 { name: 'Clopidogrel 75 mg', desc: 'Dual Antiplatelet Adjunct • Oral Tablet', price: '₹64.00' }
@@ -158,7 +158,7 @@ function renderCardData(data) {
                 <strong>${escapeHtml(m.name)}</strong>
                 <div style="font-size: 0.8rem; color: var(--text-muted);">${escapeHtml(m.desc)}</div>
             </div>
-            <div style="font-weight: 800; color: var(--accent-emerald); font-family: 'JetBrains Mono', monospace;">${escapeHtml(m.price)}</div>
+            <div style="font-weight: 800; color: var(--accent-emerald); font-family: 'IBM Plex Mono', monospace;">${escapeHtml(m.price)}</div>
         </div>
     `).join('');
 

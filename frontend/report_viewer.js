@@ -128,8 +128,8 @@ function loadReport(repId) {
             spo2: '96%',
             complaint: 'Patient presented with acute retrosternal chest pain, onset 2 hours ago during exertion, accompanied by moderate dyspnea and diaphoresis.',
             diagnoses: [
-                'Acute Coronary Syndrome (ACS) — 86.4% Diagnostic Confidence',
-                'Pleurisy / Pericarditis — 11.2% Secondary Match'
+                'Acute Coronary Syndrome (ACS) — Primary Consideration (Strong Evidence)',
+                'Pleurisy / Pericarditis — Secondary Consideration (Limited Evidence)'
             ],
             meds: [
                 'Aspirin 325 mg Chewable (STAT) — First-Line Antiplatelet',

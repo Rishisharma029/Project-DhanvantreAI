@@ -1,7 +1,7 @@
 <div align="center">
 
-# 🩺⚡ AuraMed AI (Project DhanvantreAI)
-### *Professional-Grade Clinical Decision Support & Medication Intelligence Platform*
+# 🩺 ✚ DHANVANTRE
+### *Clinical Intelligence & Decision Support Platform*
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-brightgreen?style=for-the-badge&logo=github&logoColor=white)](https://rishisharma029.github.io/Project-DhanvantreAI/)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
@@ -17,18 +17,19 @@
 
 ## 🌐 Live Production Demo
 
-Explore the live static frontend application featuring modern glassmorphism and dynamic UI enhancements:
+Explore the live clinical platform:
 👉 **[Launch Live Demo: https://rishisharma029.github.io/Project-DhanvantreAI/](https://rishisharma029.github.io/Project-DhanvantreAI/)**
 
-- **Interactive AI Medical Chat**: [chat.html](https://rishisharma029.github.io/Project-DhanvantreAI/chat.html)
-- **Clinical Dashboard**: [dashboard.html](https://rishisharma029.github.io/Project-DhanvantreAI/dashboard.html)
-- **Medication Safety & Triage**: [medicines.html](https://rishisharma029.github.io/Project-DhanvantreAI/medicines.html)
+- **Case Workbench**: [chat.html](https://rishisharma029.github.io/Project-DhanvantreAI/chat.html)
+- **Clinical Insights & Telemetry**: [dashboard.html](https://rishisharma029.github.io/Project-DhanvantreAI/dashboard.html)
+- **Medication Safety Notebook**: [medicines.html](https://rishisharma029.github.io/Project-DhanvantreAI/medicines.html)
+- **Clinical Knowledge Base**: [diseases.html](https://rishisharma029.github.io/Project-DhanvantreAI/diseases.html)
 
 ---
 
 ## 📌 Executive Platform Overview
 
-> **AuraMed AI** is a production-ready **Clinical Decision Support and Medication Information Platform**. It leverages advanced AI to retrieve evidence-based medical data, evaluate complex clinical conditions, perform multi-point medication safety audits, and assist healthcare professionals with transparent, grounded reasoning.
+> **DHANVANTRE** is an enterprise **Clinical Intelligence and Decision Support Platform**. It connects multi-source patient evidence directly to differential diagnostic reasoning, certainty levels, and medication safety audit trails. AI is seamlessly integrated into the background of a high-trust physician workflow.
 
 The platform integrates **Hybrid Dense/Lexical Retrieval (RAG)**, a **5-Stage Physician Decision Tree**, and a **Production-Grade Security Suite** to provide accurate clinical insights while maintaining the highest standards of data integrity and patient safety.
 

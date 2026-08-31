@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AuraMed AI Settings - Manage Dark Mode theme, Language, Notification preferences, and Privacy controls.">
-    <title>Application Settings | AuraMed AI</title>
+    <meta name="description" content="DHANVANTRE Clinical Intelligence Platform - Manage system appearance, language, clinical notifications, and governance controls.">
+    <title>System Preferences | DHANVANTRE</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -121,23 +121,43 @@
 </head>
 <body>
 
-    <!-- Background Elements -->
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-    <div class="bg-grid-pattern"></div>
-
     <!-- Header Navigation -->
     <header class="navbar-header scrolled">
         <div class="container nav-container">
             <a href="index.html" class="brand-logo">
-                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+                <div class="logo-icon"><i class="fa-solid fa-plus"></i></div>
+                <div class="brand-text-lockup">
+                    <span class="brand-title">DHANVANTRE</span>
+                    <span class="brand-subtitle">Clinical Intelligence</span>
+                </div>
             </a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="chat.html" class="nav-link">Cases</a>
+                <a href="medicines.html" class="nav-link">Medications</a>
+                <a href="diseases.html" class="nav-link">Knowledge</a>
+                <a href="dashboard.html" class="nav-link">Insights</a>
+            </nav>
+
             <div class="nav-actions">
-                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
                 <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
                     <i class="fa-solid fa-moon" id="themeIcon"></i>
                 </button>
+                <div class="clinician-badge-menu" id="clinicianMenu" role="button" aria-haspopup="true" aria-expanded="false">
+                    <div class="clinician-avatar"><i class="fa-solid fa-user-doctor"></i></div>
+                    <div class="clinician-details">
+                        <span class="clinician-name">Dr. Sharma <i class="fa-solid fa-chevron-down clinician-chevron"></i></span>
+                        <span class="clinician-role">Attending Physician</span>
+                    </div>
+                    <div class="clinician-dropdown" id="clinicianDropdown">
+                        <a href="profile.html"><i class="fa-solid fa-id-card"></i> Clinical Profile</a>
+                        <a href="settings.html"><i class="fa-solid fa-sliders"></i> Preferences</a>
+                        <a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Governance</a>
+                        <hr class="dropdown-divider">
+                        <a href="auth.html#login" class="dropdown-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</a>
+                    </div>
+                </div>
+                <a href="chat.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-folder-plus"></i> Open Workspace</a>
             </div>
         </div>
     </header>
@@ -315,198 +335,5 @@
 
     <!-- Script -->
     <script src="settings.js"></script>
-    <!-- Theme Enhancement: Harsh Gradients, Rainbow, Lucide -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Lucide icons
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-            
-            // Add rainbow class to navbar
-            const navbar = document.querySelector('.navbar-header, nav');
-            if (navbar && !navbar.classList.contains('navbar-harsh')) {
-                navbar.classList.add('navbar-harsh');
-            }
-            
-            // Add rainbow heading to main headings
-            document.querySelectorAll('h1, h2').forEach(function(h) {
-                if (!h.classList.contains('rainbow-heading')) {
-                    h.classList.add('rainbow-heading');
-                }
-            });
-            
-            // Add theme toggle rainbow button
-            const themeBtn = document.getElementById('themeToggleBtn');
-            if (themeBtn && !themeBtn.classList.contains('theme-toggle-rainbow')) {
-                themeBtn.classList.add('theme-toggle-rainbow');
-            }
-            
-            // Add rainbow border to primary buttons
-            document.querySelectorAll('.btn-primary, .btn-hero, .btn-submit, button[type="submit"]').forEach(function(btn) {
-                if (!btn.classList.contains('btn-harsh')) {
-                    btn.classList.add('btn-harsh');
-                }
-            });
-            
-            // Add card rainbow hover to glass cards
-            document.querySelectorAll('.glass-card, .card, .metric-card, .stat-card').forEach(function(card) {
-                if (!card.classList.contains('card-rainbow-hover')) {
-                    card.classList.add('card-rainbow-hover');
-                }
-            });
-            
-            // Observe theme changes to update body background
-            function updateBodyBg() {
-                const theme = document.documentElement.getAttribute('data-theme');
-                if (theme === 'light') {
-                    document.body.style.backgroundColor = '#ffffff';
-                } else {
-                    document.body.style.backgroundColor = '#000000';
-                }
-            }
-            
-            // Initial
-            updateBodyBg();
-            
-            // Watch for theme changes
-            const observer = new MutationObserver(updateBodyBg);
-            observer.observe(document.documentElement, {
-                attributes: true,
-                attributeFilter: ['data-theme']
-            });
-        });
-    </script>
-    <!-- Emoji & Em-Dash Enhancement -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add em-dash list styling to all ul/ol lists
-            document.querySelectorAll('ul, ol').forEach(function(list) {
-                if (!list.classList.contains('em-dash-list')) {
-                    list.classList.add('em-dash-list');
-                }
-            });
-            
-            // Add drop shadow to all cards
-            document.querySelectorAll('.glass-card, .card, .metric-card, .stat-card, .feature-card').forEach(function(card) {
-                if (!card.classList.contains('shadow-drop-md')) {
-                    card.classList.add('shadow-drop-md');
-                }
-                if (!card.classList.contains('shadow-hover-lift')) {
-                    card.classList.add('shadow-hover-lift');
-                }
-            });
-            
-            // Add liquid glass to glass cards
-            document.querySelectorAll('.glass-card').forEach(function(card) {
-                if (!card.classList.contains('liquid-glass')) {
-                    card.classList.add('liquid-glass');
-                }
-            });
-            
-            // Add features-3-col to sections with 3+ cards
-            document.querySelectorAll('.features-grid, .grid-3, .row').forEach(function(grid) {
-                const cards = grid.querySelectorAll('.glass-card, .card, .metric-card, .stat-card');
-                if (cards.length >= 3) {
-                    grid.classList.add('features-3-col');
-                }
-            });
-            
-            // Add emoji decorations to section headings based on keywords
-            const emojiMap = {
-                'AI': '🤖',
-                'Clinical': '🩺',
-                'Medical': '🏥',
-                'Health': '💚',
-                'Diagnostic': '🔬',
-                'Emergency': '🚨',
-                'Dashboard': '📊',
-                'Settings': '⚙️',
-                'Profile': '👤',
-                'Report': '📄',
-                'Medicine': '💊',
-                'Drug': '💊',
-                'Chat': '💬',
-                'History': '🕐',
-                'Notification': '🔔',
-                'Admin': '👑',
-                'Security': '🛡️',
-                'Performance': '⚡',
-                'Accessibility': '♿',
-                'Explainability': '💡',
-                'Feature': '⭐',
-                'Welcome': '👋',
-                'Login': '🔐',
-                'Register': '📝',
-                'Home': '🏠',
-                'Disease': '🧠',
-                'Symptom': '🩺',
-                'Treatment': '💉',
-                'Lab': '🧪',
-                'Voice': '🎙️',
-                'Image': '📷',
-                'Document': '📁',
-                'Search': '🔍',
-                'Results': '📋',
-                'Insights': '💡',
-                'Pipeline': '🔧',
-                'Metrics': '📈',
-                'Safety': '🛡️',
-                'Guardrail': '🛡️',
-                'Knowledge': '📚',
-                'Reasoning': '🧠',
-                'Evidence': '📚',
-                'Guideline': '📖',
-                'Dosage': '💊',
-                'Interaction': '⚠️',
-                'Differential': '🔬',
-                'Confidence': '🎯',
-                'Explain': '💡',
-                'Timeline': '🕐',
-                'Analytics': '📊',
-                'Monitoring': '👁️',
-                'Logs': '📋',
-                'Backup': '💾',
-                'Deploy': '🚀',
-                'Test': '🧪',
-                'CI/CD': '🔄',
-                'Docker': '🐦',
-                'Database': '🗄️',
-                'API': '🔌',
-                'Gateway': '🌐',
-                'Cache': '⚡',
-                'Queue': '📨',
-                'Audit': '📝',
-                'User': '👤',
-                'Role': '🎭',
-                'Permission': '🔐',
-                'Session': '\U0001F511',
-                'Token': '🎫',
-                'OAuth': '🔐',
-                'Payment': '💳',
-                'Billing': '💵',
-                'Plan': '📦',
-                'Subscription': '💳',
-                'Webhook': '🔗',
-                'Stripe': '💳'
-            };
-            
-            // Add emojis before matching headings
-            document.querySelectorAll('h1, h2, h3').forEach(function(heading) {
-                const text = heading.textContent;
-                for (const [keyword, emoji] of Object.entries(emojiMap)) {
-                    if (text.includes(keyword) && !heading.dataset.emojiAdded) {
-                        const span = document.createElement('span');
-                        span.className = 'emoji-icon';
-                        span.style.marginRight = '8px';
-                        span.textContent = emoji;
-                        heading.insertBefore(span, heading.firstChild);
-                        heading.dataset.emojiAdded = 'true';
-                        break;
-                    }
-                }
-            });
-        });
-    </script>
-</body>
+    </body>
 </html>

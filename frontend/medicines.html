@@ -1,653 +1,300 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="DhanvantreAI Medication Safety Notebook - Pharmacist-grade audit of active ingredients, renal/hepatic clearance status, contraindication matrix, and drug-drug interplay.">
-    <title>Medication Safety Notebook | DhanvantreAI</title>
+    <meta name="description" content="DHANVANTRE Clinical Intelligence Platform - Professional Medication Reference, Dosing, Contraindications, Renal/Hepatic Guidance, and Drug Interactions.">
+    <title>MEDICATION SAFETY | DHANVANTRE</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .explorer-container {
-            max-width: 1240px;
-            margin: 90px auto 60px;
-            padding: 0 24px;
-        }
-
-        .search-hero-box {
-            padding: 28px;
-            text-align: center;
-            margin-bottom: 28px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-        }
-
-        .search-hero-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
-
-        .search-hero-subtitle {
-            font-size: 0.92rem;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            max-width: 640px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .search-input-group {
-            max-width: 720px;
-            margin: 0 auto 24px;
-            position: relative;
-        }
-
-        .search-input-group input {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-full);
-            padding: 16px 24px 16px 54px;
-            color: var(--text-main);
-            font-size: 1.05rem;
-            outline: none;
-            transition: border-color var(--transition-fast);
-        }
-
-        .search-input-group input:focus {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
-        }
-
-        .search-input-group i {
-            position: absolute;
-            left: 22px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent-cyan);
-            font-size: 1.2rem;
-        }
-
-        /* Search Filter Pills */
-        .filter-mode-pills {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .filter-mode-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 8px 20px;
-            border-radius: var(--radius-full);
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-
-        .filter-mode-btn:hover, .filter-mode-btn.active {
-            background: var(--accent-cyan);
-            color: #000;
-            border-color: var(--accent-cyan);
-        }
-
-        /* Quick Category Pills */
-        .quick-cat-row {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .quick-cat-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            color: var(--text-dim);
-            padding: 4px 14px;
-            border-radius: var(--radius-full);
-            font-size: 0.75rem;
-            cursor: pointer;
-        }
-
-        .quick-cat-btn:hover {
-            color: var(--accent-cyan);
-            border-color: var(--accent-cyan);
-        }
-
-        /* Medicine Cards Grid */
-        .med-explorer-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-bottom: 60px;
-        }
-
-        @media (max-width: 1024px) {
-            .med-explorer-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 640px) {
-            .med-explorer-grid { grid-template-columns: 1fr; }
-        }
-
-        .med-item-card {
-            padding: 28px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-        }
-
-        .med-item-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 12px;
-        }
-
-        .med-item-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .med-badge-type {
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: var(--radius-sm);
-            background: rgba(6, 182, 212, 0.12);
-            color: var(--accent-cyan);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            font-weight: 600;
-        }
-
-        .med-generic-name {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 14px;
-        }
-
-        .med-ingredients {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-bottom: 16px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .med-price-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 16px;
-            border-top: 1px solid var(--border-color);
-            margin-top: 16px;
-        }
-
-        .med-price-val {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--accent-emerald);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Detail Modal Tabs & Lists */
-        .detail-tabs {
-            display: flex;
-            gap: 8px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-        }
-
-        .detail-tab-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            padding: 8px 14px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: var(--radius-sm);
-        }
-
-        .detail-tab-btn.active {
-            background: rgba(6, 182, 212, 0.15);
-            color: var(--accent-cyan);
-        }
-
-        .detail-panel {
-            display: none;
-        }
-
-        .detail-panel.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .substitute-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
-            border-radius: var(--radius-md);
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-color);
-            margin-bottom: 8px;
-        }
-    </style>
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Core Design System -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="dashboard-layout-v2">
 
-    <!-- Background Elements -->
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-    <div class="bg-grid-pattern"></div>
-
-    <!-- Header Navigation -->
-    <header class="navbar-header scrolled">
-        <div class="container nav-container">
-            <a href="index.html" class="brand-logo">
-                <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-                <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
+    <!-- 1. TOP UTILITY BAR -->
+    <header class="dashboard-topbar">
+        <div class="case-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 6px;">
+                <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i> Workspace
             </a>
-            <div class="nav-actions">
-                <a href="dashboard.html" class="btn btn-outline"><i class="fa-solid fa-gauge"></i> Dashboard</a>
-                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
-                    <i class="fa-solid fa-moon" id="themeIcon"></i>
-                </button>
+            <span style="color: var(--border-color);">/</span>
+            <span style="color: var(--text-main); font-weight: 700;">Medication Reference</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle theme">
+                <i data-lucide="moon" id="themeIcon" style="width: 15px; height: 15px;"></i>
+            </button>
+            <div class="clinician-badge-menu" id="clinicianMenu" role="button" aria-haspopup="true" aria-expanded="false">
+                <div class="clinician-avatar"><i data-lucide="user" style="width: 16px; height: 16px;"></i></div>
+                <div class="clinician-details">
+                    <span class="clinician-name">Dr. Rishi <i data-lucide="chevron-down" style="width: 12px; height: 12px;"></i></span>
+                    <span class="clinician-role">Attending Physician</span>
+                </div>
             </div>
+            <a href="chat.html" class="btn btn-primary btn-sm"><i data-lucide="plus" style="width: 14px; height: 14px;"></i> Active Case</a>
         </div>
     </header>
-
-    <main class="explorer-container">
-        <!-- Hero Search Box -->
-        <div class="glass-card search-hero-box">
-            <h1 class="search-hero-title">Biomedical <span class="gradient-text">Medicine Explorer</span></h1>
-            <p class="search-hero-subtitle">
-                Search over 250,000 pharmaceutical formulations by Brand Name, Generic Name, Active Ingredient, or Clinical Indication.
-            </p>
-
-            <!-- Search Input -->
-            <div class="search-input-group">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="medSearchInput" placeholder="Search medicines e.g., Crocin, Paracetamol, Metformin, Fever...">
-            </div>
-
-            <!-- Filter Mode Pills -->
-            <div class="filter-mode-pills">
-                <button class="filter-mode-btn active" data-by="all">All Fields</button>
-                <button class="filter-mode-btn" data-by="brand"><i class="fa-solid fa-tag"></i> Brand Name</button>
-                <button class="filter-mode-btn" data-by="generic"><i class="fa-solid fa-flask"></i> Generic Name</button>
-                <button class="filter-mode-btn" data-by="ingredient"><i class="fa-solid fa-atom"></i> Ingredient</button>
-                <button class="filter-mode-btn" data-by="use"><i class="fa-solid fa-stethoscope"></i> Disease / Use</button>
-            </div>
-
-            <!-- Quick Category Pills -->
-            <div class="quick-cat-row">
-                <span style="font-size: 0.75rem; color: var(--text-dim);">Popular Categories:</span>
-                <button class="quick-cat-btn" data-query="Antibiotic">Antibiotics</button>
-                <button class="quick-cat-btn" data-query="Paracetamol">Analgesics & Fever</button>
-                <button class="quick-cat-btn" data-query="Diabetes">Antidiabetics</button>
-                <button class="quick-cat-btn" data-query="Hypertension">Cardiovascular</button>
-                <button class="quick-cat-btn" data-query="Antifungal">Antifungals</button>
-            </div>
+    <!-- OPERATIONAL STATUS TELEMETRY STRIP -->
+    <div class="operational-status-strip">
+        <div class="status-live-indicator">
+            <span class="live-dot"></span> Formulary operational
         </div>
-
-        <!-- Medicine Results Grid -->
-        <div class="med-explorer-grid" id="medResultsGrid">
-            <!-- Sample Card 1 -->
-            <div class="glass-card med-item-card">
-                <div>
-                    <div class="med-item-header">
-                        <div class="med-item-title">Crocin 650 Tablet</div>
-                        <span class="med-badge-type">Brand</span>
-                    </div>
-                    <div class="med-generic-name"><i class="fa-solid fa-flask"></i> Paracetamol (Acetaminophen)</div>
-                    <div class="med-ingredients">Active: Paracetamol (650mg)</div>
-                    <p class="text-sm text-muted">Primary Indication: Fever, mild to moderate headache and pain relief.</p>
-                </div>
-                <div class="med-price-row">
-                    <div class="med-price-val">₹32.50</div>
-                    <button class="btn btn-secondary btn-sm" onclick="openMedDetail(101)">
-                        <span>View Details</span> <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Sample Card 2 -->
-            <div class="glass-card med-item-card">
-                <div>
-                    <div class="med-item-header">
-                        <div class="med-item-title">Augmentin 625 Duo</div>
-                        <span class="med-badge-type">Brand</span>
-                    </div>
-                    <div class="med-generic-name"><i class="fa-solid fa-flask"></i> Amoxicillin + Clavulanic Acid</div>
-                    <div class="med-ingredients">Active: Amoxicillin (500mg) + Clavulanate (125mg)</div>
-                    <p class="text-sm text-muted">Primary Indication: Bacterial respiratory tract & soft tissue infections.</p>
-                </div>
-                <div class="med-price-row">
-                    <div class="med-price-val">₹204.00</div>
-                    <button class="btn btn-secondary btn-sm" onclick="openMedDetail(102)">
-                        <span>View Details</span> <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Sample Card 3 -->
-            <div class="glass-card med-item-card">
-                <div>
-                    <div class="med-item-header">
-                        <div class="med-item-title">Glycomet SR 500</div>
-                        <span class="med-badge-type">Brand</span>
-                    </div>
-                    <div class="med-generic-name"><i class="fa-solid fa-flask"></i> Metformin Hydrochloride</div>
-                    <div class="med-ingredients">Active: Metformin (500mg SR)</div>
-                    <p class="text-sm text-muted">Primary Indication: Type 2 Diabetes Mellitus glycemic control.</p>
-                </div>
-                <div class="med-price-row">
-                    <div class="med-price-val">₹48.00</div>
-                    <button class="btn btn-secondary btn-sm" onclick="openMedDetail(103)">
-                        <span>View Details</span> <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- MEDICINE DETAIL MODAL POPUP -->
-    <div class="modal-overlay hidden" id="medDetailModal">
-        <div class="glass-card modal-box" style="max-width: 650px;">
-            <div class="modal-header">
-                <div>
-                    <h3 id="modalMedTitle" style="font-size: 1.4rem; margin-bottom: 4px;">Crocin 650 Tablet</h3>
-                    <div id="modalMedGeneric" style="font-size: 0.85rem; color: var(--accent-cyan);">Paracetamol (650mg)</div>
-                </div>
-                <button class="logout-btn" id="closeMedDetailBtn"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-
-            <!-- Detail Tabs -->
-            <div class="detail-tabs">
-                <button class="detail-tab-btn active" data-tab="uses"><i class="fa-solid fa-stethoscope"></i> Uses</button>
-                <button class="detail-tab-btn" data-tab="effects"><i class="fa-solid fa-triangle-exclamation"></i> Side Effects</button>
-                <button class="detail-tab-btn" data-tab="interactions"><i class="fa-solid fa-pills"></i> Interactions</button>
-                <button class="detail-tab-btn" data-tab="substitutes"><i class="fa-solid fa-arrows-rotate"></i> Alternatives</button>
-                <button class="detail-tab-btn" data-tab="price"><i class="fa-solid fa-tag"></i> Pricing</button>
-            </div>
-
-            <!-- Tab 1: Uses -->
-            <div class="detail-panel active" id="tabUses">
-                <h4 style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">Therapeutic Indications:</h4>
-                <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.9rem;" id="modalUsesList">
-                    <li>Pyrexia (Fever reduction)</li>
-                    <li>Mild to moderate analgesia (Headache, toothache, muscle aches)</li>
-                </ul>
-            </div>
-
-            <!-- Tab 2: Side Effects -->
-            <div class="detail-panel" id="tabEffects">
-                <h4 style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">Potential Adverse Reactions:</h4>
-                <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.9rem;" id="modalEffectsList">
-                    <li>Nausea or abdominal discomfort (Rare)</li>
-                    <li>Hepatotoxicity in severe overdose (&gt;4000mg/day)</li>
-                </ul>
-            </div>
-
-            <!-- Tab 3: Interactions -->
-            <div class="detail-panel" id="tabInteractions">
-                <h4 style="font-size: 0.9rem; color: var(--accent-rose); margin-bottom: 8px;"><i class="fa-solid fa-shield-virus"></i> Contraindications & Warnings:</h4>
-                <p class="text-sm text-muted" id="modalInteractionsText">
-                    Avoid concurrent heavy alcohol consumption (increased risk of hepatotoxicity). Exercise caution when combined with Warfarin.
-                </p>
-            </div>
-
-            <!-- Tab 4: Alternatives -->
-            <div class="detail-panel" id="tabSubstitutes">
-                <h4 style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 12px;">Equivalent Generic / Brand Substitutes:</h4>
-                <div id="modalSubstitutesList">
-                    <div class="substitute-item">
-                        <div>
-                            <strong>Dolo 650 Tablet</strong>
-                            <div style="font-size: 0.75rem; color: var(--text-dim);">Micro Labs Ltd • Same Active Compound</div>
-                        </div>
-                        <div style="font-weight: 700; color: var(--accent-emerald);">₹30.50 (Save 6%)</div>
-                    </div>
-                    <div class="substitute-item">
-                        <div>
-                            <strong>Calpol 650 Tablet</strong>
-                            <div style="font-size: 0.75rem; color: var(--text-dim);">GSK Pharmaceuticals</div>
-                        </div>
-                        <div style="font-weight: 700; color: var(--accent-emerald);">₹31.00 (Save 4%)</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tab 5: Price & Manufacturer -->
-            <div class="detail-panel" id="tabPrice">
-                <div style="background: rgba(0,0,0,0.3); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                        <span style="font-size: 0.9rem; color: var(--text-muted);">Retail MRP Price:</span>
-                        <span style="font-size: 1.5rem; font-weight: 800; color: var(--accent-emerald); font-family: 'JetBrains Mono', monospace;" id="modalPriceVal">₹32.50</span>
-                    </div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 6px;">
-                        <div>Packaging Unit: <strong id="modalUnitVal">Strip of 15 Tablets</strong></div>
-                        <div>Manufacturer: <strong id="modalMfgVal">GlaxoSmithKline Pharmaceuticals Ltd</strong></div>
-                    </div>
-                </div>
-            </div>
+        <div class="operational-tags-group">
+            <span class="operational-tag-item">Database updated 21:52</span>
+            <span class="operational-tag-item">Interaction tables refreshed 12 min ago</span>
+            <span class="operational-tag-item operational-tag-highlight">3 active alerts in cardiology ward</span>
         </div>
     </div>
 
-    <!-- Script -->
+
+    <!-- 2. MAIN WORKSPACE GRID: STABLE SIDEBAR + CONTENT -->
+    <div class="dashboard-workspace-grid">
+
+        <!-- STABLE APPLICATION SIDEBAR -->
+        <aside class="dash-sidebar-v2" aria-label="Workstation Navigation">
+            <div>
+                <!-- Group 1: WORKSPACE -->
+                <div class="sidebar-nav-group">
+                    <div class="sidebar-group-heading">WORKSPACE</div>
+                    <a href="chat.html" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="file-text" style="width: 15px; height: 15px;"></i>
+                            <span>Cases</span>
+                        </div>
+                        <span class="tabular-num" style="font-size: 0.72rem; color: var(--text-dim);">12</span>
+                    </a>
+                    <a href="dashboard.html#patients" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="users" style="width: 15px; height: 15px;"></i>
+                            <span>Patients</span>
+                        </div>
+                        <span class="tabular-num" style="font-size: 0.72rem; color: var(--text-dim);">24</span>
+                    </a>
+                </div>
+
+                <!-- Group 2: CLINICAL -->
+                <div class="sidebar-nav-group">
+                    <div class="sidebar-group-heading">CLINICAL</div>
+                    <a href="medicines.html" class="sidebar-item-link active">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="pill" style="width: 15px; height: 15px;"></i>
+                            <span>Medications</span>
+                        </div>
+                    </a>
+                    <a href="diseases.html" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="book-open" style="width: 15px; height: 15px;"></i>
+                            <span>Knowledge</span>
+                        </div>
+                    </a>
+                    <a href="dashboard.html" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="bar-chart-2" style="width: 15px; height: 15px;"></i>
+                            <span>Insights</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Group 3: SYSTEM -->
+                <div class="sidebar-nav-group">
+                    <div class="sidebar-group-heading">SYSTEM</div>
+                    <a href="history.html" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="history" style="width: 15px; height: 15px;"></i>
+                            <span>Audit</span>
+                        </div>
+                    </a>
+                    <a href="settings.html" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="settings" style="width: 15px; height: 15px;"></i>
+                            <span>Settings</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Clinician Bottom Lockup -->
+            <div style="border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 10px;">
+                <div style="font-size: 0.84rem; font-weight: 700; color: var(--text-main);">Dr. Rishi</div>
+                <div style="font-size: 0.74rem; color: var(--text-dim);">Clinician • Cardiology 04</div>
+            </div>
+        </aside>
+
+        <!-- MAIN MEDICATION REFERENCE CONTAINER -->
+        <main class="dash-content-area" style="padding: 20px 24px;">
+
+            <!-- HEADER & FILTER CARD -->
+            <section class="med-ref-header-card" aria-label="Medication Search and Filter Controls">
+                <div class="med-ref-title-row">
+                    <div class="med-ref-page-title">
+                        MEDICATION SAFETY
+                    </div>
+                    <span class="badge-machine-assisted">Clinical Formulary v2026.8</span>
+                </div>
+
+                <!-- Search Input -->
+                <div class="med-ref-search-box">
+                    <i data-lucide="search" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; color: var(--text-dim);"></i>
+                    <input type="text" id="medSearchInput" value="Metformin" placeholder="Search medications (e.g., Metformin, Aspirin, Amlodipine, Atorvastatin)..." aria-label="Search medications">
+                </div>
+
+                <!-- Filters -->
+                <div class="med-filter-pills-row">
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; margin-right: 4px;">Filters:</span>
+                    <button class="med-filter-tag active" data-filter="all">All Modules</button>
+                    <button class="med-filter-tag" data-filter="class">Class</button>
+                    <button class="med-filter-tag" data-filter="contraindications">Contraindications</button>
+                    <button class="med-filter-tag" data-filter="interactions">Interactions</button>
+                    <button class="med-filter-tag" data-filter="renal">Renal</button>
+                    <button class="med-filter-tag" data-filter="hepatic">Hepatic</button>
+                </div>
+            </section>
+
+            <!-- TWO-COLUMN WORKSTATION LAYOUT -->
+            <div class="med-ref-layout-grid">
+
+                <!-- LEFT COLUMN: MEDICATION DIRECTORY INDEX -->
+                <aside class="med-index-list" id="medIndexList" aria-label="Medication Formulary Directory">
+                    <div class="med-index-item active" data-med="metformin">
+                        <div class="med-index-name">Metformin</div>
+                        <div class="med-index-class">Biguanide • Antidiabetic</div>
+                    </div>
+                    <div class="med-index-item" data-med="aspirin">
+                        <div class="med-index-name">Aspirin (ASA)</div>
+                        <div class="med-index-class">Salicylate • Antiplatelet / NSAID</div>
+                    </div>
+                    <div class="med-index-item" data-med="amlodipine">
+                        <div class="med-index-name">Amlodipine</div>
+                        <div class="med-index-class">Dihydropyridine CCB • Antihypertensive</div>
+                    </div>
+                    <div class="med-index-item" data-med="clopidogrel">
+                        <div class="med-index-name">Clopidogrel</div>
+                        <div class="med-index-class">P2Y12 Inhibitor • Antiplatelet</div>
+                    </div>
+                    <div class="med-index-item" data-med="atorvastatin">
+                        <div class="med-index-name">Atorvastatin</div>
+                        <div class="med-index-class">HMG-CoA Reductase Inhibitor • Statin</div>
+                    </div>
+                    <div class="med-index-item" data-med="augmentin">
+                        <div class="med-index-name">Amoxicillin / Clavulanate</div>
+                        <div class="med-index-class">Beta-Lactam + Inhibitor • Antibacterial</div>
+                    </div>
+                </aside>
+
+                <!-- RIGHT COLUMN: STRUCTURED MONOGRAPH REFERENCE -->
+                <article class="med-monograph-card" id="medMonographCard" aria-label="Clinical Monograph">
+                    <div class="monograph-main-head">
+                        <h1 class="monograph-drug-title" id="monoDrugTitle">METFORMIN</h1>
+                        <div class="monograph-drug-meta" id="monoDrugMeta">
+                            Biguanide • Rx information • ATC: A10BA02
+                        </div>
+                    </div>
+
+                    <!-- 1. INDICATIONS -->
+                    <section class="monograph-section" id="secIndications">
+                        <div class="monograph-section-title">INDICATIONS</div>
+                        <div class="monograph-body-text" id="monoIndications">
+                            Type 2 diabetes mellitus (first-line pharmacotherapy as monotherapy or in combination with other oral anti-hyperglycemic agents or insulin).
+                        </div>
+                    </section>
+
+                    <!-- 2. DOSING -->
+                    <section class="monograph-section" id="secDosing">
+                        <div class="monograph-section-title">DOSING</div>
+                        <div class="monograph-body-text" id="monoDosing">
+                            <ul class="clinical-bullet-list">
+                                <li><strong>Immediate-Release (IR):</strong> Initial 500 mg PO BID or 850 mg PO QD with meals. Titrate by 500 mg weekly or 850 mg every 2 weeks as tolerated. Maintenance: 1,500 to 2,000 mg/day in divided doses. Maximum dose: 2,550 mg/day.</li>
+                                <li><strong>Extended-Release (XR):</strong> Initial 500 to 1,000 mg PO QD with evening meal. Titrate by 500 mg weekly to maximum 2,000 mg QD.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- 3. CONTRAINDICATIONS -->
+                    <section class="monograph-section" id="secContraindications">
+                        <div class="monograph-section-title">CONTRAINDICATIONS</div>
+                        <div class="monograph-body-text" id="monoContraindications">
+                            <ul class="clinical-bullet-list">
+                                <li>Severe renal impairment (eGFR &lt; 30 mL/min/1.73 m²).</li>
+                                <li>Acute or chronic metabolic acidosis, including diabetic ketoacidosis (DKA) with or without coma.</li>
+                                <li>Severe hepatic impairment or conditions associated with hypoxemia (e.g., acute heart failure, shock, acute myocardial infarction, severe sepsis).</li>
+                                <li>Known hypersensitivity to metformin hydrochloride.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- 4. RENAL CONSIDERATIONS -->
+                    <section class="monograph-section" id="secRenal">
+                        <div class="monograph-section-title">RENAL CONSIDERATIONS</div>
+                        <div class="monograph-body-text" id="monoRenal">
+                            <ul class="clinical-bullet-list">
+                                <li><strong>eGFR &ge; 60 mL/min/1.73 m²:</strong> No dosage adjustment required. Monitor renal function annually.</li>
+                                <li><strong>eGFR 45 to &lt; 60 mL/min/1.73 m²:</strong> Maximum recommended dose is 1,500 mg/day; monitor renal function every 3–6 months.</li>
+                                <li><strong>eGFR 30 to &lt; 45 mL/min/1.73 m²:</strong> Maximum dose 1,000 mg/day. Initiation of therapy is not recommended; assess risk/benefit if continuing.</li>
+                                <li><strong>eGFR &lt; 30 mL/min/1.73 m²:</strong> Contraindicated due to risk of metformin-associated lactic acidosis (MALA).</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- 5. HEPATIC CONSIDERATIONS -->
+                    <section class="monograph-section" id="secHepatic">
+                        <div class="monograph-section-title">HEPATIC CONSIDERATIONS</div>
+                        <div class="monograph-body-text" id="monoHepatic">
+                            Avoid use in patients with hepatic impairment due to impaired lactate clearance and substantially elevated risk of lactic acidosis.
+                        </div>
+                    </section>
+
+                    <!-- 6. INTERACTIONS -->
+                    <section class="monograph-section" id="secInteractions">
+                        <div class="monograph-section-title">INTERACTIONS</div>
+                        <div class="monograph-body-text" id="monoInteractions">
+                            <div style="font-weight: 700; color: var(--text-main); margin-bottom: 6px;">3 clinically relevant interactions</div>
+                            <ul class="clinical-bullet-list">
+                                <li><strong>Iodinated Contrast Agents:</strong> Withhold metformin prior to or at time of iodinated contrast imaging in patients with eGFR 30–60 mL/min; re-evaluate renal function 48 hours post-procedure before restarting.</li>
+                                <li><strong>Carbonic Anhydrase Inhibitors (Topiramate, Acetazolamide):</strong> Concomitant use may increase serum lactate and potentiate metabolic acidosis risk.</li>
+                                <li><strong>Cimetidine / OCT2 Inhibitors:</strong> Increases metformin plasma concentrations (AUC +50%) via competition for renal tubular excretion.</li>
+                            </ul>
+                        </div>
+                    </section>
+                </article>
+
+            </div>
+        </main>
+    </div>
+
     <script src="medicines.js"></script>
-    <!-- Theme Enhancement: Harsh Gradients, Rainbow, Lucide -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Lucide icons
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-            
-            // Add rainbow class to navbar
-            const navbar = document.querySelector('.navbar-header, nav');
-            if (navbar && !navbar.classList.contains('navbar-harsh')) {
-                navbar.classList.add('navbar-harsh');
-            }
-            
-            // Add rainbow heading to main headings
-            document.querySelectorAll('h1, h2').forEach(function(h) {
-                if (!h.classList.contains('rainbow-heading')) {
-                    h.classList.add('rainbow-heading');
-                }
-            });
-            
-            // Add theme toggle rainbow button
-            const themeBtn = document.getElementById('themeToggleBtn');
-            if (themeBtn && !themeBtn.classList.contains('theme-toggle-rainbow')) {
-                themeBtn.classList.add('theme-toggle-rainbow');
-            }
-            
-            // Add rainbow border to primary buttons
-            document.querySelectorAll('.btn-primary, .btn-hero, .btn-submit, button[type="submit"]').forEach(function(btn) {
-                if (!btn.classList.contains('btn-harsh')) {
-                    btn.classList.add('btn-harsh');
-                }
-            });
-            
-            // Add card rainbow hover to glass cards
-            document.querySelectorAll('.glass-card, .card, .metric-card, .stat-card').forEach(function(card) {
-                if (!card.classList.contains('card-rainbow-hover')) {
-                    card.classList.add('card-rainbow-hover');
-                }
-            });
-            
-            // Observe theme changes to update body background
-            function updateBodyBg() {
-                const theme = document.documentElement.getAttribute('data-theme');
-                if (theme === 'light') {
-                    document.body.style.backgroundColor = '#ffffff';
-                } else {
-                    document.body.style.backgroundColor = '#000000';
-                }
-            }
-            
-            // Initial
-            updateBodyBg();
-            
-            // Watch for theme changes
-            const observer = new MutationObserver(updateBodyBg);
-            observer.observe(document.documentElement, {
-                attributes: true,
-                attributeFilter: ['data-theme']
-            });
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
         });
     </script>
-    <!-- Emoji & Em-Dash Enhancement -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add em-dash list styling to all ul/ol lists
-            document.querySelectorAll('ul, ol').forEach(function(list) {
-                if (!list.classList.contains('em-dash-list')) {
-                    list.classList.add('em-dash-list');
-                }
-            });
-            
-            // Add drop shadow to all cards
-            document.querySelectorAll('.glass-card, .card, .metric-card, .stat-card, .feature-card').forEach(function(card) {
-                if (!card.classList.contains('shadow-drop-md')) {
-                    card.classList.add('shadow-drop-md');
-                }
-                if (!card.classList.contains('shadow-hover-lift')) {
-                    card.classList.add('shadow-hover-lift');
-                }
-            });
-            
-            // Add liquid glass to glass cards
-            document.querySelectorAll('.glass-card').forEach(function(card) {
-                if (!card.classList.contains('liquid-glass')) {
-                    card.classList.add('liquid-glass');
-                }
-            });
-            
-            // Add features-3-col to sections with 3+ cards
-            document.querySelectorAll('.features-grid, .grid-3, .row').forEach(function(grid) {
-                const cards = grid.querySelectorAll('.glass-card, .card, .metric-card, .stat-card');
-                if (cards.length >= 3) {
-                    grid.classList.add('features-3-col');
-                }
-            });
-            
-            // Add emoji decorations to section headings based on keywords
-            const emojiMap = {
-                'AI': '🤖',
-                'Clinical': '🩺',
-                'Medical': '🏥',
-                'Health': '💚',
-                'Diagnostic': '🔬',
-                'Emergency': '🚨',
-                'Dashboard': '📊',
-                'Settings': '⚙️',
-                'Profile': '👤',
-                'Report': '📄',
-                'Medicine': '💊',
-                'Drug': '💊',
-                'Chat': '💬',
-                'History': '🕐',
-                'Notification': '🔔',
-                'Admin': '👑',
-                'Security': '🛡️',
-                'Performance': '⚡',
-                'Accessibility': '♿',
-                'Explainability': '💡',
-                'Feature': '⭐',
-                'Welcome': '👋',
-                'Login': '🔐',
-                'Register': '📝',
-                'Home': '🏠',
-                'Disease': '🧠',
-                'Symptom': '🩺',
-                'Treatment': '💉',
-                'Lab': '🧪',
-                'Voice': '🎙️',
-                'Image': '📷',
-                'Document': '📁',
-                'Search': '🔍',
-                'Results': '📋',
-                'Insights': '💡',
-                'Pipeline': '🔧',
-                'Metrics': '📈',
-                'Safety': '🛡️',
-                'Guardrail': '🛡️',
-                'Knowledge': '📚',
-                'Reasoning': '🧠',
-                'Evidence': '📚',
-                'Guideline': '📖',
-                'Dosage': '💊',
-                'Interaction': '⚠️',
-                'Differential': '🔬',
-                'Confidence': '🎯',
-                'Explain': '💡',
-                'Timeline': '🕐',
-                'Analytics': '📊',
-                'Monitoring': '👁️',
-                'Logs': '📋',
-                'Backup': '💾',
-                'Deploy': '🚀',
-                'Test': '🧪',
-                'CI/CD': '🔄',
-                'Docker': '🐦',
-                'Database': '🗄️',
-                'API': '🔌',
-                'Gateway': '🌐',
-                'Cache': '⚡',
-                'Queue': '📨',
-                'Audit': '📝',
-                'User': '👤',
-                'Role': '🎭',
-                'Permission': '🔐',
-                'Session': '\U0001F511',
-                'Token': '🎫',
-                'OAuth': '🔐',
-                'Payment': '💳',
-                'Billing': '💵',
-                'Plan': '📦',
-                'Subscription': '💳',
-                'Webhook': '🔗',
-                'Stripe': '💳'
-            };
-            
-            // Add emojis before matching headings
-            document.querySelectorAll('h1, h2, h3').forEach(function(heading) {
-                const text = heading.textContent;
-                for (const [keyword, emoji] of Object.entries(emojiMap)) {
-                    if (text.includes(keyword) && !heading.dataset.emojiAdded) {
-                        const span = document.createElement('span');
-                        span.className = 'emoji-icon';
-                        span.style.marginRight = '8px';
-                        span.textContent = emoji;
-                        heading.insertBefore(span, heading.firstChild);
-                        heading.dataset.emojiAdded = 'true';
-                        break;
-                    }
-                }
-            });
-        });
-    </script>
+    <!-- FIXED MOBILE BOTTOM NAVIGATION BAR -->
+    <nav class="mobile-bottom-navbar" aria-label="Mobile Navigation">
+        <a href="chat.html" class="mobile-nav-item active">
+            <i data-lucide="file-text"></i>
+            <span>Cases</span>
+        </a>
+        <a href="medicines.html" class="mobile-nav-item">
+            <i data-lucide="pill"></i>
+            <span>Meds</span>
+        </a>
+        <a href="diseases.html" class="mobile-nav-item">
+            <i data-lucide="book-open"></i>
+            <span>Knowledge</span>
+        </a>
+        <a href="dashboard.html" class="mobile-nav-item">
+            <i data-lucide="more-horizontal"></i>
+            <span>More</span>
+        </a>
+    </nav>
+
 </body>
 </html>

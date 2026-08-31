@@ -288,13 +288,25 @@ function renderAnalysisReport(data) {
         badge.innerHTML = `<i class="fa-solid fa-circle-check"></i> Triage Status: GREEN / STABLE (Outpatient Consultation Recommended)`;
     }
 
-    const conf = ((data.confidence_score || 0.94) * 100).toFixed(1);
-    document.getElementById('reportConfidenceBadge').innerText = `Confidence: ${conf}%`;
+    const confScore = data.confidence_score || 0.94;
+    const qualityBadge = document.getElementById('reportConfidenceBadge');
+    if (qualityBadge) {
+        if (confScore >= 0.8) {
+            qualityBadge.className = 'evidence-quality-pill quality-strong';
+            qualityBadge.innerText = 'Strong Evidence ●';
+        } else if (confScore >= 0.5) {
+            qualityBadge.className = 'evidence-quality-pill quality-moderate';
+            qualityBadge.innerText = 'Moderate Evidence ●';
+        } else {
+            qualityBadge.className = 'evidence-quality-pill quality-limited';
+            qualityBadge.innerText = 'Limited Evidence ●';
+        }
+    }
 
     const diagList = document.getElementById('reportDiagList');
     if (data.differential_diagnoses && data.differential_diagnoses.length > 0) {
-        diagList.innerHTML = data.differential_diagnoses.map(d => `
-            <li><strong>${escapeHtml(d.disease_name)}:</strong> ${(d.probability * 100).toFixed(1)}% Match</li>
+        diagList.innerHTML = data.differential_diagnoses.map((d, idx) => `
+            <li><strong>${escapeHtml(d.disease_name)}:</strong> ${idx === 0 ? 'Primary Consideration (Strong Evidence)' : 'Secondary Rule-out (Moderate Evidence)'}</li>
         `).join('');
     }
 
