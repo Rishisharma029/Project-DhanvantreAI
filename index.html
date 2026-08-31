@@ -1,972 +1,468 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AuraMed AI - Clinical Platform Intelligence & Adaptive Diagnostic Support System. Real-time symptom triage, drug interaction guardrails, and explainable medical insights.">
-    <title>AuraMed AI | Next-Gen Clinical Intelligence & Diagnostic Support</title>
+    <meta name="description" content="DHANVANTRE - Clinical Intelligence Platform. Turn clinical evidence into clear, reviewable decisions.">
+    <title>DHANVANTRE | Clinical Intelligence Platform</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom CSS -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Core Design System -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
-<body>
+<body class="case-workspace-layout">
 
-    <!-- Dynamic Background Elements -->
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-    <div class="bg-grid-pattern"></div>
-
-    <!-- Navigation Header -->
-    <header class="navbar-header" id="navbar">
+    <!-- 1. NAVBAR -->
+    <header class="navbar-header scrolled">
         <div class="container nav-container">
             <a href="index.html" class="brand-logo">
-                <div class="logo-icon"><i class="fa-solid fa-square-plus"></i></div>
-                <span class="logo-text">Dhanvantre<span class="logo-highlight">AI</span></span>
+                <div class="logo-icon"><i data-lucide="plus" style="width: 14px; height: 14px;"></i></div>
+                <div class="brand-text-lockup">
+                    <span class="brand-title">DHANVANTRE</span>
+                    <span class="brand-subtitle">Clinical Intelligence</span>
+                </div>
             </a>
 
             <nav class="nav-menu" id="navMenu">
-                <a href="chat.html" class="nav-link active">Cases</a>
+                <a href="chat.html" class="nav-link">Cases</a>
                 <a href="medicines.html" class="nav-link">Medications</a>
                 <a href="diseases.html" class="nav-link">Knowledge</a>
-                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="dashboard.html" class="nav-link">Insights</a>
             </nav>
 
             <div class="nav-actions">
-                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme">
-                    <i class="fa-solid fa-sun" id="themeIcon"></i>
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <i data-lucide="moon" id="themeIcon" style="width: 15px; height: 15px;"></i>
                 </button>
-                <a href="auth.html#login" class="btn btn-secondary"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
-                <a href="chat.html" class="btn btn-primary"><i class="fa-solid fa-folder-plus"></i> Launch Case Workspace</a>
-                <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
+                <div class="clinician-badge-menu" id="clinicianMenu" role="button" aria-haspopup="true" aria-expanded="false">
+                    <div class="clinician-avatar"><i data-lucide="user" style="width: 16px; height: 16px;"></i></div>
+                    <div class="clinician-details">
+                        <span class="clinician-name">Dr. Rishi <i data-lucide="chevron-down" style="width: 12px; height: 12px;"></i></span>
+                        <span class="clinician-role">Attending Physician</span>
+                    </div>
+                </div>
+                <a href="chat.html" class="btn btn-primary btn-sm"><i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i> Open Workspace</a>
             </div>
         </div>
     </header>
 
+    <!-- 2. HERO SECTION -->
     <main>
-        <!-- HERO SECTION -->
-        <section class="hero-section" id="hero" style="padding-top: 100px; padding-bottom: 60px;">
-            <div class="container hero-container">
-                <div class="hero-content" style="max-width: 960px; margin: 0 auto; text-align: center;">
-                    <div class="badge badge-neutral" style="margin-bottom: 20px;">
-                        <i class="fa-solid fa-notes-medical" style="color: var(--accent-teal);"></i> CLINICAL INTELLIGENCE CANVAS
+                <section class="product-hero-section" style="padding: 90px 0 50px;">
+            <div class="container">
+                <div style="font-size: 0.95rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary); margin-bottom: 6px;">
+                    DHANVANTRE
+                </div>
+                <div style="font-size: 1.15rem; font-weight: 700; color: var(--text-muted); margin-bottom: 22px; letter-spacing: -0.01em;">
+                    Clinical Intelligence Platform
+                </div>
+
+                <h1 class="product-hero-headline" style="font-size: 3rem; font-weight: 800; line-height: 1.18; margin-bottom: 24px;">
+                    Clearer clinical decisions.<br>Better evidence. Safer workflows.
+                </h1>
+
+                <div class="product-hero-ctas" style="margin-bottom: 16px;">
+                    <a href="chat.html" class="btn btn-primary" style="padding: 12px 28px; font-size: 1rem; font-weight: 700;">
+                        <i data-lucide="folder" style="width: 16px; height: 16px;"></i> Open Clinical Workspace
+                    </a>
+                </div>
+
+                <p style="font-size: 0.92rem; color: var(--text-dim); margin-bottom: 40px;">
+                    Built for reviewable decisions, not black-box answers.
+                </p>
+
+                <!-- 29. THE SINGLE BEST HOMEPAGE SCREENSHOT CONCEPT -->
+                <div class="product-screenshot-frame" style="max-width: 1040px; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: var(--shadow-lg);">
+                    <div class="product-frame-bar" style="background: var(--bg-surface); padding: 8px 16px; border-bottom: 1px solid var(--border-color);">
+                        <div class="product-frame-dots">
+                            <span class="product-frame-dot"></span>
+                            <span class="product-frame-dot"></span>
+                            <span class="product-frame-dot"></span>
+                        </div>
+                        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 700; color: var(--text-muted);">
+                            DHANVANTRE CLINICAL WORKSTATION — CASE #DH-20481
+                        </div>
+                        <div style="font-size: 0.72rem; color: var(--text-dim);">STATION 04 • CARDIOLOGY</div>
                     </div>
-                    <h1 class="hero-title" style="font-size: 2.5rem; font-weight: 800; line-height: 1.25; margin-bottom: 20px; color: var(--text-main);">
-                        THE CLINICAL INTELLIGENCE CANVAS FOR <span style="color: var(--accent-teal);">REASONED DECISION SUPPORT</span>
-                    </h1>
-                    <p class="hero-subtitle" style="font-size: 1.05rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 32px;">
-                        DhanvantreAI replaces noisy dashboards with a spatial clinical canvas—connecting patient evidence directly to differential conclusions, certainty levels, and medication safety audit trails.
+
+                    <div style="padding: 24px; background: var(--bg-main);">
+                        <!-- Case Header Bar -->
+                        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px 20px; margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 800; font-size: 0.88rem; color: var(--text-main);">
+                                    CASE #DH-20481
+                                </div>
+                                <span class="badge badge-emerald" style="font-size: 0.68rem; font-weight: 700;">● ACTIVE</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                                <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);">Rajesh Kumar</div>
+                                <div style="font-size: 0.86rem; font-weight: 600; color: var(--text-muted);">58 years • Male</div>
+                            </div>
+                        </div>
+
+                        <!-- 3-Column Precise Workstation Layout -->
+                        <div class="case-3col-grid" style="gap: 16px;">
+                            <!-- Column 1: PATIENT -->
+                            <div class="case-col-panel" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 18px;">
+                                <div class="case-col-header" style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border-color); padding-bottom: 6px; margin-bottom: 12px;">
+                                    PATIENT
+                                </div>
+                                
+                                <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px;">Vitals</div>
+                                <table class="vitals-mini-table" style="margin-bottom: 14px;">
+                                    <tbody>
+                                        <tr><td class="vitals-key">BP</td><td class="vitals-val" style="color: var(--status-warning);">154/96</td></tr>
+                                        <tr><td class="vitals-key">HR</td><td class="vitals-val">108</td></tr>
+                                        <tr><td class="vitals-key">SpO₂</td><td class="vitals-val">93%</td></tr>
+                                        <tr><td class="vitals-key">Temp</td><td class="vitals-val">37.1°C</td></tr>
+                                    </tbody>
+                                </table>
+
+                                <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">History</div>
+                                <ul class="clinical-bullet-list" style="margin-bottom: 12px; font-size: 0.82rem;">
+                                    <li>Hypertension • Type 2 diabetes</li>
+                                </ul>
+
+                                <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">Medications</div>
+                                <ul class="clinical-bullet-list" style="margin-bottom: 12px; font-size: 0.82rem;">
+                                    <li>Metformin • Amlodipine • Aspirin</li>
+                                </ul>
+
+                                <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">Labs</div>
+                                <div style="font-size: 0.8rem; color: var(--text-main); font-family: 'IBM Plex Mono', monospace;">
+                                    hs-cTnI: <span style="color: var(--status-danger); font-weight: 700;">0.084 ng/mL</span>
+                                </div>
+                            </div>
+
+                            <!-- Column 2: DIFFERENTIAL -->
+                            <div class="case-col-panel" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 18px;">
+                                <div class="case-col-header" style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border-color); padding-bottom: 6px; margin-bottom: 12px;">
+                                    DIFFERENTIAL
+                                </div>
+
+                                <!-- ACS -->
+                                <div style="padding: 12px 0; border-bottom: 1px solid var(--border-color);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                        <div style="font-size: 0.95rem; font-weight: 800; color: var(--text-main);">ACS</div>
+                                        <span class="evidence-quality-pill quality-strong">HIGH</span>
+                                    </div>
+                                    <div style="font-size: 0.76rem; color: var(--text-dim); font-family: 'IBM Plex Mono', monospace; margin-bottom: 6px;">
+                                        Acute Coronary Syndrome
+                                    </div>
+                                    <ul class="clinical-bullet-list" style="font-size: 0.8rem; margin: 0;">
+                                        <li>Radiating chest discomfort</li>
+                                        <li>Diaphoresis & risk factors</li>
+                                    </ul>
+                                </div>
+
+                                <!-- PE -->
+                                <div style="padding: 12px 0;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                        <div style="font-size: 0.95rem; font-weight: 800; color: var(--text-main);">PE</div>
+                                        <span class="evidence-quality-pill quality-moderate">MODERATE</span>
+                                    </div>
+                                    <div style="font-size: 0.76rem; color: var(--text-dim); font-family: 'IBM Plex Mono', monospace; margin-bottom: 6px;">
+                                        Pulmonary Embolism
+                                    </div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">
+                                        SpO₂ 93% • Wells score: 1.5
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Column 3: SAFETY -->
+                            <div class="case-col-panel" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 18px;">
+                                <div class="case-col-header" style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border-color); padding-bottom: 6px; margin-bottom: 12px;">
+                                    SAFETY
+                                </div>
+
+                                <div class="safety-action-row" style="padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+                                    <span style="font-size: 0.86rem; font-weight: 700; color: var(--text-main);">ECG</span>
+                                    <span style="font-size: 0.76rem; color: var(--primary); font-family: 'IBM Plex Mono', monospace; font-weight: 700;">Required</span>
+                                </div>
+
+                                <div class="safety-action-row" style="padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+                                    <span style="font-size: 0.86rem; font-weight: 700; color: var(--text-main);">Troponin</span>
+                                    <span style="font-size: 0.76rem; color: var(--primary); font-family: 'IBM Plex Mono', monospace; font-weight: 700;">Required</span>
+                                </div>
+
+                                <div class="safety-action-row" style="padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+                                    <span style="font-size: 0.86rem; font-weight: 700; color: var(--text-main);">Med Conflict</span>
+                                    <span style="font-size: 0.76rem; color: var(--status-positive); font-family: 'IBM Plex Mono', monospace; font-weight: 700;">None detected</span>
+                                </div>
+
+                                <div style="margin-top: 14px; background: var(--bg-surface); padding: 10px; border-radius: 6px; font-size: 0.76rem; color: var(--text-muted);">
+                                    <strong>Renal Guardrail:</strong> Metformin dosing cleared for current eGFR &gt;60.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. WHY DHANVANTRE (PIPELINE) -->
+        <section class="container" id="why" style="padding: 70px 0; border-top: 1px solid var(--border-color);">
+            <div style="text-align: center; max-width: 650px; margin: 0 auto 30px;">
+                <div style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; color: var(--primary); letter-spacing: 0.08em; margin-bottom: 8px;">
+                    WHY DHANVANTRE
+                </div>
+                <h2 style="font-size: 1.9rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.01em;">
+                    Evidence → Reasoning → Safety → Review
+                </h2>
+                <p style="font-size: 0.95rem; color: var(--text-muted);">
+                    A clinical decision support architecture designed for transparency, algorithmic accountability, and physician control.
+                </p>
+            </div>
+
+            <div class="why-pipeline-grid">
+                <div class="why-pipeline-card">
+                    <div class="why-step-num">01 / EVIDENCE</div>
+                    <div class="why-step-title">Structured Intake</div>
+                    <p class="why-step-desc">
+                        Extracts and synthesizes discrete clinical findings from bedside vitals, 12-lead ECG signals, and laboratory biomarker panels.
                     </p>
-
-                    <div class="hero-cta-group" style="display: flex; gap: 14px; justify-content: center; margin-bottom: 48px;">
-                        <a href="chat.html" class="btn btn-primary btn-lg">
-                            <i class="fa-solid fa-stethoscope"></i>
-                            <span>Launch Clinical Canvas</span>
-                        </a>
-                        <a href="medicines.html" class="btn btn-outline btn-lg">
-                            <i class="fa-solid fa-pills"></i>
-                            <span>Explore Medication Safety</span>
-                        </a>
-                    </div>
-
-                    <!-- Clinical Intelligence Canvas Transformation Flow -->
-                    <div class="paper-card" style="padding: 24px; text-align: left;">
-                        <div style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
-                            <span><i class="fa-solid fa-network-wired" style="color: var(--accent-teal);"></i> SPATIAL CANVAS ARCHITECTURE</span>
-                            <span>EVIDENCE THREAD MAPPING</span>
-                        </div>
-                        <div style="display: grid; grid-template-columns: 1fr 40px 1.2fr 40px 1fr; align-items: center; gap: 12px;">
-                            <!-- Column 1: Evidence -->
-                            <div style="background: var(--bg-surface); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-                                <div style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">1. EVIDENCE & SIGNALS</div>
-                                <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); display: flex; flex-direction: column; gap: 4px;">
-                                    <span>📄 CBC & Lab Reports</span>
-                                    <span>💊 Active Prescriptions</span>
-                                    <span>🎙️ Voice Dictation</span>
-                                    <span>📊 Extracted Lab Flags</span>
-                                </div>
-                            </div>
-                            <div style="text-align: center; color: var(--text-dim); font-size: 1.2rem;"><i class="fa-solid fa-arrow-right"></i></div>
-                            <!-- Column 2: Differential Canvas -->
-                            <div style="background: var(--status-emerald-bg); border: 1px solid var(--status-emerald-border); padding: 14px; border-radius: var(--radius-sm);">
-                                <div style="font-size: 0.75rem; font-weight: 800; color: var(--status-emerald-text); margin-bottom: 8px; text-transform: uppercase;">2. DIFFERENTIAL CANVAS</div>
-                                <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); display: flex; flex-direction: column; gap: 4px;">
-                                    <span>🔍 Synthesized Clinical Picture</span>
-                                    <span>🔗 Interactive Evidence Threads</span>
-                                    <span>● Supporting / ✘ Contradicting</span>
-                                    <span>❓ Missing Evidence Notes</span>
-                                </div>
-                            </div>
-                            <div style="text-align: center; color: var(--text-dim); font-size: 1.2rem;"><i class="fa-solid fa-arrow-right"></i></div>
-                            <!-- Column 3: Safety & Actions -->
-                            <div style="background: var(--bg-surface); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-                                <div style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">3. SAFETY & ACTIONS</div>
-                                <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-main); display: flex; flex-direction: column; gap: 4px;">
-                                    <span>⚠️ Calibrated Triage Level</span>
-                                    <span>🔒 Certainty & Open Questions</span>
-                                    <span>🛡️ 10-Point Med Safety Audit</span>
-                                    <span>💬 Contextual AI Marginalia</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div></div>
                 </div>
-
-                <!-- Hero Interactive Demo Card -->
-                <div class="hero-demo-wrapper" id="hero-demo">
-                    <div class="glass-card demo-card">
-                        <div class="demo-card-header">
-                            <div class="demo-status">
-                                <span class="status-dot online"></span>
-                                <span class="status-text">AuraMed Engine v1.0 • Active</span>
-                            </div>
-                            <div class="demo-badge"><i class="fa-solid fa-microchip"></i> Live Sandbox</div>
-                        </div>
-
-                        <div class="demo-card-body">
-                            <div class="demo-step-indicator">
-                                <span class="step-tag active" id="demoTag1">1. Patient Input</span>
-                                <i class="fa-solid fa-chevron-right step-arrow"></i>
-                                <span class="step-tag" id="demoTag2">2. AI Analysis</span>
-                                <i class="fa-solid fa-chevron-right step-arrow"></i>
-                                <span class="step-tag" id="demoTag3">3. Safety Check</span>
-                            </div>
-
-                            <!-- Interactive Input Sandbox -->
-                            <div class="demo-input-box">
-                                <label for="symptomInput" class="input-label">Simulate Patient Symptoms:</label>
-                                <div class="input-with-button">
-                                    <input type="text" id="symptomInput" class="demo-field" value="Acute shortness of breath, chest pain radiating to left arm, sweating" placeholder="Type symptoms e.g., high fever, productive cough...">
-                                    <button class="btn btn-accent" id="runDemoBtn">
-                                        <i class="fa-solid fa-wand-magic-sparkles"></i> Analyze
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Preset Symptoms Quick Select -->
-                            <div class="preset-pills">
-                                <span class="pill-label">Quick Scenarios:</span>
-                                <button class="preset-btn" data-symptoms="Chest pain, dyspnea, diaphoresis">Chest Pain & Dyspnea</button>
-                                <button class="preset-btn" data-symptoms="High fever, severe headache, neck stiffness, photophobia">Fever & Meningismus</button>
-                                <button class="preset-btn" data-symptoms="Polyuria, polydipsia, unexplained weight loss, fatigue">Diabetic Triad</button>
-                            </div>
-
-                            <!-- Demo Output Console -->
-                            <div class="demo-console" id="demoConsole">
-                                <div class="console-placeholder" id="consolePlaceholder">
-                                    <i class="fa-solid fa-stethoscope"></i>
-                                    <p>Click <strong>"Analyze"</strong> or select a scenario above to test the clinical decision engine.</p>
-                                </div>
-                                <div class="console-result hidden" id="consoleResult">
-                                    <div class="result-header">
-                                        <div class="result-severity alert-high">
-                                            <i class="fa-solid fa-triangle-exclamation"></i> Triage Status: RED (Urgent Care Required)
-                                        </div>
-                                        <div class="confidence-badge">Confidence: 98.2%</div>
-                                    </div>
-                                    <div class="result-body">
-                                        <div class="result-section">
-                                            <h4><i class="fa-solid fa-notes-medical"></i> Differential Diagnostics:</h4>
-                                            <ul class="diag-list">
-                                                <li><strong>Acute Coronary Syndrome (ACS):</strong> High Probability (88%)</li>
-                                                <li><strong>Pulmonary Embolism:</strong> Secondary Differential (10%)</li>
-                                            </ul>
-                                        </div>
-                                        <div class="result-section">
-                                            <h4><i class="fa-solid fa-shield-virus"></i> Safety & Interaction Check:</h4>
-                                            <p class="text-sm text-muted">Contraindication Check: Verified zero conflict with current medications. Immediate ECG & Troponin I panel recommended.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="demo-card-footer">
-                            <div class="footer-note"><i class="fa-solid fa-circle-info"></i> Includes confidence metrics & explainable clinical rationale graph</div>
-                        </div>
-                    </div>
+                <div class="why-pipeline-card">
+                    <div class="why-step-num">02 / REASONING</div>
+                    <div class="why-step-title">Transparent Differential</div>
+                    <p class="why-step-desc">
+                        Generates ranked differential hypotheses paired with qualitative evidence strength tiers and explicit clinical reasoning.
+                    </p>
+                </div>
+                <div class="why-pipeline-card">
+                    <div class="why-step-num">03 / SAFETY</div>
+                    <div class="why-step-title">Guardrail Verification</div>
+                    <p class="why-step-desc">
+                        Automated checks for contraindications, renal threshold adjustments, and multi-drug interaction hazards before ordering.
+                    </p>
+                </div>
+                <div class="why-pipeline-card">
+                    <div class="why-step-num">04 / REVIEW</div>
+                    <div class="why-step-title">Physician Sign-Off</div>
+                    <p class="why-step-desc">
+                        Clinicians retain full oversight to accept, modify, or override recommendations with complete longitudinal auditability.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- FEATURES SECTION -->
-        <section class="features-section" id="features">
-            <div class="container">
-                <div class="section-header text-center">
-                    <div class="badge">Comprehensive Clinical Suite</div>
-                    <h2 class="section-title">Built for Modern Healthcare Infrastructure</h2>
-                    <p class="section-subtitle">
-                        An end-to-end intelligence layer engineered to assist doctors, triage nurses, and healthcare applications with real-time decision support.
+        <!-- 4. CLINICAL WORKSPACE SHOWCASE -->
+        <section class="container" style="padding: 70px 0; border-top: 1px solid var(--border-color);">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                <div>
+                    <div style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; color: var(--primary); letter-spacing: 0.08em; margin-bottom: 8px;">
+                        CLINICAL WORKSPACE
+                    </div>
+                    <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 14px;">
+                        High-density case record workstation.
+                    </h2>
+                    <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 20px;">
+                        Built for hospital workstations and emergency step-down units. Replace fragmented tabs with a unified 3-column architecture that brings patient history, differential hypotheses, and urgent action orders into a single view.
+                    </p>
+                    <a href="chat.html" class="btn btn-primary btn-sm"><i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i> Explore Case Workstation</a>
+                </div>
+
+                <div class="paper-card" style="padding: 20px;">
+                    <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">
+                        CLINICAL EVIDENCE SYNTHESIS TABLE
+                    </div>
+                    <table class="clinical-evidence-table">
+                        <thead>
+                            <tr><th>Finding</th><th>Supports</th><th>Strength</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Chest pain</td><td>ACS</td><td><span class="evidence-quality-pill quality-strong">Strong ●</span></td></tr>
+                            <tr><td>Left-arm radiation</td><td>ACS</td><td><span class="evidence-quality-pill quality-strong">Strong ●</span></td></tr>
+                            <tr><td>Tachycardia (108)</td><td>PE, ACS</td><td><span class="evidence-quality-pill quality-moderate">Moderate ●</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MEDICATION SAFETY SHOWCASE -->
+        <section class="container" style="padding: 70px 0; border-top: 1px solid var(--border-color);">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                <div class="paper-card" style="padding: 24px;">
+                    <div style="font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 2px;">METFORMIN</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">Biguanide • Rx information • ATC: A10BA02</div>
+                    
+                    <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">Renal Considerations</div>
+                    <p style="font-size: 0.82rem; color: var(--text-main); margin-bottom: 12px;">
+                        eGFR 45–60: Max 1,500 mg/day. eGFR &lt;30: Contraindicated (lactic acidosis risk).
+                    </p>
+                    
+                    <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">Interactions</div>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">
+                        3 clinically relevant interactions (Iodinated Contrast, Carbonic Anhydrase Inhibitors, Cimetidine).
                     </p>
                 </div>
 
-                <div class="features-grid">
-                    <!-- Feature Card 1 -->
-                    <div class="glass-card feature-card">
-                        <div class="feature-icon icon-teal">
-                            <i class="fa-solid fa-brain"></i>
-                        </div>
-                        <h3 class="feature-title">Adaptive Symptom Triage</h3>
-                        <p class="feature-desc">
-                            Dynamically generates follow-up clinical questions based on patient history, reducing diagnostic ambiguity and refining differential probabilities.
-                        </p>
-                        <div class="feature-tags">
-                            <span class="tag">Adaptive Q&A</span>
-                            <span class="tag">Probability Engine</span>
-                        </div>
+                <div>
+                    <div style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; color: var(--primary); letter-spacing: 0.08em; margin-bottom: 8px;">
+                        MEDICATION SAFETY
                     </div>
+                    <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 14px;">
+                        Professional formulary & clearance reference.
+                    </h2>
+                    <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 20px;">
+                        Instant reference monographs structured by standard medical sections: Indications, Dosing, Contraindications, Renal thresholds, Hepatic guidance, and Clinically Relevant Interactions.
+                    </p>
+                    <a href="medicines.html" class="btn btn-secondary btn-sm"><i data-lucide="pill" style="width: 14px; height: 14px;"></i> Open Medication Reference</a>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Feature Card 2 -->
-                    <div class="glass-card feature-card">
-                        <div class="feature-icon icon-blue">
-                            <i class="fa-solid fa-pills"></i>
-                        </div>
-                        <h3 class="feature-title">Drug Interaction Guardrails</h3>
-                        <p class="feature-desc">
-                            Cross-checks multi-drug regimens against medical databases to detect contraindications, severity levels, and adverse chemical interactions instantly.
-                        </p>
-                        <div class="feature-tags">
-                            <span class="tag">Interplay Matrix</span>
-                            <span class="tag">Real-Time Alerts</span>
-                        </div>
+        <!-- 6. AUDITABILITY & TIMELINE SHOWCASE -->
+        <section class="container" style="padding: 70px 0; border-top: 1px solid var(--border-color);">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                <div>
+                    <div style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; color: var(--primary); letter-spacing: 0.08em; margin-bottom: 8px;">
+                        AUDITABILITY
                     </div>
+                    <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 14px;">
+                        Timeline & decision history.
+                    </h2>
+                    <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 20px;">
+                        Every algorithmic signal, vital recording, and clinician validation is immutably timestamped for complete institutional compliance and clinical peer review.
+                    </p>
+                    <a href="dashboard.html" class="btn btn-secondary btn-sm"><i data-lucide="list-checks" style="width: 14px; height: 14px;"></i> View Audit Log</a>
+                </div>
 
-                    <!-- Feature Card 3 -->
-                    <div class="glass-card feature-card">
-                        <div class="feature-icon icon-purple">
-                            <i class="fa-solid fa-calculator"></i>
-                        </div>
-                        <h3 class="feature-title">Precision Dosage Safety</h3>
-                        <p class="feature-desc">
-                            Computes exact pharmacological dosages adjusted for renal clearance, hepatic impairment, age, weight, and clinical lab values.
-                        </p>
-                        <div class="feature-tags">
-                            <span class="tag">Organ Adjustment</span>
-                            <span class="tag">Safety Limits</span>
-                        </div>
+                <div class="paper-card" style="padding: 20px;">
+                    <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">
+                        TEMPORAL DECISION TIMELINE
                     </div>
-
-                    <!-- Feature Card 4 -->
-                    <div class="glass-card feature-card">
-                        <div class="feature-icon icon-emerald">
-                            <i class="fa-solid fa-eye"></i>
+                    <div class="patient-timeline-v2" style="margin: 0; padding-left: 28px;">
+                        <div class="timeline-node-item completed">
+                            <span class="timeline-time-label">21:42</span>
+                            <div class="timeline-event-title" style="font-size: 0.84rem;">Case created (Symptoms recorded)</div>
                         </div>
-                        <h3 class="feature-title">Explainable AI Rationale</h3>
-                        <p class="feature-desc">
-                            Every diagnostic suggestion is paired with transparent clinical rationale, peer-reviewed medical citations, and confidence breakdown scores.
-                        </p>
-                        <div class="feature-tags">
-                            <span class="tag">No Black-Box</span>
-                            <span class="tag">Citations Included</span>
+                        <div class="timeline-node-item completed">
+                            <span class="timeline-time-label">21:44</span>
+                            <div class="timeline-event-title" style="font-size: 0.84rem;">Vital signs added (BP 154/96, HR 108)</div>
                         </div>
-                    </div>
-
-                    <!-- Feature Card 5 -->
-                    <div class="glass-card feature-card">
-                        <div class="feature-icon icon-amber">
-                            <i class="fa-solid fa-diagram-project"></i>
+                        <div class="timeline-node-item completed">
+                            <span class="timeline-time-label">21:47</span>
+                            <div class="timeline-event-title" style="font-size: 0.84rem;">Differential generated (ACS Primary)</div>
                         </div>
-                        <h3 class="feature-title">Medical Knowledge Graph</h3>
-                        <p class="feature-desc">
-                            Powered by over 250,000 linked biomedical nodes connecting diseases, symptoms, genetic markers, anatomical targets, and drugs.
-                        </p>
-                        <div class="feature-tags">
-                            <span class="tag">Universal Search</span>
-                            <span class="tag">Graph Traversal</span>
-                        </div>
-                    </div>
-
-                    <!-- Feature Card 6 -->
-                    <div class="glass-card feature-card">
-                        <div class="feature-icon icon-rose">
-                            <i class="fa-solid fa-lock"></i>
-                        </div>
-                        <h3 class="feature-title">HIPAA Audit & History</h3>
-                        <p class="feature-desc">
-                            Immutable session history, role-based encryption, rate limiting, and complete system audit logging for enterprise security compliance.
-                        </p>
-                        <div class="feature-tags">
-                            <span class="tag">HIPAA / GDPR</span>
-                            <span class="tag">AES-256</span>
+                        <div class="timeline-node-item completed">
+                            <span class="timeline-time-label">21:51</span>
+                            <div class="timeline-event-title" style="font-size: 0.84rem;">Clinician reviewed & approved workup</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ABOUT SECTION -->
-        <section class="about-section" id="about">
-            <div class="container">
-                <div class="about-grid">
-                    <div class="about-content">
-                        <div class="badge">About AuraMed AI</div>
-                        <h2 class="section-title">Bridging Advanced AI with Clinical Excellence</h2>
-                        <p class="about-text">
-                            AuraMed AI was engineered to bridge the critical gap between raw medical data and actionable bedside clinical intelligence. Our platform synthesizes evidence-based clinical guidelines, structured medical databases, and adaptive neural logic to provide reliable, safety-guarded diagnostic support.
-                        </p>
-                        <p class="about-text">
-                            We prioritize medical accuracy, doctor autonomy, and safety above all else. AuraMed AI acts as an augmented clinical co-pilot, empowering healthcare providers to make faster, better-informed decisions while maintaining complete compliance.
-                        </p>
-
-                        <div class="pillars-list">
-                            <div class="pillar-item">
-                                <div class="pillar-icon"><i class="fa-solid fa-circle-check"></i></div>
-                                <div>
-                                    <h4>Evidence-Based Rigor</h4>
-                                    <p>Trained against verified medical ontologies, ICD-11 schemas, and clinical trial literature.</p>
-                                </div>
-                            </div>
-                            <div class="pillar-item">
-                                <div class="pillar-icon"><i class="fa-solid fa-circle-check"></i></div>
-                                <div>
-                                    <h4>Human-in-the-Loop Oversight</h4>
-                                    <p>Designed to assist healthcare professionals rather than replace clinical judgment.</p>
-                                </div>
-                            </div>
-                            <div class="pillar-item">
-                                <div class="pillar-icon"><i class="fa-solid fa-circle-check"></i></div>
-                                <div>
-                                    <h4>Enterprise Data Security</h4>
-                                    <p>Zero-retention options, local database deployment capabilities, and end-to-end encryption.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="about-card-wrapper">
-                        <div class="glass-card about-card">
-                            <h3 class="about-card-title"><i class="fa-solid fa-chart-line"></i> Operational Impact Metrics</h3>
-                            <div class="impact-grid">
-                                <div class="impact-box">
-                                    <div class="impact-num">65%</div>
-                                    <div class="impact-desc">Reduction in triage queue bottlenecking</div>
-                                </div>
-                                <div class="impact-box">
-                                    <div class="impact-num">94%</div>
-                                    <div class="impact-desc">Adverse drug interaction prevention rate</div>
-                                </div>
-                                <div class="impact-box">
-                                    <div class="impact-num">&lt;200ms</div>
-                                    <div class="impact-desc">Average decision support response latency</div>
-                                </div>
-                                <div class="impact-box">
-                                    <div class="impact-num">100%</div>
-                                    <div class="impact-desc">Auditable decision trace generation</div>
-                                </div>
-                            </div>
-
-                            <div class="compliance-row">
-                                <div class="badge-pill"><i class="fa-solid fa-shield"></i> HIPAA Compliant</div>
-                                <div class="badge-pill"><i class="fa-solid fa-file-contract"></i> GDPR Ready</div>
-                                <div class="badge-pill"><i class="fa-solid fa-server"></i> REST & GraphQL API</div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- 7. BUILT FOR CLINICIANS -->
+        <section class="container" style="padding: 70px 0; border-top: 1px solid var(--border-color);">
+            <div style="text-align: center; max-width: 650px; margin: 0 auto 30px;">
+                <div style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; color: var(--primary); letter-spacing: 0.08em; margin-bottom: 8px;">
+                    INSTITUTIONAL DEPLOYMENT
                 </div>
+                <h2 style="font-size: 1.9rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.01em;">
+                    Built for Clinicians
+                </h2>
+                <p style="font-size: 0.95rem; color: var(--text-muted);">
+                    Tailored views and workflows designed for every tier of clinical care delivery.
+                </p>
             </div>
-        </section>
 
-        <!-- HOW IT WORKS SECTION -->
-        <section class="how-it-works-section" id="how-it-works">
-            <div class="container">
-                <div class="section-header text-center">
-                    <div class="badge">Seamless Workflow</div>
-                    <h2 class="section-title">How AuraMed AI Operates</h2>
-                    <p class="section-subtitle">A transparent 4-stage pipeline that converts complex symptom patterns into validated clinical recommendations.</p>
+            <div class="clinicians-grid">
+                <div class="clinician-role-card">
+                    <div class="clinician-role-icon"><i data-lucide="user" style="width: 16px; height: 16px;"></i></div>
+                    <div class="clinician-role-title">Attending Physician</div>
+                    <p class="clinician-role-desc">
+                        Accelerate differential formulation with guideline citations and rapid order verification.
+                    </p>
                 </div>
-
-                <!-- Pipeline Steps Navigation -->
-                <div class="pipeline-nav">
-                    <button class="pipeline-tab active" data-step="1">
-                        <span class="step-num">01</span>
-                        <span class="step-text">Data Ingestion</span>
-                    </button>
-                    <button class="pipeline-tab" data-step="2">
-                        <span class="step-num">02</span>
-                        <span class="step-text">Adaptive Q&A</span>
-                    </button>
-                    <button class="pipeline-tab" data-step="3">
-                        <span class="step-num">03</span>
-                        <span class="step-text">Safety & Drug Interplay</span>
-                    </button>
-                    <button class="pipeline-tab" data-step="4">
-                        <span class="step-num">04</span>
-                        <span class="step-text">Explainable Output</span>
-                    </button>
+                <div class="clinician-role-card">
+                    <div class="clinician-role-icon"><i data-lucide="users" style="width: 16px; height: 16px;"></i></div>
+                    <div class="clinician-role-title">Clinical Nursing Staff</div>
+                    <p class="clinician-role-desc">
+                        Track bedside vital trends and monitor acute deterioration flags in real time.
+                    </p>
                 </div>
-
-                <!-- Pipeline Content Card -->
-                <div class="glass-card pipeline-card">
-                    <div class="pipeline-panel active" id="pipelineStep1">
-                        <div class="panel-info">
-                            <h3><i class="fa-solid fa-clipboard-user"></i> Step 1: Patient Data & Symptom Ingestion</h3>
-                            <p>
-                                The patient or clinical user enters chief complaints, onset duration, vital signs, and existing prescriptions. AuraMed normalizes raw text using standardized medical terminology (SNOMED-CT / ICD-11).
-                            </p>
-                            <ul class="panel-features">
-                                <li><i class="fa-solid fa-check"></i> Natural Language Symptom Extractor</li>
-                                <li><i class="fa-solid fa-check"></i> Automatic Vital Signs Flagging</li>
-                                <li><i class="fa-solid fa-check"></i> Existing Profile & Medical History Sync</li>
-                            </ul>
-                        </div>
-                        <div class="panel-visual">
-                            <div class="code-box">
-                                <div class="code-title"><i class="fa-solid fa-code"></i> Ingestion Payload</div>
-                                <pre><code>{
-  "patient_id": "PT-94820",
-  "chief_complaint": "Severe dyspnea and retrosternal pain",
-  "vitals": {
-    "bp": "145/95",
-    "hr": 110,
-    "spo2": 93
-  }
-}</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pipeline-panel" id="pipelineStep2">
-                        <div class="panel-info">
-                            <h3><i class="fa-solid fa-comments"></i> Step 2: Adaptive Questioning & Differential Synthesis</h3>
-                            <p>
-                                Rather than relying on static questionnaires, AuraMed's probabilistic engine identifies key missing clinical markers and poses targeted, high-yield follow-up questions to narrow down differentials.
-                            </p>
-                            <ul class="panel-features">
-                                <li><i class="fa-solid fa-check"></i> Dynamic Bayesian Entropy Reduction</li>
-                                <li><i class="fa-solid fa-check"></i> Targeted Symptom Clarification</li>
-                                <li><i class="fa-solid fa-check"></i> Differential Likelihood Ranking</li>
-                            </ul>
-                        </div>
-                        <div class="panel-visual">
-                            <div class="code-box">
-                                <div class="code-title"><i class="fa-solid fa-code"></i> Adaptive Clarification</div>
-                                <pre><code>{
-  "status": "adaptive_clarification_required",
-  "suggested_question": "Does the pain worsen with deep inspiration?",
-  "differentials": ["ACS (82%)", "Pleurisy (12%)"]
-}</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pipeline-panel" id="pipelineStep3">
-                        <div class="panel-info">
-                            <h3><i class="fa-solid fa-shield-virus"></i> Step 3: Safety Guardrails & Drug Interplay Check</h3>
-                            <p>
-                                Before any recommendation is finalized, the safety layer verifies proposed treatments against the patient's existing drug regimen, kidney/liver organ function metrics, and known allergies.
-                            </p>
-                            <ul class="panel-features">
-                                <li><i class="fa-solid fa-check"></i> Multi-Drug Contraindication Matrix</li>
-                                <li><i class="fa-solid fa-check"></i> Renal & Hepatic Dose Scaling</li>
-                                <li><i class="fa-solid fa-check"></i> Black Box Warning Alerts</li>
-                            </ul>
-                        </div>
-                        <div class="panel-visual">
-                            <div class="code-box">
-                                <div class="code-title"><i class="fa-solid fa-code"></i> Safety Verification</div>
-                                <pre><code>{
-  "safety_status": "APPROVED_WITH_WARNING",
-  "contraindications": [],
-  "dosage_adjustment": "Reduce Metformin dose by 50% (eGFR < 45)"
-}</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pipeline-panel" id="pipelineStep4">
-                        <div class="panel-info">
-                            <h3><i class="fa-solid fa-file-medical"></i> Step 4: Transparent Explainable Recommendation</h3>
-                            <p>
-                                The clinician receives a comprehensive decision support card complete with triage level, differential rank, recommended diagnostic tests, safety notes, and audit-ready literature citations.
-                            </p>
-                            <ul class="panel-features">
-                                <li><i class="fa-solid fa-check"></i> Full Clinical Rationale Breakdown</li>
-                                <li><i class="fa-solid fa-check"></i> Direct Medical Citation Links</li>
-                                <li><i class="fa-solid fa-check"></i> Audit Log Session Snapshot</li>
-                            </ul>
-                        </div>
-                        <div class="panel-visual">
-                            <div class="code-box">
-                                <div class="code-title"><i class="fa-solid fa-code"></i> Clinical Summary</div>
-                                <pre><code>{
-  "triage_level": "RED_URGENT",
-  "primary_diagnosis": "Acute Coronary Syndrome",
-  "confidence": 0.94,
-  "citation": "AHA/ACC 2024 NSTEMI Guidelines"
-}</code></pre>
-                            </div>
-                        </div>
-                    </div>
+                <div class="clinician-role-card">
+                    <div class="clinician-role-icon"><i data-lucide="building" style="width: 16px; height: 16px;"></i></div>
+                    <div class="clinician-role-title">Healthcare Platform</div>
+                    <p class="clinician-role-desc">
+                        Seamless integration into EHR systems with FHIR-standard compliance and data governance.
+                    </p>
                 </div>
-            </div>
-        </section>
-
-        <!-- FAQ SECTION -->
-        <section class="faq-section" id="faq">
-            <div class="container">
-                <div class="section-header text-center">
-                    <div class="badge">Got Questions?</div>
-                    <h2 class="section-title">Frequently Asked Questions</h2>
-                    <p class="section-subtitle">Find fast answers regarding our clinical accuracy, deployment options, compliance, and API integration.</p>
-                </div>
-
-                <!-- FAQ Search & Filter Controls -->
-                <div class="faq-controls">
-                    <div class="search-input-wrapper">
-                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                        <input type="text" id="faqSearchInput" placeholder="Search FAQ topics (e.g., HIPAA, Accuracy, API, Integration)...">
-                    </div>
-                    <div class="faq-tabs">
-                        <button class="faq-category-btn active" data-category="all">All</button>
-                        <button class="faq-category-btn" data-category="general">General</button>
-                        <button class="faq-category-btn" data-category="clinical">Clinical & Accuracy</button>
-                        <button class="faq-category-btn" data-category="security">Security & Compliance</button>
-                        <button class="faq-category-btn" data-category="api">API & Integration</button>
-                    </div>
-                </div>
-
-                <!-- FAQ Accordion List -->
-                <div class="faq-accordion-list" id="faqAccordion">
-                    <!-- Item 1 -->
-                    <div class="glass-card faq-item" data-category="general">
-                        <button class="faq-question">
-                            <span>Is AuraMed AI intended to replace human medical doctors?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>No. AuraMed AI is designed strictly as a <strong>clinical decision support system (CDSS)</strong> to assist qualified healthcare professionals. It acts as a force multiplier by automating symptom triage, flagging potential drug interactions, and synthesizing differential possibilities—while leaving final clinical decisions to human clinicians.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 2 -->
-                    <div class="glass-card faq-item" data-category="clinical">
-                        <button class="faq-question">
-                            <span>How accurate are the diagnostic guardrails and triage suggestions?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Our clinical engine achieves over 99.4% accuracy in safety guardrail validation. Every recommendation is bounded by strict clinical safety rules, medical knowledge graph constraints, and validated against standard ICD-11 / SNOMED-CT clinical benchmarks.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 3 -->
-                    <div class="glass-card faq-item" data-category="security">
-                        <button class="faq-question">
-                            <span>How does AuraMed AI handle patient data privacy and HIPAA compliance?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>AuraMed AI enforces end-to-end AES-256 encryption for all data in transit and at rest. We support zero-retention ephemeral inference modes, role-based access control (RBAC), rate-limiting middleware, and comprehensive audit logs that fulfill all HIPAA and GDPR mandates.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 4 -->
-                    <div class="glass-card faq-item" data-category="api">
-                        <button class="faq-question">
-                            <span>Can we integrate AuraMed AI into our existing Electronic Health Record (EHR) software?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes! AuraMed AI provides a complete RESTful API and WebSockets endpoint suite. We support standard FHIR / HL7 payload formats for seamless integration with Epic, Cerner, Allscripts, or custom health tech software.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 5 -->
-                    <div class="glass-card faq-item" data-category="clinical">
-                        <button class="faq-question">
-                            <span>What happens when the AI encounters a rare or ambiguous condition?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>When diagnostic entropy is high, the system automatically triggers its adaptive questioning module to request specific clinical signs. If ambiguity persists, the engine flags the case with a lower confidence indicator and explicitly prompts the clinician for further lab diagnostic testing.</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 6 -->
-                    <div class="glass-card faq-item" data-category="api">
-                        <button class="faq-question">
-                            <span>Is on-premise or private cloud deployment supported?</span>
-                            <i class="fa-solid fa-chevron-down faq-icon"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes. Enterprise plans include Dockerized container bundles and Kubernetes helm charts for air-gapped on-premise installation or deployment within your private AWS/Azure/GCP cloud enclave.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACT SECTION -->
-        <section class="contact-section" id="contact">
-            <div class="container">
-                <div class="contact-grid">
-                    <!-- Contact Form Card -->
-                    <div class="glass-card contact-card">
-                        <div class="card-header-inner">
-                            <div class="badge">Get In Touch</div>
-                            <h2>Request a Demo or Enterprise Quote</h2>
-                            <p class="text-muted">Fill out the form below to speak with our clinical solutions team or schedule a live sandbox demonstration.</p>
-                        </div>
-
-                        <form id="contactForm" class="contact-form" novalidate>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="fullName">Full Name <span class="required">*</span></label>
-                                    <input type="text" id="fullName" required placeholder="Dr. Sarah Jenkins">
-                                    <div class="error-msg" id="nameError">Please enter your full name</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="emailAddr">Work Email <span class="required">*</span></label>
-                                    <input type="email" id="emailAddr" required placeholder="s.jenkins@hospital.org">
-                                    <div class="error-msg" id="emailError">Please enter a valid work email</div>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="orgName">Organization / Hospital</label>
-                                    <input type="text" id="orgName" placeholder="Metro Health System">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inquiryRole">Your Role</label>
-                                    <select id="inquiryRole" class="form-select">
-                                        <option value="clinician">Clinician / Physician</option>
-                                        <option value="cto">Health Tech Executive / CTO</option>
-                                        <option value="administrator">Hospital Administrator</option>
-                                        <option value="developer">Developer / API Integrator</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="messageText">How can we help you? <span class="required">*</span></label>
-                                <textarea id="messageText" rows="4" required placeholder="Tell us about your organization's triage or clinical workflow needs..."></textarea>
-                                <div class="error-msg" id="messageError">Please enter a message</div>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitBtn">
-                                <span>Submit Request</span>
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </button>
-                        </form>
-
-                        <!-- Success Toast Banner -->
-                        <div class="form-success-banner hidden" id="successBanner">
-                            <i class="fa-solid fa-circle-check banner-icon"></i>
-                            <div>
-                                <h4>Request Submitted Successfully!</h4>
-                                <p>Thank you for reaching out. A medical AI specialist will respond to your email within 24 hours.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contact Details Info Sidebar -->
-                    <div class="contact-info-wrapper">
-                        <div class="glass-card info-card">
-                            <h3><i class="fa-solid fa-hospital-user"></i> Clinical Consultation</h3>
-                            <p class="text-muted">Interested in deploying AuraMed AI across your hospital network or health application?</p>
-                            
-                            <div class="contact-method-list">
-                                <div class="method-item">
-                                    <div class="method-icon"><i class="fa-solid fa-envelope"></i></div>
-                                    <div>
-                                        <div class="method-title">Direct Sales & Inquiries</div>
-                                        <a href="mailto:clinical@auramed.ai" class="method-link">clinical@auramed.ai</a>
-                                    </div>
-                                </div>
-
-                                <div class="method-item">
-                                    <div class="method-icon"><i class="fa-solid fa-headset"></i></div>
-                                    <div>
-                                        <div class="method-title">24/7 Security & Support</div>
-                                        <span class="method-text">+1 (800) 555-AURA (2872)</span>
-                                    </div>
-                                </div>
-
-                                <div class="method-item">
-                                    <div class="method-icon"><i class="fa-solid fa-location-dot"></i></div>
-                                    <div>
-                                        <div class="method-title">Headquarters</div>
-                                        <span class="method-text">Medical AI Innovation Center, Palo Alto, CA</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="security-seal">
-                                <i class="fa-solid fa-shield-halved seal-icon"></i>
-                                <span>SOC2 Type II Certified & HIPAA Verified Facility</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="clinician-role-card">
+                    <div class="clinician-role-icon"><i data-lucide="activity" style="width: 16px; height: 16px;"></i></div>
+                    <div class="clinician-role-title">Medical Researcher</div>
+                    <p class="clinician-role-desc">
+                        Auditable clinical cohorts and algorithmic transparency for clinical trial evaluation.
+                    </p>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
-        <div class="container footer-container">
-            <div class="footer-brand">
-                <a href="#" class="brand-logo">
-                    <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-                    <span class="logo-text">AuraMed<span class="logo-highlight">.AI</span></span>
-                </a>
-                <p class="footer-desc">
-                    Next-generation adaptive clinical decision support and real-time medical intelligence platform.
-                </p>
-                <div class="social-links">
-                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+    <!-- 8. ENTERPRISE FOOTER -->
+    <footer class="footer" style="border-top: 1px solid var(--border-color); background: var(--bg-card); padding: 50px 0 30px;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <div class="brand-logo" style="margin-bottom: 12px;">
+                        <div class="logo-icon"><i data-lucide="plus" style="width: 14px; height: 14px;"></i></div>
+                        <div class="brand-text-lockup">
+                            <span class="brand-title">DHANVANTRE</span>
+                            <span class="brand-subtitle">Clinical Intelligence</span>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 320px; line-height: 1.5;">
+                        Enterprise clinical decision support and medication safety workstation designed for healthcare systems.
+                    </p>
+                </div>
+                <div>
+                    <div style="font-size: 0.74rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; letter-spacing: 0.06em;">Workspace</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem;">
+                        <a href="chat.html" style="color: var(--text-muted); text-decoration: none;">Case Records</a>
+                        <a href="medicines.html" style="color: var(--text-muted); text-decoration: none;">Medication Safety</a>
+                        <a href="diseases.html" style="color: var(--text-muted); text-decoration: none;">Clinical Knowledge</a>
+                        <a href="dashboard.html" style="color: var(--text-muted); text-decoration: none;">Clinical Insights</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size: 0.74rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; letter-spacing: 0.06em;">Governance</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem;">
+                        <span style="color: var(--text-muted);">ACC/AHA Guidelines</span>
+                        <span style="color: var(--text-muted);">FHIR Interoperability</span>
+                        <span style="color: var(--text-muted);">Auditability Protocol</span>
+                        <span style="color: var(--text-muted);">Decision Provenance</span>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size: 0.74rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; letter-spacing: 0.06em;">Security</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem;">
+                        <span style="color: var(--text-muted);">HIPAA Conformance</span>
+                        <span style="color: var(--text-muted);">Role-Based Access</span>
+                        <span style="color: var(--text-muted);">TLS 1.3 Encryption</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="footer-nav-col">
-                <h4>Platform</h4>
-                <ul>
-                    <li><a href="#hero">Adaptive Triage</a></li>
-                    <li><a href="#features">Drug Guardrails</a></li>
-                    <li><a href="#features">Dosage Safety</a></li>
-                    <li><a href="#features">Knowledge Graph</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-nav-col">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="#how-it-works">Documentation</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#about">Clinical Validation</a></li>
-                    <li><a href="#contact">Support</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-nav-col">
-                <h4>Compliance & Legal</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">HIPAA Statement</a></li>
-                    <li><a href="#">Security Audit</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="container footer-bottom-inner">
-                <p>&copy; 2026 AuraMed AI Systems Inc. All rights reserved.</p>
-                <p class="disclaimer-text"><i class="fa-solid fa-triangle-exclamation"></i> For clinical demonstration & decision support use only. Always consult a licensed physician for emergency triage.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 20px; font-size: 0.78rem; color: var(--text-dim);">
+                <div>&copy; 2026 DHANVANTRE Clinical Intelligence Platform. All rights reserved.</div>
+                <div>Station Protocol 04 • Attending Review Mode</div>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript File -->
+    <!-- App Script -->
     <script src="app.js"></script>
-    <!-- Theme Enhancement: Harsh Gradients, Rainbow, Lucide -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Lucide icons
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-            
-            // Add rainbow class to navbar
-            const navbar = document.querySelector('.navbar-header, nav');
-            if (navbar && !navbar.classList.contains('navbar-harsh')) {
-                navbar.classList.add('navbar-harsh');
-            }
-            
-            // Add rainbow heading to main headings
-            document.querySelectorAll('h1, h2').forEach(function(h) {
-                if (!h.classList.contains('rainbow-heading')) {
-                    h.classList.add('rainbow-heading');
-                }
-            });
-            
-            // Add theme toggle rainbow button
-            const themeBtn = document.getElementById('themeToggleBtn');
-            if (themeBtn && !themeBtn.classList.contains('theme-toggle-rainbow')) {
-                themeBtn.classList.add('theme-toggle-rainbow');
-            }
-            
-            // Add rainbow border to primary buttons
-            document.querySelectorAll('.btn-primary, .btn-hero, .btn-submit, button[type="submit"]').forEach(function(btn) {
-                if (!btn.classList.contains('btn-harsh')) {
-                    btn.classList.add('btn-harsh');
-                }
-            });
-            
-            // Add card rainbow hover to glass cards
-            document.querySelectorAll('.glass-card, .card, .metric-card, .stat-card').forEach(function(card) {
-                if (!card.classList.contains('card-rainbow-hover')) {
-                    card.classList.add('card-rainbow-hover');
-                }
-            });
-            
-            // Observe theme changes to update body background
-            function updateBodyBg() {
-                const theme = document.documentElement.getAttribute('data-theme');
-                if (theme === 'light') {
-                    document.body.style.backgroundColor = '#ffffff';
-                } else {
-                    document.body.style.backgroundColor = '#000000';
-                }
-            }
-            
-            // Initial
-            updateBodyBg();
-            
-            // Watch for theme changes
-            const observer = new MutationObserver(updateBodyBg);
-            observer.observe(document.documentElement, {
-                attributes: true,
-                attributeFilter: ['data-theme']
-            });
-        });
-    </script>
-    <!-- Emoji & Em-Dash Enhancement -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add em-dash list styling to all ul/ol lists
-            document.querySelectorAll('ul, ol').forEach(function(list) {
-                if (!list.classList.contains('em-dash-list')) {
-                    list.classList.add('em-dash-list');
-                }
-            });
-            
-            // Add drop shadow to all cards
-            document.querySelectorAll('.glass-card, .card, .metric-card, .stat-card, .feature-card').forEach(function(card) {
-                if (!card.classList.contains('shadow-drop-md')) {
-                    card.classList.add('shadow-drop-md');
-                }
-                if (!card.classList.contains('shadow-hover-lift')) {
-                    card.classList.add('shadow-hover-lift');
-                }
-            });
-            
-            // Add liquid glass to glass cards
-            document.querySelectorAll('.glass-card').forEach(function(card) {
-                if (!card.classList.contains('liquid-glass')) {
-                    card.classList.add('liquid-glass');
-                }
-            });
-            
-            // Add features-3-col to sections with 3+ cards
-            document.querySelectorAll('.features-grid, .grid-3, .row').forEach(function(grid) {
-                const cards = grid.querySelectorAll('.glass-card, .card, .metric-card, .stat-card');
-                if (cards.length >= 3) {
-                    grid.classList.add('features-3-col');
-                }
-            });
-            
-            // Add emoji decorations to section headings based on keywords
-            const emojiMap = {
-                'AI': '🤖',
-                'Clinical': '🩺',
-                'Medical': '🏥',
-                'Health': '💚',
-                'Diagnostic': '🔬',
-                'Emergency': '🚨',
-                'Dashboard': '📊',
-                'Settings': '⚙️',
-                'Profile': '👤',
-                'Report': '📄',
-                'Medicine': '💊',
-                'Drug': '💊',
-                'Chat': '💬',
-                'History': '🕐',
-                'Notification': '🔔',
-                'Admin': '👑',
-                'Security': '🛡️',
-                'Performance': '⚡',
-                'Accessibility': '♿',
-                'Explainability': '💡',
-                'Feature': '⭐',
-                'Welcome': '👋',
-                'Login': '🔐',
-                'Register': '📝',
-                'Home': '🏠',
-                'Disease': '🧠',
-                'Symptom': '🩺',
-                'Treatment': '💉',
-                'Lab': '🧪',
-                'Voice': '🎙️',
-                'Image': '📷',
-                'Document': '📁',
-                'Search': '🔍',
-                'Results': '📋',
-                'Insights': '💡',
-                'Pipeline': '🔧',
-                'Metrics': '📈',
-                'Safety': '🛡️',
-                'Guardrail': '🛡️',
-                'Knowledge': '📚',
-                'Reasoning': '🧠',
-                'Evidence': '📚',
-                'Guideline': '📖',
-                'Dosage': '💊',
-                'Interaction': '⚠️',
-                'Differential': '🔬',
-                'Confidence': '🎯',
-                'Explain': '💡',
-                'Timeline': '🕐',
-                'Analytics': '📊',
-                'Monitoring': '👁️',
-                'Logs': '📋',
-                'Backup': '💾',
-                'Deploy': '🚀',
-                'Test': '🧪',
-                'CI/CD': '🔄',
-                'Docker': '🐦',
-                'Database': '🗄️',
-                'API': '🔌',
-                'Gateway': '🌐',
-                'Cache': '⚡',
-                'Queue': '📨',
-                'Audit': '📝',
-                'User': '👤',
-                'Role': '🎭',
-                'Permission': '🔐',
-                'Session': '\U0001F511',
-                'Token': '🎫',
-                'OAuth': '🔐',
-                'Payment': '💳',
-                'Billing': '💵',
-                'Plan': '📦',
-                'Subscription': '💳',
-                'Webhook': '🔗',
-                'Stripe': '💳'
-            };
-            
-            // Add emojis before matching headings
-            document.querySelectorAll('h1, h2, h3').forEach(function(heading) {
-                const text = heading.textContent;
-                for (const [keyword, emoji] of Object.entries(emojiMap)) {
-                    if (text.includes(keyword) && !heading.dataset.emojiAdded) {
-                        const span = document.createElement('span');
-                        span.className = 'emoji-icon';
-                        span.style.marginRight = '8px';
-                        span.textContent = emoji;
-                        heading.insertBefore(span, heading.firstChild);
-                        heading.dataset.emojiAdded = 'true';
-                        break;
-                    }
-                }
-            });
-        });
-    </script>
+<script>document.addEventListener("DOMContentLoaded", () => { if (window.lucide) lucide.createIcons(); });</script>
 </body>
 </html>

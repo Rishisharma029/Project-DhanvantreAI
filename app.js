@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initFaqAccordion();
     initContactForm();
     initMobileMenu();
+    initClinicianDropdown();
+    initOperationalTelemetry();
 });
 
 /* ==========================================================================
@@ -21,9 +23,10 @@ function initThemeToggle() {
     const themeBtn = document.getElementById('themeToggleBtn');
     const themeIcon = document.getElementById('themeIcon');
     const htmlEl = document.documentElement;
+    if (!themeBtn || !themeIcon) return;
 
-    // Load saved theme or default to dark
-    const savedTheme = localStorage.getItem('auramed_theme') || 'dark';
+    // Load saved theme or default to light clinical chart
+    const savedTheme = localStorage.getItem('dhanvantre_theme') || 'light';
     htmlEl.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
 
@@ -32,15 +35,15 @@ function initThemeToggle() {
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         
         htmlEl.setAttribute('data-theme', newTheme);
-        localStorage.setItem('auramed_theme', newTheme);
+        localStorage.setItem('dhanvantre_theme', newTheme);
         updateThemeIcon(newTheme);
     });
 
     function updateThemeIcon(theme) {
         if (theme === 'light') {
-            themeIcon.className = 'fa-solid fa-sun';
-        } else {
             themeIcon.className = 'fa-solid fa-moon';
+        } else {
+            themeIcon.className = 'fa-solid fa-sun';
         }
     }
 }
@@ -201,25 +204,25 @@ function initHeroDemo() {
         let safetyHtml = '';
 
         if (lower.includes('fever') || lower.includes('mening') || lower.includes('stiffness')) {
-            triageHtml = `<div class="result-severity alert-high"><i class="fa-solid fa-triangle-exclamation"></i> Triage Status: RED (Urgent Neurological Evaluation)</div><div class="confidence-badge">Confidence: 96.5%</div>`;
+            triageHtml = `<div class="result-severity alert-high"><i class="fa-solid fa-triangle-exclamation"></i> Triage Status: RED (Urgent Neurological Evaluation)</div><div class="evidence-quality-pill quality-strong">Strong Evidence ●</div>`;
             diagHtml = `
-                <li><strong>Acute Bacterial Meningitis:</strong> Primary Differential (78%)</li>
-                <li><strong>Viral Encephalitis:</strong> Secondary Differential (18%)</li>
+                <li><strong>Acute Bacterial Meningitis:</strong> Primary Consideration (Strong Evidence)</li>
+                <li><strong>Viral Encephalitis:</strong> Secondary Rule-out (Limited Evidence)</li>
             `;
             safetyHtml = `Stat lumbar puncture recommended. Empiric IV Ceftriaxone + Dexamethasone indicated.`;
         } else if (lower.includes('diabet') || lower.includes('polyuria') || lower.includes('weight loss')) {
-            triageHtml = `<div class="result-severity" style="color: var(--accent-amber); font-weight: 700;"><i class="fa-solid fa-circle-exclamation"></i> Triage Status: AMBER (Endocrine Workup)</div><div class="confidence-badge">Confidence: 94.1%</div>`;
+            triageHtml = `<div class="result-severity" style="color: var(--status-warning); font-weight: 700;"><i class="fa-solid fa-circle-exclamation"></i> Triage Status: AMBER (Endocrine Workup)</div><div class="evidence-quality-pill quality-moderate">Moderate Evidence ●</div>`;
             diagHtml = `
-                <li><strong>New-onset Type 1 / Type 2 Diabetes Mellitus:</strong> Primary (85%)</li>
-                <li><strong>Diabetic Ketoacidosis (DKA) Risk:</strong> Secondary Rule-out (12%)</li>
+                <li><strong>New-onset Diabetes Mellitus:</strong> Primary Consideration (Moderate Evidence)</li>
+                <li><strong>Diabetic Ketoacidosis (DKA) Risk:</strong> Secondary Rule-out</li>
             `;
             safetyHtml = `Order STAT Fasting Blood Glucose, HbA1c, and serum ketones. Verified no baseline renal impairment.`;
         } else {
             // Default ACS / Cardiac
-            triageHtml = `<div class="result-severity alert-high"><i class="fa-solid fa-triangle-exclamation"></i> Triage Status: RED (Urgent Cardiac Care)</div><div class="confidence-badge">Confidence: 98.2%</div>`;
+            triageHtml = `<div class="result-severity alert-high"><i class="fa-solid fa-triangle-exclamation"></i> Triage Status: RED (Urgent Cardiac Care)</div><div class="evidence-quality-pill quality-strong">Strong Evidence ●</div>`;
             diagHtml = `
-                <li><strong>Acute Coronary Syndrome (ACS):</strong> High Probability (88%)</li>
-                <li><strong>Pulmonary Embolism:</strong> Secondary Differential (10%)</li>
+                <li><strong>Acute Coronary Syndrome (ACS):</strong> High Priority Consideration (Strong Evidence)</li>
+                <li><strong>Pulmonary Embolism:</strong> Secondary Differential (Moderate Evidence)</li>
             `;
             safetyHtml = `Verified zero conflict with current medications. Immediate 12-lead ECG & Troponin I panel recommended.`;
         }
@@ -400,4 +403,48 @@ function initMobileMenu() {
             });
         });
     }
+}
+
+/* ==========================================================================
+   9. Clinician Dropdown Toggle
+   ========================================================================== */
+function initClinicianDropdown() {
+    const clinicianMenu = document.getElementById('clinicianMenu');
+    if (!clinicianMenu) return;
+
+    clinicianMenu.addEventListener('click', (e) => {
+        if (!e.target.closest('.clinician-dropdown')) {
+            e.stopPropagation();
+            clinicianMenu.classList.toggle('open');
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!clinicianMenu.contains(e.target)) {
+            clinicianMenu.classList.remove('open');
+        }
+    });
+}
+
+/* ==========================================================================
+   10. Live Operational Telemetry Sync
+   ========================================================================== */
+function initOperationalTelemetry() {
+    const timeElements = document.querySelectorAll('.operational-tag-item');
+    if (!timeElements.length) return;
+
+    function updateLiveTelemetry() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        
+        timeElements.forEach(el => {
+            if (el.textContent.includes('Last updated') || el.textContent.includes('Database updated')) {
+                el.textContent = `Last updated ${hours}:${minutes}`;
+            }
+        });
+    }
+
+    // Refresh every 30 seconds
+    setInterval(updateLiveTelemetry, 30000);
 }

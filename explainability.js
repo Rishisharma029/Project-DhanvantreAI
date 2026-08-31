@@ -76,10 +76,10 @@ function getSampleSymptomsForDisease(dis) {
 }
 
 function renderExplainabilityData(data, diseaseName) {
-    // 1. Why This Condition?
+    // 1. Clinical Note
     document.getElementById('textWhyCondition').innerHTML = `
-        The engine prioritized <strong>${escapeHtml(diseaseName)}</strong> with 86.4% confidence.
-        ${escapeHtml(data.why_disease || 'Clinical evidence matches primary diagnostic criteria.')}
+        The current presentation is most consistent with <strong>${escapeHtml(diseaseName)}</strong>.
+        ${escapeHtml(data.why_disease || 'Clinical presentation aligns with primary diagnostic criteria and symptom constellation.')}
     `;
 
     // 2. Matched Symptoms

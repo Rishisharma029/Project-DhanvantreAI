@@ -1,897 +1,662 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AuraMed AI - ChatGPT-Style Clinical Medical Chat. Voice input, adaptive follow-up questions, streaming response, and database citations.">
-    <title>AI Medical Chat | AuraMed AI</title>
+    <meta name="description" content="DHANVANTRE Clinical Intelligence Platform - Case Record Workstation for Case #DH-20481 (Rajesh Kumar).">
+    <title>CASE #DH-20481: Rajesh Kumar | DHANVANTRE</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .chat-layout {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Sidebar History Drawer */
-        .chat-sidebar {
-            background: rgba(10, 15, 29, 0.95);
-            border-right: 1px solid var(--border-color);
-            padding: 20px 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100vh;
-            z-index: 100;
-        }
-
-        [data-theme="light"] .chat-sidebar {
-            background: #ffffff;
-        }
-
-        .chat-sidebar-header {
-            margin-bottom: 20px;
-        }
-
-        .new-chat-btn {
-            width: 100%;
-            background: rgba(6, 182, 212, 0.12);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            color: var(--accent-cyan);
-            padding: 12px;
-            border-radius: var(--radius-md);
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all var(--transition-fast);
-        }
-
-        .new-chat-btn:hover {
-            background: var(--accent-cyan);
-            color: #000;
-        }
-
-        .session-list-wrapper {
-            flex: 1;
-            overflow-y: auto;
-            margin: 16px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .session-item {
-            padding: 10px 14px;
-            border-radius: var(--radius-md);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all var(--transition-fast);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .session-item:hover, .session-item.active {
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text-main);
-        }
-
-        .session-item.active {
-            border-left: 3px solid var(--accent-cyan);
-            background: rgba(6, 182, 212, 0.1);
-        }
-
-        /* Main Chat Window */
-        .chat-main-window {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            background: var(--bg-primary);
-            position: relative;
-        }
-
-        .chat-top-bar {
-            padding: 16px 32px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(10, 15, 29, 0.6);
-            backdrop-filter: blur(12px);
-        }
-
-        .model-status-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .stream-messages-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 32px 20%;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            scroll-behavior: smooth;
-        }
-
-        @media (max-width: 1200px) {
-            .stream-messages-container {
-                padding: 32px 10%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .chat-layout {
-                grid-template-columns: 1fr;
-            }
-            .chat-sidebar {
-                display: none;
-            }
-            .stream-messages-container {
-                padding: 20px 16px;
-            }
-        }
-
-        /* Message Bubbles & Clinical Cards */
-        .message-row {
-            display: flex;
-            gap: 16px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .message-row.user {
-            flex-direction: row-reverse;
-        }
-
-        .avatar-box {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-
-        .avatar-user {
-            background: var(--accent-cyan);
-            color: #000;
-        }
-
-        .avatar-ai {
-            background: var(--gradient-primary);
-            color: #fff;
-            box-shadow: 0 0 10px var(--accent-teal-glow);
-        }
-
-        .msg-content-wrapper {
-            max-width: 85%;
-        }
-
-        .user-bubble {
-            background: rgba(6, 182, 212, 0.15);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            color: var(--text-main);
-            padding: 14px 20px;
-            border-radius: 18px 18px 2px 18px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .ai-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            box-shadow: var(--shadow-md);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Adaptive Follow-up Chips Container */
-        .followup-chips-container {
-            margin-top: 18px;
-            padding-top: 14px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .chips-label {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 600;
-        }
-
-        .chips-flex {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .followup-chip {
-            background: rgba(139, 92, 246, 0.12);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            color: var(--accent-purple);
-            padding: 6px 14px;
-            border-radius: var(--radius-full);
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .followup-chip:hover {
-            background: var(--accent-purple);
-            color: #fff;
-            box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
-        }
-
-        /* Database Citation Tags */
-        .citation-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: rgba(56, 189, 248, 0.12);
-            color: var(--accent-cyan);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            padding: 2px 8px;
-            border-radius: var(--radius-sm);
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin: 0 2px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .citation-tag:hover {
-            background: var(--accent-cyan);
-            color: #000;
-        }
-
-        /* Input Controls Area */
-        .chat-input-area {
-            padding: 16px 20%;
-            background: rgba(10, 15, 29, 0.9);
-            border-top: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        @media (max-width: 1200px) {
-            .chat-input-area {
-                padding: 16px 10%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .chat-input-area {
-                padding: 12px 16px;
-            }
-        }
-
-        .quick-pills-row {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-            overflow-x: auto;
-            padding-bottom: 4px;
-        }
-
-        .quick-pill {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 4px 12px;
-            border-radius: var(--radius-full);
-            font-size: 0.75rem;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .quick-pill:hover {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-        }
-
-        .input-box-wrapper {
-            display: flex;
-            align-items: flex-end;
-            gap: 12px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 10px 16px;
-            transition: border-color var(--transition-fast);
-        }
-
-        .input-box-wrapper:focus-within {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
-        }
-
-        .chat-textarea {
-            flex: 1;
-            background: none;
-            border: none;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            outline: none;
-            resize: none;
-            max-height: 140px;
-            font-family: inherit;
-            line-height: 1.5;
-        }
-
-        .voice-mic-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            transition: all var(--transition-fast);
-        }
-
-        .voice-mic-btn:hover {
-            color: var(--accent-cyan);
-            border-color: var(--accent-cyan);
-        }
-
-        .voice-mic-btn.recording {
-            background: var(--accent-rose);
-            color: #fff;
-            animation: pulse-recording 1.2s infinite;
-        }
-
-        @keyframes pulse-recording {
-            0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
-        }
-
-        .send-msg-btn {
-            background: var(--gradient-primary);
-            border: none;
-            color: #fff;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            transition: all var(--transition-fast);
-        }
-
-        .send-msg-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 12px var(--accent-teal-glow);
-        }
-
-        /* Typing Cursor Effect */
-        .typing-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background-color: var(--accent-cyan);
-            margin-left: 4px;
-            animation: blink 0.8s infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-    </style>
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Core Design System -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="dashboard-layout-v2">
 
-    <!-- Background Elements -->
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-    <div class="bg-grid-pattern"></div>
-
-    <!-- Thin Floating Navigation Rail -->
-    <nav class="nav-rail" id="navRail">
-        <div class="rail-top-group">
-            <a href="index.html" class="rail-item active" title="DhanvantreAI Workspace">
-                <span class="rail-icon"><i class="fa-solid fa-square-plus" style="color: var(--accent-teal);"></i></span>
-                <span class="rail-label">DhanvantreAI</span>
+    <!-- 1. TOP UTILITY BAR -->
+    <header class="dashboard-topbar">
+        <div class="case-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 6px;">
+                <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i> Workspace
             </a>
-            <a href="chat.html" class="rail-item active" title="Current Case">
-                <span class="rail-icon"><i class="fa-solid fa-house"></i></span>
-                <span class="rail-label">Case Workbench</span>
-            </a>
-            <button class="rail-item" id="newChatBtn" title="New Case" style="background: transparent; border: none;">
-                <span class="rail-icon"><i class="fa-solid fa-plus"></i></span>
-                <span class="rail-label">New Case</span>
-            </button>
-            <a href="medicines.html" class="rail-item" title="Medication Safety">
-                <span class="rail-icon"><i class="fa-solid fa-pills"></i></span>
-                <span class="rail-label">Medications</span>
-            </a>
-            <a href="diseases.html" class="rail-item" title="Knowledge Base">
-                <span class="rail-icon"><i class="fa-solid fa-book-medical"></i></span>
-                <span class="rail-label">Knowledge Base</span>
-            </a>
+            <span style="color: var(--border-color);">/</span>
+            <span style="color: var(--text-main);">Case Record</span>
+            <span style="color: var(--border-color);">/</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 700;">#DH-20481</span>
         </div>
-        <div class="rail-bottom-group">
-            <button class="rail-item theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme" style="background: transparent; border: none;">
-                <span class="rail-icon"><i class="fa-solid fa-sun" id="themeIcon"></i></span>
-                <span class="rail-label">Toggle Theme</span>
+
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle theme">
+                <i data-lucide="moon" id="themeIcon" style="width: 15px; height: 15px;"></i>
             </button>
-            <a href="dashboard.html" class="rail-item" title="Telemetry Dashboard">
-                <span class="rail-icon"><i class="fa-solid fa-chart-line"></i></span>
-                <span class="rail-label">Dashboard</span>
-            </a>
+            <button class="btn btn-secondary btn-sm" id="exportCaseBtn">
+                <i data-lucide="printer" style="width: 14px; height: 14px;"></i> Export Summary
+            </button>
+            <button class="btn btn-primary btn-sm" id="openAddEvidenceBtn">
+                <i data-lucide="plus" style="width: 14px; height: 14px;"></i> Add Note / Lab
+            </button>
         </div>
-    </nav>
+    </header>
+    <!-- OPERATIONAL STATUS TELEMETRY STRIP -->
+    <div class="operational-status-strip">
+        <div class="status-live-indicator">
+            <span class="live-dot"></span> Telemetry live • Case #DH-20481
+        </div>
+        <div class="operational-tags-group">
+            <span class="operational-tag-item">Last updated 21:52</span>
+            <span class="operational-tag-item">Signals synchronized 2 min ago</span>
+            <span class="operational-tag-item operational-tag-highlight">Urgent ECG review pending</span>
+            <span class="operational-tag-item">Attending: Dr. Rishi</span>
+        </div>
+    </div>
 
-    <!-- Clinical Intelligence Canvas Viewport -->
-    <main class="canvas-main-viewport">
-        <!-- 3-Column Spatial Workspace Layout -->
-        <div class="canvas-layout-3col" id="caseCanvas">
 
-            <!-- COLUMN 1: EVIDENCE & SIGNALS (LEFT) -->
-            <div class="canvas-col-left">
-                <!-- Inputs & Files Card -->
-                <div class="paper-card" style="margin-bottom: 16px;">
-                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-                        <span><i class="fa-solid fa-file-medical" style="color: var(--accent-teal);"></i> INPUT EVIDENCE</span>
-                        <span>4 SOURCES</span>
-                    </div>
-                    <div class="evidence-signal-tag"><span>📄 CBC_Report.pdf</span> <span style="font-size: 0.75rem; color: var(--text-dim);">Lab PDF</span></div>
-                    <div class="evidence-signal-tag"><span>💊 Active_Rx.jpg</span> <span style="font-size: 0.75rem; color: var(--text-dim);">Prescription</span></div>
-                    <div class="evidence-signal-tag"><span>📝 Patient_History.txt</span> <span style="font-size: 0.75rem; color: var(--text-dim);">Clinical Notes</span></div>
-                    <div class="evidence-signal-tag"><span>🎙️ Voice_Dictation_1.wav</span> <span style="font-size: 0.75rem; color: var(--text-dim);">Audio Memo</span></div>
+    <!-- 2. MAIN WORKSPACE GRID: STABLE SIDEBAR + CASE VIEW -->
+    <div class="dashboard-workspace-grid">
+
+        <!-- STABLE APPLICATION SIDEBAR -->
+        <aside class="dash-sidebar-v2" aria-label="Workstation Navigation">
+            <div>
+                <!-- Group 1: WORKSPACE -->
+                <div class="sidebar-nav-group">
+                    <div class="sidebar-group-heading">WORKSPACE</div>
+                    <a href="chat.html" class="sidebar-item-link active">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="file-text" style="width: 15px; height: 15px;"></i>
+                            <span>Cases</span>
+                        </div>
+                        <span class="tabular-num" style="font-size: 0.72rem; color: var(--text-dim);">12</span>
+                    </a>
+                    <a href="dashboard.html#patients" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="users" style="width: 15px; height: 15px;"></i>
+                            <span>Patients</span>
+                        </div>
+                        <span class="tabular-num" style="font-size: 0.72rem; color: var(--text-dim);">24</span>
+                    </a>
                 </div>
 
-                <!-- Extracted Findings / Lab Signals -->
-                <div class="paper-card">
-                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-                        <span><i class="fa-solid fa-microscope" style="color: var(--accent-teal);"></i> EXTRACTED SIGNALS</span>
-                        <span>5 DETECTED</span>
-                    </div>
-                    <div class="evidence-signal-tag thread-active" id="signal-wbc">
-                        <span>WBC 12.4k/µL</span> <span class="badge badge-rose">↑ HIGH</span>
-                    </div>
-                    <div class="evidence-signal-tag thread-active" id="signal-temp">
-                        <span>Fever 38.9°C</span> <span class="badge badge-orange">↑ HIGH</span>
-                    </div>
-                    <div class="evidence-signal-tag thread-active" id="signal-neutro">
-                        <span>Neutrophils 82%</span> <span class="badge badge-rose">↑ HIGH</span>
-                    </div>
-                    <div class="evidence-signal-tag" id="signal-headache">
-                        <span>Headache (frontal)</span> <span class="badge badge-neutral">PRESENT</span>
-                    </div>
-                    <div class="evidence-signal-tag" id="signal-fatigue">
-                        <span>Fatigue (3 days)</span> <span class="badge badge-neutral">PRESENT</span>
-                    </div>
+                <!-- Group 2: CLINICAL -->
+                <div class="sidebar-nav-group">
+                    <div class="sidebar-group-heading">CLINICAL</div>
+                    <a href="medicines.html" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="pill" style="width: 15px; height: 15px;"></i>
+                            <span>Medications</span>
+                        </div>
+                    </a>
+                    <a href="diseases.html" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="book-open" style="width: 15px; height: 15px;"></i>
+                            <span>Knowledge</span>
+                        </div>
+                    </a>
+                    <a href="dashboard.html" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="bar-chart-2" style="width: 15px; height: 15px;"></i>
+                            <span>Insights</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Group 3: SYSTEM -->
+                <div class="sidebar-nav-group">
+                    <div class="sidebar-group-heading">SYSTEM</div>
+                    <a href="history.html" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="history" style="width: 15px; height: 15px;"></i>
+                            <span>Audit</span>
+                        </div>
+                    </a>
+                    <a href="settings.html" class="sidebar-item-link">
+                        <div class="sidebar-item-left">
+                            <i data-lucide="settings" style="width: 15px; height: 15px;"></i>
+                            <span>Settings</span>
+                        </div>
+                    </a>
                 </div>
             </div>
 
-            <!-- COLUMN 2: DIFFERENTIAL REASONING & CANVAS (CENTER) -->
-            <div class="canvas-col-center">
-                <!-- Case Header Card -->
-                <div class="paper-card" style="margin-bottom: 16px;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 12px;">
+            <!-- Clinician Bottom Lockup -->
+            <div style="border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 10px;">
+                <div style="font-size: 0.84rem; font-weight: 700; color: var(--text-main);">Dr. Rishi</div>
+                <div style="font-size: 0.74rem; color: var(--text-dim);">Clinician • Cardiology 04</div>
+            </div>
+        </aside>
+
+        <!-- MAIN CASE WORKSPACE CONTAINER -->
+        <main class="dash-content-area" style="padding: 20px 24px;">
+
+            <!-- CASE RECORD HEADER CARD -->
+            <section class="case-header-card" aria-label="Patient Case Record Header">
+                <div class="case-header-top-row">
+                    <div class="case-id-badge">
+                        <span>CASE #DH-20481</span>
+                        <span style="color: var(--text-dim);">•</span>
+                        <span class="badge badge-emerald">● ACTIVE</span>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--text-dim); font-family: 'IBM Plex Mono', monospace;">
+                        STATION 04 • CARDIOLOGY
+                    </div>
+                </div>
+
+                <h1 class="case-patient-title">Rajesh Kumar</h1>
+                <div class="case-demographics-line">
+                    58 years • Male • MRN: 948-204-11 • Ward: Cardiology Step-Down
+                </div>
+
+                <div class="case-presentation-badges">
+                    <span class="badge badge-rose">Chest pain</span>
+                    <span class="badge badge-amber">Dyspnea</span>
+                    <span class="badge badge-neutral">Diaphoresis</span>
+                </div>
+
+                <div class="case-meta-bar">
+                    <div>Started 31 Aug 2026, 21:42 • Attending: Dr. Rishi</div>
+                    <div>TIMI Score: 4/7 (Intermediate-High Risk)</div>
+                </div>
+            </section>
+
+            <!-- CASE NAVIGATION TABS -->
+            <nav class="case-nav-tabs-bar" role="tablist" aria-label="Case Record Tabs">
+                <button class="case-nav-tab-btn active" data-target="tab-overview" role="tab" aria-selected="true">
+                    Overview
+                </button>
+                <button class="case-nav-tab-btn" data-target="tab-evidence" role="tab" aria-selected="false">
+                    Evidence
+                </button>
+                <button class="case-nav-tab-btn" data-target="tab-differential" role="tab" aria-selected="false">
+                    Differential
+                </button>
+                <button class="case-nav-tab-btn" data-target="tab-medications" role="tab" aria-selected="false">
+                    Medications
+                </button>
+                <button class="case-nav-tab-btn" data-target="tab-timeline" role="tab" aria-selected="false">
+                    Timeline
+                </button>
+                <button class="case-nav-tab-btn" data-target="tab-audit" role="tab" aria-selected="false">
+                    Audit
+                </button>
+            </nav>
+
+            <!-- TAB 1: OVERVIEW (THREE-COLUMN CLINICAL CASE ARCHITECTURE) -->
+            <div class="case-tab-pane active" id="tab-overview" role="tabpanel">
+                <div class="case-3col-grid">
+
+                    <!-- 1. LEFT COLUMN — PATIENT RECORD -->
+                    <aside class="case-col-panel" aria-label="Patient Record Summary">
+                        <div class="case-col-header">
+                            <span>PATIENT</span>
+                            <span class="tabular-num">MRN: 948-204-11</span>
+                        </div>
+
+                        <div class="patient-identity-name">Rajesh Kumar</div>
+                        <div class="patient-identity-sub">58 years • Male</div>
+
+                        <!-- Vitals Section -->
+                        <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.06em; margin-bottom: 8px;">
+                            VITALS
+                        </div>
+                        <table class="vitals-mini-table">
+                            <tbody>
+                                <tr>
+                                    <td class="vitals-key">BP</td>
+                                    <td class="vitals-val" style="color: var(--status-warning);">154/96</td>
+                                </tr>
+                                <tr>
+                                    <td class="vitals-key">HR</td>
+                                    <td class="vitals-val">108</td>
+                                </tr>
+                                <tr>
+                                    <td class="vitals-key">SpO₂</td>
+                                    <td class="vitals-val">93%</td>
+                                </tr>
+                                <tr>
+                                    <td class="vitals-key">Temp</td>
+                                    <td class="vitals-val">37.1°C</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr class="dropdown-divider" style="margin: 14px 0;">
+
+                        <!-- Relevant History -->
+                        <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.06em; margin-bottom: 8px;">
+                            RELEVANT HISTORY
+                        </div>
+                        <ul class="clinical-bullet-list">
+                            <li>Hypertension</li>
+                            <li>Type 2 diabetes</li>
+                        </ul>
+
+                        <hr class="dropdown-divider" style="margin: 14px 0;">
+
+                        <!-- Current Medications -->
+                        <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.06em; margin-bottom: 8px;">
+                            CURRENT MEDICATIONS
+                        </div>
+                        <ul class="clinical-bullet-list">
+                            <li>Metformin</li>
+                            <li>Amlodipine</li>
+                            <li>Aspirin</li>
+                        </ul>
+                    </aside>
+
+                    <!-- 2. CENTER COLUMN — CLINICAL REASONING -->
+                    <section class="case-col-panel" aria-label="Clinical Reasoning & Differential">
+                        <div class="case-col-header">
+                            <span>CLINICAL NOTE</span>
+                            <span class="badge-machine-assisted">Machine-assisted</span>
+                        </div>
+
+                        <p class="clinical-summary-text">
+                            The current presentation is most consistent with ACS.
+                        </p>
+
+                        <div style="margin-bottom: 16px;">
+                            <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px;">
+                                Supporting evidence:
+                            </div>
+                            <ul class="clinical-bullet-list">
+                                <li>exertional chest discomfort</li>
+                                <li>left-arm radiation</li>
+                                <li>diaphoresis</li>
+                                <li>cardiovascular risk factors</li>
+                            </ul>
+                        </div>
+
+                        <hr class="dropdown-divider" style="margin: 16px 0;">
+
+                        <div class="case-col-header" style="margin-top: 14px;">
+                            <span>DIFFERENTIAL</span>
+                            <span style="font-size: 0.72rem; color: var(--text-dim); font-family: 'IBM Plex Mono', monospace;">EVIDENCE QUALITY</span>
+                        </div>
+
+                        <!-- 01 Acute Coronary Syndrome -->
+                        <div class="differential-tier-item">
+                            <div class="diff-title-row">
+                                <div class="diff-name">
+                                    <span class="diff-index">01</span>
+                                    <span>Acute Coronary Syndrome</span>
+                                </div>
+                                <span class="evidence-quality-pill quality-strong">Strong ●</span>
+                            </div>
+                            <div class="evidence-strength-container">
+                                <div class="evidence-strength-row">
+                                    <span class="evidence-strength-label">Evidence strength</span>
+                                    <div class="evidence-strength-segments">
+                                        <span class="strength-segment filled"></span>
+                                        <span class="strength-segment filled"></span>
+                                        <span class="strength-segment filled"></span>
+                                        <span class="strength-segment filled"></span>
+                                        <span class="strength-segment filled"></span>
+                                        <span class="strength-segment filled"></span>
+                                        <span class="strength-segment filled"></span>
+                                        <span class="strength-segment filled"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-text">Strong</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="diff-support-evidence">
+                                <div class="diff-support-lbl">Supporting evidence</div>
+                                <ul class="clinical-bullet-list">
+                                <li>Radiating chest pain</li>
+                                <li>Diaphoresis</li>
+                                <li>Risk factors</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- 02 Pulmonary Embolism -->
+                        <div class="differential-tier-item">
+                            <div class="diff-title-row">
+                                <div class="diff-name">
+                                    <span class="diff-index">02</span>
+                                    <span>Pulmonary Embolism</span>
+                                </div>
+                                <span class="evidence-quality-pill quality-moderate">Moderate ●</span>
+                            </div>
+                            <div class="evidence-strength-container">
+                                <div class="evidence-strength-row">
+                                    <span class="evidence-strength-label">Evidence strength</span>
+                                    <div class="evidence-strength-segments">
+                                        <span class="strength-segment filled moderate"></span>
+                                        <span class="strength-segment filled moderate"></span>
+                                        <span class="strength-segment filled moderate"></span>
+                                        <span class="strength-segment filled moderate"></span>
+                                        <span class="strength-segment filled moderate"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-text" style="color: var(--status-warning);">Moderate</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="diff-support-evidence" style="font-size: 0.8rem; color: var(--text-muted);">
+                                Mild tachypnea (RR 22) and SpO2 93% on room air warrant consideration; Wells score currently 1.5.
+                            </div>
+                        </div>
+
+                        <!-- 03 Aortic Dissection -->
+                        <div class="differential-tier-item">
+                            <div class="diff-title-row">
+                                <div class="diff-name">
+                                    <span class="diff-index">03</span>
+                                    <span>Aortic Dissection</span>
+                                </div>
+                                <span class="evidence-quality-pill quality-limited">Limited ●</span>
+                            </div>
+                            <div class="evidence-strength-container">
+                                <div class="evidence-strength-row">
+                                    <span class="evidence-strength-label">Evidence strength</span>
+                                    <div class="evidence-strength-segments">
+                                        <span class="strength-segment filled" style="background: var(--text-dim); border-color: var(--text-dim);"></span>
+                                        <span class="strength-segment filled" style="background: var(--text-dim); border-color: var(--text-dim);"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-segment"></span>
+                                        <span class="strength-text" style="color: var(--text-dim);">Limited</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="diff-support-evidence" style="font-size: 0.8rem; color: var(--text-muted);">
+                                Symmetric bilateral upper extremity pulses; no tearing interscapular back pain reported.
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 3. RIGHT COLUMN — ACTIONS / SAFETY -->
+                    <aside class="case-col-panel" aria-label="Clinical Safety & Action Items">
+                        <div class="case-col-header">
+                            <span>CLINICAL SAFETY</span>
+                            <span class="badge badge-amber" style="font-size: 0.65rem;">ATTENTION</span>
+                        </div>
+
+                        <div style="background: var(--status-rose-bg); border: 1px solid var(--status-rose-border); padding: 8px 12px; border-radius: var(--radius-xs); color: var(--status-rose-text); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                            <span>URGENT REVIEW</span>
+                        </div>
+
+                        <!-- Action Orders -->
+                        <div class="safety-action-row">
+                            <span class="safety-action-label">ECG</span>
+                            <span class="safety-action-status" style="color: var(--primary);">Recommended</span>
+                        </div>
+                        <div class="safety-action-row">
+                            <span class="safety-action-label">Troponin</span>
+                            <span class="safety-action-status" style="color: var(--primary);">Recommended</span>
+                        </div>
+                        <div class="safety-action-row">
+                            <span class="safety-action-label">Medication conflict</span>
+                            <span class="safety-action-status none">None detected</span>
+                        </div>
+
+                        <hr class="dropdown-divider" style="margin: 16px 0;">
+
+                        <!-- Open Questions Checklist -->
+                        <div class="case-col-header" style="margin-top: 10px;">
+                            <span>OPEN QUESTIONS</span>
+                        </div>
+                        <div class="checklist-group">
+                            <label class="checklist-item">
+                                <input type="checkbox" id="chkEcg" checked>
+                                <span>ECG available?</span>
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" id="chkHistory">
+                                <span>Previous cardiac history?</span>
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox" id="chkOnset" checked>
+                                <span>Onset duration?</span>
+                            </label>
+                        </div>
+                    </aside>
+
+                </div>
+            </div>
+
+            <!-- TAB 2: EVIDENCE (CLINICAL EVIDENCE TABLE) -->
+            <div class="case-tab-pane" id="tab-evidence" role="tabpanel">
+                <div class="paper-card" style="margin-bottom: 18px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                        <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.06em;">
+                            CLINICAL EVIDENCE SYNTHESIS TABLE
+                        </div>
+                        <span class="badge-machine-assisted">Machine-assisted</span>
+                    </div>
+
+                    <table class="clinical-evidence-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 220px;">Finding</th>
+                                <th>Supports</th>
+                                <th>Contradicts</th>
+                                <th style="width: 140px;">Strength</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Chest pain</strong></td>
+                                <td><span style="color: var(--text-main); font-weight: 600;">ACS</span></td>
+                                <td style="color: var(--text-dim);">—</td>
+                                <td><span class="evidence-quality-pill quality-strong">Strong ●</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Left-arm radiation</strong></td>
+                                <td><span style="color: var(--text-main); font-weight: 600;">ACS</span></td>
+                                <td style="color: var(--text-dim);">—</td>
+                                <td><span class="evidence-quality-pill quality-strong">Strong ●</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tachycardia (HR 108)</strong></td>
+                                <td><span style="color: var(--text-main); font-weight: 600;">PE, ACS</span></td>
+                                <td style="color: var(--text-dim);">—</td>
+                                <td><span class="evidence-quality-pill quality-moderate">Moderate ●</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>No fever (37.1°C)</strong></td>
+                                <td style="color: var(--text-dim);">—</td>
+                                <td><span style="color: var(--text-muted);">Infection (Pneumonia / Pericarditis)</span></td>
+                                <td><span class="evidence-quality-pill quality-moderate">Moderate ●</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Symmetric radial pulses</strong></td>
+                                <td style="color: var(--text-dim);">—</td>
+                                <td><span style="color: var(--text-muted);">Aortic Dissection</span></td>
+                                <td><span class="evidence-quality-pill quality-strong">Strong ●</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Diaphoresis</strong></td>
+                                <td><span style="color: var(--text-main); font-weight: 600;">ACS</span></td>
+                                <td style="color: var(--text-dim);">—</td>
+                                <td><span class="evidence-quality-pill quality-strong">Strong ●</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 3: DIFFERENTIAL -->
+            <div class="case-tab-pane" id="tab-differential" role="tabpanel">
+                <div class="paper-card">
+                    <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.06em; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                        DIFFERENTIAL DIAGNOSTIC SYNTHESIS
+                    </div>
+
+                    <div class="differential-rank-card top-rank">
                         <div>
-                            <span style="font-size: 0.75rem; font-weight: 800; color: var(--accent-teal); letter-spacing: 0.5px;">CLINICAL CASE WORKBENCH</span>
-                            <h1 style="font-size: 1.4rem; font-weight: 800; color: var(--text-main);">CASE #DH-0428</h1>
+                            <span class="evidence-quality-pill quality-strong">Strong Evidence ●</span>
+                            <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin-top: 4px;">
+                                1. Acute Coronary Syndrome (NSTEMI)
+                            </h4>
+                            <div style="font-size: 0.78rem; color: var(--text-dim); font-family: 'IBM Plex Mono', monospace;">
+                                ICD-11: BA41.1 • Evidence Quality: Strong
+                            </div>
                         </div>
-                        <div class="badge badge-emerald" style="padding: 4px 10px;">
-                            <i class="fa-solid fa-circle-check"></i> System Operational
-                        </div>
-                    </div>
-                    <div style="font-size: 1rem; font-weight: 700; color: var(--text-main);">
-                        Sarah • 34 • Female
-                    </div>
-                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 4px;">
-                        <em>"Fever, severe frontal headache, and progressive fatigue for 3 days"</em>
-                    </div>
-                </div>
-
-                <!-- Clinical Picture Summary Box -->
-                <div class="paper-card" style="border-left: 4px solid var(--accent-teal); margin-bottom: 16px; background: var(--bg-card);">
-                    <div style="font-size: 0.75rem; font-weight: 800; color: var(--accent-teal); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">SYNTHESIZED CLINICAL PICTURE</div>
-                    <div style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">
-                        ACUTE INFLAMMATORY PROCESS POSSIBLE
-                    </div>
-                    <p style="font-size: 0.86rem; color: var(--text-muted); margin-top: 6px;">
-                        Significant leukocytosis with neutrophilic predominance (82%) combined with pyrexia (38.9°C) strongly points toward an acute infectious/inflammatory etiology.
-                    </p>
-                </div>
-
-                <!-- Interactive Evidence Threads Section -->
-                <div class="paper-card" style="margin-bottom: 16px;">
-                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-                        <span><i class="fa-solid fa-network-wired" style="color: var(--accent-teal);"></i> INTERACTIVE EVIDENCE THREADS</span>
-                        <span>CLICK TO EXPLORE RATIONALE</span>
-                    </div>
-
-                    <!-- Candidate 1: Bacterial Infection -->
-                    <div class="differential-card-item active-thread" onclick="selectEvidenceThread('bacterial')">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                            <span style="font-weight: 800; color: var(--text-main); font-size: 0.95rem;">● Bacterial Infection</span>
-                            <span class="badge badge-rose">84% Probability</span>
-                        </div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 8px;">
-                            <span style="color: var(--status-emerald-text);">✔ Supporting: WBC 12.4k ↑, Neutrophils 82% ↑</span>
-                            <span style="color: var(--status-rose-text);">✘ Missing: Blood cultures pending</span>
-                        </div>
-                    </div>
-
-                    <!-- Candidate 2: Viral Syndrome -->
-                    <div class="differential-card-item" onclick="selectEvidenceThread('viral')">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                            <span style="font-weight: 800; color: var(--text-main); font-size: 0.95rem;">● Viral Syndrome</span>
-                            <span class="badge badge-amber">42% Probability</span>
-                        </div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 8px;">
-                            <span style="color: var(--status-emerald-text);">✔ Supporting: Fever, Fatigue, Headache</span>
-                            <span style="color: var(--status-rose-text);">✘ Contradicting: Neutrophilia >80%</span>
-                        </div>
-                    </div>
-
-                    <!-- Candidate 3: Migraine -->
-                    <div class="differential-card-item" onclick="selectEvidenceThread('migraine')">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                            <span style="font-weight: 800; color: var(--text-dim); font-size: 0.95rem;">○ Migraine</span>
-                            <span class="badge badge-neutral">12% Probability</span>
-                        </div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">
-                            <span style="color: var(--status-rose-text);">✘ Contradicting: High fever 38.9°C & leukocytosis contradict simple migraine</span>
+                        <div style="margin-top: 10px; font-size: 0.84rem; color: var(--text-main);">
+                            <strong>Supporting Evidence:</strong> Exertional retrosternal crushing pain, left-arm radiation, diaphoresis, cardiovascular risk factors.
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Step-by-Step Clinical Rationale Trail -->
+            <!-- TAB 4: MEDICATIONS -->
+            <div class="case-tab-pane" id="tab-medications" role="tabpanel">
                 <div class="paper-card">
-                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 10px;">CLINICAL REASONING TIMELINE</div>
-                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem; color: var(--text-muted);">
-                        <div><strong style="color: var(--text-main);">Step 1:</strong> Lab extraction identified leukocytosis (12.4k) and fever (38.9°C).</div>
-                        <div><strong style="color: var(--text-main);">Step 2:</strong> Differential matching ruled out migraine due to inflammatory flags.</div>
-                        <div><strong style="color: var(--text-main);">Step 3:</strong> Recommended empiric evaluation and medication safety verification.</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                        <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.06em;">
+                            INPATIENT MEDICATIONS & SAFETY GUARDRAIL
+                        </div>
+                        <span class="badge badge-emerald">0 Conflicts</span>
+                    </div>
+
+                    <table class="table-dense">
+                        <thead>
+                            <tr>
+                                <th>Medication</th>
+                                <th>Dosage & Route</th>
+                                <th>Frequency</th>
+                                <th>Indication</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Aspirin</strong></td>
+                                <td class="tabular-num">325 mg PO</td>
+                                <td>STAT Loading</td>
+                                <td>Antiplatelet / ACS</td>
+                                <td><span class="badge badge-emerald">ADMINISTERED</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Clopidogrel (Plavix)</strong></td>
+                                <td class="tabular-num">300 mg PO</td>
+                                <td>STAT Loading</td>
+                                <td>P2Y12 Inhibitor / ACS</td>
+                                <td><span class="badge badge-emerald">ADMINISTERED</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 5: TIMELINE (PATIENT CASE TIMELINE) -->
+            <div class="case-tab-pane" id="tab-timeline" role="tabpanel">
+                <div class="paper-card">
+                    <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.06em; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                        PATIENT CASE TIMELINE
+                    </div>
+
+                    <div class="patient-timeline-v2">
+                        <div class="timeline-node-item completed">
+                            <span class="timeline-time-label">21:42</span>
+                            <div class="timeline-event-title">Case created</div>
+                            <div class="timeline-event-sub">Symptoms recorded (Substernal pressure, left arm radiation, diaphoresis)</div>
+                        </div>
+                        <div class="timeline-node-item completed">
+                            <span class="timeline-time-label">21:44</span>
+                            <div class="timeline-event-title">Vital signs added</div>
+                            <div class="timeline-event-sub">BP 154/96, HR 108, SpO₂ 93%, Temp 37.1°C recorded at bedside</div>
+                        </div>
+                        <div class="timeline-node-item completed">
+                            <span class="timeline-time-label">21:46</span>
+                            <div class="timeline-event-title">Medication history reviewed</div>
+                            <div class="timeline-event-sub">Active home medications confirmed: Metformin, Amlodipine, Aspirin</div>
+                        </div>
+                        <div class="timeline-node-item completed">
+                            <span class="timeline-time-label">21:47</span>
+                            <div class="timeline-event-title">Differential generated</div>
+                            <div class="timeline-event-sub">Primary consideration: Acute Coronary Syndrome (High). Secondary: PE, Aortic Dissection</div>
+                        </div>
+                        <div class="timeline-node-item completed">
+                            <span class="timeline-time-label">21:48</span>
+                            <div class="timeline-event-title">Drug interaction check completed</div>
+                            <div class="timeline-event-sub">Zero severe contraindications detected with inpatient emergency antiplatelet orders</div>
+                        </div>
+                        <div class="timeline-node-item completed">
+                            <span class="timeline-time-label">21:49</span>
+                            <div class="timeline-event-title">ECG recommended</div>
+                            <div class="timeline-event-sub">12-Lead STAT Electrocardiogram protocol triggered</div>
+                        </div>
+                        <div class="timeline-node-item completed">
+                            <span class="timeline-time-label">21:51</span>
+                            <div class="timeline-event-title">Clinician reviewed recommendation</div>
+                            <div class="timeline-event-sub">Dr. Rishi verified diagnostic reasoning and approved STAT cardiac workup</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- COLUMN 3: SAFETY, CERTAINTY & ACTIONS (RIGHT) -->
-            <div class="canvas-col-right">
-                <!-- Triage Level Card -->
-                <div class="paper-card" style="margin-bottom: 16px; text-align: center;">
-                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 8px;">TRIAGE ASSESSMENT</div>
-                    <div class="badge badge-rose" style="font-size: 1rem; padding: 8px 18px; font-weight: 800;">
-                        <i class="fa-solid fa-triangle-exclamation"></i> URGENT EVALUATION
+            <!-- TAB 6: AUDIT -->
+            <div class="case-tab-pane" id="tab-audit" role="tabpanel">
+                <div class="paper-card">
+                    <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.06em; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                        CLINICAL AUDIT TRAIL & ALGORITHMIC TRACEABILITY
                     </div>
-                </div>
 
-                <!-- Certainty & Uncertainty Breakdown -->
-                <div class="paper-card" style="margin-bottom: 16px;">
-                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 10px;">CERTAINTY & UNCERTAINTY</div>
-                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem;">
-                        <div style="display: flex; justify-content: space-between; font-weight: 700; color: var(--text-main);">
-                            <span>Diagnostic Certainty:</span>
-                            <span style="color: var(--status-emerald-text);">78% Calibrated</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);">
-                            <span>• Unresolved Questions:</span>
-                            <span style="font-weight: 700; color: var(--status-amber-text);">2 Open Flags</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);">
-                            <span>• Safety Guardrail Alerts:</span>
-                            <span style="font-weight: 700; color: var(--status-rose-text);">1 Check</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 10-Point Medication Safety Audit -->
-                <div class="paper-card" style="margin-bottom: 16px;">
-                    <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 10px;">MEDICATION SAFETY AUDIT</div>
-                    <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.82rem;">
-                        <div style="display: flex; justify-content: space-between; color: var(--status-emerald-text);">
-                            <span>Renal Function (eGFR):</span> <span>✔ Normal (>90 mL/min)</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; color: var(--status-amber-text);">
-                            <span>Hepatic Clearance:</span> <span>⚠️ Caution (Paracetamol max 2g/day)</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; color: var(--status-emerald-text);">
-                            <span>Drug Interactions:</span> <span>✔ No Severe Interplay</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; color: var(--status-emerald-text);">
-                            <span>Allergy Guardrail:</span> <span>✔ Penicillin Clear</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quiet Contextual AI Marginalia Annotation -->
-                <div class="ai-annotation-note">
-                    <strong style="color: var(--text-main);">Clinical Marginalia:</strong><br>
-                    Neutrophil predominance >80% strongly favors bacterial etiology over viral prodrome. Recommend blood culture and clinical follow-up within 12 hours.
+                    <table class="table-dense">
+                        <tbody>
+                            <tr>
+                                <td style="width: 220px; font-weight: 700; color: var(--text-muted);">Decision Model Version</td>
+                                <td class="tabular-num">DHANVANTRE Clinical Reasoning Engine v4.2.1</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700; color: var(--text-muted);">Clinical Guideline Benchmark</td>
+                                <td>ACC/AHA 2025 Guideline for Management of Patients with NSTE-ACS</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700; color: var(--text-muted);">Attending Physician Sign-Off</td>
+                                <td><span class="badge badge-emerald">Dr. Rishi (MD, Internal Medicine)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
-        </div>
-    </main>
-
-            <!-- Chat Input Area -->
-            <div class="chat-input-area">
-                <!-- Quick Prompt Pills -->
-                <div class="quick-pills-row">
-                    <button class="quick-pill" data-prompt="Patient experiencing acute retrosternal chest pain radiating to left arm with diaphoresis.">
-                        <i class="fa-solid fa-heart-pulse" style="color: var(--accent-rose);"></i> Chest Pain & Dyspnea
-                    </button>
-                    <button class="quick-pill" data-prompt="High fever 102F, severe headache, photophobia, and neck stiffness.">
-                        <i class="fa-solid fa-temperature-arrow-up" style="color: var(--accent-amber);"></i> Fever & Meningismus
-                    </button>
-                    <button class="quick-pill" data-prompt="Check drug interaction between Paracetamol 500mg and Ibuprofen 400mg.">
-                        <i class="fa-solid fa-pills" style="color: var(--accent-purple);"></i> Drug Interplay Check
-                    </button>
-                </div>
-
-                <!-- Input Box Container -->
-                <div class="input-box-wrapper">
-                    <textarea id="chatInput" class="chat-textarea" rows="1" placeholder="Type clinical symptoms or ask a medical question... (Press Enter to send)"></textarea>
-
-                    <button class="voice-mic-btn" id="voiceMicBtn" title="Voice Input (Speech-to-Text)">
-                        <i class="fa-solid fa-microphone"></i>
-                    </button>
-
-                    <button class="send-msg-btn" id="sendMsgBtn" title="Send Message">
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </div>
-            </div>
         </main>
     </div>
 
-    <!-- CITATION INSPECTOR MODAL -->
-    <div class="modal-overlay hidden" id="citationModal">
-        <div class="glass-card modal-box">
-            <div class="modal-header">
-                <h3><i class="fa-solid fa-book-medical" style="color: var(--accent-cyan);"></i> Biomedical Citation Detail</h3>
-                <button class="logout-btn" id="closeCitationModalBtn"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div id="citationModalBody">
-                <h4 id="citationTitle" style="font-size: 1rem; color: var(--accent-cyan); margin-bottom: 8px;">AHA/ACC 2024 NSTEMI Clinical Guidelines</h4>
-                <p id="citationSource" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">American Heart Association / American College of Cardiology</p>
-                <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-color); font-size: 0.85rem;" id="citationSnippet">
-                    "Patients presenting with acute ischemic chest discomfort and suspected NSTEMI should receive immediate 12-lead ECG, troponin I assays, and aspirin 162-325 mg unless contraindicated."
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Script -->
+    <!-- Controller Scripts -->
     <script src="chat.js"></script>
-    <!-- Theme Enhancement: Harsh Gradients, Rainbow, Lucide -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Lucide icons
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-            
-            // Add rainbow class to navbar
-            const navbar = document.querySelector('.navbar-header, nav');
-            if (navbar && !navbar.classList.contains('navbar-harsh')) {
-                navbar.classList.add('navbar-harsh');
-            }
-            
-            // Add rainbow heading to main headings
-            document.querySelectorAll('h1, h2').forEach(function(h) {
-                if (!h.classList.contains('rainbow-heading')) {
-                    h.classList.add('rainbow-heading');
-                }
-            });
-            
-            // Add theme toggle rainbow button
-            const themeBtn = document.getElementById('themeToggleBtn');
-            if (themeBtn && !themeBtn.classList.contains('theme-toggle-rainbow')) {
-                themeBtn.classList.add('theme-toggle-rainbow');
-            }
-            
-            // Add rainbow border to primary buttons
-            document.querySelectorAll('.btn-primary, .btn-hero, .btn-submit, button[type="submit"]').forEach(function(btn) {
-                if (!btn.classList.contains('btn-harsh')) {
-                    btn.classList.add('btn-harsh');
-                }
-            });
-            
-            // Add card rainbow hover to glass cards
-            document.querySelectorAll('.glass-card, .card, .metric-card, .stat-card').forEach(function(card) {
-                if (!card.classList.contains('card-rainbow-hover')) {
-                    card.classList.add('card-rainbow-hover');
-                }
-            });
-            
-            // Observe theme changes to update body background
-            function updateBodyBg() {
-                const theme = document.documentElement.getAttribute('data-theme');
-                if (theme === 'light') {
-                    document.body.style.backgroundColor = '#ffffff';
-                } else {
-                    document.body.style.backgroundColor = '#000000';
-                }
-            }
-            
-            // Initial
-            updateBodyBg();
-            
-            // Watch for theme changes
-            const observer = new MutationObserver(updateBodyBg);
-            observer.observe(document.documentElement, {
-                attributes: true,
-                attributeFilter: ['data-theme']
-            });
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
         });
     </script>
-    <!-- Emoji & Em-Dash Enhancement -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add em-dash list styling to all ul/ol lists
-            document.querySelectorAll('ul, ol').forEach(function(list) {
-                if (!list.classList.contains('em-dash-list')) {
-                    list.classList.add('em-dash-list');
-                }
-            });
-            
-            // Add drop shadow to all cards
-            document.querySelectorAll('.glass-card, .card, .metric-card, .stat-card, .feature-card').forEach(function(card) {
-                if (!card.classList.contains('shadow-drop-md')) {
-                    card.classList.add('shadow-drop-md');
-                }
-                if (!card.classList.contains('shadow-hover-lift')) {
-                    card.classList.add('shadow-hover-lift');
-                }
-            });
-            
-            // Add liquid glass to glass cards
-            document.querySelectorAll('.glass-card').forEach(function(card) {
-                if (!card.classList.contains('liquid-glass')) {
-                    card.classList.add('liquid-glass');
-                }
-            });
-            
-            // Add features-3-col to sections with 3+ cards
-            document.querySelectorAll('.features-grid, .grid-3, .row').forEach(function(grid) {
-                const cards = grid.querySelectorAll('.glass-card, .card, .metric-card, .stat-card');
-                if (cards.length >= 3) {
-                    grid.classList.add('features-3-col');
-                }
-            });
-            
-            // Add emoji decorations to section headings based on keywords
-            const emojiMap = {
-                'AI': '🤖',
-                'Clinical': '🩺',
-                'Medical': '🏥',
-                'Health': '💚',
-                'Diagnostic': '🔬',
-                'Emergency': '🚨',
-                'Dashboard': '📊',
-                'Settings': '⚙️',
-                'Profile': '👤',
-                'Report': '📄',
-                'Medicine': '💊',
-                'Drug': '💊',
-                'Chat': '💬',
-                'History': '🕐',
-                'Notification': '🔔',
-                'Admin': '👑',
-                'Security': '🛡️',
-                'Performance': '⚡',
-                'Accessibility': '♿',
-                'Explainability': '💡',
-                'Feature': '⭐',
-                'Welcome': '👋',
-                'Login': '🔐',
-                'Register': '📝',
-                'Home': '🏠',
-                'Disease': '🧠',
-                'Symptom': '🩺',
-                'Treatment': '💉',
-                'Lab': '🧪',
-                'Voice': '🎙️',
-                'Image': '📷',
-                'Document': '📁',
-                'Search': '🔍',
-                'Results': '📋',
-                'Insights': '💡',
-                'Pipeline': '🔧',
-                'Metrics': '📈',
-                'Safety': '🛡️',
-                'Guardrail': '🛡️',
-                'Knowledge': '📚',
-                'Reasoning': '🧠',
-                'Evidence': '📚',
-                'Guideline': '📖',
-                'Dosage': '💊',
-                'Interaction': '⚠️',
-                'Differential': '🔬',
-                'Confidence': '🎯',
-                'Explain': '💡',
-                'Timeline': '🕐',
-                'Analytics': '📊',
-                'Monitoring': '👁️',
-                'Logs': '📋',
-                'Backup': '💾',
-                'Deploy': '🚀',
-                'Test': '🧪',
-                'CI/CD': '🔄',
-                'Docker': '🐦',
-                'Database': '🗄️',
-                'API': '🔌',
-                'Gateway': '🌐',
-                'Cache': '⚡',
-                'Queue': '📨',
-                'Audit': '📝',
-                'User': '👤',
-                'Role': '🎭',
-                'Permission': '🔐',
-                'Session': '\U0001F511',
-                'Token': '🎫',
-                'OAuth': '🔐',
-                'Payment': '💳',
-                'Billing': '💵',
-                'Plan': '📦',
-                'Subscription': '💳',
-                'Webhook': '🔗',
-                'Stripe': '💳'
-            };
-            
-            // Add emojis before matching headings
-            document.querySelectorAll('h1, h2, h3').forEach(function(heading) {
-                const text = heading.textContent;
-                for (const [keyword, emoji] of Object.entries(emojiMap)) {
-                    if (text.includes(keyword) && !heading.dataset.emojiAdded) {
-                        const span = document.createElement('span');
-                        span.className = 'emoji-icon';
-                        span.style.marginRight = '8px';
-                        span.textContent = emoji;
-                        heading.insertBefore(span, heading.firstChild);
-                        heading.dataset.emojiAdded = 'true';
-                        break;
-                    }
-                }
-            });
-        });
-    </script>
+    <!-- FIXED MOBILE BOTTOM NAVIGATION BAR -->
+    <nav class="mobile-bottom-navbar" aria-label="Mobile Navigation">
+        <a href="chat.html" class="mobile-nav-item active">
+            <i data-lucide="file-text"></i>
+            <span>Cases</span>
+        </a>
+        <a href="medicines.html" class="mobile-nav-item">
+            <i data-lucide="pill"></i>
+            <span>Meds</span>
+        </a>
+        <a href="diseases.html" class="mobile-nav-item">
+            <i data-lucide="book-open"></i>
+            <span>Knowledge</span>
+        </a>
+        <a href="dashboard.html" class="mobile-nav-item">
+            <i data-lucide="more-horizontal"></i>
+            <span>More</span>
+        </a>
+    </nav>
+
 </body>
 </html>
